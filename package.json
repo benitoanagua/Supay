@@ -44,15 +44,23 @@
     "test:ci": "gscan --fatal --verbose .",
     "pretest": "npm run build",
     "preship": "npm test",
-    "ship": "node src/scripts/ship.js"
+    "ship": "node src/scripts/ship.js",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "screenshots": {
     "desktop": "assets/hello-world-thumb.png"
   },
   "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^6.2.0",
     "@tailwindcss/cli": "^4.1.13",
+    "@tsconfig/svelte": "^5.0.5",
     "gscan": "^5.1.0",
-    "tailwindcss": "^4.1.13"
+    "svelte": "^5.38.10",
+    "svelte-check": "^4.3.1",
+    "svelte-legos": "^0.2.5",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5"
   },
   "browserslist": [
     "defaults"
