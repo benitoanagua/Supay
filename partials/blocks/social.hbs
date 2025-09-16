@@ -1,0 +1,30 @@
+<ul class="flex-1 flex items-center justify-center md:justify-end gap-x-4 text-neutral-400">
+    {{#if @custom.twitter_url}}
+        <li>
+            <a href={{@custom.twitter_url}} target="_blank">
+                <span class="i-ri-twitter-fill block h-6 w-6" />
+            </a>
+        </li>
+    {{/if}}
+    {{#if @custom.youtube_url}}
+        <li>
+            <a href={{@custom.youtube_url}} target="_blank">
+                <span class="i-ri-youtube-line block h-6 w-6" />
+            </a>
+        </li>
+    {{/if}}
+    {{#if @custom.instagram_url}}
+        <li>
+            <a href={{@custom.instagram_url}} target="_blank">
+                <span class="i-ri-instagram-line block h-6 w-6" />
+            </a>
+        </li>
+    {{/if}}
+    {{#if @custom.tiktok_url}}
+        <li>
+            <a href={{@custom.tiktok_url}} target="_blank">
+                <span class="i-ri-tiktok-fill block h-6 w-6" />
+            </a>
+        </li>
+    {{/if}}
+</ul>

@@ -1,0 +1,30 @@
+{{!< default}}
+{{#post}}
+    {{#match @page.show_title_and_feature_image}}
+    <section class="section mt-8">
+        <article class="mx-auto max-w-2xl">
+            <h1 class="headline-1 mt-4 font-sans font-700">{{title}}</h1>
+            <hr class="my-6 border-t border-neutral-100" />
+            <div>
+                {{#if feature_image}}
+                    <figure>
+                        <img srcset="{{img_url feature_image size=" s"}} 300w, {{img_url feature_image size="m" }} 600w,
+                            {{img_url feature_image size="l" }} 1000w, {{img_url feature_image size="xl" }} 2000w"
+                            sizes="(min-width: 1400px) 1400px, 92vw" src="{{img_url feature_image size=" xl"}}"
+                            alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                            class="w-full mb-1 aspect-monitor object-cover" />
+                        {{#if feature_image_caption}}
+                            <figcaption class="font-sans text-sm italic text-neutral-500">
+                                {{feature_image_caption}}
+                            </figcaption>
+                        {{/if}}
+                    </figure>
+                {{/if}}
+                <div class="paragraphs mt-8">
+                    {{content}}
+                </div>
+            </div>
+        </article>
+    </section>
+    {{/match}}
+{{/post}}

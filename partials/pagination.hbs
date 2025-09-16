@@ -1,0 +1,11 @@
+<nav class="flex gap-x-2 justify-center" role="navigation">
+    {{#if pagination.prev}}
+        <a class="btn-primary" href="{{page_url pagination.prev}}">&larr; MÁS RECIENTES</a>
+    {{/if}}
+    {{#is "paged"}}
+        <a class="btn-primary" href="{{page_url 1}}">PORTADA</a>
+    {{/is}}
+    {{#if pagination.next}}
+        <a class="btn-primary" href="{{page_url pagination.next}}">MÁS ANTIGUAS &rarr;</a>
+    {{/if}}
+</nav>

@@ -1,3 +1,27 @@
-<div class="bg-slate-700 w-full my-12 py-2">
+<footer class="bg-neutral-900 mt-16">
+  <div class="section py-12">
+    <div class="flex flex-col md:flex-row gap-y-4 gap-x-8">
+      <span class="flex-1 text-center md:text-left">
+        <wc-logo></wc-logo>
+      </span>
+      {{> blocks/social}}
+    </div>
+    <hr class="my-8 border-t border-neutral-800" />
+    <p class="mb-3 text-neutral-100 font-sans uppercase">
+      Secciones
+    </p>
+    <ul class="flex flex-wrap text-xs font-500 text-neutral-400">
+      {{#foreach navigation}}
+        <li class="w-1/2 md:w-1/4">
+          <a href={{url absolute=" true" }} class="font-sans">{{label}}</a>
+        </li>
+      {{/foreach}}
+    </ul>
+    <hr class="my-8 border-t border-neutral-800" />
     {{navigation type="secondary"}}
-</div>
+    <hr class="my-8 border-t border-neutral-800" />
+    <div class="flex-1 text-sm text-neutral-400 text-center font-serif">
+      © 2023 El Nacional. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>

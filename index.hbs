@@ -1,9 +1,74 @@
-{{!< default}} 
-
-
-<div class="w-[90rem] mx-auto ">
-    {{#foreach posts}}
-            {{> card}}
-
-    {{/foreach}}
-</div>
+{{!< default}}
+{{#match @custom.home "Home 1"}}
+    {{> blocks/home-1}}
+{{/match}}
+{{#match @custom.home "Home 2"}}
+    {{> blocks/home-2}}
+{{/match}}
+{{#match @custom.home "Home 3"}}
+    {{> blocks/home-3}}
+{{/match}}
+<section class="section mt-8">
+    <div class="grid gap-12 grid-cols-1 md:grid-cols-5">
+        <main class="md:col-span-3 md-divider-right">
+            <div class="pb-8">
+                {{#get "posts" filter="primary_tag:local" limit="4" include="tags,authors"}}
+                    {{> blocks/headline name='Local'}}
+                    <wc-grille desktop="1" mobile="1" gap="medium">
+                        {{#foreach posts}}
+                            <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" {{^if @last}}
+                                feature_image="{{feature_image}}" {{/if}} tag_name="{{primary_tag.name}}"
+                                tag_url="{{primary_tag.url}}" author_name="{{primary_author.name}}"
+                                author_url="{{primary_author.url}}" reading_time="{{reading_time minute=" Lectura 1
+                                min." minutes="Lectura % min." }}" published_at="{{date published_at format=" MMM DD,
+                                YYYY" locale="es" }}" media_align="right" {{#if @first}} media_width="is-half" {{else}}
+                                media_width="is-one-quarter" density="compact" {{/if}} heading="6"></wc-card>
+                        {{/foreach}}
+                    </wc-grille>
+                {{/get}}
+            </div>
+            <div class="pt-8">
+                {{#get "posts" filter="primary_tag:pais" limit="4" include="tags,authors"}}
+                    {{> blocks/headline name='País'}}
+                    <wc-grille desktop="1" mobile="1" gap="medium">
+                        {{#foreach posts}}
+                            <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" {{^if @last}}
+                                feature_image="{{feature_image}}" {{/if}} tag_name="{{primary_tag.name}}"
+                                tag_url="{{primary_tag.url}}" author_name="{{primary_author.name}}"
+                                author_url="{{primary_author.url}}" reading_time="{{reading_time minute=" Lectura 1
+                                min." minutes="Lectura % min." }}" published_at="{{date published_at format=" MMM DD,
+                                YYYY" locale="es" }}" media_align="left" {{#if @first}} media_width="is-half" {{else}}
+                                media_width="is-one-quarter" density="compact" {{/if}} heading="6"></wc-card>
+                        {{/foreach}}
+                    </wc-grille>
+                {{/get}}
+            </div>
+        </main>
+        <aside class="md:col-span-2 relative md:left-x-divider">
+            <div class="sticky top-0">
+                <div class="">
+                    {{#get "posts" filter="primary_tag:opinion" limit="4" include="tags,authors"}}
+                        {{> blocks/headline name='Opinión'}}
+                        {{#foreach posts}}
+                            {{> components/post-avatar}}
+                        {{/foreach}}
+                    {{/get}}
+                </div>
+                <hr class="my-8 border-neutral-200" />
+                <span class="font-sans font-500 text-xs">Descubra más de lo que le importa</span>
+                <ul class="mt-4 flex flex-wrap gap-x-2 gap-y-4">
+                    {{#get "tags" limit="12" filter="slug:-[opinion,local,editorial,pais,mundo,entrevistas,deportivo,entretenimiento]"}}
+                        {{#foreach tags}}
+                            <li>
+                                <a href={{url}}
+                                    class="text-2xs font-500 bg-neutral-200 text-neutral-900 px-4 py-2 rounded-full">
+                                    {{name}}
+                                </a>
+                            </li>
+                        {{/foreach}}
+                    {{/get}}
+                </ul>
+            </div>
+        </aside>
+    </div>
+</section>

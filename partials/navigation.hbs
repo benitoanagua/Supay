@@ -1,13 +1,22 @@
 {{#if isSecondary}}
-    <ul class="flex flex-row  justify-center" >
-        {{#foreach navigation}}
-            <li class="block text-center text-[0.70rem] text-white p-2 mx-2 nav-{{slug}}"><a href="{{url}}" >{{slug}}</a></li>
-        {{/foreach}}
-    </ul>
+  <ul class="flex flex-wrap text-xs font-500 text-neutral-400">
+    {{#foreach navigation}}
+      <li class="w-1/2 md:w-1/4">
+        <a href={{url absolute=" true" }} class="font-sans">{{label}}</a>
+      </li>
+    {{/foreach}}
+  </ul>
 {{else}}
-        <ul class="flex flex-row justify-center" >
-        {{#foreach navigation}}
-            <li class="block text-center text-[0.70rem] text-white p-2 mx-2 nav-{{slug}}"><a href="{{url}}" >{{slug}}</a></li>
-        {{/foreach}}
-    </ul>
+  <wc-menu home="{{@site.url}}" {{#match @custom.home 'Home 2' }} dark {{/match}}>
+    <wc-logo slot="logo" {{^match @custom.home 'Home 2' }} positive {{/match}}></wc-logo>
+    <button
+      class="border-0 p-1 {{#match @custom.home 'Home 2' }} bg-neutral-900 text-white {{else}} bg-white text-neutral-900 {{/match}}"
+      slot="search" data-ghost-search>
+      <span class="i-ri-search-line block h-6 w-6" />
+    </button>
+    {{#foreach navigation}}
+      <wc-menu-item url="{{url}}" {{#if current}}current{{/if}} {{#match @custom.home 'Home 2' }} dark
+        {{/match}}>{{label}}</wc-menu-item>
+    {{/foreach}}
+  </wc-menu>
 {{/if}}

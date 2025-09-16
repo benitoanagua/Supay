@@ -1,28 +1,82 @@
-{{!< default}} 
-
-{{#post}} <article class="w-[90rem] text-white mx-auto {{post_class}}">
-
-    {{#if feature_image}}
-    <div class="flex flex-col m-auto">
-        <img class=" h-[450px] p-2" srcset="{{img_url feature_image size="s"}} 300w, {{img_url feature_image
-            size="m" }} 600w, {{img_url feature_image size="l" }} 1000w, {{img_url feature_image size="xl" }} 2000w"
-            sizes="(max-width: 1000px) 400px, 700px" src="{{img_url feature_image size="m"}}"
-            alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
-        {{#if feature_image_caption}}
-        <p class="text-center mt-1 text-sm">
-            {{feature_image_caption}}
-        </p>
-        {{/if}}
-    </div>
-    {{/if}}
-
-    <h1 class="text-2xl text-indigo-200 font-normal py-2 my-5" >{{title}}</h1>
-
-    {{content}}
-
-    <div class="mt-16">
-        {{comments}}
-    </div>
-
-    </article>
+{{!< default}}
+{{#post}}
+    <section class="section mt-8">
+        <article class="mx-auto max-w-2xl">
+            <h1 class="headline-1 font-700 mt-4 font-sans text-neutral-900">{{title}}</h1>
+            {{#if excerpt}}
+                <p class="mt-4 font-serif post-content italic">{{excerpt}}</p>
+            {{/if}}
+            <div class="border-y border-t-neutral-100 border-b-neutral-200 mt-8 pt-4 pb-2">
+                {{> "blocks/share"}}
+            </div>
+            <figure class="mt-8 flex gap-4 font-serif">
+                <img src={{primary_author.profile_image}} alt={{primary_author.name}} class="w-12 h-12 rounded-full" />
+                <figcaption class="flex flex-col justify-center font-sans">
+                    <a href={{primary_author.url}} class="author-link">
+                        {{primary_author.name}}
+                    </a>
+                    <div class="post-meta">
+                        <span
+                            class="capitalize after:content-['•'] after:ml-2 after:mr-1">{{date published_at format="MMM DD, YYYY" locale="es"}}</span>
+                        <span>{{reading_time minute=" Lectura 1 min." minutes="Lectura % min." }}</span>
+                    </div>
+                </figcaption>
+            </figure>
+            {{#if feature_image}}
+                <figure class="mt-8">
+                    <img srcset="{{img_url feature_image size=" s"}} 300w, {{img_url feature_image size="m" }} 600w,
+                        {{img_url feature_image size="l" }} 1000w, {{img_url feature_image size="xl" }} 2000w"
+                        sizes="(min-width: 1400px) 1400px, 92vw" src="{{img_url feature_image size=" xl"}}"
+                        alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                        class="w-full mb-1 aspect-monitor object-cover rounded-lg" />
+                    {{#if feature_image_caption}}
+                        <figcaption class="post-meta">
+                            {{feature_image_caption}}
+                        </figcaption>
+                    {{/if}}
+                </figure>
+            {{/if}}
+            <div class="mt-8 paragraphs">
+                {{content}}
+            </div>
+            <div class="mt-12">
+                {{#if tags}}
+                    <ul class="flex gap-x-2">
+                        {{#foreach tags}}
+                            <li>
+                                <a href="{{url}}" title="{{name}}"
+                                    class="bg-neutral-100 py-2 px-4 rounded-full cursor-pointer text-xs text-neutral-700">{{name}}</a>
+                            </li>
+                        {{/foreach}}
+                    </ul>
+                {{/if}}
+            </div>
+            <div class="mt-8 pt-4 pb-2">
+                {{> "blocks/share"}}
+            </div>
+        </article>
+    </section>
+    <section class="section mt-8">
+        <div class="mx-auto max-w-2xl">
+            {{> blocks/headline name='Relacionados'}}
+            <wc-grille desktop="2" mobile="2" gap="medium">
+                {{#get "posts" filter="tag:{{primary_tag.slug}}+id:-{{id}}" limit="4" include="tags,authors"}}
+                    {{#foreach posts}}
+                        <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" feature_image="{{feature_image}}"
+                            tag_name="{{primary_tag.name}}" tag_url="{{primary_tag.url}}"
+                            author_name="{{primary_author.name}}" author_url="{{primary_author.url}}"
+                            reading_time="{{reading_time minute=" Lectura 1 min." minutes="Lectura % min." }}"
+                            published_at="{{date published_at format=" MMM DD, YYYY" locale="es" }}" media_align="top"
+                            heading="6" density="compact" aspect_ratio="video"></wc-card>
+                    {{/foreach}}
+                {{/get}}
+            </wc-grille>
+        </div>
+    </section>
+    <section class="section mt-8">
+        <div class="mx-auto max-w-2xl">
+            {{> blocks/headline name='Comentarios'}}
+            {{> components/comments }}
+        </div>
+    </section>
 {{/post}}

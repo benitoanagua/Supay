@@ -1,0 +1,40 @@
+{{!< default}}
+<section class="section mt-8">
+    <div class="mx-auto max-w-2xl">
+        {{> blocks/headline name='Autor'}}
+        {{#author}}
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 mx-auto">
+                {{#if profile_image}}
+                    <figure class="w-40 mx-auto">
+                        <img class="w-full aspect-square object-cover rounded-full"
+                            srcset="{{img_url profile_image size=" s"}} 300w, {{img_url profile_image size="m" }} 600w,
+                            {{img_url profile_image size="l" }} 1000w, {{img_url profile_image size="xl" }} 2000w"
+                            sizes="(max-width: 1000px) 400px, 800px" src="{{img_url profile_image size=" m"}}"
+                            alt="{{title}}" />
+                    </figure>
+                {{/if}}
+                <div class="flex-1">
+                    <h5 class="headline-5 font-sans uppercase">{{name}}</h5>
+                    {{#if bio}}
+                        <p class="my-4">{{bio}}</p>
+                    {{/if}}
+                </div>
+            </div>
+        {{/author}}
+        {{> blocks/headline name='Articulos'}}
+        <div class="flex gap-16">
+            <wc-grille desktop="2" mobile="1" gap="medium">
+                {{#foreach posts}}
+                    <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" feature_image="{{feature_image}}"
+                        tag_name="{{primary_tag.name}}" tag_url="{{primary_tag.url}}"
+                        reading_time="{{reading_time minute=" Lectura 1 min." minutes="Lectura % min." }}"
+                        published_at="{{date published_at format=" MMM DD, YYYY" locale="es" }}" media_align="left"
+                        media_width="is-one-third" heading="6" density="compact"></wc-card>
+                {{/foreach}}
+            </wc-grille>
+        </div>
+    </div>
+</section>
+<main class="section mt-4">
+    {{> pagination}}
+</main>

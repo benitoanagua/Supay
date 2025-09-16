@@ -1,0 +1,42 @@
+<section class="section">
+  <div class="flex flex-col md:flex-row gap-12 mt-8 pb-4">
+    <div class="md:w-3/5 relative md:right-x-divider ">
+      {{#get "posts" filter="tag:hash-principal" limit="1" include="tags,authors" as |post|}}
+        {{#post}}
+          <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" feature_image="{{feature_image}}"
+            tag_name="{{primary_tag.name}}" tag_url="{{primary_tag.url}}" author_name="{{primary_author.name}}"
+            author_url="{{primary_author.url}}" reading_time="{{reading_time minute=" Lectura 1 min."
+            minutes="Lectura % min." }}" published_at="{{date published_at format=" MMM DD, YYYY" locale="es" }}"
+            media_align="bottom" heading="1" density="normal" aspect_ratio="video"></wc-card>
+        {{/post}}
+      {{/get}}
+    </div>
+    <div class="md:w-2/5 relative top-y-divider md:no-top-y-divider">
+      <wc-grille desktop="1" mobile="1" gap="medium">
+        {{#get "posts" filter="tag:hash-secundario" limit="2" include="tags,authors"}}
+          {{#foreach posts}}
+            <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" {{#if @first}}
+              feature_image="{{feature_image}}" {{/if}} tag_name="{{primary_tag.name}}" tag_url="{{primary_tag.url}}"
+              author_name="{{primary_author.name}}" author_url="{{primary_author.url}}"
+              reading_time="{{reading_time minute=" Lectura 1 min." minutes="Lectura % min." }}"
+              published_at="{{date published_at format=" MMM DD, YYYY" locale="es" }}" media_align="top" heading="5"
+              {{#if @first}} density="compact" {{/if}} aspect_ratio="video"></wc-card>
+          {{/foreach}}
+        {{/get}}
+      </wc-grille>
+    </div>
+  </div>
+  <div class="mt-8 relative top-y-divider">
+    <wc-grille desktop="3" mobile="1" gap="medium">
+      {{#get "posts" filter="tag:hash-complementario" limit="3" include="tags,authors"}}
+        {{#foreach posts}}
+          <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" tag_name="{{primary_tag.name}}"
+            tag_url="{{primary_tag.url}}" author_name="{{primary_author.name}}" author_url="{{primary_author.url}}"
+            reading_time="{{reading_time minute=" Lectura 1 min." minutes="Lectura % min." }}"
+            published_at="{{date published_at format=" MMM DD, YYYY" locale="es" }}" media_align="left" heading="6"
+            density="compact" aspect_ratio="square" media_width="is-one-fifth"></wc-card>
+        {{/foreach}}
+      {{/get}}
+    </wc-grille>
+  </div>
+</section>
