@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @source './**/*.hbs';
-@source 'partials/**/.hbsp';
+@source 'partials/**/.hbs';
 
 /* .kg-width-full and .kg-width-wide Add both class in @layer components */
 

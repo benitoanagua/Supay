@@ -1,26 +1,62 @@
 {
   "name": "supay",
   "description": "A Ghost CMS theme inspired by Andean culture, built with Tailwind CSS v4, Material Design 3, and Svelte web components.",
+  "demo": "https://benitoanagua.github.io/Supay",
   "version": "0.1.0",
+  "engines": {
+    "ghost": ">=5.0.0"
+  },
   "license": "MIT",
   "author": {
     "name": "Benito Anagua",
     "email": "benito.anagua@gmail.com",
     "url": "https://benitoanagua.me"
   },
+  "gpm": {
+    "type": "theme",
+    "categories": [
+      "Minimal",
+      "Cultural",
+      "Magazine"
+    ]
+  },
   "keywords": [
     "supay",
-    "Benito Anagua",
     "ghost",
-    "ghost-theme"
+    "ghost-theme",
+    "andean",
+    "cultural",
+    "tailwind",
+    "material-design"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benitoanagua/Supay.git"
+  },
+  "bugs": "https://github.com/benitoanagua/Supay/issues",
+  "contributors": "https://github.com/benitoanagua/Supay/graphs/contributors",
   "scripts": {
-    "start": "tailwindcss -i ./assets/css/tailwind.css -o ./assets/build/tailwind.css --minify --watch",
-    "build": "tailwindcss -i ./assets/css/tailwind.css -o ./assets/build/tailwind.css --minify"
+    "dev": "tailwindcss -i ./src/css/tailwind.css -o ./dist/tailwind.css --watch",
+    "build": "tailwindcss -i ./src/css/tailwind.css -o ./dist/tailwind.css --minify",
+    "start": "npm run dev",
+    "zip": "node src/scripts/zip.js",
+    "test": "gscan .",
+    "test:ci": "gscan --fatal --verbose .",
+    "pretest": "npm run build",
+    "preship": "npm test",
+    "ship": "node src/scripts/ship.js"
   },
   "screenshots": {
     "desktop": "assets/hello-world-thumb.png"
   },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.13",
+    "gscan": "^5.1.0",
+    "tailwindcss": "^4.1.13"
+  },
+  "browserslist": [
+    "defaults"
+  ],
   "config": {
     "image_sizes": {
       "xxs": {
@@ -44,9 +80,5 @@
     },
     "posts_per_page": 10,
     "card_assets": true
-  },
-  "dependencies": {
-    "@tailwindcss/cli": "^4.1.13",
-    "tailwindcss": "^4.1.13"
   }
 }
