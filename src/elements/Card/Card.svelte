@@ -8,8 +8,6 @@
 />
 
 <script lang="ts">
-  import { elementSizeStore } from "svelte-legos";
-
   let {
     title,
     url,
@@ -32,8 +30,45 @@
   let meta_width: HTMLElement | null = $state(null);
   let image_width: HTMLElement | null = $state(null);
 
-  const meta_size = $derived(elementSizeStore(meta_width));
-  const image_size = $derived(elementSizeStore(image_width));
+  // Reemplazo nativo para elementSizeStore
+  let meta_size = $state({ width: 0, height: 0 });
+  let image_size = $state({ width: 0, height: 0 });
+
+  $effect(() => {
+    if (meta_width) {
+      const observer = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          meta_size = {
+            width: entry.contentRect.width,
+            height: entry.contentRect.height,
+          };
+        }
+      });
+
+      observer.observe(meta_width);
+
+      // Cleanup
+      return () => observer.disconnect();
+    }
+  });
+
+  $effect(() => {
+    if (image_width) {
+      const observer = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          image_size = {
+            width: entry.contentRect.width,
+            height: entry.contentRect.height,
+          };
+        }
+      });
+
+      observer.observe(image_width);
+
+      // Cleanup
+      return () => observer.disconnect();
+    }
+  });
 </script>
 
 <div
@@ -72,9 +107,9 @@
           src={feature_image}
           alt={title}
           bind:this={image_width}
-          class="w-full object-cover {$image_size.width < 240
+          class="w-full object-cover {image_size.width < 240
             ? 'rounded'
-            : $image_size.width >= 240 && $image_size.width <= 440
+            : image_size.width >= 240 && image_size.width <= 440
               ? 'rounded-md'
               : 'rounded-lg'}  {aspect_ratio === 'square'
             ? 'aspect-square'
@@ -129,11 +164,11 @@
           >{published_at}</span
         >
         <span
-          class="{$meta_size.width > 240
+          class="{meta_size.width > 240
             ? `after:content-['•'] after:ml-2 after:mr-1`
             : null} ">{reading_time}</span
         >
-        {#if $meta_size.width > 240}
+        {#if meta_size.width > 240}
           <a
             href={tag_url}
             class="text-neutral-900 no-underline bg-neutral-100 py-.5 px-3 rounded-full"

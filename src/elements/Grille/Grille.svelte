@@ -11,12 +11,35 @@
 
 <script lang="ts">
   import { tick } from "svelte";
-  import { mediaQuery } from "svelte-legos";
 
   let { desktop = 3, mobile = 3, gap = "medium" } = $props();
 
-  const isMobile = mediaQuery("(max-width: 767px)");
+  // Reemplazo nativo para mediaQuery
+  let isMobile = $state(false);
   let parent: HTMLElement | null = $state(null);
+
+  $effect(() => {
+    // Solo ejecutar en el cliente (navegador)
+    if (typeof window === "undefined") return;
+
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+
+    // Función para actualizar el estado
+    const updateIsMobile = () => {
+      isMobile = mediaQuery.matches;
+    };
+
+    // Establecer valor inicial
+    updateIsMobile();
+
+    // Escuchar cambios
+    mediaQuery.addEventListener("change", updateIsMobile);
+
+    // Cleanup
+    return () => {
+      mediaQuery.removeEventListener("change", updateIsMobile);
+    };
+  });
 
   const gridRendering = () => {
     if (!parent) return;
@@ -39,7 +62,8 @@
 
       nodo.style.boxSizing = "content-box";
 
-      if ($isMobile) {
+      if (isMobile) {
+        // Cambiado de $isMobile a isMobile
         let widthM = Math.floor(
           (parent!.clientWidth - 2 * padding * (mobile - 1)) / mobile
         );
@@ -57,8 +81,8 @@
       let bottom = false;
 
       if (
-        (dsk.col < desktop - 1 && !$isMobile) ||
-        (mbl.col < mobile - 1 && $isMobile)
+        (dsk.col < desktop - 1 && !isMobile) || // Cambiado de $isMobile a isMobile
+        (mbl.col < mobile - 1 && isMobile) // Cambiado de $isMobile a isMobile
       ) {
         nodo.style.paddingRight = `${padding}px`;
         nodo.style.marginRight = `${padding}px`;
@@ -67,8 +91,8 @@
       }
 
       if (
-        (dsk.row < dsk.rows && !$isMobile) ||
-        (mbl.row < mbl.rows && $isMobile)
+        (dsk.row < dsk.rows && !isMobile) || // Cambiado de $isMobile a isMobile
+        (mbl.row < mbl.rows && isMobile) // Cambiado de $isMobile a isMobile
       ) {
         nodo.style.paddingBottom = `${padding}px`;
         nodo.style.marginBottom = `${padding}px`;
@@ -101,7 +125,8 @@
 
   $effect(() => {
     // Re-render when mobile breakpoint changes
-    if (parent && $isMobile !== undefined) {
+    if (parent && isMobile !== undefined) {
+      // Cambiado de $isMobile a isMobile
       tick().then(() => gridRendering());
     }
   });

@@ -26,9 +26,6 @@ importers:
       svelte-check:
         specifier: ^4.3.1
         version: 4.3.1(picomatch@4.0.3)(svelte@5.38.10)(typescript@5.9.2)
-      svelte-legos:
-        specifier: ^0.2.5
-        version: 0.2.5(svelte@5.38.10)
       tailwindcss:
         specifier: ^4.1.13
         version: 4.1.13
@@ -1546,9 +1543,6 @@ packages:
   caller@1.1.0:
     resolution: {integrity: sha512-n+21IZC3j06YpCWaxmUy5AnVqhmCIM2bQtqQyy00HJlmStRt6kwDX5F9Z97pqwAB+G/tgSz6q/kUBbNyQzIubw==}
 
-  canvas-confetti@1.9.3:
-    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==}
-
   caseless@0.12.0:
     resolution: {integrity: sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw==}
 
@@ -2450,13 +2444,6 @@ packages:
     resolution: {integrity: sha512-rksPWtoZb2ZpT5OVgtmy0KHVM+Dca3iVwWY9ifwhcexfjebtgjg3wmrUt9PvJ59XIYBcknQeYHD8IAnVlh9lAw==}
     hasBin: true
 
-  prism-svelte@0.5.0:
-    resolution: {integrity: sha512-db91Bf3pRGKDPz1lAqLFSJXeW13mulUJxhycysFpfXV5MIK7RgWWK2E5aPAa71s8TCzQUXxF5JOV42/iOs6QkA==}
-
-  prismjs@1.30.0:
-    resolution: {integrity: sha512-DEvV2ZF2r2/63V+tK8hQvrR2ZGn10srHbXviTlcv7Kpzw8jWiNTqbVgjO3IY8RxrrOUF8VPMQQFysYYYv0YZxw==}
-    engines: {node: '>=6'}
-
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
@@ -2684,11 +2671,6 @@ packages:
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.0
       typescript: '>=5.0.0'
-
-  svelte-legos@0.2.5:
-    resolution: {integrity: sha512-r4HbLYripCLECgraqJMvsykW/8FaPBd1hLkt3ejJzJRfhhOnCgGTo6lJT27qrestDFbiIASQV3xOnjRr/D6cGw==}
-    peerDependencies:
-      svelte: ^4.0.0
 
   svelte@5.38.10:
     resolution: {integrity: sha512-UY+OhrWK7WI22bCZ00P/M3HtyWgwJPi9IxSRkoAE2MeAy6kl7ZlZWJZ8RaB+X4KD/G+wjis+cGVnVYaoqbzBqg==}
@@ -4493,8 +4475,6 @@ snapshots:
 
   caller@1.1.0: {}
 
-  canvas-confetti@1.9.3: {}
-
   caseless@0.12.0: {}
 
   chalk@4.1.2:
@@ -5399,10 +5379,6 @@ snapshots:
       colors: 1.4.0
       minimist: 1.2.8
 
-  prism-svelte@0.5.0: {}
-
-  prismjs@1.30.0: {}
-
   process-nextick-args@2.0.1: {}
 
   proto-list@1.2.4:
@@ -5704,13 +5680,6 @@ snapshots:
       typescript: 5.9.2
     transitivePeerDependencies:
       - picomatch
-
-  svelte-legos@0.2.5(svelte@5.38.10):
-    dependencies:
-      canvas-confetti: 1.9.3
-      prism-svelte: 0.5.0
-      prismjs: 1.30.0
-      svelte: 5.38.10
 
   svelte@5.38.10:
     dependencies:

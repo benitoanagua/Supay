@@ -5,32 +5,37 @@
 />
 
 <script lang="ts">
-  import { tick } from "svelte";
   import { fade } from "svelte/transition";
-  import { windowScrollStore } from "svelte-legos";
 
-  const position = windowScrollStore();
   let el: HTMLElement | null = $state(null);
   let isVisible = $state(false);
 
   $effect(() => {
-    if (el) {
-      const checkVisibility = async () => {
-        await tick();
-        if (el) {
-          isVisible = $position.y > el.getBoundingClientRect().top;
-        }
-      };
+    // Solo ejecutar en el cliente
+    if (typeof window === "undefined" || !el) return;
 
-      checkVisibility();
+    const checkVisibility = () => {
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        // El elemento es visible si está dentro del viewport
+        isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+      }
+    };
 
-      // Also check on scroll
-      const unsubscribe = position.subscribe(() => {
-        checkVisibility();
-      });
+    // Verificar inicialmente
+    checkVisibility();
 
-      return unsubscribe;
-    }
+    // Escuchar eventos de scroll
+    window.addEventListener("scroll", checkVisibility, { passive: true });
+
+    // También verificar en resize por si acaso
+    window.addEventListener("resize", checkVisibility, { passive: true });
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("scroll", checkVisibility);
+      window.removeEventListener("resize", checkVisibility);
+    };
   });
 </script>
 
