@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
-@source './**/*.hbs';
-@source 'partials/**/.hbs';
+@source '../../*.hbs';
+@source '../../partials/**/*.hbs';
+@source '../../src/**/*.{svelte,css,js,ts}';
 
 /* .kg-width-full and .kg-width-wide Add both class in @layer components */
 

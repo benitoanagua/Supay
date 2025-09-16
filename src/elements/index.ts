@@ -1,3 +1,5 @@
+import "../css/tailwind.css";
+
 export { default as Card } from "./Card/Card.svelte";
 export { default as Grille } from "./Grille/Grille.svelte";
 export { default as Logo } from "./Logo/Logo.svelte";

@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/html";
 
 // Importa tus estilos y custom elements
-// import '../dist/tailwind.css';
+import "../dist/supay.css";
 import "../dist/svelte-bundle.js";
 
 const preview: Preview = {
