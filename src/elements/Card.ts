@@ -1,6 +1,14 @@
 import { LitElement, html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, state, query } from "lit/decorators.js";
 import mainCSS from "../main.css?inline";
+import type {
+  CardHeading,
+  CardDensity,
+  CardMediaAlign,
+  CardMediaWidth,
+  CardAspectRatio,
+  CardElevation,
+} from "../types/card.js";
 
 @customElement("wc-card")
 export class WcCard extends LitElement {
@@ -16,14 +24,17 @@ export class WcCard extends LitElement {
   @property({ type: String, attribute: "author-url" }) author_url = "";
   @property({ type: String, attribute: "author-profile-image" })
   author_profile_image = "";
-  @property({ type: String, attribute: "media-align" }) media_align = "left";
-  @property({ type: String, attribute: "media-width" }) media_width = "is-half";
-  @property({ type: Number, reflect: true }) heading = 4;
-  @property({ type: String }) density = "normal";
-  @property({ type: String, attribute: "aspect-ratio" }) aspect_ratio =
-    "monitor";
+  @property({ type: String, attribute: "media-align" })
+  media_align: CardMediaAlign = "left";
+  @property({ type: String, attribute: "media-width" })
+  media_width: CardMediaWidth = "is-half";
+  @property({ type: Number, reflect: true }) heading: CardHeading = 4;
+  @property({ type: String }) density: CardDensity = "normal";
+  @property({ type: String, attribute: "aspect-ratio" })
+  aspect_ratio: CardAspectRatio = "monitor";
   @property({ type: String, attribute: "reading-time" }) reading_time = "";
   @property({ type: String, attribute: "published-at" }) published_at = "";
+  @property({ type: Number }) elevation: CardElevation = 2;
 
   @state() private imageSize = { width: 0, height: 0 };
 
@@ -65,6 +76,11 @@ export class WcCard extends LitElement {
   private cleanupObservers() {
     this.metaObserver?.disconnect();
     this.imageObserver?.disconnect();
+  }
+
+  private getCardClasses() {
+    const classes = ["wc-card", `wc-card--elevation-${this.elevation}`];
+    return classes.join(" ");
   }
 
   private getFlexClass() {
@@ -125,7 +141,7 @@ export class WcCard extends LitElement {
 
   render() {
     return html`
-      <div class="wc-card">
+      <div class="${this.getCardClasses()}">
         <div class="wc-card__container ${this.getFlexClass()}">
           ${this.feature_image
             ? html`
