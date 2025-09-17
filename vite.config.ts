@@ -14,7 +14,7 @@ export default defineConfig({
     emptyOutDir: false,
     cssCodeSplit: false,
     lib: {
-      entry: resolve(__dirname, "src/elements/index.ts"),
+      entry: resolve(__dirname, "src/main.ts"),
       name: "SupayElements",
       fileName: (format) => `supay-elements.${format}.js`,
       formats: ["es"],

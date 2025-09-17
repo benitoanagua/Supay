@@ -7,9 +7,6 @@ import { WcMenuItem } from "./MenuItem.js";
 import { WcOffcanvas } from "./Offcanvas.js";
 import { WcSticky } from "./Sticky.js";
 
-// Import styles
-import "../main.css";
-
 // Export all components and types
 export { WcCard, WcGrille, WcLogo, WcMenu, WcMenuItem, WcOffcanvas, WcSticky };
 

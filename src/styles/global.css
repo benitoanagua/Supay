@@ -1,0 +1,80 @@
+.wc-card {
+  @apply bg-surfaceContainerHighest rounded-xl p-4;
+}
+
+.wc-card__container {
+  @apply flex gap-4;
+}
+
+.wc-card__figure {
+  @apply m-0 overflow-hidden;
+}
+
+.wc-card__content {
+  @apply flex flex-col gap-y-3 flex-1;
+}
+
+.wc-card__author {
+  @apply flex items-center gap-x-2;
+}
+
+.wc-card__author-image {
+  @apply w-8 h-8 rounded-full;
+}
+
+.wc-card__author-bullet {
+  @apply w-2 h-2 bg-primary rounded-full inline-block;
+}
+
+.wc-card__author-link {
+  @apply text-onSurfaceVariant text-sm font-medium no-underline hover:text-primary transition-colors;
+}
+
+.wc-card__title-link {
+  @apply text-onSurface no-underline;
+}
+
+.wc-card__excerpt {
+  @apply my-2 text-onSurfaceVariant text-base;
+}
+
+.wc-card__meta {
+  @apply flex items-center text-onSurfaceVariant text-sm flex-wrap gap-x-1;
+}
+
+.wc-card__meta-item {
+  @apply whitespace-nowrap;
+
+  &:not(:last-child)::after {
+    @apply content-['•'] ml-2 mr-1;
+  }
+}
+
+.wc-card__tag {
+  @apply text-primary bg-primaryContainer/30 py-1 px-3 rounded-full text-xs no-underline;
+}
+
+/* Typography scale with @apply */
+.headline-1 {
+  @apply text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight;
+}
+
+.headline-2 {
+  @apply text-xl md:text-2xl lg:text-3xl font-medium tracking-tight;
+}
+
+.headline-3 {
+  @apply text-lg md:text-xl lg:text-2xl font-medium tracking-normal;
+}
+
+.headline-4 {
+  @apply text-base md:text-lg lg:text-xl font-medium tracking-wide;
+}
+
+.headline-5 {
+  @apply text-sm md:text-base lg:text-lg font-medium tracking-wide;
+}
+
+.headline-6 {
+  @apply text-xs md:text-sm lg:text-base font-medium tracking-wide;
+}
