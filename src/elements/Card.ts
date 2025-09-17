@@ -25,10 +25,8 @@ export class WcCard extends LitElement {
   @property({ type: String, attribute: "reading-time" }) reading_time = "";
   @property({ type: String, attribute: "published-at" }) published_at = "";
 
-  @state() private metaSize = { width: 0, height: 0 };
   @state() private imageSize = { width: 0, height: 0 };
 
-  @query(".post-meta") private metaElement?: HTMLElement;
   @query("img") private imageElement?: HTMLImageElement;
 
   private metaObserver?: ResizeObserver;
@@ -50,18 +48,6 @@ export class WcCard extends LitElement {
 
   private setupObservers() {
     this.cleanupObservers();
-
-    if (this.metaElement) {
-      this.metaObserver = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-          this.metaSize = {
-            width: entry.contentRect.width,
-            height: entry.contentRect.height,
-          };
-        }
-      });
-      this.metaObserver.observe(this.metaElement);
-    }
 
     if (this.imageElement) {
       this.imageObserver = new ResizeObserver((entries) => {
@@ -187,13 +173,9 @@ export class WcCard extends LitElement {
                   <div class="wc-card__meta">
                     <span class="wc-card__meta-item">${this.published_at}</span>
                     <span class="wc-card__meta-item">${this.reading_time}</span>
-                    ${this.metaSize.width > 240
-                      ? html`
-                          <a href="${this.tag_url}" class="wc-card__tag">
-                            ${this.tag_name}
-                          </a>
-                        `
-                      : ""}
+                    <a href="${this.tag_url}" class="wc-card__tag">
+                      ${this.tag_name}
+                    </a>
                   </div>
                 `
               : ""}

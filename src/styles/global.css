@@ -39,7 +39,7 @@
 }
 
 .wc-card__meta {
-  @apply flex items-center text-onSurfaceVariant text-sm flex-wrap gap-x-1;
+  @apply flex gap-y-4 items-center text-onSurfaceVariant text-sm flex-wrap gap-x-1;
 }
 
 .wc-card__meta-item {

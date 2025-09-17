@@ -1,166 +1,141 @@
-import { LitElement, html, unsafeCSS, PropertyValueMap } from "lit";
-import { customElement, property, state, query } from "lit/decorators.js";
-import mainCSS from "../main.css?inline";
+import { LitElement, html, css } from "lit";
+import { property, query } from "lit/decorators.js";
 
-@customElement("wc-grille")
 export class WcGrille extends LitElement {
-  static styles = [unsafeCSS(mainCSS)];
+  @property({ type: Number })
+  desktop = 3;
 
-  @property({ type: Number, reflect: true }) desktop = 3;
-  @property({ type: Number, reflect: true }) mobile = 3;
-  @property({ type: String, reflect: true }) gap = "medium";
+  @property({ type: Number })
+  mobile = 2;
 
-  @state() private isMobile = false;
+  @property({ type: String })
+  gap = "medium";
 
-  @query("slot") private slotElement?: HTMLSlotElement;
+  @query("slot")
+  slot!: HTMLSlotElement;
 
-  private mediaQuery?: MediaQueryList;
+  @query(".grille-container")
+  container!: HTMLElement;
 
-  // Deshabilitar Shadow DOM para usar estilos globales de Tailwind
-  protected createRenderRoot() {
-    return this;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.setupMediaQuery();
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.cleanupMediaQuery();
-  }
-
-  protected updated(changedProperties: PropertyValueMap<any>) {
-    super.updated(changedProperties);
-    if (
-      changedProperties.has("desktop") ||
-      changedProperties.has("mobile") ||
-      changedProperties.has("gap")
-    ) {
-      this.updateGrid();
+  static styles = css`
+    .grille-container {
+      display: flex;
+      flex-wrap: wrap;
     }
+  `;
+
+  firstUpdated() {
+    this.setupResizeObserver();
+    this.gridRendering();
   }
 
-  private setupMediaQuery() {
-    if (typeof window === "undefined") return;
-
-    this.mediaQuery = window.matchMedia("(max-width: 767px)");
-
-    const updateIsMobile = () => {
-      this.isMobile = this.mediaQuery!.matches;
-      this.updateGrid();
-    };
-
-    updateIsMobile();
-    this.mediaQuery.addEventListener("change", updateIsMobile);
+  updated() {
+    this.gridRendering();
   }
 
-  private cleanupMediaQuery() {
-    if (this.mediaQuery) {
-      this.mediaQuery.removeEventListener("change", this.updateMediaQuery);
-    }
-  }
-
-  private updateMediaQuery = () => {
-    this.isMobile = this.mediaQuery!.matches;
-    this.updateGrid();
-  };
-
-  private updateGrid() {
-    if (!this.slotElement) return;
-
-    // Wait for slot to be assigned
-    requestAnimationFrame(() => {
-      const assignedNodes = this.slotElement!.assignedNodes();
-      const elements = assignedNodes.filter(
-        (node): node is HTMLElement =>
-          node.nodeType === Node.ELEMENT_NODE && node instanceof HTMLElement,
-      );
-
-      elements.forEach((element, index) => {
-        this.applyGridStyles(element, index, elements.length);
+  setupResizeObserver() {
+    if (this.container && window.ResizeObserver) {
+      const resizeObserver = new ResizeObserver(() => {
+        this.gridRendering();
       });
+      resizeObserver.observe(this.container);
+    }
+
+    // Fallback para cambios de viewport
+    window.addEventListener("resize", () => {
+      setTimeout(() => this.gridRendering(), 100);
     });
   }
 
-  private applyGridStyles(
-    element: HTMLElement,
-    index: number,
-    totalLength: number,
-  ) {
-    const breakpoint = this.isMobile ? this.mobile : this.desktop;
-    const gridInfo = this.calculateGrid(breakpoint, index, totalLength);
-    const padding = this.gap === "small" ? 8 : this.gap === "medium" ? 16 : 24;
-
-    element.style.boxSizing = "content-box";
-
-    // Calculate width
-    const parentWidth = this.clientWidth;
-    const itemWidth = Math.floor(
-      (parentWidth - 2 * padding * (breakpoint - 1)) / breakpoint,
-    );
-    const border = (index + 1) % breakpoint !== 0 ? 1 : 0;
-    element.style.width = `${itemWidth - border}px`;
-
-    // Reset styles
-    element.style.paddingRight = "";
-    element.style.marginRight = "";
-    element.style.borderRight = "";
-    element.style.paddingBottom = "";
-    element.style.marginBottom = "";
-    element.style.borderBottom = "";
-    element.style.borderImage = "";
-
-    let hasRightBorder = false;
-    let hasBottomBorder = false;
-
-    // Apply right border/padding
-    if (gridInfo.col < breakpoint - 1) {
-      element.style.paddingRight = `${padding}px`;
-      element.style.marginRight = `${padding}px`;
-      element.style.borderRight = "1px solid rgb(245, 245, 245)";
-      hasRightBorder = true;
-    }
-
-    // Apply bottom border/padding
-    if (gridInfo.row < gridInfo.rows) {
-      element.style.paddingBottom = `${padding}px`;
-      element.style.marginBottom = `${padding}px`;
-      element.style.borderBottom = "1px solid rgb(245, 245, 245)";
-      hasBottomBorder = true;
-    }
-
-    // Apply corner gradient if needed
-    if (hasRightBorder && hasBottomBorder) {
-      const gradientSize = Math.round((2 * padding * Math.sqrt(2)) / 4 + 1);
-      element.style.borderImage = `linear-gradient(315deg, white ${gradientSize}px, rgb(245, 245, 245) 0) 1`;
-    }
-  }
-
-  private calculateGrid(
-    breakpoint: number,
-    index: number,
-    totalLength: number,
-  ) {
-    const divInt = Math.floor(totalLength / breakpoint);
-    const divMod = totalLength % breakpoint;
+  grid(breakpoint: number, index: number, length: number) {
+    const divInt = Math.floor(length / breakpoint);
+    const divMod = length % breakpoint;
     const rows = divMod > 0 ? divInt + 1 : divInt;
     const row = Math.floor(index / breakpoint) + 1;
     const col = index - Math.floor(index / breakpoint) * breakpoint;
-
     return { rows, row, col };
   }
 
-  private handleSlotChange() {
-    this.updateGrid();
+  gridRendering() {
+    if (!this.slot || !this.container) return;
+
+    const assignedElements = this.slot.assignedElements();
+
+    assignedElements.forEach((element: Element, i: number) => {
+      // Type guard para asegurar que es HTMLElement
+      if (!(element instanceof HTMLElement)) return;
+
+      // Reset styles
+      element.style.cssText = "";
+
+      const isMobile = window.innerWidth < 768;
+      const columns = isMobile ? this.mobile : this.desktop;
+      const dsk = this.grid(this.desktop, i, assignedElements.length);
+      const mbl = this.grid(this.mobile, i, assignedElements.length);
+
+      const padding =
+        this.gap === "small" ? 8 : this.gap === "medium" ? 16 : 24;
+
+      element.style.boxSizing = "content-box";
+
+      // Calcular ancho
+      if (isMobile) {
+        const widthM = Math.floor(
+          (this.container.clientWidth - 2 * padding * (this.mobile - 1)) /
+            this.mobile
+        );
+        const borderM = (i + 1) % this.mobile !== 0 ? 1 : 0;
+        element.style.width = `${widthM - borderM}px`;
+      } else {
+        const widthd = Math.floor(
+          (this.container.clientWidth - 2 * padding * (this.desktop - 1)) /
+            this.desktop
+        );
+        const borderD = (i + 1) % this.desktop !== 0 ? 1 : 0;
+        element.style.width = `${widthd - borderD}px`;
+      }
+
+      let hasRightBorder = false;
+      let hasBottomBorder = false;
+      const borderColor = "rgb(126, 126, 126)";
+
+      // Línea derecha
+      if (
+        (dsk.col < this.desktop - 1 && !isMobile) ||
+        (mbl.col < this.mobile - 1 && isMobile)
+      ) {
+        element.style.paddingRight = `${padding}px`;
+        element.style.marginRight = `${padding}px`;
+        element.style.borderRight = `1px solid ${borderColor}`;
+        hasRightBorder = true;
+      }
+
+      // Línea abajo
+      if (
+        (dsk.row < dsk.rows && !isMobile) ||
+        (mbl.row < mbl.rows && isMobile)
+      ) {
+        element.style.paddingBottom = `${padding}px`;
+        element.style.marginBottom = `${padding}px`;
+        element.style.borderBottom = `1px solid ${borderColor}`;
+        hasBottomBorder = true;
+      }
+
+      // Esquina (donde se cruzan las líneas)
+      if (hasRightBorder && hasBottomBorder) {
+        const gradientSize = Math.round((2 * padding * Math.sqrt(2)) / 4 + 1);
+        element.style.borderImage = `linear-gradient(315deg, white ${gradientSize}px, ${borderColor} 0) 1`;
+      }
+    });
   }
 
   render() {
     return html`
-      <div class="flex flex-wrap">
-        <slot @slotchange="${this.handleSlotChange}"></slot>
+      <div class="grille-container">
+        <slot @slotchange=${this.gridRendering}></slot>
       </div>
     `;
   }
 }
+
+customElements.define("wc-grille", WcGrille);

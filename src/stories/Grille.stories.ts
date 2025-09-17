@@ -13,10 +13,10 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     desktop: {
-      control: { type: "number", min: 1, max: 6 },
+      control: { type: "range", min: 1, max: 6, step: 1 },
     },
     mobile: {
-      control: { type: "number", min: 1, max: 3 },
+      control: { type: "range", min: 1, max: 3, step: 1 },
     },
     gap: {
       control: { type: "select" },
@@ -26,23 +26,19 @@ const meta = {
   render: (args: GrilleProps) => {
     const grille = document.createElement("wc-grille");
 
-    Object.entries(args).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) {
-        grille.setAttribute(key, String(value));
-      }
-    });
+    // Establecer atributos
+    grille.setAttribute("desktop", args.desktop.toString());
+    grille.setAttribute("mobile", args.mobile.toString());
+    grille.setAttribute("gap", args.gap);
 
-    const posts = Array.from({ length: 7 }, () => ({
-      title: randPhrase(),
-    }));
-
-    posts.forEach((post, i) => {
-      const span = document.createElement("span");
-      span.textContent = `${i}.- ${post.title}`;
-      span.style.display = "block";
-      span.style.padding = "8px";
-      grille.appendChild(span);
-    });
+    // Crear elementos DENTRO del slot
+    for (let i = 0; i < 7; i++) {
+      const div = document.createElement("div");
+      div.textContent = `${i + 1}. ${randPhrase()}`;
+      div.style.padding = "12px";
+      div.style.minHeight = "60px";
+      grille.appendChild(div);
+    }
 
     return grille;
   },
@@ -56,29 +52,5 @@ export const Default: Story = {
     desktop: 3,
     mobile: 2,
     gap: "medium",
-  },
-};
-
-export const FourColumns: Story = {
-  args: {
-    desktop: 4,
-    mobile: 1,
-    gap: "medium",
-  },
-};
-
-export const SmallGap: Story = {
-  args: {
-    desktop: 3,
-    mobile: 2,
-    gap: "small",
-  },
-};
-
-export const LargeGap: Story = {
-  args: {
-    desktop: 3,
-    mobile: 2,
-    gap: "large",
   },
 };
