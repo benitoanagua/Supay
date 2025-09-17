@@ -1,13 +1,30 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
+  "include": [
+    "./src/**/*",
+    "./@types/*",
+    "./types/**/*.d.ts",
+    "./src/**/*.d.ts"
+  ],
   "compilerOptions": {
-    "strict": true,
-    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "target": "es2021",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "module": "es2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*", "src/node_modules"],
-  "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
+  "exclude": ["**/node_modules"]
 }

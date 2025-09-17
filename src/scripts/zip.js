@@ -91,7 +91,7 @@ class AlternativeZipPackager {
       console.log(`\n✅ Package created: ${zipFileName}`);
       console.log(
         "📊 Size:",
-        execSync(`du -h ${zipFileName}`).toString().trim()
+        execSync(`du -h ${zipFileName}`).toString().trim(),
       );
     } catch (error) {
       console.error(`❌ Packaging failed: ${error.message}`);
@@ -106,8 +106,8 @@ class AlternativeZipPackager {
       const packageJson = JSON.parse(
         require("fs").readFileSync(
           join(this.projectRoot, "package.json"),
-          "utf8"
-        )
+          "utf8",
+        ),
       );
       return packageJson.version;
     } catch {

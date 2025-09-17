@@ -2,7 +2,7 @@ import type { Preview } from "@storybook/html";
 
 // Importa tus estilos y custom elements
 import "../dist/supay.css";
-import "../dist/svelte-bundle.js";
+import "../dist/supay-elements.es.js";
 
 const preview: Preview = {
   parameters: {

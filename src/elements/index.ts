@@ -1,9 +1,27 @@
-import "../css/tailwind.css";
+// Import all components to register them
+import { WcCard } from "./Card.js";
+import { WcGrille } from "./Grille.js";
+import { WcLogo } from "./Logo.js";
+import { WcMenu } from "./Menu.js";
+import { WcMenuItem } from "./MenuItem.js";
+import { WcOffcanvas } from "./Offcanvas.js";
+import { WcSticky } from "./Sticky.js";
 
-export { default as Card } from "./Card/Card.svelte";
-export { default as Grille } from "./Grille/Grille.svelte";
-export { default as Logo } from "./Logo/Logo.svelte";
-export { default as Menu } from "./Menu/Menu.svelte";
-export { default as MenuItem } from "./Menu/MenuItem.svelte";
-export { default as Offcanvas } from "./Offcanvas/Offcanvas.svelte";
-export { default as Sticky } from "./Sticky/Sticky.svelte";
+// Import styles
+import "../main.css";
+
+// Export all components and types
+export { WcCard, WcGrille, WcLogo, WcMenu, WcMenuItem, WcOffcanvas, WcSticky };
+
+// Global type declarations
+declare global {
+  interface HTMLElementTagNameMap {
+    "wc-card": WcCard;
+    "wc-grille": WcGrille;
+    "wc-logo": WcLogo;
+    "wc-menu": WcMenu;
+    "wc-menu-item": WcMenuItem;
+    "wc-offcanvas": WcOffcanvas;
+    "wc-sticky": WcSticky;
+  }
+}

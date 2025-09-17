@@ -1,0 +1,28 @@
+import { defineConfig } from 'vite';
+import { resolve } from 'node:path';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+    base: './',
+    plugins: [tailwindcss()],
+    css: {
+        devSourcemap: true,
+    },
+    build: {
+        target: 'esnext',
+        minify: 'esbuild',
+        emptyOutDir: false,
+        lib: {
+            entry: resolve(__dirname, 'src/elements/index.ts'),
+            name: 'SupayElements',
+            fileName: (format) => `supay-elements.${format}.js`,
+            formats: ['es']
+        },
+        
+    },
+    resolve: { 
+        alias: { 
+            '@': resolve(__dirname, 'src') 
+        } 
+    }
+});
