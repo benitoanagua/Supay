@@ -11,6 +11,17 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ["../dist"],
+  // Configura Vite para observar los archivos dist
+  viteFinal: async (config) => {
+    config.server = {
+      ...config.server,
+      watch: {
+        ...config.server?.watch,
+        ignored: ["!**/dist/**"], // No ignorar la carpeta dist
+      },
+    };
+    return config;
+  },
 };
 
 export default config;
