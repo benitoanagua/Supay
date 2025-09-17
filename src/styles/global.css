@@ -78,3 +78,7 @@
 .headline-6 {
   @apply text-xs md:text-sm lg:text-base font-medium tracking-wide;
 }
+
+.wc-grille__container {
+  @apply flex flex-wrap;
+}

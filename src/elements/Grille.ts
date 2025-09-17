@@ -1,28 +1,20 @@
-import { LitElement, html, css } from "lit";
-import { property, query } from "lit/decorators.js";
+import { LitElement, html, unsafeCSS } from "lit";
+import { customElement, property, query } from "lit/decorators.js";
+import mainCSS from "../main.css?inline";
 
+@customElement("wc-grille")
 export class WcGrille extends LitElement {
-  @property({ type: Number })
-  desktop = 3;
+  static styles = [unsafeCSS(mainCSS)];
 
-  @property({ type: Number })
-  mobile = 2;
+  @property({ type: Number }) desktop = 3;
+  @property({ type: Number }) mobile = 2;
+  @property({ type: String }) gap = "medium";
 
-  @property({ type: String })
-  gap = "medium";
+  @query("slot", true)
+  private slotElement!: HTMLSlotElement;
 
-  @query("slot")
-  slot!: HTMLSlotElement;
-
-  @query(".grille-container")
-  container!: HTMLElement;
-
-  static styles = css`
-    .grille-container {
-      display: flex;
-      flex-wrap: wrap;
-    }
-  `;
+  @query(".wc-grille__container", true)
+  private containerElement!: HTMLElement;
 
   firstUpdated() {
     this.setupResizeObserver();
@@ -34,11 +26,11 @@ export class WcGrille extends LitElement {
   }
 
   setupResizeObserver() {
-    if (this.container && window.ResizeObserver) {
+    if (this.containerElement && window.ResizeObserver) {
       const resizeObserver = new ResizeObserver(() => {
         this.gridRendering();
       });
-      resizeObserver.observe(this.container);
+      resizeObserver.observe(this.containerElement);
     }
 
     // Fallback para cambios de viewport
@@ -57,19 +49,17 @@ export class WcGrille extends LitElement {
   }
 
   gridRendering() {
-    if (!this.slot || !this.container) return;
+    if (!this.slotElement || !this.containerElement) return;
 
-    const assignedElements = this.slot.assignedElements();
+    const assignedElements = this.slotElement.assignedElements();
 
     assignedElements.forEach((element: Element, i: number) => {
-      // Type guard para asegurar que es HTMLElement
       if (!(element instanceof HTMLElement)) return;
 
       // Reset styles
       element.style.cssText = "";
 
       const isMobile = window.innerWidth < 768;
-      const columns = isMobile ? this.mobile : this.desktop;
       const dsk = this.grid(this.desktop, i, assignedElements.length);
       const mbl = this.grid(this.mobile, i, assignedElements.length);
 
@@ -81,14 +71,16 @@ export class WcGrille extends LitElement {
       // Calcular ancho
       if (isMobile) {
         const widthM = Math.floor(
-          (this.container.clientWidth - 2 * padding * (this.mobile - 1)) /
+          (this.containerElement.clientWidth -
+            2 * padding * (this.mobile - 1)) /
             this.mobile
         );
         const borderM = (i + 1) % this.mobile !== 0 ? 1 : 0;
         element.style.width = `${widthM - borderM}px`;
       } else {
         const widthd = Math.floor(
-          (this.container.clientWidth - 2 * padding * (this.desktop - 1)) /
+          (this.containerElement.clientWidth -
+            2 * padding * (this.desktop - 1)) /
             this.desktop
         );
         const borderD = (i + 1) % this.desktop !== 0 ? 1 : 0;
@@ -97,7 +89,7 @@ export class WcGrille extends LitElement {
 
       let hasRightBorder = false;
       let hasBottomBorder = false;
-      const borderColor = "rgb(126, 126, 126)";
+      const borderColor = "var(--color-outline)";
 
       // Línea derecha
       if (
@@ -124,18 +116,16 @@ export class WcGrille extends LitElement {
       // Esquina (donde se cruzan las líneas)
       if (hasRightBorder && hasBottomBorder) {
         const gradientSize = Math.round((2 * padding * Math.sqrt(2)) / 4 + 1);
-        element.style.borderImage = `linear-gradient(315deg, white ${gradientSize}px, ${borderColor} 0) 1`;
+        element.style.borderImage = `linear-gradient(315deg, transparent ${gradientSize}px, ${borderColor} 0) 1`;
       }
     });
   }
 
   render() {
     return html`
-      <div class="grille-container">
+      <div class="wc-grille__container">
         <slot @slotchange=${this.gridRendering}></slot>
       </div>
     `;
   }
 }
-
-customElements.define("wc-grille", WcGrille);
