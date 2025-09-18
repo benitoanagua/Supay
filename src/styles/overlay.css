@@ -40,61 +40,86 @@
   @apply aspect-4/3;
 }
 
-/* Fill Effects */
+/* Fill Effects - Usando variables MD3 */
 .wc-overlay--fill-full::before {
-  @apply content-[''] absolute w-full h-full bg-black/50;
+  content: "";
+  @apply absolute bg-scrim w-full h-full;
+  background-color: var(--color-scrim);
+  opacity: 0.6;
 }
 
 .wc-overlay--fill-gradient.wc-overlay--position-top::before {
-  @apply content-[''] absolute w-full h-full bg-gradient-to-b from-black/90;
+  content: "";
+  @apply absolute w-full h-full;
+  background: linear-gradient(to bottom, var(--color-scrim) 10%, transparent);
 }
 
 .wc-overlay--fill-gradient.wc-overlay--position-bottom::before {
-  @apply content-[''] absolute w-full h-full bg-gradient-to-t from-black/90;
+  content: "";
+  @apply absolute w-full h-full;
+  background: linear-gradient(to top, var(--color-scrim) 10%, transparent);
 }
 
 .wc-overlay--fill-gradient.wc-overlay--position-center::before {
-  @apply content-[''] absolute w-full h-full bg-gradient-to-t from-transparent via-black/90 to-transparent;
+  content: "";
+  @apply absolute w-full h-full;
+  background: linear-gradient(
+    to top,
+    transparent,
+    var(--color-scrim) 60%,
+    transparent
+  );
 }
 
-/* Content Container - ESTILOS ORIGINALES */
+/* Content Container */
 .wc-overlay__content {
-  @apply max-w-xl p-4 flex flex-col space-y-1 text-left z-10;
+  @apply max-w-xl p-6 flex flex-col gap-3 text-left z-10 rounded-lg;
 }
 
-/* Box Styles - MANTENER LA LÓGICA ORIGINAL */
+/* Box Styles - Usando variables MD3 */
 .wc-overlay--box-background .wc-overlay__content {
-  @apply bg-primary/90;
+  background-color: color-mix(
+    in srgb,
+    var(--color-surfaceContainerHigh) 10%,
+    transparent
+  );
+  @apply backdrop-blur-sm;
 }
 
 .wc-overlay--box-border .wc-overlay__content {
-  @apply m-4 border border-white/20; /* Aquí está el m-4 que funciona */
+  border: 1px solid color-mix(in srgb, var(--color-outline) 50%, transparent);
 }
 
 .wc-overlay--box-transparent .wc-overlay__content {
   @apply bg-transparent;
 }
 
-/* Category */
+/* Category/Tag - Usando variables MD3 */
 .wc-overlay__category {
-  @apply font-sans font-medium text-xs text-onPrimary uppercase;
+  color: var(--color-primaryContainer);
+  background-color: var(--color-onPrimaryContainer);
+  @apply w-fit text-xs font-medium uppercase tracking-wide px-3 py-1 rounded-full;
 }
 
-/* Title Link */
+/* Title Link - Usando variables MD3 */
 .wc-overlay__title-link {
-  @apply text-white no-underline;
+  color: var(--color-onPrimary);
+  @apply no-underline hover:opacity-90 transition-opacity;
 }
 
 /* Meta Container */
 .wc-overlay__meta {
-  @apply flex flex-wrap list-none pl-0;
+  @apply flex flex-wrap items-center gap-3 text-sm;
 }
 
-/* Meta Items */
+/* Meta Items - Usando variables MD3 */
 .wc-overlay__meta-item {
-  @apply flex items-center font-sans font-medium text-xs text-neutral-300;
+  color: color-mix(in srgb, var(--color-onPrimary) 90%, transparent);
+  @apply flex items-center font-medium;
 }
 
 .wc-overlay__meta-item:not(:last-child)::after {
-  @apply content-[''] mx-1.5 w-[1px] h-3 -skew-x-12 bg-primary;
+  content: "•";
+  color: color-mix(in srgb, var(--color-onPrimary) 60%, transparent);
+  @apply mx-2;
 }
