@@ -169,7 +169,7 @@ export class WcCard extends BaseClass {
                             class="wc-card__author-image"
                           />
                         `
-                      : html` <span class="wc-card__author-bullet"></span> `}
+                      : html`<span class="wc-card__author-bullet"></span>`}
                     <a href="${this.author_url}" class="wc-card__author-link">
                       ${this.author_name}
                     </a>
@@ -182,7 +182,7 @@ export class WcCard extends BaseClass {
             </a>
 
             ${this.density === "normal"
-              ? html` <p class="wc-card__excerpt">${this.excerpt}</p> `
+              ? html`<p class="wc-card__excerpt">${this.excerpt}</p>`
               : ""}
             ${this.tag_name && this.density !== "minimal"
               ? html`

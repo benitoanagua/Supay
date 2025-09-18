@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "./styles/material-theme.css";
 @import "./styles/global.css";
+@import "./styles/card.css";
+@import "./styles/grille.css";
 @import "./styles/overlay.css";
 
 @source '../../*.hbs';

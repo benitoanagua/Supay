@@ -28,8 +28,6 @@ export class WcOverlay extends BaseClass {
   aspect_ratio: CardAspectRatio = "monitor";
   @property({ type: Number, reflect: true }) heading: CardHeading = 4;
   @property({ type: Boolean, attribute: "show-meta" }) show_meta = false;
-  @property({ type: Boolean, attribute: "show-category" }) show_category =
-    false;
   @property({ type: String }) align: OverlayAlign = "center";
   @property({ type: String }) position: OverlayPosition = "center";
   @property({ type: String }) box: OverlayBox = "background";
@@ -61,13 +59,13 @@ export class WcOverlay extends BaseClass {
     return html`
       <div
         class="${this.getOverlayClasses()}"
-        style="background-image: url(${this.feature_image})"
+        style="${this.feature_image
+          ? `background-image: url(${this.feature_image})`
+          : ""}"
       >
         <div class="wc-overlay__content">
-          ${this.show_category && this.tag_name
-            ? html`
-                <span class="wc-overlay__category"> ${this.tag_name} </span>
-              `
+          ${this.tag_name
+            ? html` <span class="wc-overlay__category">${this.tag_name}</span> `
             : ""}
 
           <a href="${this.url}" class="wc-overlay__title-link">

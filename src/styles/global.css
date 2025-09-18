@@ -1,74 +1,4 @@
-pero usa clases .wc-card {
-  @apply block;
-}
-.wc-card--elevation-0 {
-  @apply p-0;
-}
-
-.wc-card--elevation-1 {
-  @apply bg-surfaceContainerHighest rounded-lg p-3;
-}
-
-.wc-card--elevation-2 {
-  @apply bg-surfaceContainerHighest rounded-xl p-4;
-}
-
-.wc-card--elevation-3 {
-  @apply bg-surfaceContainerHighest rounded-xl p-5 shadow-md;
-}
-
-.wc-card__container {
-  @apply flex gap-4;
-}
-
-.wc-card__figure {
-  @apply m-0 overflow-hidden;
-}
-
-.wc-card__content {
-  @apply flex flex-col gap-y-3 flex-1;
-}
-
-.wc-card__author {
-  @apply flex items-center gap-x-2;
-}
-
-.wc-card__author-image {
-  @apply w-8 h-8 rounded-full;
-}
-
-.wc-card__author-bullet {
-  @apply w-2 h-2 bg-primary rounded-full inline-block;
-}
-bg-surfaceContainerHighest rounded-xl p-4 .wc-card__author-link {
-  @apply text-onSurfaceVariant text-sm font-medium no-underline hover:text-primary transition-colors;
-}
-
-.wc-card__title-link {
-  @apply text-onSurface no-underline;
-}
-
-.wc-card__excerpt {
-  @apply my-2 text-onSurfaceVariant text-base;
-}
-
-.wc-card__meta {
-  @apply flex gap-y-4 items-center text-onSurfaceVariant text-sm flex-wrap gap-x-1;
-}
-
-.wc-card__meta-item {
-  @apply whitespace-nowrap;
-
-  &:not(:last-child)::after {
-    @apply content-['•'] ml-2 mr-1;
-  }
-}
-
-.wc-card__tag {
-  @apply text-primary bg-primaryContainer/30 py-1 px-3 rounded-full text-xs no-underline;
-}
-
-/* Typography scale with @apply */
+/* Typography scale with responsive utilities */
 .headline-1 {
   @apply text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight;
 }
@@ -91,8 +21,4 @@ bg-surfaceContainerHighest rounded-xl p-4 .wc-card__author-link {
 
 .headline-6 {
   @apply text-xs md:text-sm lg:text-base font-medium tracking-wide;
-}
-
-.wc-grille__container {
-  @apply flex flex-wrap;
 }
