@@ -7,8 +7,15 @@ import {
   randNumber,
   randMonth,
 } from "@ngneat/falso";
+import type {
+  OverlayProps,
+  OverlayAlign,
+  OverlayPosition,
+  OverlayFill,
+  OverlayBox,
+} from "../types/overlay.js";
 
-const meta = {
+const meta: Meta<OverlayProps> = {
   title: "Components/Overlay",
   component: "wc-overlay",
   tags: ["autodocs"],
@@ -18,42 +25,37 @@ const meta = {
       description: "Heading level (1-6)",
     },
     aspect_ratio: {
-      control: { type: "radio" },
+      control: { type: "inline-radio" },
       options: ["monitor", "square", "video"],
       description: "Image aspect ratio",
     },
     show_meta: {
       control: { type: "boolean" },
-      description: "Show meta information",
+      description: "Show author and date information",
     },
     show_category: {
       control: { type: "boolean" },
       description: "Show category tag",
     },
-    font_group: {
-      control: { type: "select" },
-      options: ["default", "supplement", "sans", "serif"],
-      description: "Font family group",
-    },
     align: {
-      control: { type: "select" },
-      options: ["start", "center", "end"],
-      description: "Horizontal alignment",
+      control: { type: "inline-radio" },
+      options: ["start", "center", "end"] as OverlayAlign[],
+      description: "Horizontal content alignment",
     },
     position: {
-      control: { type: "select" },
-      options: ["top", "center", "bottom"],
-      description: "Vertical position",
+      control: { type: "inline-radio" },
+      options: ["top", "center", "bottom"] as OverlayPosition[],
+      description: "Vertical content position",
     },
     box: {
       control: { type: "select" },
-      options: ["border", "background", "transparent"],
-      description: "Content box style",
+      options: ["border", "background", "transparent"] as OverlayBox[],
+      description: "Content container style",
     },
     fill: {
       control: { type: "select" },
-      options: ["full", "gradient", "none"],
-      description: "Overlay fill type",
+      options: ["full", "gradient", "none"] as OverlayFill[],
+      description: "Overlay effect type",
     },
     feature_image: {
       control: { type: "text" },
@@ -61,7 +63,7 @@ const meta = {
     },
     tag_name: {
       control: { type: "text" },
-      description: "Category tag name",
+      description: "Category or tag name",
     },
     author_name: {
       control: { type: "text" },
@@ -73,10 +75,10 @@ const meta = {
     },
     reading_time: {
       control: { type: "text" },
-      description: "Reading time",
+      description: "Estimated reading time",
     },
   },
-  render: (args) => {
+  render: (args: OverlayProps) => {
     const overlay = document.createElement("wc-overlay");
 
     Object.entries(args).forEach(([key, value]) => {
@@ -90,13 +92,11 @@ const meta = {
 };
 
 export default meta;
-type Story = StoryObj<any>;
+type Story = StoryObj<OverlayProps>;
 
-const overlayData = {
-  title: randPhrase(),
+const baseOverlayData = {
   url: randUrl(),
   feature_image: "https://picsum.photos/800/600",
-  tag_name: randWord(),
   author_name: randFullName(),
   published_at: `${randMonth({ abbreviation: true })} ${randNumber({
     min: 1,
@@ -105,98 +105,217 @@ const overlayData = {
   reading_time: `${randNumber({ min: 5, max: 25 })} min read`,
 };
 
-export const Default: Story = {
+export const StandardConfiguration: Story = {
+  name: "Standard Configuration",
   args: {
-    ...overlayData,
-    heading: 2,
+    ...baseOverlayData,
+    title: randPhrase(),
+    tag_name: randWord(),
+    heading: 3,
     aspect_ratio: "monitor",
     show_meta: true,
     show_category: true,
-    font_group: "default",
     align: "center",
     position: "center",
     box: "background",
-    fill: "full",
+    fill: "gradient",
   },
 };
 
-export const Minimal: Story = {
+export const MinimalPresentation: Story = {
+  name: "Minimal Presentation",
   args: {
-    ...overlayData,
-    heading: 4,
+    ...baseOverlayData,
+    title: randPhrase(),
+    tag_name: "",
+    heading: 2,
     aspect_ratio: "square",
     show_meta: false,
     show_category: false,
-    font_group: "sans",
-    align: "start",
-    position: "bottom",
+    align: "center",
+    position: "center",
     box: "transparent",
     fill: "none",
+    feature_image: "https://picsum.photos/600/600",
   },
 };
 
-export const TopAligned: Story = {
+export const TopAlignedContent: Story = {
+  name: "Top Aligned Content",
   args: {
-    ...overlayData,
+    ...baseOverlayData,
+    title: randPhrase(),
+    tag_name: randWord(),
+    heading: 4,
+    aspect_ratio: "monitor",
+    show_meta: true,
+    show_category: true,
+    align: "start",
+    position: "top",
+    box: "border",
+    fill: "full",
+  },
+};
+
+export const BottomAlignedContent: Story = {
+  name: "Bottom Aligned Content",
+  args: {
+    ...baseOverlayData,
+    title: randPhrase(),
+    tag_name: randWord(),
+    heading: 3,
+    aspect_ratio: "video",
+    show_meta: false,
+    show_category: true,
+    align: "end",
+    position: "bottom",
+    box: "background",
+    fill: "gradient",
+    feature_image: "https://picsum.photos/800/450",
+  },
+};
+
+export const FullOverlayEffect: Story = {
+  name: "Full Overlay Effect",
+  args: {
+    ...baseOverlayData,
+    title: randPhrase(),
+    tag_name: randWord(),
     heading: 2,
     aspect_ratio: "monitor",
     show_meta: true,
     show_category: true,
-    font_group: "default",
-    align: "start",
-    position: "top",
-    box: "background",
-    fill: "gradient",
-  },
-};
-
-export const GradientOverlay: Story = {
-  args: {
-    ...overlayData,
-    heading: 1,
-    aspect_ratio: "monitor",
-    show_meta: true,
-    show_category: true,
-    font_group: "serif",
     align: "center",
-    position: "bottom",
+    position: "center",
     box: "transparent",
-    fill: "gradient",
+    fill: "full",
   },
 };
 
-export const NoOverlay: Story = {
+export const GradientOverlayEffect: Story = {
+  name: "Gradient Overlay Effect",
   args: {
-    ...overlayData,
-    heading: 4,
+    ...baseOverlayData,
+    title: randPhrase(),
+    tag_name: randWord(),
+    heading: 1,
     aspect_ratio: "square",
     show_meta: true,
     show_category: true,
-    font_group: "sans",
+    align: "center",
+    position: "bottom",
+    box: "background",
+    fill: "gradient",
+    feature_image: "https://picsum.photos/600/600",
+  },
+};
+
+export const NoOverlayEffect: Story = {
+  name: "No Overlay Effect",
+  args: {
+    ...baseOverlayData,
+    title: randPhrase(),
+    tag_name: randWord(),
+    heading: 4,
+    aspect_ratio: "monitor",
+    show_meta: true,
+    show_category: true,
     align: "center",
     position: "center",
-    box: "background",
+    box: "border",
     fill: "none",
   },
 };
 
-export const Playground: Story = {
+export const BorderContainerStyle: Story = {
+  name: "Border Container Style",
   args: {
-    ...overlayData,
+    ...baseOverlayData,
+    title: randPhrase(),
+    tag_name: randWord(),
+    heading: 3,
+    aspect_ratio: "video",
+    show_meta: false,
+    show_category: true,
+    align: "end",
+    position: "top",
+    box: "border",
+    fill: "gradient",
+    feature_image: "https://picsum.photos/800/450",
+  },
+};
+
+export const TransparentContainerStyle: Story = {
+  name: "Transparent Container Style",
+  args: {
+    ...baseOverlayData,
+    title: randPhrase(),
+    tag_name: randWord(),
     heading: 2,
     aspect_ratio: "monitor",
     show_meta: true,
+    show_category: false,
+    align: "start",
+    position: "center",
+    box: "transparent",
+    fill: "full",
+  },
+};
+
+export const ContentAlignmentShowcase: Story = {
+  name: "Content Alignment Showcase",
+  render: () => {
+    const container = document.createElement("div");
+    container.className = "grid grid-cols-1 md:grid-cols-3 gap-6 p-6";
+
+    const alignments = ["start", "center", "end"] as OverlayAlign[];
+    const positions = ["top", "center", "bottom"] as OverlayPosition[];
+
+    alignments.forEach((align) => {
+      positions.forEach((position) => {
+        const overlay = document.createElement("wc-overlay");
+        overlay.setAttribute("title", `Align: ${align}\nPosition: ${position}`);
+        overlay.setAttribute("feature-image", "https://picsum.photos/400/250");
+        overlay.setAttribute("aspect-ratio", "monitor");
+        overlay.setAttribute("heading", "4");
+        overlay.setAttribute("align", align);
+        overlay.setAttribute("position", position);
+        overlay.setAttribute("box", "background");
+        overlay.setAttribute("fill", "gradient");
+        overlay.setAttribute("show-category", "true");
+        overlay.setAttribute("tag-name", `${align}-${position}`);
+
+        container.appendChild(overlay);
+      });
+    });
+
+    return container;
+  },
+};
+
+export const InteractiveConfiguration: Story = {
+  name: "Interactive Configuration",
+  args: {
+    title: "Customize this overlay",
+    url: randUrl(),
+    feature_image: "https://picsum.photos/800/500",
+    tag_name: "Custom",
+    author_name: randFullName(),
+    published_at: "Current date",
+    reading_time: "5 min read",
+    heading: 3,
+    aspect_ratio: "monitor",
+    show_meta: true,
     show_category: true,
-    font_group: "default",
     align: "center",
     position: "center",
     box: "background",
-    fill: "full",
+    fill: "gradient",
   },
   parameters: {
     controls: {
       expanded: true,
-      sort: "alpha",
+      sort: "requiredFirst",
     },
   },
 };

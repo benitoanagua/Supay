@@ -1,7 +1,13 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import mainCSS from "../main.css?inline";
-import type { OverlayProps } from "../types/overlay.js";
+import type {
+  OverlayAlign,
+  OverlayPosition,
+  OverlayFill,
+  OverlayBox,
+} from "../types/overlay.js";
+import type { CardHeading, CardAspectRatio } from "../types/card.js";
 
 @customElement("wc-overlay")
 export class WcOverlay extends LitElement {
@@ -14,17 +20,16 @@ export class WcOverlay extends LitElement {
   @property({ type: String, attribute: "author-name" }) author_name = "";
   @property({ type: String, attribute: "published-at" }) published_at = "";
   @property({ type: String, attribute: "reading-time" }) reading_time = "";
-  @property({ type: String, attribute: "aspect-ratio" }) aspect_ratio =
-    "monitor";
-  @property({ type: Number }) heading = 1;
+  @property({ type: String, attribute: "aspect-ratio" })
+  aspect_ratio: CardAspectRatio = "monitor";
+  @property({ type: Number, reflect: true }) heading: CardHeading = 4;
   @property({ type: Boolean, attribute: "show-meta" }) show_meta = false;
   @property({ type: Boolean, attribute: "show-category" }) show_category =
     false;
-  @property({ type: String, attribute: "font-group" }) font_group = "default";
-  @property({ type: String }) align = "center";
-  @property({ type: String }) position = "center";
-  @property({ type: String }) box = "background";
-  @property({ type: String }) fill = "full";
+  @property({ type: String }) align: OverlayAlign = "center";
+  @property({ type: String }) position: OverlayPosition = "center";
+  @property({ type: String }) box: OverlayBox = "background";
+  @property({ type: String }) fill: OverlayFill = "full";
 
   protected createRenderRoot() {
     return this;
@@ -102,45 +107,28 @@ export class WcOverlay extends LitElement {
     return classes.join(" ");
   }
 
-  private getHeadFontClass() {
-    return this.font_group === "default" || this.font_group === "serif"
-      ? "font-serif"
-      : "font-sans";
-  }
-
-  private getTitleClass() {
-    const baseClasses = ["text-white font-700", this.getHeadFontClass()];
-
-    const spacingClasses = {
-      1: "headline-1 pb-12px",
-      2: "headline-2 pb-10px",
-      3: "headline-3 pb-8px",
-      4: "headline-4 pb-4px",
-      5: "headline-5 pb-2px",
-      6: "headline-6 pb-0",
-    }[this.heading];
-
-    return [...baseClasses, spacingClasses].join(" ");
+  private getHeadingClass() {
+    return `m-0 font-500 headline-${this.heading}`;
   }
 
   private renderTitle() {
-    const titleClass = this.getTitleClass();
+    const titleClass = this.getHeadingClass();
 
     switch (this.heading) {
       case 1:
-        return html`<h1 class="${titleClass}">${this.title}</h1>`;
+        return html`<h1 class="${titleClass} text-white">${this.title}</h1>`;
       case 2:
-        return html`<h2 class="${titleClass}">${this.title}</h2>`;
+        return html`<h2 class="${titleClass} text-white">${this.title}</h2>`;
       case 3:
-        return html`<h3 class="${titleClass}">${this.title}</h3>`;
+        return html`<h3 class="${titleClass} text-white">${this.title}</h3>`;
       case 4:
-        return html`<h4 class="${titleClass}">${this.title}</h4>`;
+        return html`<h4 class="${titleClass} text-white">${this.title}</h4>`;
       case 5:
-        return html`<h5 class="${titleClass}">${this.title}</h5>`;
+        return html`<h5 class="${titleClass} text-white">${this.title}</h5>`;
       case 6:
-        return html`<h6 class="${titleClass}">${this.title}</h6>`;
+        return html`<h6 class="${titleClass} text-white">${this.title}</h6>`;
       default:
-        return html`<h2 class="${titleClass}">${this.title}</h2>`;
+        return html`<h2 class="${titleClass} text-white">${this.title}</h2>`;
     }
   }
 
@@ -154,7 +142,7 @@ export class WcOverlay extends LitElement {
           ${this.show_category && this.tag_name
             ? html`
                 <span
-                  class="font-sans font-500 text-xs text-accent-500 uppercase"
+                  class="font-sans font-500 text-xs text-onPrimary uppercase"
                 >
                   ${this.tag_name}
                 </span>
