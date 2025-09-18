@@ -1,55 +1,43 @@
 import type { Meta, StoryObj } from "@storybook/html";
 import { randUrl, randMusicGenre } from "@ngneat/falso";
+import type { MenuProps } from "../types/menu.js";
 
-interface MenuProps {
-  dark: boolean;
-  home: string;
-}
-
-const meta = {
+const meta: Meta<MenuProps> = {
   title: "Components/Menu",
   component: "wc-menu",
   tags: ["autodocs"],
-  argTypes: {
-    dark: {
-      control: { type: "boolean" },
-    },
-    home: {
-      control: { type: "text" },
-    },
-  },
-  render: (args: MenuProps) => {
+  render: () => {
     const menu = document.createElement("wc-menu");
 
-    Object.entries(args).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) {
-        menu.setAttribute(key, String(value));
-      }
-    });
-
-    const logo = document.createElement("wc-logo");
-    logo.setAttribute("slot", "logo");
-    menu.appendChild(logo);
-
-    const searchBtn = document.createElement("button");
-    searchBtn.setAttribute("slot", "search");
-    searchBtn.className = "border-0 bg-white p-1";
-    const searchIcon = document.createElement("span");
-    searchIcon.className = "i-ri-search-line block h-6 w-6";
-    searchBtn.appendChild(searchIcon);
-    menu.appendChild(searchBtn);
-
-    const nav = Array.from({ length: 5 }, () => ({
+    // Create menu items data
+    const menuItems = Array.from({ length: 5 }, (_, index) => ({
       slug: randMusicGenre(),
       url: randUrl(),
+      active: index === 0,
     }));
 
-    nav.forEach((item, index) => {
-      const menuItem = document.createElement("wc-menu-item");
-      menuItem.setAttribute("url", item.url);
-      if (index === 0) menuItem.setAttribute("current", "true");
-      menuItem.textContent = item.slug;
-      menu.appendChild(menuItem);
+    // Set menu property
+    const menuData = menuItems.reduce(
+      (acc, item, index) => {
+        acc[`item-${index + 1}`] = {
+          url: item.url,
+          title: item.slug,
+          active: item.active,
+        };
+        return acc;
+      },
+      {} as Record<string, any>
+    );
+
+    menu.menu = menuData;
+
+    // Add event listeners for demo purposes
+    menu.addEventListener("menu-toggle", (e: any) => {
+      console.log("Menu toggled:", e.detail.isOpen);
+    });
+
+    menu.addEventListener("menu-item-selected", (e: any) => {
+      console.log("Menu item selected:", e.detail);
     });
 
     return menu;
@@ -60,15 +48,25 @@ export default meta;
 type Story = StoryObj<MenuProps>;
 
 export const Default: Story = {
-  args: {
-    dark: false,
-    home: "#",
-  },
+  args: {},
 };
 
-export const Dark: Story = {
-  args: {
-    dark: true,
-    home: "#",
+export const WithSlotItems: Story = {
+  args: {},
+  render: () => {
+    const menu = document.createElement("wc-menu");
+
+    // Add menu items via slot
+    const menuItems = Array.from({ length: 3 }, (_, index) => {
+      const item = document.createElement("wc-menu-item");
+      item.setAttribute("url", randUrl());
+      item.setAttribute("title", randMusicGenre());
+      if (index === 0) item.setAttribute("active", "true");
+      return item;
+    });
+
+    menuItems.forEach((item) => menu.appendChild(item));
+
+    return menu;
   },
 };

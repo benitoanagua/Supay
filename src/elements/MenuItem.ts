@@ -1,20 +1,20 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import mainCSS from "../main.css?inline";
+import type { MenuItemSelectEvent } from "../types/menu";
 
 @customElement("wc-menu-item")
 export class WcMenuItem extends LitElement {
   static styles = [unsafeCSS(mainCSS)];
 
-  @property({ type: String, reflect: true }) url = "#";
-  @property({ type: Boolean }) current = false;
-  @property({ type: Boolean }) dark = false;
+  @property({ type: String }) url = "#";
+  @property({ type: String }) title = "";
+  @property({ type: Boolean }) active = false;
 
   @state() private isMobile = false;
 
   private mediaQuery?: MediaQueryList;
 
-  // Deshabilitar Shadow DOM para usar estilos globales de Tailwind
   protected createRenderRoot() {
     return this;
   }
@@ -32,14 +32,10 @@ export class WcMenuItem extends LitElement {
   private setupMediaQuery() {
     if (typeof window === "undefined") return;
 
-    this.mediaQuery = window.matchMedia("(max-width: 767px)");
+    this.mediaQuery = window.matchMedia("(max-width: 768px)");
+    this.isMobile = this.mediaQuery.matches;
 
-    const updateIsMobile = () => {
-      this.isMobile = this.mediaQuery!.matches;
-    };
-
-    updateIsMobile();
-    this.mediaQuery.addEventListener("change", updateIsMobile);
+    this.mediaQuery.addEventListener("change", this.updateMediaQuery);
   }
 
   private cleanupMediaQuery() {
@@ -48,36 +44,58 @@ export class WcMenuItem extends LitElement {
     }
   }
 
-  private updateMediaQuery = () => {
-    this.isMobile = this.mediaQuery!.matches;
+  private updateMediaQuery = (e: MediaQueryListEvent) => {
+    this.isMobile = e.matches;
   };
 
-  private getLinkClasses() {
-    const baseClasses = "no-underline font-sans";
+  private getMenuItemClasses() {
+    const classes = [
+      "wc-menu-item",
+      "no-underline",
+      "transition-all",
+      "duration-200",
+      "rounded-full",
+      "flex",
+      "items-center",
+      "px-4",
+      "py-3",
+    ];
 
-    let colorClasses;
-    if (this.current) {
-      colorClasses = "text-red-500";
-    } else if (this.dark) {
-      colorClasses = "text-white";
+    if (this.isMobile) {
+      classes.push("text-base", "font-medium");
     } else {
-      colorClasses = "text-neutral-900";
+      classes.push("text-sm", "font-medium", "tracking-wide");
     }
 
-    const sizeClasses = this.isMobile
-      ? "text-lg font-medium"
-      : "text-xs font-700 tracking-wide";
+    if (this.active) {
+      classes.push("bg-primaryContainer", "text-onPrimaryContainer");
+    } else {
+      classes.push("text-onSurfaceVariant", "hover:bg-surfaceContainerLow");
+    }
 
-    return `${baseClasses} ${colorClasses} ${sizeClasses}`;
+    return classes.join(" ");
+  }
+
+  private handleClick(e: Event) {
+    e.preventDefault();
+    const event: MenuItemSelectEvent = new CustomEvent("menu-item-click", {
+      detail: { url: this.url, title: this.title },
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(event);
   }
 
   render() {
     return html`
-      <div class="uppercase">
-        <a class="${this.getLinkClasses()}" href="${this.url}">
-          <slot></slot>
-        </a>
-      </div>
+      <a
+        class="${this.getMenuItemClasses()}"
+        href="${this.url}"
+        @click="${this.handleClick}"
+        aria-current="${this.active ? "page" : "false"}"
+      >
+        <span class="wc-menu-item-label">${this.title}</span>
+      </a>
     `;
   }
 }
