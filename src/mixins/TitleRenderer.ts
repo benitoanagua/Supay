@@ -14,7 +14,7 @@ export function TitleRendererMixin<T extends new (...args: any[]) => any>(
     title!: string;
 
     protected getHeadingClass(): string {
-      return `m-0 font-500 headline-${this.heading}`;
+      return `m-0 font-medium headline-${this.heading}`;
     }
 
     protected renderTitle(additionalClasses: string = ""): TemplateResult {

@@ -39,74 +39,20 @@ export class WcOverlay extends BaseClass {
     return this;
   }
 
-  private getAspectRatioClass() {
-    return this.aspect_ratio === "square"
-      ? "aspect-square"
-      : this.aspect_ratio === "video"
-        ? "aspect-video"
-        : "aspect-4/3";
-  }
-
-  private getAlignClass() {
-    return this.align === "start"
-      ? "justify-start"
-      : this.align === "end"
-        ? "justify-end"
-        : "justify-center";
-  }
-
-  private getPositionClass() {
-    return this.position === "top"
-      ? "items-start"
-      : this.position === "bottom"
-        ? "items-end"
-        : "items-center";
-  }
-
   private getOverlayClasses() {
     const classes = [
-      "w-full flex overflow-hidden bg-cover bg-center",
-      this.getPositionClass(),
-      this.getAlignClass(),
-      this.getAspectRatioClass(),
+      "wc-overlay",
+      `wc-overlay--align-${this.align}`,
+      `wc-overlay--position-${this.position}`,
+      `wc-overlay--aspect-${this.aspect_ratio}`,
     ];
 
     if (this.fill !== "none") {
-      classes.push(
-        "relative before:content-[''] before:absolute before:w-full before:h-full"
-      );
+      classes.push(`wc-overlay--fill-${this.fill}`);
     }
 
-    if (this.fill === "full") {
-      classes.push("before:bg-black/50");
-    } else if (this.fill === "gradient") {
-      if (this.position === "top") {
-        classes.push("before:bg-gradient-to-b before:from-black/90");
-      } else if (this.position === "bottom") {
-        classes.push("before:bg-gradient-to-t before:from-black/90");
-      } else {
-        classes.push(
-          "before:bg-gradient-to-t before:from-transparent before:via-black/90 before:to-transparent"
-        );
-      }
-    }
-
-    return classes.join(" ");
-  }
-
-  private getContentClasses() {
-    const classes = [
-      "max-w-xl p-4 flex flex-col space-y-1 text-left",
-      this.fill !== "none" ? "z-10" : "",
-    ];
-
-    if (this.box === "background") {
-      classes.push("bg-primary/90");
-    } else if (this.box === "border") {
-      classes.push("m-4 border border-white/20");
-    } else {
-      classes.push("bg-transparent");
-    }
+    // Añadir la clase del tipo de box al contenedor principal
+    classes.push(`wc-overlay--box-${this.box}`);
 
     return classes.join(" ");
   }
@@ -117,47 +63,37 @@ export class WcOverlay extends BaseClass {
         class="${this.getOverlayClasses()}"
         style="background-image: url(${this.feature_image})"
       >
-        <div class="${this.getContentClasses()}">
+        <div class="wc-overlay__content">
           ${this.show_category && this.tag_name
             ? html`
-                <span
-                  class="font-sans font-500 text-xs text-accent-500 uppercase"
-                >
-                  ${this.tag_name}
-                </span>
+                <span class="wc-overlay__category"> ${this.tag_name} </span>
               `
             : ""}
 
-          <a href="${this.url}"> ${this.renderTitle("text-white")} </a>
+          <a href="${this.url}" class="wc-overlay__title-link">
+            ${this.renderTitle("text-white")}
+          </a>
 
           ${this.show_meta
             ? html`
-                <ul class="flex flex-wrap">
+                <ul class="wc-overlay__meta">
                   ${this.author_name
                     ? html`
-                        <li
-                          class="flex items-center font-sans font-500 text-xs uppercase text-neutral-300
-                                   after:content-[''] after:mx-1.5 after:w-[1px] after:h-3 after:last-hidden after:-skew-x-12 after:bg-primary-500"
-                        >
+                        <li class="wc-overlay__meta-item">
                           ${this.author_name}
                         </li>
                       `
                     : ""}
                   ${this.published_at
                     ? html`
-                        <li
-                          class="flex items-center font-sans font-500 text-xs text-neutral-400
-                                   after:content-[''] after:mx-1.5 after:w-[1px] after:h-3 after:last-hidden after:-skew-x-12 after:bg-primary-500"
-                        >
+                        <li class="wc-overlay__meta-item">
                           ${this.published_at}
                         </li>
                       `
                     : ""}
                   ${this.reading_time
                     ? html`
-                        <li
-                          class="flex items-center font-sans font-500 text-xs text-neutral-400"
-                        >
+                        <li class="wc-overlay__meta-item">
                           ${this.reading_time}
                         </li>
                       `

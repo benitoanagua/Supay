@@ -65,7 +65,7 @@ export class WcMenuItem extends LitElement {
     }
 
     const sizeClasses = this.isMobile
-      ? "text-lg font-500"
+      ? "text-lg font-medium"
       : "text-xs font-700 tracking-wide";
 
     return `${baseClasses} ${colorClasses} ${sizeClasses}`;

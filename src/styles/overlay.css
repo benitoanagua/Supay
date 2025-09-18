@@ -1,0 +1,100 @@
+/* Overlay Component */
+.wc-overlay {
+  @apply w-full flex overflow-hidden bg-cover bg-center relative;
+}
+
+.wc-overlay--align-start {
+  @apply justify-start;
+}
+
+.wc-overlay--align-center {
+  @apply justify-center;
+}
+
+.wc-overlay--align-end {
+  @apply justify-end;
+}
+
+.wc-overlay--position-top {
+  @apply items-start;
+}
+
+.wc-overlay--position-center {
+  @apply items-center;
+}
+
+.wc-overlay--position-bottom {
+  @apply items-end;
+}
+
+/* Aspect Ratios */
+.wc-overlay--aspect-square {
+  @apply aspect-square;
+}
+
+.wc-overlay--aspect-video {
+  @apply aspect-video;
+}
+
+.wc-overlay--aspect-monitor {
+  @apply aspect-4/3;
+}
+
+/* Fill Effects */
+.wc-overlay--fill-full::before {
+  @apply content-[''] absolute w-full h-full bg-black/50;
+}
+
+.wc-overlay--fill-gradient.wc-overlay--position-top::before {
+  @apply content-[''] absolute w-full h-full bg-gradient-to-b from-black/90;
+}
+
+.wc-overlay--fill-gradient.wc-overlay--position-bottom::before {
+  @apply content-[''] absolute w-full h-full bg-gradient-to-t from-black/90;
+}
+
+.wc-overlay--fill-gradient.wc-overlay--position-center::before {
+  @apply content-[''] absolute w-full h-full bg-gradient-to-t from-transparent via-black/90 to-transparent;
+}
+
+/* Content Container - ESTILOS ORIGINALES */
+.wc-overlay__content {
+  @apply max-w-xl p-4 flex flex-col space-y-1 text-left z-10;
+}
+
+/* Box Styles - MANTENER LA LÓGICA ORIGINAL */
+.wc-overlay--box-background .wc-overlay__content {
+  @apply bg-primary/90;
+}
+
+.wc-overlay--box-border .wc-overlay__content {
+  @apply m-4 border border-white/20; /* Aquí está el m-4 que funciona */
+}
+
+.wc-overlay--box-transparent .wc-overlay__content {
+  @apply bg-transparent;
+}
+
+/* Category */
+.wc-overlay__category {
+  @apply font-sans font-medium text-xs text-onPrimary uppercase;
+}
+
+/* Title Link */
+.wc-overlay__title-link {
+  @apply text-white no-underline;
+}
+
+/* Meta Container */
+.wc-overlay__meta {
+  @apply flex flex-wrap list-none pl-0;
+}
+
+/* Meta Items */
+.wc-overlay__meta-item {
+  @apply flex items-center font-sans font-medium text-xs text-neutral-300;
+}
+
+.wc-overlay__meta-item:not(:last-child)::after {
+  @apply content-[''] mx-1.5 w-[1px] h-3 -skew-x-12 bg-primary;
+}
