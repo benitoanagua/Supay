@@ -8,9 +8,13 @@ import type {
   OverlayBox,
 } from "../types/overlay.js";
 import type { CardHeading, CardAspectRatio } from "../types/card.js";
+import { TitleRendererMixin } from "../mixins/TitleRenderer.js";
+
+// Aplicar el mixin a la clase base
+const BaseClass = TitleRendererMixin(LitElement);
 
 @customElement("wc-overlay")
-export class WcOverlay extends LitElement {
+export class WcOverlay extends BaseClass {
   static styles = [unsafeCSS(mainCSS)];
 
   @property({ type: String }) title = "";
@@ -107,31 +111,6 @@ export class WcOverlay extends LitElement {
     return classes.join(" ");
   }
 
-  private getHeadingClass() {
-    return `m-0 font-500 headline-${this.heading}`;
-  }
-
-  private renderTitle() {
-    const titleClass = this.getHeadingClass();
-
-    switch (this.heading) {
-      case 1:
-        return html`<h1 class="${titleClass} text-white">${this.title}</h1>`;
-      case 2:
-        return html`<h2 class="${titleClass} text-white">${this.title}</h2>`;
-      case 3:
-        return html`<h3 class="${titleClass} text-white">${this.title}</h3>`;
-      case 4:
-        return html`<h4 class="${titleClass} text-white">${this.title}</h4>`;
-      case 5:
-        return html`<h5 class="${titleClass} text-white">${this.title}</h5>`;
-      case 6:
-        return html`<h6 class="${titleClass} text-white">${this.title}</h6>`;
-      default:
-        return html`<h2 class="${titleClass} text-white">${this.title}</h2>`;
-    }
-  }
-
   render() {
     return html`
       <div
@@ -142,14 +121,14 @@ export class WcOverlay extends LitElement {
           ${this.show_category && this.tag_name
             ? html`
                 <span
-                  class="font-sans font-500 text-xs text-onPrimary uppercase"
+                  class="font-sans font-500 text-xs text-accent-500 uppercase"
                 >
                   ${this.tag_name}
                 </span>
               `
             : ""}
 
-          <a href="${this.url}"> ${this.renderTitle()} </a>
+          <a href="${this.url}"> ${this.renderTitle("text-white")} </a>
 
           ${this.show_meta
             ? html`

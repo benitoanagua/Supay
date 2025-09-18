@@ -9,9 +9,13 @@ import type {
   CardAspectRatio,
   CardElevation,
 } from "../types/card.js";
+import { TitleRendererMixin } from "../mixins/TitleRenderer.js";
+
+// Aplicar el mixin a la clase base
+const BaseClass = TitleRendererMixin(LitElement);
 
 @customElement("wc-card")
-export class WcCard extends LitElement {
+export class WcCard extends BaseClass {
   static styles = [unsafeCSS(mainCSS)];
 
   @property({ type: String }) title = "";
@@ -135,10 +139,6 @@ export class WcCard extends LitElement {
     return `w-full object-cover ${sizeClass} ${aspectClass}`;
   }
 
-  private getHeadingClass() {
-    return `m-0 font-500 headline-${this.heading}`;
-  }
-
   render() {
     return html`
       <div class="${this.getCardClasses()}">
@@ -178,7 +178,7 @@ export class WcCard extends LitElement {
               : ""}
 
             <a href="${this.url}" class="wc-card__title-link">
-              <h3 class="${this.getHeadingClass()}">${this.title}</h3>
+              ${this.renderTitle()}
             </a>
 
             ${this.density === "normal"
