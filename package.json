@@ -2,7 +2,7 @@
   "name": "supay",
   "description": "A Ghost CMS theme inspired by Andean culture, built with Tailwind CSS v4, Material Design 3, and Lit web components.",
   "demo": "https://benitoanagua.github.io/Supay",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "engines": {
     "ghost": ">=5.0.0"
   },
