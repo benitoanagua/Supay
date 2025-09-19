@@ -47,47 +47,49 @@ const meta = {
   render: () => {
     const navbar = document.createElement("wc-navbar");
 
+    // Logo slot
     const logo = document.createElement("wc-logo");
     logo.slot = "logo";
     logo.className = "h-8";
     navbar.appendChild(logo);
 
+    // Navigation slot - Solo navegación desktop visible
     const navigationContainer = document.createElement("div");
     navigationContainer.slot = "navigation";
-    navigationContainer.className = "w-full flex justify-center";
 
+    // Navegación Desktop
     const desktopNav = document.createElement("nav");
-    desktopNav.className = "hidden md:flex md:space-x-6";
     desktopNav.innerHTML = `
-      <a href="${randUrl()}" class="text-onSurface hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-surfaceContainerLow font-medium bg-primaryContainer text-onPrimaryContainer">${randMusicGenre()}</a>
-      ${Array.from(
-        { length: 4 },
-        () => `
-        <a href="${randUrl()}" class="text-onSurface hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-surfaceContainerLow">${randMusicGenre()}</a>
-      `
-      ).join("")}
+      <div class="hidden md:flex space-x-6">
+        <a href="${randUrl()}" class="text-onSurface hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-surfaceContainerLow font-medium bg-primaryContainer text-onPrimaryContainer">${randMusicGenre()}</a>
+        ${Array.from(
+          { length: 4 },
+          () => `
+          <a href="${randUrl()}" class="text-onSurface hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-surfaceContainerLow">${randMusicGenre()}</a>
+        `
+        ).join("")}
+      </div>
+
+      <!-- Mobile menu toggle - Solo visible en mobile -->
+      <wc-offcanvas class="md:hidden">
+        <div class="mobile-navigation-content">
+          <h2 class="text-xl font-medium text-onSurface mb-4">Menu</h2>
+          <nav class="flex flex-col gap-1">
+          ${Array.from(
+            { length: 6 },
+            () => `
+            <a href="${randUrl()}" class="text-onSurface hover:text-primary transition-colors px-4 py-3 rounded-lg hover:bg-surfaceContainerLow text-lg">${randMusicGenre()}</a>
+          `
+          ).join("")}
+          </nav>
+        </div>
+      </wc-offcanvas>
     `;
 
-    const offcanvas = document.createElement("wc-offcanvas");
-    offcanvas.className = "md:hidden";
-
-    const mobileNav = document.createElement("nav");
-    mobileNav.className = "flex flex-col space-y-2 p-4";
-    mobileNav.innerHTML = `
-      <h2 class="text-xl font-medium text-onSurface mb-4">${randMusicGenre()}</h2>
-      ${Array.from(
-        { length: 5 },
-        () => `
-        <a href="${randUrl()}" class="text-onSurface hover:text-primary transition-colors px-3 py-3 rounded-lg hover:bg-surfaceContainerLow">${randMusicGenre()}</a>
-      `
-      ).join("")}
-    `;
-
-    offcanvas.appendChild(mobileNav);
     navigationContainer.appendChild(desktopNav);
-    navigationContainer.appendChild(offcanvas);
     navbar.appendChild(navigationContainer);
 
+    // Actions slot
     const actions = document.createElement("div");
     actions.slot = "actions";
     actions.className = "flex items-center space-x-2";
@@ -95,12 +97,13 @@ const meta = {
       <button class="hidden md:flex items-center space-x-2 px-4 py-2 bg-primary text-onPrimary rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
         <span>${randMusicGenre()}</span>
       </button>
-      <button class="p-2 rounded-lg hover:bg-surfaceContainer transition-colors" title="${randMusicGenre()}">
+      <button class="p-2 rounded-lg hover:bg-surfaceContainer transition-colors" title="Search">
         <svg class="w-5 h-5 text-onSurfaceVariant" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
         </svg>
       </button>
     `;
+
     navbar.appendChild(actions);
 
     return navbar;
@@ -111,157 +114,3 @@ export default meta;
 type Story = StoryObj;
 
 export const Default: Story = {};
-
-export const WithLongNavigation: Story = {
-  render: () => {
-    const navbar = document.createElement("wc-navbar");
-
-    const logo = document.createElement("wc-logo");
-    logo.slot = "logo";
-    logo.className = "h-8";
-    navbar.appendChild(logo);
-
-    const navigationContainer = document.createElement("div");
-    navigationContainer.slot = "navigation";
-    navigationContainer.className = "w-full flex justify-center";
-
-    const desktopNav = document.createElement("nav");
-    desktopNav.className =
-      "hidden md:flex md:space-x-4 md:flex-wrap md:justify-center";
-    desktopNav.innerHTML = Array.from(
-      { length: 8 },
-      () => `
-      <a href="${randUrl()}" class="text-onSurface hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-surfaceContainerLow whitespace-nowrap">${randMusicGenre()}</a>
-    `
-    ).join("");
-
-    const offcanvas = document.createElement("wc-offcanvas");
-    offcanvas.className = "md:hidden";
-
-    const mobileNav = document.createElement("nav");
-    mobileNav.className = "flex flex-col space-y-2 p-4";
-    mobileNav.innerHTML = Array.from(
-      { length: 8 },
-      () => `
-      <a href="${randUrl()}" class="text-onSurface hover:text-primary transition-colors px-3 py-3 rounded-lg hover:bg-surfaceContainerLow">${randMusicGenre()}</a>
-    `
-    ).join("");
-
-    offcanvas.appendChild(mobileNav);
-    navigationContainer.appendChild(desktopNav);
-    navigationContainer.appendChild(offcanvas);
-    navbar.appendChild(navigationContainer);
-
-    const actions = document.createElement("div");
-    actions.slot = "actions";
-    actions.className = "flex items-center space-x-2";
-    actions.innerHTML = `
-      <button class="p-2 rounded-lg hover:bg-surfaceContainer transition-colors" title="${randMusicGenre()}">
-        <svg class="w-5 h-5 text-onSurfaceVariant" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-      </button>
-    `;
-    navbar.appendChild(actions);
-
-    return navbar;
-  },
-};
-
-export const MinimalActions: Story = {
-  render: () => {
-    const navbar = document.createElement("wc-navbar");
-
-    const logo = document.createElement("wc-logo");
-    logo.slot = "logo";
-    logo.className = "h-8";
-    navbar.appendChild(logo);
-
-    const navigationContainer = document.createElement("div");
-    navigationContainer.slot = "navigation";
-    navigationContainer.className = "w-full flex justify-center";
-
-    const desktopNav = document.createElement("nav");
-    desktopNav.className = "hidden md:flex md:space-x-6";
-    desktopNav.innerHTML = Array.from(
-      { length: 4 },
-      () => `
-      <a href="${randUrl()}" class="text-onSurface hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-surfaceContainerLow">${randMusicGenre()}</a>
-    `
-    ).join("");
-
-    const offcanvas = document.createElement("wc-offcanvas");
-    offcanvas.className = "md:hidden";
-
-    const mobileNav = document.createElement("nav");
-    mobileNav.className = "flex flex-col space-y-2 p-4";
-    mobileNav.innerHTML = Array.from(
-      { length: 4 },
-      () => `
-      <a href="${randUrl()}" class="text-onSurface hover:text-primary transition-colors px-3 py-3 rounded-lg hover:bg-surfaceContainerLow">${randMusicGenre()}</a>
-    `
-    ).join("");
-
-    offcanvas.appendChild(mobileNav);
-    navigationContainer.appendChild(desktopNav);
-    navigationContainer.appendChild(offcanvas);
-    navbar.appendChild(navigationContainer);
-
-    const actions = document.createElement("div");
-    actions.slot = "actions";
-    actions.className = "flex items-center";
-    actions.innerHTML = `
-      <button class="p-2 rounded-lg hover:bg-surfaceContainer transition-colors" title="${randMusicGenre()}">
-        <svg class="w-5 h-5 text-onSurfaceVariant" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-      </button>
-    `;
-    navbar.appendChild(actions);
-
-    return navbar;
-  },
-};
-
-export const NoActions: Story = {
-  render: () => {
-    const navbar = document.createElement("wc-navbar");
-
-    const logo = document.createElement("wc-logo");
-    logo.slot = "logo";
-    logo.className = "h-8";
-    navbar.appendChild(logo);
-
-    const navigationContainer = document.createElement("div");
-    navigationContainer.slot = "navigation";
-    navigationContainer.className = "w-full flex justify-center";
-
-    const desktopNav = document.createElement("nav");
-    desktopNav.className = "hidden md:flex md:space-x-6";
-    desktopNav.innerHTML = Array.from(
-      { length: 5 },
-      () => `
-      <a href="${randUrl()}" class="text-onSurface hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-surfaceContainerLow">${randMusicGenre()}</a>
-    `
-    ).join("");
-
-    const offcanvas = document.createElement("wc-offcanvas");
-    offcanvas.className = "md:hidden";
-
-    const mobileNav = document.createElement("nav");
-    mobileNav.className = "flex flex-col space-y-2 p-4";
-    mobileNav.innerHTML = Array.from(
-      { length: 5 },
-      () => `
-      <a href="${randUrl()}" class="text-onSurface hover:text-primary transition-colors px-3 py-3 rounded-lg hover:bg-surfaceContainerLow">${randMusicGenre()}</a>
-    `
-    ).join("");
-
-    offcanvas.appendChild(mobileNav);
-    navigationContainer.appendChild(desktopNav);
-    navigationContainer.appendChild(offcanvas);
-    navbar.appendChild(navigationContainer);
-
-    return navbar;
-  },
-};

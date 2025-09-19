@@ -13,58 +13,22 @@
          md:px-6 lg:px-8;
 }
 
+/* Logo positioning */
 .wc-navbar__logo {
-  @apply flex items-center flex-shrink-0;
+  @apply flex items-center order-2 md:order-1; /* Center on mobile, left on desktop */
 }
 
-.wc-navbar__logo--desktop {
-  @apply order-1;
-}
-
-.wc-navbar__logo--mobile {
-  @apply order-2 justify-center flex-1 md:hidden;
-}
-
+/* Navigation positioning */
 .wc-navbar__navigation {
-  @apply flex items-center justify-center;
+  @apply flex items-center order-1 md:order-2; /* Left on mobile, center on desktop */
+
+  /* Para centrar realmente en desktop */
+  @apply md:flex-1 md:justify-center;
 }
 
-.wc-navbar__navigation--desktop {
-  @apply order-2 flex-1 hidden md:flex;
-}
-
-.wc-navbar__navigation--mobile {
-  @apply order-3 flex-shrink-0 md:hidden;
-}
-
+/* Actions positioning */
 .wc-navbar__actions {
-  @apply flex items-center flex-shrink-0;
-}
-
-.wc-navbar__actions--desktop {
-  @apply order-3;
-}
-
-.wc-navbar__actions--mobile {
-  @apply order-1 md:hidden;
-}
-
-.wc-navbar__mobile-menu-toggle {
-  @apply cursor-pointer border-0 bg-transparent p-2 rounded-full 
-         hover:bg-surfaceContainerLow transition-colors md:hidden;
-}
-
-.wc-navbar__mobile-menu-toggle-icon {
-  @apply block h-6 w-6 icon-[garden--menu-stroke-16] text-onSurfaceVariant;
-}
-
-.wc-navbar__search-button {
-  @apply cursor-pointer border-0 bg-transparent p-2 rounded-full 
-         hover:bg-surfaceContainerLow transition-colors;
-}
-
-.wc-navbar__search-icon {
-  @apply block h-6 w-6 icon-[garden--search-stroke-16] text-onSurfaceVariant;
+  @apply flex items-center order-3; /* Right on both mobile and desktop */
 }
 
 /* Animation for sticky appearance */

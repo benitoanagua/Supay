@@ -1,4 +1,3 @@
-// src/elements/Navbar.ts
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, state, query } from "lit/decorators.js";
 import mainCSS from "../main.css?inline";
@@ -105,17 +104,17 @@ export class WcNavbar extends LitElement {
       <nav class="${this.getNavbarClasses()}">
         <div class="wc-navbar__container">
           <!-- Logo: Izquierda en desktop, centro en mobile -->
-          <div class="wc-navbar__logo wc-navbar__logo--desktop">
+          <div class="wc-navbar__logo">
             <slot name="logo"></slot>
           </div>
 
-          <!-- Navigation: Centro en desktop, offcanvas en mobile -->
-          <div class="wc-navbar__navigation wc-navbar__navigation--desktop">
+          <!-- Navigation: Centro en desktop, izquierda en mobile -->
+          <div class="wc-navbar__navigation">
             <slot name="navigation"></slot>
           </div>
 
-          <!-- Actions: Derecha en desktop, izquierda en mobile -->
-          <div class="wc-navbar__actions wc-navbar__actions--desktop">
+          <!-- Actions: Derecha en desktop, derecha en mobile -->
+          <div class="wc-navbar__actions">
             <slot name="actions"></slot>
           </div>
         </div>
