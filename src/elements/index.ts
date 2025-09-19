@@ -2,13 +2,12 @@
 import { WcCard } from "./Card.js";
 import { WcGrille } from "./Grille.js";
 import { WcLogo } from "./Logo.js";
-import { WcMenu } from "./Menu.js";
-import { WcMenuItem } from "./MenuItem.js";
 import { WcSticky } from "./Sticky.js";
 import { WcOverlay } from "./Overlay.js";
+import { WcOffcanvas } from "./Offcanvas.js";
 
 // Export all components and types
-export { WcCard, WcGrille, WcLogo, WcMenu, WcMenuItem, WcSticky, WcOverlay };
+export { WcCard, WcGrille, WcLogo, WcSticky, WcOverlay, WcOffcanvas };
 
 // Global type declarations
 declare global {
@@ -16,9 +15,8 @@ declare global {
     "wc-card": WcCard;
     "wc-grille": WcGrille;
     "wc-logo": WcLogo;
-    "wc-menu": WcMenu;
-    "wc-menu-item": WcMenuItem;
     "wc-sticky": WcSticky;
     "wc-overlay": WcOverlay;
+    "wc-offcanvas": WcOffcanvas;
   }
 }

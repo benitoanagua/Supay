@@ -5,8 +5,9 @@
 @import "./styles/global.css";
 @import "./styles/card.css";
 @import "./styles/grille.css";
-@import "./styles/menu.css";
+@import "./styles/offcanvas.css";
 @import "./styles/overlay.css";
+@import "./styles/sticky.css";
 
 @source '../../*.hbs';
 @source '../../partials/**/*.hbs';
