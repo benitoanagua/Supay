@@ -1,3 +1,4 @@
+// src/elements/Sticky.ts
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, state, query } from "lit/decorators.js";
 import mainCSS from "../main.css?inline";
@@ -7,16 +8,13 @@ export class WcSticky extends LitElement {
   static styles = unsafeCSS(mainCSS);
 
   @state() private isVisible = false;
-  @state() private isMobile = false;
-
   @query(".wc-sticky") private stickyElement?: HTMLElement;
 
   private intersectionObserver?: IntersectionObserver;
-  private mediaQuery?: MediaQueryList;
   private scrollY = 0;
   private elementTop = 0;
 
-  // Usar Shadow DOM pero con estilos globales
+  // Deshabilitar Shadow DOM para usar estilos globales de Tailwind
   protected createRenderRoot() {
     const shadowRoot = super.createRenderRoot();
 
@@ -30,7 +28,6 @@ export class WcSticky extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.setupMediaQuery();
     this.setupScrollListener();
   }
 
@@ -44,19 +41,6 @@ export class WcSticky extends LitElement {
     this.setupIntersectionObserver();
     this.updateElementPosition();
   }
-
-  private setupMediaQuery() {
-    if (typeof window === "undefined") return;
-
-    this.mediaQuery = window.matchMedia("(max-width: 768px)");
-    this.isMobile = this.mediaQuery.matches;
-
-    this.mediaQuery.addEventListener("change", this.updateMediaQuery);
-  }
-
-  private updateMediaQuery = (e: MediaQueryListEvent) => {
-    this.isMobile = e.matches;
-  };
 
   private setupScrollListener() {
     if (typeof window === "undefined") return;
@@ -110,88 +94,45 @@ export class WcSticky extends LitElement {
       this.intersectionObserver.disconnect();
       this.intersectionObserver = undefined;
     }
-    if (this.mediaQuery) {
-      this.mediaQuery.removeEventListener("change", this.updateMediaQuery);
-    }
+  }
+
+  private renderContent() {
+    return html`
+      <div
+        class="flex items-center justify-between w-full px-4 py-3 mx-auto md:px-6 lg:px-8"
+      >
+        <!-- Logo: Izquierda en desktop, centro en mobile -->
+        <div class="flex items-center order-2 md:order-1">
+          <slot name="logo"></slot>
+        </div>
+
+        <!-- Navigation: Centro en desktop, offcanvas en mobile -->
+        <div class="flex items-center order-1 md:order-2">
+          <slot name="navigation"></slot>
+        </div>
+
+        <!-- Actions: Derecha en desktop, izquierda en mobile -->
+        <div class="flex items-center order-3 md:order-3">
+          <slot name="actions"></slot>
+        </div>
+      </div>
+    `;
   }
 
   render() {
     return html`
-      <nav class="wc-sticky">
-        <div class="wc-sticky__container">
-          <!-- Slot 1: Logo - Izquierda en desktop, centro en mobile -->
-          <div
-            class="${this.isMobile
-              ? "wc-sticky__logo wc-sticky__logo--mobile"
-              : "wc-sticky__logo wc-sticky__logo--desktop"}"
-          >
-            <slot name="logo"></slot>
-          </div>
-
-          <!-- Slot 2: Navigation - Centro en desktop, offcanvas en mobile -->
-          <div
-            class="${this.isMobile
-              ? "wc-sticky__navigation wc-sticky__navigation--mobile"
-              : "wc-sticky__navigation wc-sticky__navigation--desktop"}"
-          >
-            ${this.isMobile
-              ? html`
-                  <wc-offcanvas>
-                    <slot name="navigation"></slot>
-                  </wc-offcanvas>
-                `
-              : html`<slot name="navigation"></slot>`}
-          </div>
-
-          <!-- Slot 3: Actions - Derecha en desktop, izquierda en mobile -->
-          <div
-            class="${this.isMobile
-              ? "wc-sticky__actions wc-sticky__actions--mobile"
-              : "wc-sticky__actions wc-sticky__actions--desktop"}"
-          >
-            <slot name="actions"></slot>
-          </div>
-        </div>
+      <!-- Main navigation -->
+      <nav class="wc-sticky w-full transition-all duration-300 ease-in-out">
+        ${this.renderContent()}
       </nav>
 
-      <!-- Sticky navigation (solo visible al hacer scroll) -->
+      <!-- Sticky navigation (visible on scroll) -->
       ${this.isVisible
         ? html`
-            <nav class="wc-sticky--sticky wc-sticky--visible">
-              <div class="wc-sticky__container">
-                <!-- Logo -->
-                <div
-                  class="${this.isMobile
-                    ? "wc-sticky__logo wc-sticky__logo--mobile"
-                    : "wc-sticky__logo wc-sticky__logo--desktop"}"
-                >
-                  <slot name="logo"></slot>
-                </div>
-
-                <!-- Navigation -->
-                <div
-                  class="${this.isMobile
-                    ? "wc-sticky__navigation wc-sticky__navigation--mobile"
-                    : "wc-sticky__navigation wc-sticky__navigation--desktop"}"
-                >
-                  ${this.isMobile
-                    ? html`
-                        <wc-offcanvas>
-                          <slot name="navigation"></slot>
-                        </wc-offcanvas>
-                      `
-                    : html`<slot name="navigation"></slot>`}
-                </div>
-
-                <!-- Actions -->
-                <div
-                  class="${this.isMobile
-                    ? "wc-sticky__actions wc-sticky__actions--mobile"
-                    : "wc-sticky__actions wc-sticky__actions--desktop"}"
-                >
-                  <slot name="actions"></slot>
-                </div>
-              </div>
+            <nav
+              class="fixed top-0 left-0 w-full z-50 bg-surface/95 backdrop-blur-md border-b border-outline/20 transition-all duration-300 ease-in-out opacity-100 translate-y-0"
+            >
+              ${this.renderContent()}
             </nav>
           `
         : ""}
