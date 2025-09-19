@@ -11,7 +11,7 @@ export default defineConfig({
   build: {
     target: "esnext",
     minify: "esbuild",
-    emptyOutDir: false,
+    emptyOutDir: true,
     cssCodeSplit: false,
     lib: {
       entry: resolve(__dirname, "src/main.ts"),

@@ -51,8 +51,8 @@ class AlternativeZipPackager {
                 --exclude='.git' \
                 --exclude='.gitignore' \
                 --exclude='node_modules' \
-                --exclude='src/*' \
-                --exclude='scripts' \
+                --exclude='src' \
+                --exclude='vite.config.ts' \
                 --exclude='pnpm-lock.yaml' \
                 --exclude='package-lock.json' \
                 --exclude='yarn.lock' \
