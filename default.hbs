@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="{{@site.locale}}" {{#match @custom.color_scheme "Dark" }} data-theme="dark" {{else}} {{/match}}>
+<html lang="{{@site.locale}}" {{#match @custom.color_scheme "Dark"}}data-theme="dark"{{/match}}>
 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href='{{asset "css/bundle.css"}}' />
-    <script type="module" src='{{asset "js/bundle.js"}}'></script>
+    <link rel="stylesheet" type="text/css" href='{{asset "dist/supay-elements.css"}}' />
+    <script type="module" src='{{asset "dist/supay-elements.es.js"}}'></script>
     <title>{{meta_title}}</title>
     
     {{!-- LiveJS para desarrollo --}}
-    {{#if @site.env="development"}}
+    {{#is "development"}}
     <script type="text/javascript" src="http://livejs.com/live.js"></script>
-    {{/if}}
+    {{/is}}
     
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">

@@ -22,3 +22,33 @@
 .headline-6 {
   @apply text-xs md:text-sm lg:text-base font-medium tracking-wide;
 }
+
+/* This keeps small embeds centered */
+.kg-width-wide {
+  --at-apply: w-fit;
+}
+
+.kg-width-full {
+  --at-apply: w-screen;
+}
+
+.kg-embed-card {
+  --at-apply: flex flex-col items-center w-full;
+}
+
+.kg-embed-card iframe {
+  --at-apply: max-w-680px;
+}
+
+/* Highly specific styles for traditional Instagram embeds */
+iframe {
+  margin-top: 3vmin !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 3vmin !important;
+}
+
+/* Youtube iframe */
+iframe[src*="youtube.com"] {
+  --at-apply: aspect-video w-full h-auto;
+}

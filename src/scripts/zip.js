@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
-const { execSync } = require("child_process");
-const { mkdirSync } = require("fs");
-const { join } = require("path");
+import { execSync } from "child_process";
+import { mkdirSync, readFileSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 class AlternativeZipPackager {
   constructor() {
@@ -47,7 +51,7 @@ class AlternativeZipPackager {
                 --exclude='.git' \
                 --exclude='.gitignore' \
                 --exclude='node_modules' \
-                --exclude='src' \
+                --exclude='src/*' \
                 --exclude='scripts' \
                 --exclude='pnpm-lock.yaml' \
                 --exclude='package-lock.json' \
@@ -91,7 +95,7 @@ class AlternativeZipPackager {
       console.log(`\n✅ Package created: ${zipFileName}`);
       console.log(
         "📊 Size:",
-        execSync(`du -h ${zipFileName}`).toString().trim(),
+        execSync(`du -h ${zipFileName}`).toString().trim()
       );
     } catch (error) {
       console.error(`❌ Packaging failed: ${error.message}`);
@@ -104,10 +108,7 @@ class AlternativeZipPackager {
   getPackageVersion() {
     try {
       const packageJson = JSON.parse(
-        require("fs").readFileSync(
-          join(this.projectRoot, "package.json"),
-          "utf8",
-        ),
+        readFileSync(join(this.projectRoot, "package.json"), "utf8")
       );
       return packageJson.version;
     } catch {
@@ -116,6 +117,7 @@ class AlternativeZipPackager {
   }
 }
 
-if (require.main === module) {
+// Execute if called directly
+if (import.meta.url === `file://${process.argv[1]}`) {
   new AlternativeZipPackager().packageTheme().catch(console.error);
 }

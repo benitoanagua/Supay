@@ -112,7 +112,44 @@
         "width": 2000
       }
     },
-    "posts_per_page": 10,
-    "card_assets": true
+    "posts_per_page": 12,
+    "card_assets": true,
+    "custom": {
+      "twitter_url": {
+        "type": "text",
+        "label": "Twitter URL"
+      },
+      "youtube_url": {
+        "type": "text",
+        "label": "Youtube URL"
+      },
+      "instagram_url": {
+        "type": "text",
+        "label": "Instagram URL"
+      },
+      "tiktok_url": {
+        "type": "text",
+        "label": "Tik Tok URL"
+      },
+      "home": {
+        "type": "select",
+        "options": [
+          "Home 1",
+          "Home 2",
+          "Home 3"
+        ],
+        "default": "Home 1",
+        "group": "homepage"
+      },
+      "color_scheme": {
+        "type": "select",
+        "options": [
+          "Light",
+          "Dark",
+          "Auto"
+        ],
+        "default": "Light"
+      }
+    }
   }
 }
