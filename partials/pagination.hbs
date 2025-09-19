@@ -1,11 +1,17 @@
-<nav class="flex gap-x-2 justify-center" role="navigation">
+<nav class="flex flex-wrap gap-4 justify-center" role="navigation">
     {{#if pagination.prev}}
-        <a class="btn-primary" href="{{page_url pagination.prev}}">&larr; MÁS RECIENTES</a>
+        <a href="{{page_url pagination.prev}}" class="bg-primary text-onPrimary px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+            &larr; Más recientes
+        </a>
     {{/if}}
     {{#is "paged"}}
-        <a class="btn-primary" href="{{page_url 1}}">PORTADA</a>
+        <a href="{{page_url 1}}" class="bg-surfaceContainerHighest text-onSurface px-6 py-3 rounded-lg font-medium hover:bg-surfaceContainer transition-colors">
+            Portada
+        </a>
     {{/is}}
     {{#if pagination.next}}
-        <a class="btn-primary" href="{{page_url pagination.next}}">MÁS ANTIGUAS &rarr;</a>
+        <a href="{{page_url pagination.next}}" class="bg-primary text-onPrimary px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+            Más antiguas &rarr;
+        </a>
     {{/if}}
 </nav>

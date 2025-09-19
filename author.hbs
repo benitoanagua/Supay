@@ -1,40 +1,56 @@
 {{!< default}}
 <section class="section mt-8">
-    <div class="mx-auto max-w-2xl">
+    <div class="mx-auto max-w-4xl">
         {{> blocks/headline name='Autor'}}
+        
         {{#author}}
-            <div class="flex flex-col md:flex-row gap-8 md:gap-12 mx-auto">
+            <div class="flex flex-col md:flex-row gap-8 items-center bg-surfaceContainerHighest rounded-xl p-6 mb-8">
                 {{#if profile_image}}
-                    <figure class="w-40 mx-auto">
-                        <img class="w-full aspect-square object-cover rounded-full"
-                            srcset="{{img_url profile_image size=" s"}} 300w, {{img_url profile_image size="m" }} 600w,
-                            {{img_url profile_image size="l" }} 1000w, {{img_url profile_image size="xl" }} 2000w"
-                            sizes="(max-width: 1000px) 400px, 800px" src="{{img_url profile_image size=" m"}}"
-                            alt="{{title}}" />
+                    <figure class="w-32 h-32 flex-shrink-0">
+                        <img class="w-full h-full object-cover rounded-full"
+                            srcset="{{img_url profile_image size="s"}} 300w, 
+                                   {{img_url profile_image size="m"}} 600w,
+                                   {{img_url profile_image size="l"}} 1000w"
+                            sizes="(max-width: 768px) 128px, 192px" 
+                            src="{{img_url profile_image size="m"}}"
+                            alt="{{name}}" />
                     </figure>
                 {{/if}}
-                <div class="flex-1">
-                    <h5 class="headline-5 font-sans uppercase">{{name}}</h5>
+                <div class="flex-1 text-center md:text-left">
+                    <h2 class="headline-3 text-onSurface mb-4">{{name}}</h2>
                     {{#if bio}}
-                        <p class="my-4">{{bio}}</p>
+                        <p class="text-onSurfaceVariant leading-relaxed">{{bio}}</p>
                     {{/if}}
                 </div>
             </div>
         {{/author}}
-        {{> blocks/headline name='Articulos'}}
-        <div class="flex gap-16">
-            <wc-grille desktop="2" mobile="1" gap="medium">
-                {{#foreach posts}}
-                    <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" feature_image="{{feature_image}}"
-                        tag_name="{{primary_tag.name}}" tag_url="{{primary_tag.url}}"
-                        reading_time="{{reading_time minute=" Lectura 1 min." minutes="Lectura % min." }}"
-                        published_at="{{date published_at format=" MMM DD, YYYY" locale="es" }}" media_align="left"
-                        media_width="is-one-third" heading="6" density="compact"></wc-card>
-                {{/foreach}}
-            </wc-grille>
-        </div>
+        
+        {{> blocks/headline name='Artículos'}}
+        
+        <wc-grille desktop="2" mobile="1" gap="medium" class="mb-8">
+            {{#foreach posts}}
+                <wc-card 
+                    title="{{title}}" 
+                    url="{{url}}" 
+                    excerpt="{{excerpt}}" 
+                    feature_image="{{feature_image}}"
+                    tag_name="{{primary_tag.name}}" 
+                    tag_url="{{primary_tag.url}}"
+                    reading_time="{{reading_time minute="1 min" minutes="% min"}}"
+                    published_at="{{date published_at format="MMM DD, YYYY" locale="es"}}" 
+                    media_align="left"
+                    media_width="is-one-third" 
+                    heading="6" 
+                    density="compact"
+                    elevation="1">
+                </wc-card>
+            {{/foreach}}
+        </wc-grille>
     </div>
 </section>
-<main class="section mt-4">
-    {{> pagination}}
-</main>
+
+<section class="section">
+    <div class="mx-auto max-w-4xl">
+        {{> pagination}}
+    </div>
+</section>

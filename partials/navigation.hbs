@@ -1,22 +1,27 @@
 {{#if isSecondary}}
-  <ul class="flex flex-wrap text-xs font-medium text-neutral-400">
-    {{#foreach navigation}}
-      <li class="w-1/2 md:w-1/4">
-        <a href={{url absolute=" true" }} class="font-sans">{{label}}</a>
-      </li>
-    {{/foreach}}
-  </ul>
+    <ul class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-onSurfaceVariant">
+        {{#foreach navigation}}
+            <li>
+                <a href="{{url absolute="true"}}" class="hover:text-primary transition-colors">{{label}}</a>
+            </li>
+        {{/foreach}}
+    </ul>
 {{else}}
-  <wc-menu home="{{@site.url}}" {{#match @custom.home 'Home 2' }} dark {{/match}}>
-    <wc-logo slot="logo" {{^match @custom.home 'Home 2' }} positive {{/match}}></wc-logo>
-    <button
-      class="border-0 p-1 {{#match @custom.home 'Home 2' }} bg-neutral-900 text-white {{else}} bg-white text-neutral-900 {{/match}}"
-      slot="search" data-ghost-search>
-      <span class="i-ri-search-line block h-6 w-6" />
-    </button>
-    {{#foreach navigation}}
-      <wc-menu-item url="{{url}}" {{#if current}}current{{/if}} {{#match @custom.home 'Home 2' }} dark
-        {{/match}}>{{label}}</wc-menu-item>
-    {{/foreach}}
-  </wc-menu>
+    <nav class="hidden md:flex items-center space-x-1">
+        {{#foreach navigation}}
+            <a href="{{url}}" class="px-4 py-2 rounded-lg text-onSurface hover:text-primary hover:bg-surfaceContainerLow transition-colors font-medium {{#if current}} bg-primaryContainer text-onPrimaryContainer {{/if}}">
+                {{label}}
+            </a>
+        {{/foreach}}
+    </nav>
+    
+    <wc-offcanvas class="md:hidden">
+        <nav class="flex flex-col space-y-2 p-4">
+            {{#foreach navigation}}
+                <a href="{{url}}" class="px-4 py-3 rounded-lg text-onSurface hover:text-primary hover:bg-surfaceContainerLow transition-colors text-lg {{#if current}} bg-primaryContainer text-onPrimaryContainer {{/if}}">
+                    {{label}}
+                </a>
+            {{/foreach}}
+        </nav>
+    </wc-offcanvas>
 {{/if}}

@@ -1,27 +1,31 @@
-<footer class="bg-neutral-900 mt-16">
+<footer class="bg-surfaceContainerHighest mt-16 border-t border-outlineVariant">
   <div class="section py-12">
-    <div class="flex flex-col md:flex-row gap-y-4 gap-x-8">
-      <span class="flex-1 text-center md:text-left">
-        <wc-logo></wc-logo>
-      </span>
+    <div class="flex flex-col md:flex-row items-center gap-6 mb-8">
+      <div class="flex-1 text-center md:text-left">
+        <wc-logo class="h-8 fill-onSurface"></wc-logo>
+      </div>
       {{> blocks/social}}
     </div>
-    <hr class="my-8 border-t border-neutral-800" />
-    <p class="mb-3 text-neutral-100 font-sans uppercase">
-      Secciones
-    </p>
-    <ul class="flex flex-wrap text-xs font-medium text-neutral-400">
+    
+    <hr class="my-8 border-outlineVariant" />
+    
+    <h3 class="headline-6 text-onSurface mb-4">Secciones</h3>
+    <ul class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-onSurfaceVariant">
       {{#foreach navigation}}
-        <li class="w-1/2 md:w-1/4">
-          <a href={{url absolute=" true" }} class="font-sans">{{label}}</a>
+        <li>
+          <a href="{{url absolute="true"}}" class="hover:text-primary transition-colors">{{label}}</a>
         </li>
       {{/foreach}}
     </ul>
-    <hr class="my-8 border-t border-neutral-800" />
+    
+    <hr class="my-8 border-outlineVariant" />
+    
     {{navigation type="secondary"}}
-    <hr class="my-8 border-t border-neutral-800" />
-    <div class="flex-1 text-sm text-neutral-400 text-center font-serif">
-      © 2023 El Nacional. Todos los derechos reservados.
+    
+    <hr class="my-8 border-outlineVariant" />
+    
+    <div class="text-center text-sm text-onSurfaceVariant">
+      © {{date format="YYYY"}} {{@site.title}}. Todos los derechos reservados.
     </div>
   </div>
 </footer>

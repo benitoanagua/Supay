@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{@site.locale}}" {{#match @custom.color_scheme "Dark" }} class="dark-mode" {{else}} class="auto-color"
-    {{/match}}>
+<html lang="{{@site.locale}}" {{#match @custom.color_scheme "Dark" }} data-theme="dark" {{else}} {{/match}}>
 
 <head>
     <meta charset="utf-8" />
@@ -9,25 +8,26 @@
     <link rel="stylesheet" type="text/css" href='{{asset "css/bundle.css"}}' />
     <script type="module" src='{{asset "js/bundle.js"}}'></script>
     <title>{{meta_title}}</title>
-    {{!-- Outputs important meta data and settings, should always be in
-
-    <head> --}}
+    
+    {{!-- LiveJS para desarrollo --}}
+    {{#if @site.env="development"}}
     <script type="text/javascript" src="http://livejs.com/live.js"></script>
+    {{/if}}
+    
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    {{!-- <link rel="manifest" href='{{asset "images/bundle.js"}}'> --}}
     {{ghost_head}}
 </head>
 
-<body class="{{body_class}}">
+<body class="{{body_class}} bg-background text-onSurface">
     {{> header}}
-    {{{body}}}
+    <main class="min-h-screen">
+        {{{body}}}
+    </main>
     {{> footer}}
     {{ghost_foot}}
-    {{!-- Outputs important scripts - should always be included before closing body tag --}}
-    {{!-- <script id="dsq-count-scr" src="//elnacionalbo.disqus.com/count.js" async></script> --}}
 </body>
 
 </html>

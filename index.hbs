@@ -8,66 +8,100 @@
 {{#match @custom.home "Home 3"}}
     {{> blocks/home-3}}
 {{/match}}
+
 <section class="section mt-8">
-    <div class="grid gap-12 grid-cols-1 md:grid-cols-5">
-        <main class="md:col-span-3 md-divider-right">
+    <div class="grid gap-8 grid-cols-1 md:grid-cols-5">
+        <main class="md:col-span-3 md:pr-8 md:border-r md:border-outlineVariant">
             <div class="pb-8">
                 {{#get "posts" filter="primary_tag:local" limit="4" include="tags,authors"}}
                     {{> blocks/headline name='Local'}}
                     <wc-grille desktop="1" mobile="1" gap="medium">
                         {{#foreach posts}}
-                            <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" {{^if @last}}
-                                feature_image="{{feature_image}}" {{/if}} tag_name="{{primary_tag.name}}"
-                                tag_url="{{primary_tag.url}}" author_name="{{primary_author.name}}"
-                                author_url="{{primary_author.url}}" reading_time="{{reading_time minute=" Lectura 1
-                                min." minutes="Lectura % min." }}" published_at="{{date published_at format=" MMM DD,
-                                YYYY" locale="es" }}" media_align="right" {{#if @first}} media_width="is-half" {{else}}
-                                media_width="is-one-quarter" density="compact" {{/if}} heading="6"></wc-card>
+                            <wc-card 
+                                title="{{title}}" 
+                                url="{{url}}" 
+                                excerpt="{{excerpt}}" 
+                                {{^if @last}}feature_image="{{feature_image}}"{{/if}}
+                                tag_name="{{primary_tag.name}}"
+                                tag_url="{{primary_tag.url}}" 
+                                author_name="{{primary_author.name}}"
+                                author_url="{{primary_author.url}}" 
+                                reading_time="{{reading_time minute="1 min" minutes="% min"}}"
+                                published_at="{{date published_at format="MMM DD, YYYY" locale="es"}}" 
+                                media_align="right" 
+                                {{#if @first}} 
+                                    media_width="is-half" 
+                                    heading="5"
+                                {{else}} 
+                                    media_width="is-one-quarter" 
+                                    density="compact"
+                                    heading="6"
+                                {{/if}}
+                                elevation="1">
+                            </wc-card>
                         {{/foreach}}
                     </wc-grille>
                 {{/get}}
             </div>
-            <div class="pt-8">
+            
+            <div class="pt-8 border-t border-outlineVariant">
                 {{#get "posts" filter="primary_tag:pais" limit="4" include="tags,authors"}}
                     {{> blocks/headline name='País'}}
                     <wc-grille desktop="1" mobile="1" gap="medium">
                         {{#foreach posts}}
-                            <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" {{^if @last}}
-                                feature_image="{{feature_image}}" {{/if}} tag_name="{{primary_tag.name}}"
-                                tag_url="{{primary_tag.url}}" author_name="{{primary_author.name}}"
-                                author_url="{{primary_author.url}}" reading_time="{{reading_time minute=" Lectura 1
-                                min." minutes="Lectura % min." }}" published_at="{{date published_at format=" MMM DD,
-                                YYYY" locale="es" }}" media_align="left" {{#if @first}} media_width="is-half" {{else}}
-                                media_width="is-one-quarter" density="compact" {{/if}} heading="6"></wc-card>
+                            <wc-card 
+                                title="{{title}}" 
+                                url="{{url}}" 
+                                excerpt="{{excerpt}}" 
+                                {{^if @last}}feature_image="{{feature_image}}"{{/if}}
+                                tag_name="{{primary_tag.name}}"
+                                tag_url="{{primary_tag.url}}" 
+                                author_name="{{primary_author.name}}"
+                                author_url="{{primary_author.url}}" 
+                                reading_time="{{reading_time minute="1 min" minutes="% min"}}"
+                                published_at="{{date published_at format="MMM DD, YYYY" locale="es"}}" 
+                                media_align="left" 
+                                {{#if @first}} 
+                                    media_width="is-half" 
+                                    heading="5"
+                                {{else}} 
+                                    media_width="is-one-quarter" 
+                                    density="compact"
+                                    heading="6"
+                                {{/if}}
+                                elevation="1">
+                            </wc-card>
                         {{/foreach}}
                     </wc-grille>
                 {{/get}}
             </div>
         </main>
-        <aside class="md:col-span-2 relative md:left-x-divider">
-            <div class="sticky top-0">
-                <div class="">
+        
+        <aside class="md:col-span-2 md:pl-8">
+            <div class="sticky top-24">
+                <div class="mb-8">
                     {{#get "posts" filter="primary_tag:opinion" limit="4" include="tags,authors"}}
                         {{> blocks/headline name='Opinión'}}
-                        {{#foreach posts}}
-                            {{> components/post-avatar}}
+                        <div class="space-y-6">
+                            {{#foreach posts}}
+                                {{> components/post-avatar}}
+                            {{/foreach}}
+                        </div>
+                    {{/get}}
+                </div>
+                
+                <hr class="my-8 border-outlineVariant" />
+                
+                <h3 class="headline-6 text-onSurface mb-4">Descubra más de lo que le importa</h3>
+                <div class="flex flex-wrap gap-2">
+                    {{#get "tags" limit="12" filter="slug:-[opinion,local,editorial,pais,mundo,entrevistas,deportivo,entretenimiento]"}}
+                        {{#foreach tags}}
+                            <a href="{{url}}" class="bg-surfaceContainerHighest text-onSurfaceVariant px-4 py-2 rounded-full text-sm font-medium hover:bg-primaryContainer hover:text-onPrimaryContainer transition-colors">
+                                {{name}}
+                            </a>
                         {{/foreach}}
                     {{/get}}
                 </div>
-                <hr class="my-8 border-neutral-200" />
-                <span class="font-sans font-medium text-xs">Descubra más de lo que le importa</span>
-                <ul class="mt-4 flex flex-wrap gap-x-2 gap-y-4">
-                    {{#get "tags" limit="12" filter="slug:-[opinion,local,editorial,pais,mundo,entrevistas,deportivo,entretenimiento]"}}
-                        {{#foreach tags}}
-                            <li>
-                                <a href={{url}}
-                                    class="text-2xs font-medium bg-neutral-200 text-neutral-900 px-4 py-2 rounded-full">
-                                    {{name}}
-                                </a>
-                            </li>
-                        {{/foreach}}
-                    {{/get}}
-                </ul>
             </div>
         </aside>
     </div>

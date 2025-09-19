@@ -1,56 +1,53 @@
-<header class="pt-4 {{#match @custom.home 'Home 2' }} bg-neutral-900 {{else}} bg-white {{/match}}">
-  <div class=" section hidden md:flex items-center gap-4
-    {{#match @custom.home 'Home 2' }} text-neutral-100 {{else}} text-neutral-700 {{/match}}">
+<header class="{{#match @custom.home 'Home 2' }} bg-surfaceContainerHighest {{else}} bg-surface {{/match}}">
+  <div class="section hidden md:flex items-center gap-4">
     <div class="flex-1">
-      <span class="font-sans text-2xs font-medium">
-        Tarija,{{date format="dddd D [de] MMMM [de] YYYY" locale="es"}}
+      <span class="font-sans text-sm text-onSurfaceVariant">
+        Tarija, {{date format="dddd D [de] MMMM [de] YYYY" locale="es"}}
       </span>
-      {{!-- <wc-offcanvas>
-      <span slot="open" class="block h-6 w-6 i-ri-menu-line"></span>
-      <div slot="content">
-        {{> blocks/headline name='Autores'}}
-        {{authors visibility="all"}}
-        {{> blocks/headline name='Popular'}}
-        {{#get "tags" limit="10" include="count.posts" order="count.posts desc"}}
-          {{#foreach tags}}
-            {{#unless (contains label (navigation "label"))}}
-              <a href="{{url}}" class="tag">{{name}}</a>
-            {{/unless}}
-          {{/foreach}}
-        {{/get}}
-      </div>
-    </wc-offcanvas> --}}
     </div>
     <div class="flex-1 text-center">
       <a href="{{@site.url}}">
-        <wc-logo size="large" {{^match @custom.home 'Home 2' }} positive {{/match}}></wc-logo>
+        <wc-logo class="h-8 {{#match @custom.home 'Home 2' }} fill-onPrimaryContainer {{else}} fill-primary {{/match}}"></wc-logo>
       </a>
     </div>
     <div class="flex-1 text-right">
-      <button class="p-1" data-ghost-search><span class="i-ri-search-line block h-6 w-6" />
+      <button class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors" data-ghost-search>
+        <span class="i-ri-search-line block h-6 w-6 text-onSurfaceVariant"></span>
       </button>
     </div>
   </div>
 </header>
-<nav class="sticky top-0 border-y z-40 shadow
-  {{#match @custom.home 'Home 2' }} bg-neutral-900 border-neutral-800 {{else}} bg-white border-neutral-100 {{/match}}">
-  <div
-    class="section flex items-center {{#match @custom.home 'Home 2' }} text-neutral-100 {{else}} text-neutral-700 {{/match}}">
-    <div class="flex-1 hidden md:block">
-      <wc-sticky>
-        <a href="{{@site.url}}">
-          <wc-logo size="small" {{^match @custom.home 'Home 2' }} positive {{/match}}></wc-logo>
-        </a>
-      </wc-sticky>
-    </div>
-    <div class="flex-1 text-center">
-      {{ navigation}}
-    </div>
-    <div class="flex-1 text-right hidden md:block">
-      <wc-sticky>
-        <button class="p-1" data-ghost-search><span class="i-ri-search-line block h-6 w-6" />
-        </button>
-      </wc-sticky>
-    </div>
+
+<wc-navbar class="border-b border-outlineVariant/20">
+  <div slot="logo">
+    <a href="{{@site.url}}">
+      <wc-logo class="h-6 {{#match @custom.home 'Home 2' }} fill-onPrimaryContainer {{else}} fill-primary {{/match}}"></wc-logo>
+    </a>
   </div>
-</nav>
+  
+  <div slot="navigation">
+    <nav class="hidden md:flex items-center space-x-1">
+      {{#foreach navigation}}
+        <a href="{{url}}" class="px-4 py-2 rounded-lg text-onSurface hover:text-primary hover:bg-surfaceContainerLow transition-colors font-medium {{#if current}} bg-primaryContainer text-onPrimaryContainer {{/if}}">
+          {{label}}
+        </a>
+      {{/foreach}}
+    </nav>
+    
+    <wc-offcanvas class="md:hidden">
+      <nav class="flex flex-col space-y-2 p-4">
+        {{#foreach navigation}}
+          <a href="{{url}}" class="px-4 py-3 rounded-lg text-onSurface hover:text-primary hover:bg-surfaceContainerLow transition-colors text-lg {{#if current}} bg-primaryContainer text-onPrimaryContainer {{/if}}">
+            {{label}}
+          </a>
+        {{/foreach}}
+      </nav>
+    </wc-offcanvas>
+  </div>
+  
+  <div slot="actions">
+    <button class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors" data-ghost-search>
+      <span class="i-ri-search-line block h-6 w-6 text-onSurfaceVariant"></span>
+    </button>
+  </div>
+</wc-navbar>

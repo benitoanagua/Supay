@@ -1,65 +1,80 @@
-<section class="relative flex items-end md:items-center bg-neutral-900 h-3xl">
-  {{#get "posts" filter="tag:hash-principal" limit="1" include="tags,authors" as |post|}}
-    {{#post}}
-      <div class="section z-10">
-        <div class="md:w-1/2 text-center">
-          <a href="{{url}}" class="text-white no-underline font-700 font-sans">
-            <h1 class="headline-1">{{title}}</h1>
-          </a>
-          {{#if excerpt}}
-            <p class="mt-4 post-content italic text-neutral-100">{{excerpt}}</p>
-          {{/if}}
-          <div class="mt-4 flex flex-col justify-center font-sans">
-            <a href={{primary_author.url}} class="author-link text-neutral-100">
-              {{primary_author.name}}
-            </a>
-            <div class="post-meta">
-              <span class="capitalize after:content-['•'] after:ml-2 after:mr-1">
-                {{date published_at format="MMM DD, YYYY" locale="es"}}
-              </span>
-              <span>{{reading_time minute=" Lectura 1 min." minutes="Lectura % min." }}</span>
-            </div>
-            <div class="mt-8 ">
-              <a class="btn-primary" href="{{url}}">LEER MÁS &rarr;</a>
-            </div>
-          </div>
-        </div>
-        <div class="absolute h-1/2 md:h-full w-full md:w-1/2 top-0 right-0 bg-cover bg-center filter grayscale
-          before:content-[''] before:h-full before:block before:bg-gradient-to-t
-          md:before:bg-gradient-to-r before:from-neutral-900 before:to-50% before:to-transparent"
-          style="background-image: url({{feature_image}});">
-        </div>
-    {{/post}}
-  {{/get}}
-</section>
 <section class="section">
-  <div class="flex flex-col md:flex-row gap-12">
-    <div class="md:w-3/5 mt-4 relative md:right-x-divider">
-      <wc-grille desktop="2" mobile="1" gap="medium">
+  <div class="flex flex-col md:flex-row gap-8 mt-8 pb-8 border-b border-outlineVariant">
+    <div class="md:w-3/5">
+      {{#get "posts" filter="tag:hash-principal" limit="1" include="tags,authors" as |post|}}
+        {{#post}}
+          <wc-card 
+            title="{{title}}" 
+            url="{{url}}" 
+            excerpt="{{excerpt}}" 
+            feature_image="{{feature_image}}"
+            tag_name="{{primary_tag.name}}" 
+            tag_url="{{primary_tag.url}}" 
+            author_name="{{primary_author.name}}"
+            author_url="{{primary_author.url}}" 
+            reading_time="{{reading_time minute='1 min' minutes='% min'}}"
+            published_at="{{date published_at format='MMM DD, YYYY' locale='es'}}"
+            media_align="bottom" 
+            heading="2" 
+            density="normal" 
+            aspect_ratio="video"
+            elevation="2"
+            class="h-full">
+          </wc-card>
+        {{/post}}
+      {{/get}}
+    </div>
+    
+    <div class="md:w-2/5">
+      <wc-grille desktop="1" mobile="1" gap="medium">
         {{#get "posts" filter="tag:hash-secundario" limit="2" include="tags,authors"}}
           {{#foreach posts}}
-            <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" {{#if @first}}
-              feature_image="{{feature_image}}" {{/if}} tag_name="{{primary_tag.name}}" tag_url="{{primary_tag.url}}"
-              author_name="{{primary_author.name}}" author_url="{{primary_author.url}}"
-              reading_time="{{reading_time minute=" Lectura 1 min." minutes="Lectura % min." }}"
-              published_at="{{date published_at format=" MMM DD, YYYY" locale="es" }}" media_align="top" heading="5"
-              {{#if @first}} density="compact" {{/if}} aspect_ratio="video"></wc-card>
+            <wc-card 
+              title="{{title}}" 
+              url="{{url}}" 
+              excerpt="{{excerpt}}" 
+              {{#if @first}}feature_image="{{feature_image}}"{{/if}}
+              tag_name="{{primary_tag.name}}"
+              tag_url="{{primary_tag.url}}" 
+              author_name="{{primary_author.name}}" 
+              author_url="{{primary_author.url}}"
+              reading_time="{{reading_time minute='1 min' minutes='% min'}}"
+              published_at="{{date published_at format='MMM DD, YYYY' locale='es'}}" 
+              media_align="top" 
+              heading="5"
+              {{#if @first}}density="compact"{{/if}}
+              aspect_ratio="video"
+              elevation="1">
+            </wc-card>
           {{/foreach}}
         {{/get}}
       </wc-grille>
     </div>
-    <div class="md:w-2/5 mt-4 relative top-y-divider md:no-top-y-divider">
-      <wc-grille desktop="1" mobile="1" gap="medium">
-        {{#get "posts" filter="tag:hash-complementario" limit="3" include="tags,authors"}}
-          {{#foreach posts}}
-            <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" tag_name="{{primary_tag.name}}"
-              tag_url="{{primary_tag.url}}" author_name="{{primary_author.name}}" author_url="{{primary_author.url}}"
-              reading_time="{{reading_time minute=" Lectura 1 min." minutes="Lectura % min." }}"
-              published_at="{{date published_at format=" MMM DD, YYYY" locale="es" }}" media_align="left" heading="6"
-              density="compact" aspect_ratio="video" media_width="square"></wc-card>
-          {{/foreach}}
-        {{/get}}
-      </wc-grille>
-    </div>
+  </div>
+  
+  <div class="mt-8">
+    <wc-grille desktop="3" mobile="1" gap="medium">
+      {{#get "posts" filter="tag:hash-complementario" limit="3" include="tags,authors"}}
+        {{#foreach posts}}
+          <wc-card 
+            title="{{title}}" 
+            url="{{url}}" 
+            excerpt="{{excerpt}}" 
+            tag_name="{{primary_tag.name}}"
+            tag_url="{{primary_tag.url}}" 
+            author_name="{{primary_author.name}}" 
+            author_url="{{primary_author.url}}"
+            reading_time="{{reading_time minute='1 min' minutes='% min'}}"
+            published_at="{{date published_at format='MMM DD, YYYY' locale='es'}}" 
+            media_align="left" 
+            heading="6"
+            density="compact" 
+            aspect_ratio="square" 
+            media_width="is-one-fifth"
+            elevation="1">
+          </wc-card>
+        {{/foreach}}
+      {{/get}}
+    </wc-grille>
   </div>
 </section>

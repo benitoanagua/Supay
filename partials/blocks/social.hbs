@@ -1,29 +1,29 @@
-<ul class="flex-1 flex items-center justify-center md:justify-end gap-x-4 text-neutral-400">
+<ul class="flex items-center justify-center md:justify-end gap-4 text-onSurfaceVariant">
     {{#if @custom.twitter_url}}
         <li>
-            <a href={{@custom.twitter_url}} target="_blank">
-                <span class="i-ri-twitter-fill block h-6 w-6" />
+            <a href="{{@custom.twitter_url}}" target="_blank" class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors">
+                <span class="i-ri-twitter-fill block h-5 w-5"></span>
             </a>
         </li>
     {{/if}}
     {{#if @custom.youtube_url}}
         <li>
-            <a href={{@custom.youtube_url}} target="_blank">
-                <span class="i-ri-youtube-line block h-6 w-6" />
+            <a href="{{@custom.youtube_url}}" target="_blank" class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors">
+                <span class="i-ri-youtube-line block h-5 w-5"></span>
             </a>
         </li>
     {{/if}}
     {{#if @custom.instagram_url}}
         <li>
-            <a href={{@custom.instagram_url}} target="_blank">
-                <span class="i-ri-instagram-line block h-6 w-6" />
+            <a href="{{@custom.instagram_url}}" target="_blank" class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors">
+                <span class="i-ri-instagram-line block h-5 w-5"></span>
             </a>
         </li>
     {{/if}}
     {{#if @custom.tiktok_url}}
         <li>
-            <a href={{@custom.tiktok_url}} target="_blank">
-                <span class="i-ri-tiktok-fill block h-6 w-6" />
+            <a href="{{@custom.tiktok_url}}" target="_blank" class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors">
+                <span class="i-ri-tiktok-fill block h-5 w-5"></span>
             </a>
         </li>
     {{/if}}

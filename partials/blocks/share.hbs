@@ -1,48 +1,28 @@
-<div class="flex">
-    {{!-- {{#if @custom.disqus_api_key }}
-    <a href="#disqus_thread">
-        <ul class="flex-1 flex justify-center md:justify-start gap-x-3 text-neutral-400">
-            <li class="flex group relative inline-block">
-                <span class="i-ri-heart-3-line block h-6 w-6 hover:text-neutral-900"></span>
-                <span class="text-neutral-500 text-xs pt-1 pl-1">
-                    {{disqus url api_key=@custom.disqus_api_key forum=@custom.disqus_forum response="love"}}
-                </span>
-                {{> "components/tooltip" message="Reacciones"}}
-            </li>
-            <li class="flex group relative inline-block">
-                <span class="i-ri-chat-3-line block h-6 w-6 hover:text-neutral-900"></span>
-                <span class="text-neutral-500 text-xs pt-1 pl-1">
-                    {{disqus url api_key=@custom.disqus_api_key forum=@custom.disqus_forum response="comments"}}
-                </span>
-                {{> "components/tooltip" message="Comentarios"}}
-            </li>
-        </ul>
-    </a>
-    {{/if}} --}}
-    <ul class="flex-1 flex justify-center md:justify-end gap-x-3 text-neutral-400">
-        <li class="group relative inline-block">
-            <button onclick="navigator.clipboard.writeText(window.location.href)">
-                <span class="i-ri-link-m block h-6 w-6 hover:text-neutral-900" />
+<div class="flex items-center justify-between">
+    <ul class="flex items-center gap-3 text-onSurfaceVariant">
+        <li class="group relative">
+            <button onclick="navigator.clipboard.writeText(window.location.href)" class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors">
+                <span class="i-ri-link-m block h-5 w-5"></span>
             </button>
             {{> "components/tooltip" message="Copiar enlace"}}
         </li>
-        <li class="group relative inline-block">
-            <a href="https://twitter.com/intent/tweet?url={{@site.url}}{{url}}&text={{title}}" target="_blank">
-                <span class="i-ri-twitter-line block h-6 w-6 hover:text-neutral-900" />
+        <li class="group relative">
+            <a href="https://twitter.com/intent/tweet?url={{@site.url}}{{url}}&text={{title}}" target="_blank" class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors">
+                <span class="i-ri-twitter-line block h-5 w-5"></span>
             </a>
-            {{> "components/tooltip" message="Compartir en twitter"}}
+            {{> "components/tooltip" message="Compartir en Twitter"}}
         </li>
-        <li class="group relative inline-block">
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{@site.url}}{{url}}" target="_blank">
-                <span class="i-ri-facebook-circle-line block h-6 w-6 hover:text-neutral-900" />
+        <li class="group relative">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{@site.url}}{{url}}" target="_blank" class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors">
+                <span class="i-ri-facebook-circle-line block h-5 w-5"></span>
             </a>
-            {{> "components/tooltip" message="Compartir en facebook"}}
+            {{> "components/tooltip" message="Compartir en Facebook"}}
         </li>
-        <li class="group relative inline-block">
-            <a href="whatsapp://send?text={{title}} {{@site.url}}{{url}}" target="_blank">
-                <span class="i-ri-whatsapp-line block h-6 w-6 hover:text-neutral-900" />
+        <li class="group relative">
+            <a href="whatsapp://send?text={{title}} {{@site.url}}{{url}}" target="_blank" class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors">
+                <span class="i-ri-whatsapp-line block h-5 w-5"></span>
             </a>
-            {{> "components/tooltip" message="Compartir en whatsapp"}}
+            {{> "components/tooltip" message="Compartir en WhatsApp"}}
         </li>
     </ul>
 </div>

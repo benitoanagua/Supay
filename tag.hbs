@@ -1,19 +1,36 @@
 {{!< default}}
-<main class="section mt-4">
-  {{#tag}}
-    {{> blocks/headline }}
-  {{/tag}}
-  <wc-grille desktop="4" mobile="2" gap="medium">
-    {{#foreach posts}}
-      <wc-card title="{{title}}" url="{{url}}" excerpt="{{excerpt}}" feature_image="{{feature_image}}"
-        tag_name="{{primary_tag.name}}" tag_url="{{primary_tag.url}}" author_name="{{primary_author.name}}"
-        author_url="{{primary_author.url}}" author_profile_image="{{primary_author.profile_image}}"
-        reading_time="{{reading_time minute=" Lectura 1 min." minutes="Lectura % min." }}"
-        published_at="{{date published_at format=" MMM DD, YYYY" locale="es" }}" media_align="top" heading="5"
-        density="compact"></wc-card>
-    {{/foreach}}
-  </wc-grille>
-</main>
-<main class="section mt-4">
-  {{> pagination}}
-</main>
+<section class="section mt-8">
+    <div class="mx-auto max-w-4xl">
+        {{#tag}}
+            {{> blocks/headline name=name}}
+        {{/tag}}
+        
+        <wc-grille desktop="3" mobile="2" gap="medium" class="mb-8">
+            {{#foreach posts}}
+                <wc-card 
+                    title="{{title}}" 
+                    url="{{url}}" 
+                    excerpt="{{excerpt}}" 
+                    feature_image="{{feature_image}}"
+                    tag_name="{{primary_tag.name}}" 
+                    tag_url="{{primary_tag.url}}" 
+                    author_name="{{primary_author.name}}"
+                    author_url="{{primary_author.url}}" 
+                    author_profile_image="{{primary_author.profile_image}}"
+                    reading_time="{{reading_time minute="1 min" minutes="% min"}}"
+                    published_at="{{date published_at format="MMM DD, YYYY" locale="es"}}" 
+                    media_align="top" 
+                    heading="5" 
+                    density="compact"
+                    elevation="1">
+                </wc-card>
+            {{/foreach}}
+        </wc-grille>
+    </div>
+</section>
+
+<section class="section">
+    <div class="mx-auto max-w-4xl">
+        {{> pagination}}
+    </div>
+</section>
