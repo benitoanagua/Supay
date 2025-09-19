@@ -1,14 +1,14 @@
-// src/elements/Sticky.ts
+// src/elements/Navbar.ts
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, state, query } from "lit/decorators.js";
 import mainCSS from "../main.css?inline";
 
-@customElement("wc-sticky")
-export class WcSticky extends LitElement {
+@customElement("wc-navbar")
+export class WcNavbar extends LitElement {
   static styles = unsafeCSS(mainCSS);
 
-  @state() private isVisible = false;
-  @query(".wc-sticky") private stickyElement?: HTMLElement;
+  @state() private isSticky = false;
+  @query(".wc-navbar") private navbarElement?: HTMLElement;
 
   private intersectionObserver?: IntersectionObserver;
   private scrollY = 0;
@@ -54,29 +54,29 @@ export class WcSticky extends LitElement {
 
   private handleScroll = () => {
     this.scrollY = window.scrollY;
-    this.updateVisibility();
+    this.updateStickyState();
   };
 
   private updateElementPosition() {
-    if (this.stickyElement) {
+    if (this.navbarElement) {
       this.elementTop =
-        this.stickyElement.getBoundingClientRect().top + this.scrollY;
+        this.navbarElement.getBoundingClientRect().top + this.scrollY;
     }
   }
 
-  private updateVisibility() {
-    this.isVisible = this.scrollY > this.elementTop;
+  private updateStickyState() {
+    this.isSticky = this.scrollY > this.elementTop;
   }
 
   private setupIntersectionObserver() {
-    if (typeof window === "undefined" || !this.stickyElement) return;
+    if (typeof window === "undefined" || !this.navbarElement) return;
 
     this.cleanupObservers();
 
     this.intersectionObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          this.isVisible =
+          this.isSticky =
             !entry.isIntersecting && this.scrollY > this.elementTop;
         });
       },
@@ -86,7 +86,7 @@ export class WcSticky extends LitElement {
       }
     );
 
-    this.intersectionObserver.observe(this.stickyElement);
+    this.intersectionObserver.observe(this.navbarElement);
   }
 
   private cleanupObservers() {
@@ -96,46 +96,30 @@ export class WcSticky extends LitElement {
     }
   }
 
-  private renderContent() {
-    return html`
-      <div
-        class="flex items-center justify-between w-full px-4 py-3 mx-auto md:px-6 lg:px-8"
-      >
-        <!-- Logo: Izquierda en desktop, centro en mobile -->
-        <div class="flex items-center order-2 md:order-1">
-          <slot name="logo"></slot>
-        </div>
-
-        <!-- Navigation: Centro en desktop, offcanvas en mobile -->
-        <div class="flex items-center order-1 md:order-2">
-          <slot name="navigation"></slot>
-        </div>
-
-        <!-- Actions: Derecha en desktop, izquierda en mobile -->
-        <div class="flex items-center order-3 md:order-3">
-          <slot name="actions"></slot>
-        </div>
-      </div>
-    `;
+  private getNavbarClasses() {
+    return this.isSticky ? "wc-navbar wc-navbar--sticky" : "wc-navbar";
   }
 
   render() {
     return html`
-      <!-- Main navigation -->
-      <nav class="wc-sticky w-full transition-all duration-300 ease-in-out">
-        ${this.renderContent()}
-      </nav>
+      <nav class="${this.getNavbarClasses()}">
+        <div class="wc-navbar__container">
+          <!-- Logo: Izquierda en desktop, centro en mobile -->
+          <div class="wc-navbar__logo wc-navbar__logo--desktop">
+            <slot name="logo"></slot>
+          </div>
 
-      <!-- Sticky navigation (visible on scroll) -->
-      ${this.isVisible
-        ? html`
-            <nav
-              class="fixed top-0 left-0 w-full z-50 bg-surface/95 backdrop-blur-md border-b border-outline/20 transition-all duration-300 ease-in-out opacity-100 translate-y-0"
-            >
-              ${this.renderContent()}
-            </nav>
-          `
-        : ""}
+          <!-- Navigation: Centro en desktop, offcanvas en mobile -->
+          <div class="wc-navbar__navigation wc-navbar__navigation--desktop">
+            <slot name="navigation"></slot>
+          </div>
+
+          <!-- Actions: Derecha en desktop, izquierda en mobile -->
+          <div class="wc-navbar__actions wc-navbar__actions--desktop">
+            <slot name="actions"></slot>
+          </div>
+        </div>
+      </nav>
     `;
   }
 }
