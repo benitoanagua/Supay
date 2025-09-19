@@ -1,23 +1,3 @@
-<header class="{{#match @custom.home 'Home 2' }} bg-surfaceContainerHighest {{else}} bg-surface {{/match}}">
-  <div class="section hidden md:flex items-center gap-4">
-    <div class="flex-1">
-      <span class="font-sans text-sm text-onSurfaceVariant">
-        Tarija, {{date format="dddd D [de] MMMM [de] YYYY" locale="es"}}
-      </span>
-    </div>
-    <div class="flex-1 text-center">
-      <a href="{{@site.url}}">
-        <wc-logo class="h-8 {{#match @custom.home 'Home 2' }} fill-onPrimaryContainer {{else}} fill-primary {{/match}}"></wc-logo>
-      </a>
-    </div>
-    <div class="flex-1 text-right">
-      <button class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors" data-ghost-search>
-        <span class="i-ri-search-line block h-6 w-6 text-onSurfaceVariant"></span>
-      </button>
-    </div>
-  </div>
-</header>
-
 <wc-navbar class="border-b border-outlineVariant/20">
   <div slot="logo">
     <a href="{{@site.url}}">
@@ -27,27 +7,62 @@
   
   <div slot="navigation">
     <nav class="hidden md:flex items-center space-x-1">
-      {{#foreach navigation}}
-        <a href="{{url}}" class="px-4 py-2 rounded-lg text-onSurface hover:text-primary hover:bg-surfaceContainerLow transition-colors font-medium {{#if current}} bg-primaryContainer text-onPrimaryContainer {{/if}}">
-          {{label}}
+      {{#if @site.navigation}}
+        {{#foreach @site.navigation}}
+          <a href="{{url}}" class="px-4 py-2 rounded-lg text-onSurface hover:text-primary hover:bg-surfaceContainerLow transition-colors font-medium {{#if current}} bg-primaryContainer text-onPrimaryContainer {{/if}}">
+            {{label}}
+          </a>
+        {{/foreach}}
+      {{else}}
+        <a href="/" class="px-4 py-2 rounded-lg text-onSurface hover:text-primary hover:bg-surfaceContainerLow transition-colors font-medium">
+          Home
         </a>
-      {{/foreach}}
+      {{/if}}
     </nav>
     
     <wc-offcanvas class="md:hidden">
       <nav class="flex flex-col space-y-2 p-4">
-        {{#foreach navigation}}
-          <a href="{{url}}" class="px-4 py-3 rounded-lg text-onSurface hover:text-primary hover:bg-surfaceContainerLow transition-colors text-lg {{#if current}} bg-primaryContainer text-onPrimaryContainer {{/if}}">
-            {{label}}
+        {{#if @site.navigation}}
+          {{#foreach @site.navigation}}
+            <a href="{{url}}" class="px-4 py-3 rounded-lg text-onSurface hover:text-primary hover:bg-surfaceContainerLow transition-colors text-lg {{#if current}} bg-primaryContainer text-onPrimaryContainer {{/if}}">
+              {{label}}
+            </a>
+          {{/foreach}}
+        {{else}}
+          <a href="/" class="px-4 py-3 rounded-lg text-onSurface hover:text-primary hover:bg-surfaceContainerLow transition-colors text-lg">
+            Home
           </a>
-        {{/foreach}}
+        {{/if}}
       </nav>
     </wc-offcanvas>
   </div>
   
   <div slot="actions">
     <button class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors" data-ghost-search>
-      <span class="i-ri-search-line block h-6 w-6 text-onSurfaceVariant"></span>
+      <span class="icon-[garden--search-stroke-16] block h-6 w-6 text-onSurfaceVariant"></span>
     </button>
   </div>
 </wc-navbar>
+
+{{!-- <div class="h-16"></div> --}}
+
+<header class="section {{#match @custom.home 'Home 2' }} bg-surfaceContainerHighest {{else}} bg-surface {{/match}}">
+  <div class="section hidden md:flex items-center gap-4">
+    <div class="flex-1">
+      <span class="font-sans text-sm text-onSurfaceVariant">
+        Tarija, {{date format="dddd D [de] MMMM [de] YYYY" locale="es"}}
+      </span>
+    </div>
+    <div class="flex-1 text-center">
+      {{!-- <a href="{{@site.url}}">
+        <wc-logo class="h-8 {{#match @custom.home 'Home 2' }} fill-onPrimaryContainer {{else}} fill-primary {{/match}}"></wc-logo>
+      </a> --}}
+    </div>
+    <div class="flex-1 text-right">
+      {{!-- <button class="p-2 rounded-full hover:bg-surfaceContainerLow transition-colors" data-ghost-search>
+        <span class="icon-[garden--search-stroke-16] block h-6 w-6 text-onSurfaceVariant"></span>
+      </button> --}}
+    </div>
+  </div>
+</header>
+

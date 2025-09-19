@@ -12,7 +12,7 @@ yarn-error.log*
 .env*.local
 
 # custom
-dist/
+assets/dist
 *.zip
 *storybook.log
 storybook-static

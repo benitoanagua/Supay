@@ -1,8 +1,8 @@
 import type { Preview } from "@storybook/html";
 
 // Importa tus estilos y custom elements
-import "../dist/supay-elements.css";
-import "../dist/supay-elements.es.js";
+import "../assets/dist/supay-elements.css";
+import "../assets/dist/supay-elements.es.js";
 
 const preview: Preview = {
   parameters: {

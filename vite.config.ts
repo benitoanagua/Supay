@@ -13,6 +13,7 @@ export default defineConfig({
     minify: "esbuild",
     emptyOutDir: true,
     cssCodeSplit: false,
+    outDir: "assets/dist",
     lib: {
       entry: resolve(__dirname, "src/main.ts"),
       name: "SupayElements",

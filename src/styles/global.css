@@ -1,4 +1,7 @@
 /* Typography scale with responsive utilities */
+.section {
+  @apply container mx-auto py-4;
+}
 .headline-1 {
   @apply text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight;
 }

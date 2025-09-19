@@ -102,7 +102,7 @@ export class WcNavbar extends LitElement {
   render() {
     return html`
       <nav class="${this.getNavbarClasses()}">
-        <div class="wc-navbar__container">
+        <div class="section wc-navbar__container">
           <!-- Logo: Izquierda en desktop, centro en mobile -->
           <div class="wc-navbar__logo">
             <slot name="logo"></slot>
