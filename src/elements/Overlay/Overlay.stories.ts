@@ -13,7 +13,7 @@ import type {
   OverlayPosition,
   OverlayFill,
   OverlayBox,
-} from "../types/overlay.js";
+} from "../../types/overlay.js";
 
 const meta: Meta<OverlayProps> = {
   title: "Components/Overlay",

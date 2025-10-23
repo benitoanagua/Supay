@@ -1,0 +1,78 @@
+.metro-card {
+  @apply block bg-surface text-onSurface border-none;
+  @apply transition-all duration-300 ease-out;
+}
+
+.metro-card--elevation-1 {
+  @apply bg-surfaceContainerLow p-3;
+  @apply sm:p-4;
+  @apply lg:p-5;
+}
+
+.metro-card--elevation-2 {
+  @apply bg-surfaceContainer p-4;
+  @apply sm:p-5;
+  @apply lg:p-6;
+}
+
+.metro-card--elevation-3 {
+  @apply bg-surfaceContainerHigh p-5;
+  @apply sm:p-6;
+  @apply lg:p-7;
+}
+
+.metro-card--density-normal {
+  @apply min-h-28;
+  @apply sm:min-h-32;
+  @apply lg:min-h-36;
+}
+
+.metro-card--density-compact {
+  @apply min-h-20;
+  @apply sm:min-h-24;
+  @apply lg:min-h-28;
+}
+
+.metro-card--density-minimal {
+  @apply min-h-12;
+  @apply sm:min-h-16;
+  @apply lg:min-h-20;
+}
+
+.metro-card__container {
+  @apply flex gap-3 w-full h-full;
+  @apply sm:gap-4;
+  @apply lg:gap-5;
+}
+
+.metro-card__author-image {
+  @apply w-6 h-6 object-cover;
+  @apply sm:w-7 sm:h-7;
+  @apply lg:w-8 lg:h-8;
+}
+
+.metro-card__author-link {
+  @apply text-sm text-onSurfaceVariant no-underline font-semibold;
+  @apply sm:text-base;
+}
+
+.metro-card__title-link > * {
+  @apply m-0 font-light tracking-tight;
+}
+
+.metro-card__excerpt {
+  @apply text-onSurfaceVariant text-sm leading-relaxed font-normal;
+  @apply sm:text-base;
+  @apply lg:text-lg;
+}
+
+.metro-card__meta {
+  @apply flex flex-wrap items-center gap-2 text-xs text-onSurfaceVariant;
+  @apply sm:text-sm;
+}
+
+.metro-card__tag {
+  @apply bg-primaryContainer text-onPrimaryContainer px-3 py-1;
+  @apply text-xs font-semibold no-underline;
+  @apply sm:text-sm sm:px-4;
+}

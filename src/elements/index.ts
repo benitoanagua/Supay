@@ -1,10 +1,10 @@
 // Import all components to register them
-import { WcCard } from "./Card.js";
-import { WcGrille } from "./Grille.js";
-import { WcLogo } from "./Logo.js";
-import { WcNavbar } from "./Navbar.js";
-import { WcOverlay } from "./Overlay.js";
-import { WcOffcanvas } from "./Offcanvas.js";
+import { WcCard } from "./Card/Card.js";
+import { WcGrille } from "./Grille/Grille.js";
+import { WcLogo } from "./Logo/Logo.js";
+import { WcNavbar } from "./Navbar/Navbar.js";
+import { WcOverlay } from "./Overlay/Overlay.js";
+import { WcOffcanvas } from "./Offcanvas/Offcanvas.js";
 
 // Export all components and types
 export { WcCard, WcGrille, WcLogo, WcNavbar, WcOverlay, WcOffcanvas };

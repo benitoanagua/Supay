@@ -1,0 +1,41 @@
+.metro-navbar {
+  @apply w-full bg-surface text-onSurface border-b border-outlineVariant;
+  @apply transition-all duration-300 ease-out sticky top-0 z-50;
+}
+
+.metro-navbar__container {
+  @apply container mx-auto px-4 py-3;
+  @apply flex items-center justify-between;
+  @apply sm:px-6 sm:py-4;
+  @apply lg:px-8 lg:py-5;
+}
+
+.metro-navbar__logo {
+  @apply flex items-center order-2;
+  @apply md:order-1;
+}
+
+.metro-navbar__navigation {
+  @apply flex items-center order-1;
+
+  @apply md:order-2 md:flex-1 md:justify-center;
+}
+
+.metro-navbar__actions {
+  @apply flex items-center gap-2 order-3;
+  @apply sm:gap-3;
+  @apply lg:gap-4;
+}
+
+.metro-navbar nav {
+  @apply hidden;
+  @apply md:flex md:items-center md:space-x-1;
+  @apply lg:space-x-2;
+}
+
+.metro-navbar a {
+  @apply px-3 py-2 text-onSurface no-underline font-semibold;
+  @apply transition-all duration-200;
+  @apply sm:px-4;
+  @apply lg:px-5 lg:py-3;
+}

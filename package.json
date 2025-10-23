@@ -57,8 +57,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "generate:theme": "tsx src/plugins/material-theme/cli.ts",
-    "postinstall": "tsx src/plugins/material-theme/cli.ts",
-    "prebuild": "tsx src/plugins/material-theme/cli.ts"
+    "prestart": "npm run generate:theme",
+    "prebuild": "npm run generate:theme"
   },
   "screenshots": {
     "desktop": "assets/hello-world-thumb.png"
@@ -75,6 +75,7 @@
     "@storybook/html": "^9.1.8",
     "@storybook/html-vite": "^9.1.8",
     "@tailwindcss/vite": "^4.1.13",
+    "@types/node": "^24.9.1",
     "eslint": "^9.36.0",
     "gscan": "^5.1.0",
     "lit": "^3.3.1",

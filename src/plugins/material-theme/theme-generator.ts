@@ -1,138 +1,80 @@
-import { writeFileSync, mkdirSync } from 'fs'
-import { dirname, resolve } from 'path'
+import { writeFileSync, mkdirSync } from 'fs';
+import { resolve } from 'path';
 import {
   argbFromHex,
   hexFromArgb,
   MaterialDynamicColors,
   Hct,
-  SchemeTonalSpot,
-  SchemeNeutral,
-  SchemeVibrant,
-  SchemeExpressive,
-  SchemeMonochrome,
-  SchemeContent,
-  SchemeFidelity,
-} from '@material/material-color-utilities'
-import { themeConfig, getVariantName } from './theme-config'
+  DynamicScheme,
+} from '@material/material-color-utilities';
+import { SEED_COLOR, SCHEMES, SELECTED_SCHEME, THEME_CSS_VARS } from './theme.config';
 
-export function getThemeConfig() {
-  return themeConfig
+function getColorFromScheme(prop: string, scheme: DynamicScheme): number {
+  const materialColors = MaterialDynamicColors as unknown as Record<
+    string,
+    { getArgb: (scheme: DynamicScheme) => number } | undefined
+  >;
+
+  const colorGetter = materialColors[prop];
+  if (!colorGetter || typeof colorGetter.getArgb !== 'function') {
+    throw new Error(`Color property not found or invalid: ${prop}`);
+  }
+  return colorGetter.getArgb(scheme);
 }
 
-// Mapeo de nombres de variante a constructores de esquema
-const SCHEME_CONSTRUCTORS: Record<string, any> = {
-  MONOCHROME: SchemeMonochrome,
-  NEUTRAL: SchemeNeutral,
-  TONAL_SPOT: SchemeTonalSpot,
-  VIBRANT: SchemeVibrant,
-  EXPRESSIVE: SchemeExpressive,
-  FIDELITY: SchemeFidelity,
-  CONTENT: SchemeContent,
-}
-
-function createScheme(isDark: boolean) {
-  const config = getThemeConfig()
-  const sourceColor = argbFromHex(config.seedColor)
-  const sourceHct = Hct.fromInt(sourceColor)
-
-  // Convertir número de variante a nombre
-  const variantName = getVariantName(config.variant)
-  const SchemeConstructor = SCHEME_CONSTRUCTORS[variantName] || SchemeTonalSpot
-
-  return new SchemeConstructor(sourceHct, isDark, config.contrastLevel)
-}
-
-function extractColors(scheme: any) {
-  const props = [
-    'primary',
-    'onPrimary',
-    'primaryContainer',
-    'onPrimaryContainer',
-    'secondary',
-    'onSecondary',
-    'secondaryContainer',
-    'onSecondaryContainer',
-    'tertiary',
-    'onTertiary',
-    'tertiaryContainer',
-    'onTertiaryContainer',
-    'error',
-    'onError',
-    'errorContainer',
-    'onErrorContainer',
-    'background',
-    'onBackground',
-    'surface',
-    'surfaceDim',
-    'surfaceBright',
-    'surfaceContainerLowest',
-    'surfaceContainerLow',
-    'surfaceContainer',
-    'surfaceContainerHigh',
-    'surfaceContainerHighest',
-    'onSurface',
-    'surfaceVariant',
-    'onSurfaceVariant',
-    'outline',
-    'outlineVariant',
-    'shadow',
-    'scrim',
-    'inverseSurface',
-    'inverseOnSurface',
-    'inversePrimary',
-  ]
-
-  const colors: Record<string, string> = {}
-  for (const prop of props) {
+function extractColors(scheme: DynamicScheme): Record<string, string> {
+  const colors: Record<string, string> = {};
+  for (const prop of THEME_CSS_VARS) {
     try {
-      const color = (MaterialDynamicColors as any)[prop]?.getArgb(scheme)
-      colors[prop] = hexFromArgb(color)
+      const color = getColorFromScheme(prop, scheme);
+      colors[prop] = hexFromArgb(color);
     } catch {
-      colors[prop] = '#FF00FF' // fallback
-      console.warn(`Could not extract color property: ${prop}`)
+      colors[prop] = '#FF00FF';
+      console.warn(`Could not extract: ${prop}`);
     }
   }
-  return colors
+  return colors;
 }
 
 export function generateThemeFiles(root: string, outputDir: string): void {
   try {
-    const config = getThemeConfig()
-    const variantName = getVariantName(config.variant)
+    console.log('🎨 Harawihark - Generating Material Design theme...');
+    console.log(`   🎨 Base color: ${SEED_COLOR}`);
+    console.log(`   🎨 Scheme: ${SELECTED_SCHEME}`);
+    console.log(`   🎨 CSS Variables: ${THEME_CSS_VARS.length}`);
 
-    console.log(`🎨 Generating Material Design theme:`)
-    console.log(`   • Seed Color: ${config.seedColor}`)
-    console.log(`   • Variant: ${variantName} (${config.variant})`)
-    console.log(`   • Contrast Level: ${config.contrastLevel}`)
+    const selectedScheme = SCHEMES.find((s) => s.name === SELECTED_SCHEME);
+    if (!selectedScheme) {
+      throw new Error(`Scheme not found: ${SELECTED_SCHEME}`);
+    }
 
-    const lightScheme = createScheme(false)
-    const darkScheme = createScheme(true)
+    const { variant: SchemeConstructor } = selectedScheme;
 
-    const lightColors = extractColors(lightScheme)
-    const darkColors = extractColors(darkScheme)
+    const lightScheme = new SchemeConstructor(Hct.fromInt(argbFromHex(SEED_COLOR)), false, 0);
+    const darkScheme = new SchemeConstructor(Hct.fromInt(argbFromHex(SEED_COLOR)), true, 0);
+
+    const lightColors = extractColors(lightScheme);
+    const darkColors = extractColors(darkScheme);
 
     const cssContent = `@theme {
-${Object.entries(lightColors)
-  .map(([k, v]) => `  --color-${k}: ${v};`)
-  .join('\n')}
+${THEME_CSS_VARS.map((k) => `  --color-${k}: ${lightColors[k]};`).join('\n')}
 }
 
 [data-theme="dark"] {
-${Object.entries(darkColors)
-  .map(([k, v]) => `  --color-${k}: ${v};`)
-  .join('\n')}
-}`
+${THEME_CSS_VARS.map((k) => `  --color-${k}: ${darkColors[k]};`).join('\n')}
+}
+`;
 
-    // Crear directorio si no existe
-    const fullPath = resolve(root, outputDir)
-    mkdirSync(dirname(fullPath), { recursive: true })
+    const outputPath = resolve(root, outputDir);
+    mkdirSync(outputPath, { recursive: true });
 
-    // Escribir archivo CSS
-    writeFileSync(resolve(fullPath, 'material-theme.css'), cssContent)
+    writeFileSync(resolve(outputPath, 'material-theme.css'), cssContent);
 
-    console.log('✅ Theme generated successfully at:', `${outputDir}/material-theme.css`)
+    console.log('✅ Material theme generated successfully:');
+    console.log(`   📁 ${outputDir}/material-theme.css`);
+    console.log(`   📊 Variables: ${THEME_CSS_VARS.length}`);
   } catch (error) {
-    console.error('❌ Error generating themes:', error)
-    throw error
+    console.error('❌ Error generating Material theme:', error);
+    throw error;
   }
 }

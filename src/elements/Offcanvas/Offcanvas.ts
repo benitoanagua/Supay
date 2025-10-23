@@ -8,15 +8,11 @@ export class WcOffcanvas extends LitElement {
 
   @state() private showOffcanvas = false;
 
-  // Usar Shadow DOM pero con estilos globales
   protected createRenderRoot() {
     const shadowRoot = super.createRenderRoot();
-
-    // Aplicar estilos globales manualmente
     const style = document.createElement("style");
     style.textContent = (mainCSS as any).toString();
     shadowRoot.appendChild(style);
-
     return shadowRoot;
   }
 
@@ -39,29 +35,32 @@ export class WcOffcanvas extends LitElement {
     return html`
       <!-- Botón de apertura -->
       <button
-        class="wc-offcanvas-toggle"
+        class="metro-offcanvas-toggle"
         @click="${this.toggleOffcanvas}"
         aria-label="Open navigation menu"
       >
-        <span class="wc-offcanvas-toggle-icon"></span>
+        <span class="metro-offcanvas-toggle-icon"></span>
       </button>
 
       <!-- Offcanvas (solo visible cuando showOffcanvas es true) -->
       ${this.showOffcanvas
         ? html`
-            <div class="wc-offcanvas-overlay" @click="${this.toggleOffcanvas}">
+            <div
+              class="metro-offcanvas-overlay"
+              @click="${this.toggleOffcanvas}"
+            >
               <div
-                class="wc-offcanvas-panel"
+                class="metro-offcanvas-panel"
                 @click="${(e: Event) => e.stopPropagation()}"
               >
                 <button
-                  class="wc-offcanvas-close"
+                  class="metro-offcanvas-close"
                   @click="${this.toggleOffcanvas}"
                   aria-label="Close offcanvas"
                 >
-                  <span class="wc-offcanvas-close-icon"></span>
+                  <span class="metro-offcanvas-close-icon"></span>
                 </button>
-                <div class="wc-offcanvas-content">
+                <div class="metro-offcanvas-content">
                   <slot></slot>
                 </div>
               </div>

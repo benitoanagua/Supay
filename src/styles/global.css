@@ -1,32 +1,136 @@
-/* Typography scale with responsive utilities */
-.section {
-  @apply container mx-auto py-4;
+@import "tailwindcss";
+@plugin "@iconify/tailwind4";
+
+@layer base {
+  html {
+    @apply antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Segoe UI", system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-background text-onBackground;
+    @apply min-h-screen m-0 p-0;
+    @apply font-sans text-base leading-normal;
+  }
+
+  *,
+  *::before,
+  *::after {
+    @apply box-border rounded-none shadow-none;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-primary;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surfaceVariant;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-outline;
+
+    &:hover {
+      @apply bg-onSurfaceVariant;
+    }
+  }
+
+  ::selection {
+    @apply bg-primaryContainer text-onPrimaryContainer;
+  }
 }
+
 .headline-1 {
-  @apply text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight;
+  @apply text-2xl font-light tracking-tight;
+  @apply sm:text-3xl;
+  @apply lg:text-4xl;
+  @apply xl:text-5xl;
 }
 
 .headline-2 {
-  @apply text-xl md:text-2xl lg:text-3xl font-medium tracking-tight;
+  @apply text-xl font-light tracking-tight;
+  @apply sm:text-2xl;
+  @apply lg:text-3xl;
+  @apply xl:text-4xl;
 }
 
 .headline-3 {
-  @apply text-lg md:text-xl lg:text-2xl font-medium tracking-normal;
+  @apply text-lg font-light tracking-normal;
+  @apply sm:text-xl;
+  @apply lg:text-2xl;
+  @apply xl:text-3xl;
 }
 
 .headline-4 {
-  @apply text-base md:text-lg lg:text-xl font-medium tracking-wide;
+  @apply text-base font-light tracking-wide;
+  @apply sm:text-lg;
+  @apply lg:text-xl;
+  @apply xl:text-2xl;
 }
 
 .headline-5 {
-  @apply text-sm md:text-base lg:text-lg font-medium tracking-wide;
+  @apply text-sm font-semibold tracking-wide;
+  @apply sm:text-base;
+  @apply lg:text-lg;
+  @apply xl:text-xl;
 }
 
 .headline-6 {
-  @apply text-xs md:text-sm lg:text-base font-medium tracking-wide;
+  @apply text-xs font-semibold tracking-wide;
+  @apply sm:text-sm;
+  @apply lg:text-base;
+  @apply xl:text-lg;
 }
 
-/* This keeps small embeds centered */
+.section {
+  @apply container mx-auto px-4 py-6;
+  @apply sm:px-6 sm:py-8;
+  @apply lg:px-8 lg:py-12;
+  @apply xl:px-10 xl:py-16;
+}
+
+.metro-xs {
+  @apply gap-1;
+  @apply sm:gap-1.5;
+}
+
+.metro-sm {
+  @apply gap-2;
+  @apply sm:gap-2.5;
+}
+
+.metro-md {
+  @apply gap-4;
+  @apply sm:gap-5;
+  @apply lg:gap-6;
+}
+
+.metro-lg {
+  @apply gap-6;
+  @apply sm:gap-7;
+  @apply lg:gap-8;
+}
+
+.metro-xl {
+  @apply gap-8;
+  @apply sm:gap-9;
+  @apply lg:gap-10;
+}
+
+.metro-container {
+  @apply container mx-auto px-4;
+  @apply sm:px-6;
+  @apply lg:px-8;
+  @apply xl:px-10;
+}
+
+/* Ghost */
 .kg-width-wide {
   --at-apply: w-fit;
 }

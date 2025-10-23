@@ -7,21 +7,17 @@ export class WcNavbar extends LitElement {
   static styles = unsafeCSS(mainCSS);
 
   @state() private isSticky = false;
-  @query(".wc-navbar") private navbarElement?: HTMLElement;
+  @query(".metro-navbar") private navbarElement?: HTMLElement;
 
   private intersectionObserver?: IntersectionObserver;
   private scrollY = 0;
   private elementTop = 0;
 
-  // Deshabilitar Shadow DOM para usar estilos globales de Tailwind
   protected createRenderRoot() {
     const shadowRoot = super.createRenderRoot();
-
-    // Aplicar estilos globales manualmente
     const style = document.createElement("style");
     style.textContent = (mainCSS as any).toString();
     shadowRoot.appendChild(style);
-
     return shadowRoot;
   }
 
@@ -96,25 +92,22 @@ export class WcNavbar extends LitElement {
   }
 
   private getNavbarClasses() {
-    return this.isSticky ? "wc-navbar wc-navbar--sticky" : "wc-navbar";
+    return this.isSticky ? "metro-navbar metro-navbar--sticky" : "metro-navbar";
   }
 
   render() {
     return html`
       <nav class="${this.getNavbarClasses()}">
-        <div class="section wc-navbar__container">
-          <!-- Logo: Izquierda en desktop, centro en mobile -->
-          <div class="wc-navbar__logo">
+        <div class="metro-navbar__container">
+          <div class="metro-navbar__logo">
             <slot name="logo"></slot>
           </div>
 
-          <!-- Navigation: Centro en desktop, izquierda en mobile -->
-          <div class="wc-navbar__navigation">
+          <div class="metro-navbar__navigation">
             <slot name="navigation"></slot>
           </div>
 
-          <!-- Actions: Derecha en desktop, derecha en mobile -->
-          <div class="wc-navbar__actions">
+          <div class="metro-navbar__actions">
             <slot name="actions"></slot>
           </div>
         </div>

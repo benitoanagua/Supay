@@ -6,11 +6,10 @@ import type {
   OverlayPosition,
   OverlayFill,
   OverlayBox,
-} from "../types/overlay.js";
-import type { CardHeading, CardAspectRatio } from "../types/card.js";
-import { TitleRendererMixin } from "../mixins/TitleRenderer.js";
+} from "../../types/overlay.js";
+import type { CardHeading, CardAspectRatio } from "../../types/card.js";
+import { TitleRendererMixin } from "../../mixins/TitleRenderer.js";
 
-// Aplicar el mixin a la clase base
 const BaseClass = TitleRendererMixin(LitElement);
 
 @customElement("wc-overlay")
@@ -39,18 +38,17 @@ export class WcOverlay extends BaseClass {
 
   private getOverlayClasses() {
     const classes = [
-      "wc-overlay",
-      `wc-overlay--align-${this.align}`,
-      `wc-overlay--position-${this.position}`,
-      `wc-overlay--aspect-${this.aspect_ratio}`,
+      "metro-overlay",
+      `metro-overlay--align-${this.align}`,
+      `metro-overlay--position-${this.position}`,
+      `metro-overlay--aspect-${this.aspect_ratio}`,
     ];
 
     if (this.fill !== "none") {
-      classes.push(`wc-overlay--fill-${this.fill}`);
+      classes.push(`metro-overlay--fill-${this.fill}`);
     }
 
-    // Añadir la clase del tipo de box al contenedor principal
-    classes.push(`wc-overlay--box-${this.box}`);
+    classes.push(`metro-overlay--box-${this.box}`);
 
     return classes.join(" ");
   }
@@ -63,35 +61,37 @@ export class WcOverlay extends BaseClass {
           ? `background-image: url(${this.feature_image})`
           : ""}"
       >
-        <div class="wc-overlay__content">
+        <div class="metro-overlay__content">
           ${this.tag_name
-            ? html` <span class="wc-overlay__category">${this.tag_name}</span> `
+            ? html`
+                <span class="metro-overlay__category">${this.tag_name}</span>
+              `
             : ""}
 
-          <a href="${this.url}" class="wc-overlay__title-link">
+          <a href="${this.url}" class="metro-overlay__title-link">
             ${this.renderTitle("text-white")}
           </a>
 
           ${this.show_meta
             ? html`
-                <ul class="wc-overlay__meta">
+                <ul class="metro-overlay__meta">
                   ${this.author_name
                     ? html`
-                        <li class="wc-overlay__meta-item">
+                        <li class="metro-overlay__meta-item">
                           ${this.author_name}
                         </li>
                       `
                     : ""}
                   ${this.published_at
                     ? html`
-                        <li class="wc-overlay__meta-item">
+                        <li class="metro-overlay__meta-item">
                           ${this.published_at}
                         </li>
                       `
                     : ""}
                   ${this.reading_time
                     ? html`
-                        <li class="wc-overlay__meta-item">
+                        <li class="metro-overlay__meta-item">
                           ${this.reading_time}
                         </li>
                       `

@@ -6,7 +6,6 @@ import mainCSS from "../main.css?inline";
 export class WcLogo extends LitElement {
   static styles = [unsafeCSS(mainCSS)];
 
-  // Deshabilitar Shadow DOM para usar estilos globales de Tailwind
   protected createRenderRoot() {
     return this;
   }

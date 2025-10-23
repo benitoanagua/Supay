@@ -1,0 +1,37 @@
+.metro-grille__container {
+  @apply flex flex-wrap w-full bg-transparent;
+
+  @apply justify-start overflow-x-auto;
+  @apply scroll-snap-type-x-mandatory;
+  @apply -webkit-overflow-scrolling-touch;
+
+  @apply sm:justify-center sm:overflow-visible;
+  @apply sm:scroll-snap-type-none;
+
+  @apply lg:grid lg:grid-flow-col lg:auto-cols-fr;
+}
+
+.metro-grille-item {
+  @apply transition-all duration-300 bg-transparent;
+
+  @apply flex-shrink-0 scroll-snap-align-start;
+
+  @apply sm:flex-shrink sm:scroll-snap-align-none;
+}
+
+.metro-grille--gap-small .metro-grille-item {
+  @apply p-2;
+  @apply sm:p-3;
+}
+
+.metro-grille--gap-medium .metro-grille-item {
+  @apply p-4;
+  @apply sm:p-5;
+  @apply lg:p-6;
+}
+
+.metro-grille--gap-large .metro-grille-item {
+  @apply p-6;
+  @apply sm:p-7;
+  @apply lg:p-8;
+}

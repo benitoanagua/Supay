@@ -1,0 +1,46 @@
+.metro-overlay {
+  @apply w-full flex overflow-hidden bg-cover bg-center relative;
+  isolation: isolate;
+
+  @apply min-h-64;
+  @apply sm:min-h-80;
+  @apply lg:min-h-96;
+}
+
+.metro-overlay--aspect-square {
+  @apply aspect-square;
+}
+
+.metro-overlay--aspect-video {
+  @apply aspect-video;
+  @apply lg:aspect-16/9;
+}
+
+.metro-overlay--aspect-monitor {
+  @apply aspect-4/3;
+  @apply lg:aspect-16/10;
+}
+
+.metro-overlay__content {
+  @apply max-w-full p-4 flex flex-col gap-3 z-2 relative;
+  @apply sm:max-w-2xl sm:p-6 sm:gap-4;
+  @apply lg:max-w-4xl lg:p-8 lg:gap-5;
+  @apply xl:max-w-5xl xl:p-12 xl:gap-6;
+}
+
+.metro-overlay__category {
+  @apply inline-block bg-primaryContainer text-onPrimaryContainer;
+  @apply px-2 py-1 text-xs font-semibold uppercase tracking-wide;
+  @apply sm:px-3 sm:py-1 sm:text-sm;
+  @apply lg:px-4 lg:py-2;
+}
+
+.metro-overlay__title-link > * {
+  @apply text-white m-0 font-light tracking-tight;
+}
+
+.metro-overlay__meta {
+  @apply flex flex-wrap items-center gap-2 text-sm text-white/90;
+  @apply sm:gap-3 sm:text-base;
+  @apply lg:gap-4;
+}
