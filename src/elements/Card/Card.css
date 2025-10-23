@@ -1,78 +1,288 @@
-.metro-card {
-  @apply block bg-surface text-onSurface border-none;
-  @apply transition-all duration-300 ease-out;
+/* ========================================
+   CARD COMPONENT - OUTLINE-BASED UI
+   Adaptado desde Material Design
+   ======================================== */
+
+/* Base Card - Sin fondos rellenos, solo estructura */
+.wc-card {
+  @apply block transition-all duration-300;
+  @apply bg-transparent; /* Sin fondo por defecto */
 }
 
-.metro-card--elevation-1 {
-  @apply bg-surfaceContainerLow p-3;
-  @apply sm:p-4;
-  @apply lg:p-5;
+/* Elevation System - Reemplazado por bordes */
+.wc-card--elevation-0 {
+  @apply p-0;
+  @apply border-0; /* Sin borde = sin estructura */
 }
 
-.metro-card--elevation-2 {
-  @apply bg-surfaceContainer p-4;
-  @apply sm:p-5;
-  @apply lg:p-6;
+.wc-card--elevation-1 {
+  @apply border border-outline/40; /* Borde sutil */
+  @apply rounded-lg p-3 md:p-3;
+  @apply bg-transparent;
+  @apply transition-colors duration-200;
 }
 
-.metro-card--elevation-3 {
-  @apply bg-surfaceContainerHigh p-5;
-  @apply sm:p-6;
-  @apply lg:p-7;
+.wc-card--elevation-1:hover {
+  @apply border-outline/60; /* Incremento de contraste en hover */
 }
 
-.metro-card--density-normal {
-  @apply min-h-28;
-  @apply sm:min-h-32;
-  @apply lg:min-h-36;
+.wc-card--elevation-2 {
+  @apply border border-outline/60; /* Borde estándar */
+  @apply rounded-xl p-4 md:p-3;
+  @apply bg-transparent;
+  @apply transition-all duration-200;
 }
 
-.metro-card--density-compact {
-  @apply min-h-20;
-  @apply sm:min-h-24;
-  @apply lg:min-h-28;
+.wc-card--elevation-2:hover {
+  @apply border-outline; /* Contraste máximo en hover */
+  @apply shadow-none; /* Sin sombras nunca */
 }
 
-.metro-card--density-minimal {
-  @apply min-h-12;
-  @apply sm:min-h-16;
-  @apply lg:min-h-20;
+.wc-card--elevation-3 {
+  @apply border-2 border-outline; /* Borde doble para máxima jerarquía */
+  @apply rounded-xl p-5 md:p-3;
+  @apply bg-transparent;
+  @apply shadow-none; /* Eliminar sombra de Material */
 }
 
-.metro-card__container {
-  @apply flex gap-3 w-full h-full;
-  @apply sm:gap-4;
-  @apply lg:gap-5;
+.wc-card--elevation-3:hover {
+  @apply border-primary/60; /* Acento en hover para máxima elevación */
 }
 
-.metro-card__author-image {
-  @apply w-6 h-6 object-cover;
-  @apply sm:w-7 sm:h-7;
-  @apply lg:w-8 lg:h-8;
+/* Container - Estructura con gaps claros */
+.wc-card__container {
+  @apply flex gap-4 w-full md:flex-col;
 }
 
-.metro-card__author-link {
-  @apply text-sm text-onSurfaceVariant no-underline font-semibold;
-  @apply sm:text-base;
+/* Figure - Sin desbordamiento, bordes limpios */
+.wc-card__figure {
+  @apply m-0 overflow-hidden flex-shrink-0 md:w-full;
+  @apply border border-outline/30; /* Borde sutil alrededor de imágenes */
+  @apply rounded-md;
 }
 
-.metro-card__title-link > * {
-  @apply m-0 font-light tracking-tight;
+.wc-card__figure img {
+  @apply transition-transform duration-300;
 }
 
-.metro-card__excerpt {
-  @apply text-onSurfaceVariant text-sm leading-relaxed font-normal;
-  @apply sm:text-base;
-  @apply lg:text-lg;
+.wc-card__figure:hover img {
+  @apply scale-105; /* Zoom sutil en hover */
 }
 
-.metro-card__meta {
-  @apply flex flex-wrap items-center gap-2 text-xs text-onSurfaceVariant;
-  @apply sm:text-sm;
+/* Content - Espaciado estructural */
+.wc-card__content {
+  @apply flex flex-col gap-y-3 flex-1 min-w-0;
 }
 
-.metro-card__tag {
-  @apply bg-primaryContainer text-onPrimaryContainer px-3 py-1;
-  @apply text-xs font-semibold no-underline;
-  @apply sm:text-sm sm:px-4;
+/* Author Section - Línea como separador visual */
+.wc-card__author {
+  @apply flex items-center gap-x-2;
+  @apply pb-3; /* Espacio para separador */
+  @apply border-b border-outline/20; /* Línea divisoria sutil */
+}
+
+/* Author Image - Contorno en vez de relleno */
+.wc-card__author-image {
+  @apply w-8 h-8 rounded-full object-cover;
+  @apply border-2 border-outline/40; /* Borde alrededor del avatar */
+  @apply p-0.5; /* Padding interno para crear "anillo" */
+}
+
+/* Author Bullet - Outline circle */
+.wc-card__author-bullet {
+  @apply w-2 h-2 rounded-full inline-block;
+  @apply bg-transparent; /* Sin relleno */
+  @apply border-2 border-primary; /* Solo contorno */
+}
+
+/* Author Link - Underline on hover */
+.wc-card__author-link {
+  @apply text-onSurfaceVariant text-sm font-medium;
+  @apply no-underline relative;
+  @apply transition-colors duration-200;
+  @apply hover:text-primary;
+}
+
+.wc-card__author-link::after {
+  content: "";
+  @apply absolute bottom-0 left-0;
+  @apply w-0 h-px;
+  @apply bg-primary;
+  @apply transition-all duration-300;
+}
+
+.wc-card__author-link:hover::after {
+  @apply w-full;
+}
+
+/* Title Link - Sin decoración, enfoque en tipografía */
+.wc-card__title-link {
+  @apply text-onSurface no-underline block;
+  @apply transition-colors duration-200;
+  @apply hover:text-primary;
+}
+
+/* Excerpt - Line-height generoso */
+.wc-card__excerpt {
+  @apply text-onSurfaceVariant my-2 text-base;
+  @apply leading-relaxed; /* 1.625 line-height típico de outline UI */
+}
+
+/* Meta - Separadores con bullets */
+.wc-card__meta {
+  @apply text-onSurfaceVariant;
+  @apply flex flex-wrap items-center gap-x-1 gap-y-4;
+  @apply text-sm;
+  @apply pt-3; /* Espacio superior */
+  @apply border-t border-outline/20; /* Línea divisoria superior */
+}
+
+.wc-card__meta-item {
+  @apply whitespace-nowrap;
+  @apply flex items-center;
+}
+
+.wc-card__meta-item:not(:last-child)::after {
+  content: "•";
+  @apply ml-2 mr-1;
+  @apply text-outline/60; /* Bullet con opacidad */
+}
+
+/* Tag - Outline style (sin relleno) */
+.wc-card__tag {
+  @apply text-primary;
+  @apply py-1 px-3;
+  @apply rounded-full;
+  @apply text-xs font-medium;
+  @apply no-underline;
+  @apply transition-all duration-200;
+
+  /* Reemplazo de color-mix por border outline */
+  @apply bg-transparent; /* Sin fondo */
+  @apply border border-primary/40; /* Borde de acento */
+}
+
+.wc-card__tag:hover {
+  @apply border-primary; /* Border sólido en hover */
+  @apply bg-primary/5; /* Mínimo tinte de fondo (opcional) */
+}
+
+/* ========================================
+   VARIANTES ADICIONALES
+   ======================================== */
+
+/* Card con foco (para selección) */
+.wc-card--focused {
+  @apply border-2 border-primary;
+  @apply ring-2 ring-primary/20 ring-offset-2;
+  @apply ring-offset-surface;
+}
+
+/* Card deshabilitada */
+.wc-card--disabled {
+  @apply border-outline/20;
+  @apply opacity-60;
+  @apply pointer-events-none;
+}
+
+/* Card con header interno (opcional) */
+.wc-card__header {
+  @apply pb-3 mb-3;
+  @apply border-b border-outline/30;
+  @apply font-medium text-sm;
+  @apply text-onSurfaceVariant;
+  @apply uppercase tracking-wide;
+}
+
+/* Card con footer interno (opcional) */
+.wc-card__footer {
+  @apply pt-3 mt-3;
+  @apply border-t border-outline/30;
+  @apply flex items-center justify-between;
+  @apply text-sm;
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+/* Mobile: Bordes más delgados para ahorrar espacio */
+@media (max-width: 768px) {
+  .wc-card--elevation-3 {
+    @apply border; /* 1px en vez de 2px en mobile */
+  }
+
+  .wc-card__author {
+    @apply border-b-0; /* Sin línea divisoria en mobile si es muy compacto */
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .wc-card--elevation-1:hover,
+  .wc-card--elevation-2:hover {
+    @apply border-outline; /* Mayor contraste en dark mode */
+  }
+
+  .wc-card__figure {
+    @apply border-outline/40; /* Bordes más visibles */
+  }
+}
+
+/* ========================================
+   ACCESIBILIDAD
+   ======================================== */
+
+/* Focus visible para navegación por teclado */
+.wc-card:focus-visible {
+  @apply outline-2 outline-primary outline-offset-2;
+}
+
+.wc-card__title-link:focus-visible,
+.wc-card__author-link:focus-visible,
+.wc-card__tag:focus-visible {
+  @apply outline-2 outline-primary outline-offset-2;
+  @apply rounded-sm;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .wc-card,
+  .wc-card__author-link,
+  .wc-card__title-link,
+  .wc-card__tag,
+  .wc-card__figure img {
+    @apply transition-none;
+  }
+
+  .wc-card__author-link::after {
+    @apply transition-none;
+  }
+}
+
+/* ========================================
+   UTILIDADES ADICIONALES
+   ======================================== */
+
+/* Card con grid interno (2 columnas) */
+.wc-card--grid {
+  @apply grid grid-cols-2 gap-4;
+}
+
+/* Card compacta (sin paddings extra) */
+.wc-card--compact .wc-card__content {
+  @apply gap-y-2;
+}
+
+.wc-card--compact .wc-card__author {
+  @apply pb-2;
+}
+
+/* Card con línea de acento lateral (opcional) */
+.wc-card--accent-left {
+  @apply border-l-4 border-l-primary;
+}
+
+.wc-card--accent-top {
+  @apply border-t-4 border-t-primary;
 }

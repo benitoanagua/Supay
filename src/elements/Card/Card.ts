@@ -1,6 +1,6 @@
-import { LitElement, html, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
-import mainCSS from "../main.css?inline";
+import { LitElement, html, PropertyValueMap, unsafeCSS } from "lit";
+import { customElement, property, state, query } from "lit/decorators.js";
+import mainCSS from "../../main.css?inline";
 import type {
   CardHeading,
   CardDensity,
@@ -11,6 +11,7 @@ import type {
 } from "../../types/card.js";
 import { TitleRendererMixin } from "../../mixins/TitleRenderer.js";
 
+// Aplicar el mixin a la clase base
 const BaseClass = TitleRendererMixin(LitElement);
 
 @customElement("wc-card")
@@ -39,55 +40,95 @@ export class WcCard extends BaseClass {
   @property({ type: String, attribute: "published-at" }) published_at = "";
   @property({ type: Number }) elevation: CardElevation = 2;
 
+  @state() private imageSize = { width: 0, height: 0 };
+
   @query("img") private imageElement?: HTMLImageElement;
+
+  private metaObserver?: ResizeObserver;
+  private imageObserver?: ResizeObserver;
 
   protected createRenderRoot() {
     return this;
   }
 
+  protected updated(changedProperties: PropertyValueMap<any>) {
+    super.updated(changedProperties);
+    this.setupObservers();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.cleanupObservers();
+  }
+
+  private setupObservers() {
+    this.cleanupObservers();
+
+    if (this.imageElement) {
+      this.imageObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          this.imageSize = {
+            width: entry.contentRect.width,
+            height: entry.contentRect.height,
+          };
+        }
+      });
+      this.imageObserver.observe(this.imageElement);
+    }
+  }
+
+  private cleanupObservers() {
+    this.metaObserver?.disconnect();
+    this.imageObserver?.disconnect();
+  }
+
   private getCardClasses() {
-    const classes = [
-      "metro-card",
-      `metro-card--elevation-${this.elevation}`,
-      `metro-card--density-${this.density}`,
-    ];
+    const classes = ["wc-card", `wc-card--elevation-${this.elevation}`];
     return classes.join(" ");
   }
 
   private getFlexClass() {
-    if (this.media_align === "top") return "flex-col";
-    if (this.media_align === "bottom") return "flex-col-reverse";
-
-    // Mobile: siempre columna
-    if (this.media_align === "left") return "flex-col md:flex-row";
-    if (this.media_align === "right")
+    if (this.media_align === "left" && this.density !== "normal")
+      return "flex-row";
+    if (this.media_align === "left" && this.density === "normal")
+      return "flex-col md:flex-row";
+    if (this.media_align === "right" && this.density !== "normal")
+      return "flex-row-reverse";
+    if (this.media_align === "right" && this.density === "normal")
       return "flex-col-reverse md:flex-row-reverse";
-
-    return "flex-col";
+    if (this.media_align === "top") return "flex-col";
+    return "flex-col-reverse";
   }
 
   private getFigureClass() {
     const isHorizontal =
       this.media_align === "left" || this.media_align === "right";
+    const isNormalDensity = this.density === "normal";
 
-    if (!isHorizontal) return "w-full";
+    if (!isHorizontal || (isHorizontal && isNormalDensity)) return "flex-1";
 
-    // Mobile: ancho completo, desktop: ancho proporcional
     switch (this.media_width) {
       case "is-one-fifth":
-        return "w-full md:w-1/5";
+        return "w-1/5";
       case "is-one-quarter":
-        return "w-full md:w-1/4";
+        return "w-1/4";
       case "is-one-third":
-        return "w-full md:w-1/3";
+        return "w-1/3";
       case "is-two-fifths":
-        return "w-full md:w-2/5";
+        return "w-2/5";
       default:
-        return "w-full md:w-1/2";
+        return "w-1/2";
     }
   }
 
   private getImageClasses() {
+    const sizeClass =
+      this.imageSize.width < 240
+        ? "rounded"
+        : this.imageSize.width >= 240 && this.imageSize.width <= 440
+          ? "rounded-md"
+          : "rounded-lg";
+
     const aspectClass =
       this.aspect_ratio === "square"
         ? "aspect-square"
@@ -95,68 +136,60 @@ export class WcCard extends BaseClass {
           ? "aspect-video"
           : "aspect-4/3";
 
-    return `w-full object-cover ${aspectClass}`;
+    return `w-full object-cover ${sizeClass} ${aspectClass}`;
   }
 
   render() {
     return html`
       <div class="${this.getCardClasses()}">
-        <div class="metro-card__container ${this.getFlexClass()}">
+        <div class="wc-card__container ${this.getFlexClass()}">
           ${this.feature_image
             ? html`
-                <figure class="metro-card__figure ${this.getFigureClass()}">
-                  <a href="${this.url}" class="block">
+                <figure class="wc-card__figure ${this.getFigureClass()}">
+                  <a href="${this.url}">
                     <img
                       src="${this.feature_image}"
                       alt="${this.title}"
                       class="${this.getImageClasses()}"
-                      @load="${this.onImageLoad}"
                     />
                   </a>
                 </figure>
               `
             : ""}
 
-          <div class="metro-card__content">
+          <div class="wc-card__content">
             ${this.author_name
               ? html`
-                  <div class="metro-card__author">
+                  <div class="wc-card__author">
                     ${this.author_profile_image
                       ? html`
                           <img
                             src="${this.author_profile_image}"
                             alt="${this.author_name}"
-                            class="metro-card__author-image"
+                            class="wc-card__author-image"
                           />
                         `
-                      : html`<span class="metro-card__author-bullet"></span>`}
-                    <a
-                      href="${this.author_url}"
-                      class="metro-card__author-link"
-                    >
+                      : html`<span class="wc-card__author-bullet"></span>`}
+                    <a href="${this.author_url}" class="wc-card__author-link">
                       ${this.author_name}
                     </a>
                   </div>
                 `
               : ""}
 
-            <a href="${this.url}" class="metro-card__title-link">
+            <a href="${this.url}" class="wc-card__title-link">
               ${this.renderTitle()}
             </a>
 
             ${this.density === "normal"
-              ? html`<p class="metro-card__excerpt">${this.excerpt}</p>`
+              ? html`<p class="wc-card__excerpt">${this.excerpt}</p>`
               : ""}
             ${this.tag_name && this.density !== "minimal"
               ? html`
-                  <div class="metro-card__meta">
-                    <span class="metro-card__meta-item"
-                      >${this.published_at}</span
-                    >
-                    <span class="metro-card__meta-item"
-                      >${this.reading_time}</span
-                    >
-                    <a href="${this.tag_url}" class="metro-card__tag">
+                  <div class="wc-card__meta">
+                    <span class="wc-card__meta-item">${this.published_at}</span>
+                    <span class="wc-card__meta-item">${this.reading_time}</span>
+                    <a href="${this.tag_url}" class="wc-card__tag">
                       ${this.tag_name}
                     </a>
                   </div>
@@ -166,14 +199,5 @@ export class WcCard extends BaseClass {
         </div>
       </div>
     `;
-  }
-
-  private onImageLoad() {
-    if (this.imageElement) {
-      this.imageSize = {
-        width: this.imageElement.clientWidth,
-        height: this.imageElement.clientHeight,
-      };
-    }
   }
 }

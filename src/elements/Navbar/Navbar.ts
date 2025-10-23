@@ -1,23 +1,27 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, state, query } from "lit/decorators.js";
-import mainCSS from "../main.css?inline";
+import mainCSS from "../../main.css?inline";
 
 @customElement("wc-navbar")
 export class WcNavbar extends LitElement {
   static styles = unsafeCSS(mainCSS);
 
   @state() private isSticky = false;
-  @query(".metro-navbar") private navbarElement?: HTMLElement;
+  @query(".wc-navbar") private navbarElement?: HTMLElement;
 
   private intersectionObserver?: IntersectionObserver;
   private scrollY = 0;
   private elementTop = 0;
 
+  // Deshabilitar Shadow DOM para usar estilos globales de Tailwind
   protected createRenderRoot() {
     const shadowRoot = super.createRenderRoot();
+
+    // Aplicar estilos globales manualmente
     const style = document.createElement("style");
     style.textContent = (mainCSS as any).toString();
     shadowRoot.appendChild(style);
+
     return shadowRoot;
   }
 
@@ -92,22 +96,25 @@ export class WcNavbar extends LitElement {
   }
 
   private getNavbarClasses() {
-    return this.isSticky ? "metro-navbar metro-navbar--sticky" : "metro-navbar";
+    return this.isSticky ? "wc-navbar wc-navbar--sticky" : "wc-navbar";
   }
 
   render() {
     return html`
       <nav class="${this.getNavbarClasses()}">
-        <div class="metro-navbar__container">
-          <div class="metro-navbar__logo">
+        <div class="section wc-navbar__container">
+          <!-- Logo: Izquierda en desktop, centro en mobile -->
+          <div class="wc-navbar__logo">
             <slot name="logo"></slot>
           </div>
 
-          <div class="metro-navbar__navigation">
+          <!-- Navigation: Centro en desktop, izquierda en mobile -->
+          <div class="wc-navbar__navigation">
             <slot name="navigation"></slot>
           </div>
 
-          <div class="metro-navbar__actions">
+          <!-- Actions: Derecha en desktop, derecha en mobile -->
+          <div class="wc-navbar__actions">
             <slot name="actions"></slot>
           </div>
         </div>

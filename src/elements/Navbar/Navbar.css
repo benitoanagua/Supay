@@ -1,41 +1,763 @@
-.metro-navbar {
-  @apply w-full bg-surface text-onSurface border-b border-outlineVariant;
-  @apply transition-all duration-300 ease-out sticky top-0 z-50;
+/* ========================================
+   NAVBAR COMPONENT - OUTLINE-BASED UI
+   Adaptado desde Material Design
+   ======================================== */
+
+/* ========================================
+   BASE NAVBAR - SIN FONDO SÓLIDO
+   ======================================== */
+
+/* Base - Transparente con border inferior */
+.wc-navbar {
+  @apply w-full transition-all duration-300 ease-in-out;
+  @apply bg-transparent; /* Sin fondo por defecto */
+  @apply border-b border-outline/20; /* Solo línea inferior */
 }
 
-.metro-navbar__container {
-  @apply container mx-auto px-4 py-3;
-  @apply flex items-center justify-between;
-  @apply sm:px-6 sm:py-4;
-  @apply lg:px-8 lg:py-5;
+/* Hover state sutil */
+.wc-navbar:hover {
+  @apply border-b-outline/30; /* Incremento de contraste */
 }
 
-.metro-navbar__logo {
-  @apply flex items-center order-2;
-  @apply md:order-1;
+/* ========================================
+   STICKY MODE - BACKDROP BLUR + BORDER
+   ======================================== */
+
+/* Sticky - Semi-transparente con blur */
+.wc-navbar--sticky {
+  @apply fixed top-0 left-0 w-full z-50;
+
+  /* Reemplazo de bg sólido por transparente + blur */
+  @apply bg-surface/80; /* Reducido de 95% a 80% */
+  @apply backdrop-blur-md; /* Blur moderado (12px) */
+  -webkit-backdrop-filter: blur(12px);
+
+  /* Border más visible en sticky */
+  @apply border-b border-outline/30;
+
+  /* Sombra muy sutil (opcional) */
+  @apply shadow-[0_1px_3px_rgba(0,0,0,0.05)];
 }
 
-.metro-navbar__navigation {
-  @apply flex items-center order-1;
-
-  @apply md:order-2 md:flex-1 md:justify-center;
+.wc-navbar--sticky:hover {
+  @apply border-b-outline/50; /* Mayor contraste en hover */
 }
 
-.metro-navbar__actions {
-  @apply flex items-center gap-2 order-3;
-  @apply sm:gap-3;
-  @apply lg:gap-4;
+/* Animación de aparición suave */
+.wc-navbar--sticky {
+  animation: wc-navbar-slide-down 0.3s ease-out;
 }
 
-.metro-navbar nav {
-  @apply hidden;
-  @apply md:flex md:items-center md:space-x-1;
-  @apply lg:space-x-2;
+@keyframes wc-navbar-slide-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-.metro-navbar a {
-  @apply px-3 py-2 text-onSurface no-underline font-semibold;
+/* ========================================
+   CONTAINER - ESTRUCTURA CON GAPS
+   ======================================== */
+
+.wc-navbar__container {
+  @apply flex items-center justify-between w-full;
+  @apply gap-4; /* Gap entre secciones */
+}
+
+/* ========================================
+   LOGO SECTION
+   ======================================== */
+
+.wc-navbar__logo {
+  @apply flex items-center;
+  @apply order-2 md:order-1; /* Centro en mobile, izquierda en desktop */
+  @apply transition-opacity duration-200;
+}
+
+.wc-navbar__logo:hover {
+  @apply opacity-80; /* Feedback sutil */
+}
+
+/* Logo con border opcional (variante) */
+.wc-navbar__logo--bordered {
+  @apply pl-4 border-l-2 border-outline/30;
+}
+
+/* ========================================
+   NAVIGATION SECTION
+   ======================================== */
+
+.wc-navbar__navigation {
+  @apply flex items-center;
+  @apply order-1 md:order-2;
+
+  /* Centrado en desktop */
+  @apply md:flex-1 md:justify-center;
+
+  /* Gap entre items */
+  @apply gap-1;
+}
+
+/* ========================================
+   NAVIGATION LINKS - UNDERLINE STYLE
+   ======================================== */
+
+.wc-navbar__link {
+  @apply relative px-3 py-2;
+  @apply text-onSurfaceVariant text-sm font-medium;
+  @apply no-underline;
   @apply transition-all duration-200;
-  @apply sm:px-4;
-  @apply lg:px-5 lg:py-3;
+  @apply rounded-md; /* Para focus outline */
+}
+
+/* Hover state */
+.wc-navbar__link:hover {
+  @apply text-onSurface;
+}
+
+/* Underline reveal en hover */
+.wc-navbar__link::after {
+  content: "";
+  @apply absolute bottom-0 left-3 right-3;
+  @apply h-0.5;
+  @apply bg-primary;
+  @apply transition-all duration-300;
+  @apply scale-x-0 origin-left;
+}
+
+.wc-navbar__link:hover::after {
+  @apply scale-x-100;
+}
+
+/* Active state - Underline permanente */
+.wc-navbar__link--active {
+  @apply text-onSurface font-semibold;
+}
+
+.wc-navbar__link--active::after {
+  @apply scale-x-100;
+  @apply bg-primary;
+}
+
+/* Focus state */
+.wc-navbar__link:focus-visible {
+  @apply outline-2 outline-primary outline-offset-2;
+}
+
+/* Disabled state */
+.wc-navbar__link--disabled {
+  @apply text-onSurfaceVariant/40;
+  @apply pointer-events-none;
+}
+
+/* ========================================
+   NAVIGATION VARIANTS
+   ======================================== */
+
+/* Pills style - Border outline */
+.wc-navbar__link--pill {
+  @apply border border-transparent;
+  @apply rounded-full;
+}
+
+.wc-navbar__link--pill:hover {
+  @apply border-outline/40;
+  @apply bg-transparent; /* Sin fondo */
+}
+
+.wc-navbar__link--pill.wc-navbar__link--active {
+  @apply border-primary/60;
+  @apply bg-transparent;
+}
+
+.wc-navbar__link--pill::after {
+  content: none; /* Sin underline en pills */
+}
+
+/* Tab style - Border bottom */
+.wc-navbar__link--tab {
+  @apply px-4 py-3;
+  @apply border-b-2 border-transparent;
+  @apply rounded-none;
+}
+
+.wc-navbar__link--tab:hover {
+  @apply border-b-outline/40;
+}
+
+.wc-navbar__link--tab.wc-navbar__link--active {
+  @apply border-b-primary;
+}
+
+.wc-navbar__link--tab::after {
+  content: none; /* Sin underline adicional */
+}
+
+/* Minimal style - Solo texto */
+.wc-navbar__link--minimal::after {
+  content: none;
+}
+
+.wc-navbar__link--minimal:hover {
+  @apply text-primary;
+}
+
+/* ========================================
+   ACTIONS SECTION
+   ======================================== */
+
+.wc-navbar__actions {
+  @apply flex items-center;
+  @apply order-3;
+  @apply gap-2;
+}
+
+/* Action buttons con border */
+.wc-navbar__action-btn {
+  @apply px-3 py-2;
+  @apply text-sm font-medium;
+  @apply bg-transparent;
+  @apply border border-outline/40;
+  @apply rounded-md;
+  @apply transition-all duration-200;
+  @apply cursor-pointer;
+}
+
+.wc-navbar__action-btn:hover {
+  @apply border-outline/80;
+  @apply text-onSurface;
+}
+
+.wc-navbar__action-btn:active {
+  @apply scale-95;
+}
+
+.wc-navbar__action-btn:focus-visible {
+  @apply outline-2 outline-primary outline-offset-2;
+}
+
+/* Primary action */
+.wc-navbar__action-btn--primary {
+  @apply border-primary/60 text-primary;
+}
+
+.wc-navbar__action-btn--primary:hover {
+  @apply border-primary bg-primary/5;
+}
+
+/* Icon button */
+.wc-navbar__action-icon {
+  @apply w-10 h-10;
+  @apply flex items-center justify-center;
+  @apply bg-transparent;
+  @apply border border-outline/40;
+  @apply rounded-full;
+  @apply transition-all duration-200;
+  @apply cursor-pointer;
+}
+
+.wc-navbar__action-icon:hover {
+  @apply border-outline/80;
+  @apply rotate-12; /* Rotación sutil */
+}
+
+.wc-navbar__action-icon:active {
+  @apply scale-90;
+}
+
+/* Icon with badge */
+.wc-navbar__action-icon--badge {
+  @apply relative;
+}
+
+.wc-navbar__action-icon--badge::after {
+  content: "";
+  @apply absolute top-1 right-1;
+  @apply w-2 h-2;
+  @apply bg-error;
+  @apply border border-surface;
+  @apply rounded-full;
+}
+
+/* ========================================
+   DIVIDERS - SEPARADORES VERTICALES
+   ======================================== */
+
+.wc-navbar__divider {
+  @apply h-6 w-px;
+  @apply bg-outline/30;
+  @apply mx-2;
+}
+
+/* ========================================
+   SEARCH BAR (OPCIONAL)
+   ======================================== */
+
+.wc-navbar__search {
+  @apply relative;
+  @apply hidden md:flex; /* Solo en desktop */
+  @apply items-center;
+  @apply max-w-md;
+}
+
+.wc-navbar__search-input {
+  @apply w-full px-4 py-2 pl-10;
+  @apply bg-transparent;
+  @apply border border-outline/40 rounded-lg;
+  @apply text-sm text-onSurface;
+  @apply transition-all duration-200;
+}
+
+.wc-navbar__search-input::placeholder {
+  @apply text-onSurfaceVariant/60;
+}
+
+.wc-navbar__search-input:focus {
+  @apply outline-2 outline-primary outline-offset-0;
+  @apply border-primary/60;
+}
+
+.wc-navbar__search-icon {
+  @apply absolute left-3 top-1/2 -translate-y-1/2;
+  @apply w-4 h-4;
+  @apply text-onSurfaceVariant;
+  @apply pointer-events-none;
+}
+
+/* ========================================
+   BREADCRUMBS (OPCIONAL)
+   ======================================== */
+
+.wc-navbar__breadcrumbs {
+  @apply flex items-center gap-2;
+  @apply text-sm text-onSurfaceVariant;
+}
+
+.wc-navbar__breadcrumb-link {
+  @apply text-onSurfaceVariant hover:text-onSurface;
+  @apply no-underline transition-colors duration-200;
+}
+
+.wc-navbar__breadcrumb-link--active {
+  @apply text-onSurface font-medium;
+  @apply pointer-events-none;
+}
+
+.wc-navbar__breadcrumb-separator {
+  @apply text-outline/60;
+}
+
+/* ========================================
+   VARIANTES DE NAVBAR
+   ======================================== */
+
+/* Bordered - Con borde completo */
+.wc-navbar--bordered {
+  @apply border border-outline/30 rounded-lg;
+  @apply m-2; /* Margen para que se vea el borde completo */
+}
+
+.wc-navbar--bordered.wc-navbar--sticky {
+  @apply m-0 rounded-none border-x-0 border-t-0;
+}
+
+/* Minimal - Sin borde inferior */
+.wc-navbar--minimal {
+  @apply border-b-0;
+}
+
+/* Elevated - Con sombra sutil */
+.wc-navbar--elevated {
+  @apply shadow-[0_1px_3px_rgba(0,0,0,0.08)];
+}
+
+/* Glass - Máximo blur y transparencia */
+.wc-navbar--glass {
+  @apply bg-surface/60;
+  @apply backdrop-blur-xl;
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.wc-navbar--glass.wc-navbar--sticky {
+  @apply bg-surface/60;
+}
+
+/* Solid - Fondo opaco (fallback) */
+.wc-navbar--solid {
+  @apply bg-surface;
+  @apply backdrop-blur-none;
+}
+
+.wc-navbar--solid.wc-navbar--sticky {
+  @apply bg-surface;
+}
+
+/* Transparent - Totalmente transparente */
+.wc-navbar--transparent {
+  @apply bg-transparent border-b-0;
+  @apply backdrop-blur-none;
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+/* Mobile: Layout simplificado */
+@media (max-width: 768px) {
+  .wc-navbar__container {
+    @apply gap-2;
+  }
+
+  .wc-navbar__link {
+    @apply px-2 py-1.5 text-xs;
+  }
+
+  .wc-navbar__action-btn {
+    @apply px-2 py-1.5 text-xs;
+  }
+
+  .wc-navbar__action-icon {
+    @apply w-9 h-9;
+  }
+
+  /* Ocultar elementos secundarios en mobile */
+  .wc-navbar__divider {
+    @apply hidden;
+  }
+}
+
+/* Tablet: Ajustes intermedios */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .wc-navbar__search {
+    @apply max-w-xs;
+  }
+}
+
+/* ========================================
+   SCROLL BEHAVIOR
+   ======================================== */
+
+/* Navbar que se encoge al scroll */
+.wc-navbar--scrolled {
+  @apply py-2; /* Reducir padding vertical */
+}
+
+.wc-navbar--scrolled .wc-navbar__logo {
+  @apply scale-90; /* Logo más pequeño */
+}
+
+/* Navbar que se oculta al scroll down */
+.wc-navbar--hidden {
+  transform: translateY(-100%);
+}
+
+/* Navbar que reaparece al scroll up */
+.wc-navbar--visible {
+  transform: translateY(0);
+  animation: wc-navbar-slide-down 0.3s ease-out;
+}
+
+/* ========================================
+   PROGRESS BAR (READING INDICATOR)
+   ======================================== */
+
+.wc-navbar__progress {
+  @apply absolute bottom-0 left-0;
+  @apply h-0.5;
+  @apply bg-primary;
+  @apply transition-all duration-100 ease-linear;
+}
+
+/* ========================================
+   MEGA MENU (DROPDOWN)
+   ======================================== */
+
+.wc-navbar__dropdown {
+  @apply absolute top-full left-0 mt-1;
+  @apply min-w-[200px];
+  @apply bg-surface/95 backdrop-blur-md;
+  -webkit-backdrop-filter: blur(12px);
+  @apply border border-outline/30 rounded-lg;
+  @apply shadow-[0_4px_12px_rgba(0,0,0,0.08)];
+  @apply opacity-0 invisible;
+  @apply transition-all duration-200;
+  @apply z-50;
+}
+
+.wc-navbar__link:hover .wc-navbar__dropdown,
+.wc-navbar__link:focus-within .wc-navbar__dropdown {
+  @apply opacity-100 visible;
+}
+
+.wc-navbar__dropdown-item {
+  @apply block px-4 py-2;
+  @apply text-onSurfaceVariant hover:text-onSurface;
+  @apply no-underline;
+  @apply transition-colors duration-200;
+  @apply border-b border-outline/10;
+}
+
+.wc-navbar__dropdown-item:last-child {
+  @apply border-b-0;
+}
+
+.wc-navbar__dropdown-item:hover {
+  @apply bg-surfaceContainerLow;
+}
+
+/* ========================================
+   NOTIFICATIONS PANEL
+   ======================================== */
+
+.wc-navbar__notifications {
+  @apply absolute top-full right-0 mt-2;
+  @apply w-80;
+  @apply bg-surface/95 backdrop-blur-md;
+  -webkit-backdrop-filter: blur(12px);
+  @apply border border-outline/30 rounded-lg;
+  @apply shadow-[0_4px_12px_rgba(0,0,0,0.08)];
+  @apply opacity-0 invisible;
+  @apply transition-all duration-200;
+  @apply z-50;
+}
+
+.wc-navbar__action-icon:hover .wc-navbar__notifications,
+.wc-navbar__action-icon:focus-within .wc-navbar__notifications {
+  @apply opacity-100 visible;
+}
+
+.wc-navbar__notifications-header {
+  @apply px-4 py-3;
+  @apply border-b border-outline/20;
+  @apply font-medium text-sm;
+}
+
+.wc-navbar__notifications-list {
+  @apply max-h-96 overflow-y-auto;
+}
+
+.wc-navbar__notification-item {
+  @apply px-4 py-3;
+  @apply border-b border-outline/10;
+  @apply hover:bg-surfaceContainerLow;
+  @apply transition-colors duration-200;
+  @apply cursor-pointer;
+}
+
+.wc-navbar__notification-item:last-child {
+  @apply border-b-0;
+}
+
+.wc-navbar__notification-item--unread {
+  @apply border-l-2 border-l-primary;
+}
+
+/* ========================================
+   THEME TOGGLE BUTTON
+   ======================================== */
+
+.wc-navbar__theme-toggle {
+  @apply w-10 h-10;
+  @apply flex items-center justify-center;
+  @apply bg-transparent;
+  @apply border border-outline/40 rounded-full;
+  @apply transition-all duration-200;
+  @apply cursor-pointer;
+}
+
+.wc-navbar__theme-toggle:hover {
+  @apply border-outline/80;
+  @apply rotate-180; /* Rotación en hover */
+}
+
+.wc-navbar__theme-toggle:active {
+  @apply scale-90;
+}
+
+.wc-navbar__theme-toggle-icon {
+  @apply w-5 h-5;
+  @apply text-onSurfaceVariant;
+  @apply transition-transform duration-300;
+}
+
+/* ========================================
+   ACCESIBILIDAD
+   ======================================== */
+
+/* Skip to content link */
+.wc-navbar__skip-link {
+  @apply absolute left-0 top-0;
+  @apply px-4 py-2;
+  @apply bg-primary text-onPrimary;
+  @apply border-2 border-primary;
+  @apply rounded-br-lg;
+  @apply transform -translate-y-full;
+  @apply transition-transform duration-200;
+  @apply z-50;
+}
+
+.wc-navbar__skip-link:focus {
+  @apply translate-y-0;
+}
+
+/* Focus trap para navegación por teclado */
+.wc-navbar:focus-within {
+  @apply border-b-primary/40;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .wc-navbar {
+    @apply border-b-2 border-outline;
+  }
+
+  .wc-navbar--sticky {
+    @apply border-b-2 border-outline;
+  }
+
+  .wc-navbar__link::after {
+    @apply h-1; /* Underline más grueso */
+  }
+
+  .wc-navbar__action-btn,
+  .wc-navbar__action-icon {
+    @apply border-2 border-outline;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .wc-navbar,
+  .wc-navbar--sticky,
+  .wc-navbar__link,
+  .wc-navbar__action-btn,
+  .wc-navbar__action-icon,
+  .wc-navbar__theme-toggle,
+  .wc-navbar__dropdown {
+    @apply transition-none;
+    animation: none !important;
+  }
+
+  .wc-navbar__link::after {
+    @apply transition-none;
+  }
+
+  .wc-navbar__action-icon:hover,
+  .wc-navbar__theme-toggle:hover {
+    @apply rotate-0; /* Sin rotación */
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .wc-navbar {
+    @apply border-b-outline/30;
+  }
+
+  .wc-navbar--sticky {
+    @apply bg-surface/70; /* Más transparente en dark */
+    @apply border-b-outline/40;
+  }
+
+  .wc-navbar__dropdown,
+  .wc-navbar__notifications {
+    @apply bg-surface/90;
+  }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+/* Border glow animation */
+@keyframes wc-navbar-border-glow {
+  0%,
+  100% {
+    border-color: theme("colors.outline.DEFAULT / 0.2");
+  }
+  50% {
+    border-color: theme("colors.outline.DEFAULT / 0.5");
+  }
+}
+
+.wc-navbar--loading {
+  animation: wc-navbar-border-glow 2s ease-in-out infinite;
+}
+
+/* Slide from top (alternative) */
+@keyframes wc-navbar-slide-top {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Fade in */
+@keyframes wc-navbar-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   UTILITIES
+   ======================================== */
+
+/* Compact mode */
+.wc-navbar--compact {
+  @apply py-2;
+}
+
+.wc-navbar--compact .wc-navbar__link {
+  @apply py-1;
+}
+
+/* Centered layout */
+.wc-navbar--centered .wc-navbar__container {
+  @apply justify-center;
+}
+
+/* Spaced layout */
+.wc-navbar--spaced .wc-navbar__container {
+  @apply justify-between gap-8;
+}
+
+/* Fixed height */
+.wc-navbar--fixed-height {
+  @apply h-16;
+}
+
+.wc-navbar--fixed-height .wc-navbar__container {
+  @apply h-full;
+}
+
+/* ========================================
+   INTEGRATION HELPERS
+   ======================================== */
+
+/* Para uso con wc-offcanvas */
+.wc-navbar .wc-offcanvas-toggle {
+  @apply border-outline/40;
+}
+
+/* Para uso con breadcrumbs */
+.wc-navbar--with-breadcrumbs {
+  @apply flex-col items-start;
+}
+
+.wc-navbar--with-breadcrumbs .wc-navbar__container {
+  @apply w-full;
+}
+
+.wc-navbar--with-breadcrumbs .wc-navbar__breadcrumbs {
+  @apply w-full py-2 border-t border-outline/20;
 }

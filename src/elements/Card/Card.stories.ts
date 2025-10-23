@@ -16,7 +16,7 @@ import type {
   CardMediaWidth,
   CardAspectRatio,
   CardElevation,
-} from "../types/card.js";
+} from "../../types/card.js";
 
 const meta = {
   title: "Components/Card",

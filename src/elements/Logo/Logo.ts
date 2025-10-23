@@ -1,11 +1,12 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement } from "lit/decorators.js";
-import mainCSS from "../main.css?inline";
+import mainCSS from "../../main.css?inline";
 
 @customElement("wc-logo")
 export class WcLogo extends LitElement {
   static styles = [unsafeCSS(mainCSS)];
 
+  // Deshabilitar Shadow DOM para usar estilos globales de Tailwind
   protected createRenderRoot() {
     return this;
   }
