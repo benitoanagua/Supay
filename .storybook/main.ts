@@ -10,7 +10,7 @@ const config: StorybookConfig = {
     name: "@storybook/html-vite",
     options: {},
   },
-  staticDirs: ["../dist"],
+  staticDirs: ["../assets/dist"],
   // Configura Vite para observar los archivos dist
   viteFinal: async (config) => {
     config.server = {

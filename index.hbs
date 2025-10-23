@@ -9,79 +9,93 @@
     {{> blocks/home-3}}
 {{/match}}
 
+<div style="background: #f0f0f0; padding: 20px; margin: 20px; border: 1px solid #ccc;">
+    <h2>🐛 DEBUG INFO</h2>
+    <p><strong>Config Cat1:</strong> "{{@custom.featured_category_1}}" ({{@custom.featured_category_1_name}})</p>
+    <p><strong>Config Cat2:</strong> "{{@custom.featured_category_2}}" ({{@custom.featured_category_2_name}})</p>
+    <p><strong>Config Cat3:</strong> "{{@custom.featured_category_3}}" ({{@custom.featured_category_3_name}})</p>
+</div>
+
+
 <section class="section mt-8">
     <div class="grid gap-8 grid-cols-1 md:grid-cols-5">
         <main class="md:col-span-3 md:pr-8 md:border-r md:border-outlineVariant">
+            
+            {{!-- Primera categoría principal --}}
             <div class="pb-8">
-                {{#get "posts" filter="primary_tag:local" limit="4" include="tags,authors"}}
-                    {{> blocks/headline name='Local'}}
-                    <wc-grille desktop="1" mobile="1" gap="medium">
-                        {{#foreach posts}}
-                            <wc-card 
-                                title="{{title}}" 
-                                url="{{url}}" 
-                                excerpt="{{excerpt}}" 
-                                {{^if @last}}feature_image="{{feature_image}}"{{/if}}
-                                tag_name="{{primary_tag.name}}"
-                                tag_url="{{primary_tag.url}}" 
-                                author_name="{{primary_author.name}}"
-                                author_url="{{primary_author.url}}" 
-                                reading_time="{{reading_time minute="1 min" minutes="% min"}}"
-                                published_at="{{date published_at format="MMM DD, YYYY" locale="es"}}" 
-                                media_align="right" 
-                                {{#if @first}} 
-                                    media_width="is-half" 
-                                    heading="5"
-                                {{else}} 
-                                    media_width="is-one-quarter" 
-                                    density="compact"
-                                    heading="6"
-                                {{/if}}
-                                elevation="1">
-                            </wc-card>
-                        {{/foreach}}
-                    </wc-grille>
-                {{/get}}
+                {{#get "posts" filter="primary_tag:{{@custom.featured_category_1_name}}" include="tags,authors"}}
+                        {{> blocks/headline name="Artículos Recientes"}}
+                        <wc-grille desktop="1" mobile="1" gap="medium">
+                            {{#foreach posts}}
+                                <wc-card 
+                                    title="{{title}}" 
+                                    url="{{url}}" 
+                                    excerpt="{{excerpt}}" 
+                                    {{#unless @last}}feature-image="{{feature_image}}"{{/unless}}
+                                    tag-name="{{primary_tag.name}}"
+                                    tag-url="{{primary_tag.url}}" 
+                                    author-name="{{primary_author.name}}"
+                                    author-url="{{primary_author.url}}" 
+                                    reading-time="{{reading_time minute="1 min" minutes="% min"}}"
+                                    published-at="{{date published_at format="MMM DD, YYYY" locale="es"}}" 
+                                    media-align="right" 
+                                    {{#if @first}} 
+                                        media-width="is-half" 
+                                        heading="5"
+                                    {{else}} 
+                                        media-width="is-one-quarter" 
+                                        density="compact"
+                                        heading="6"
+                                    {{/if}}
+                                    elevation="1">
+                                </wc-card>
+                            {{/foreach}}
+                        </wc-grille>
+                    {{/get}}
             </div>
             
+            {{!-- Segunda categoría principal --}}
             <div class="pt-8 border-t border-outlineVariant">
-                {{#get "posts" filter="primary_tag:pais" limit="4" include="tags,authors"}}
-                    {{> blocks/headline name='País'}}
-                    <wc-grille desktop="1" mobile="1" gap="medium">
-                        {{#foreach posts}}
-                            <wc-card 
-                                title="{{title}}" 
-                                url="{{url}}" 
-                                excerpt="{{excerpt}}" 
-                                {{^if @last}}feature_image="{{feature_image}}"{{/if}}
-                                tag_name="{{primary_tag.name}}"
-                                tag_url="{{primary_tag.url}}" 
-                                author_name="{{primary_author.name}}"
-                                author_url="{{primary_author.url}}" 
-                                reading_time="{{reading_time minute="1 min" minutes="% min"}}"
-                                published_at="{{date published_at format="MMM DD, YYYY" locale="es"}}" 
-                                media_align="left" 
-                                {{#if @first}} 
-                                    media_width="is-half" 
-                                    heading="5"
-                                {{else}} 
-                                    media_width="is-one-quarter" 
-                                    density="compact"
-                                    heading="6"
-                                {{/if}}
-                                elevation="1">
-                            </wc-card>
-                        {{/foreach}}
-                    </wc-grille>
+                {{#get "posts" filter="primary_tag:{{@custom.featured_category__name}}"  include="tags,authors"}}
+                    {{#if posts}}
+                        {{> blocks/headline name="Más Artículos"}}
+                        <wc-grille desktop="1" mobile="1" gap="medium">
+                            {{#foreach posts}}
+                                <wc-card 
+                                    title="{{title}}" 
+                                    url="{{url}}" 
+                                    excerpt="{{excerpt}}" 
+                                    {{#unless @last}}feature-image="{{feature_image}}"{{/unless}}
+                                    tag-name="{{primary_tag.name}}"
+                                    tag-url="{{primary_tag.url}}" 
+                                    author-name="{{primary_author.name}}"
+                                    author-url="{{primary_author.url}}" 
+                                    reading-time="{{reading_time minute="1 min" minutes="% min"}}"
+                                    published-at="{{date published_at format="MMM DD, YYYY" locale="es"}}" 
+                                    media-align="left" 
+                                    {{#if @first}} 
+                                        media-width="is-half" 
+                                        heading="5"
+                                    {{else}} 
+                                        media-width="is-one-quarter" 
+                                        density="compact"
+                                        heading="6"
+                                    {{/if}}
+                                    elevation="1">
+                                </wc-card>
+                            {{/foreach}}
+                        </wc-grille>
+                    {{/if}}
                 {{/get}}
             </div>
         </main>
         
         <aside class="md:col-span-2 md:pl-8">
             <div class="sticky top-24">
+                {{!-- Categoría del sidebar --}}
                 <div class="mb-8">
-                    {{#get "posts" filter="primary_tag:opinion" limit="4" include="tags,authors"}}
-                        {{> blocks/headline name='Opinión'}}
+                    {{#get "posts" limit="4" include="tags,authors"}}
+                        {{> blocks/headline name="Artículos Destacados"}}
                         <div class="space-y-6">
                             {{#foreach posts}}
                                 {{> components/post-avatar}}
@@ -94,13 +108,23 @@
                 
                 <h3 class="headline-6 text-onSurface mb-4">Descubra más de lo que le importa</h3>
                 <div class="flex flex-wrap gap-2">
-                    {{#get "tags" limit="12" filter="slug:-[opinion,local,editorial,pais,mundo,entrevistas,deportivo,entretenimiento]"}}
-                        {{#foreach tags}}
-                            <a href="{{url}}" class="bg-surfaceContainerHighest text-onSurfaceVariant px-4 py-2 rounded-full text-sm font-medium hover:bg-primaryContainer hover:text-onPrimaryContainer transition-colors">
-                                {{name}}
-                            </a>
-                        {{/foreach}}
-                    {{/get}}
+                    {{#if @custom.excluded_tags}}
+                        {{#get "tags" limit="12" filter="slug:-[{{@custom.excluded_tags}}]"}}
+                            {{#foreach tags}}
+                                <a href="{{url}}" class="bg-surfaceContainerHighest text-onSurfaceVariant px-4 py-2 rounded-full text-sm font-medium hover:bg-primaryContainer hover:text-onPrimaryContainer transition-colors">
+                                    {{name}}
+                                </a>
+                            {{/foreach}}
+                        {{/get}}
+                    {{else}}
+                        {{#get "tags" limit="12" filter="visibility:public"}}
+                            {{#foreach tags}}
+                                <a href="{{url}}" class="bg-surfaceContainerHighest text-onSurfaceVariant px-4 py-2 rounded-full text-sm font-medium hover:bg-primaryContainer hover:text-onPrimaryContainer transition-colors">
+                                    {{name}}
+                                </a>
+                            {{/foreach}}
+                        {{/get}}
+                    {{/if}}
                 </div>
             </div>
         </aside>
