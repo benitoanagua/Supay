@@ -1,36 +1,58 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import mainCSS from "../main.css?inline";
+import type { GrilleProps, Gap } from "../types/grille.js";
 
 @customElement("wc-grille")
-export class WcGrille extends LitElement {
+export class WcGrille extends LitElement implements GrilleProps {
   static styles = [unsafeCSS(mainCSS)];
 
-  @property({ type: Number }) desktop = 3;
-  @property({ type: Number }) mobile = 2;
-  @property({ type: String }) gap = "medium";
-
-  @query("slot", true)
-  private slotElement!: HTMLSlotElement;
+  @property({ type: Number }) desktop: GrilleProps["desktop"] = 3;
+  @property({ type: Number }) mobile: GrilleProps["mobile"] = 2;
+  @property({ type: String }) gap: Gap = "medium";
 
   @query(".wc-grille__container", true)
   private containerElement!: HTMLElement;
 
-  firstUpdated() {
+  @query("slot", true)
+  private slotElement!: HTMLSlotElement;
+
+  private resizeObserver?: ResizeObserver;
+
+  protected createRenderRoot() {
+    const shadowRoot = super.createRenderRoot();
+
+    const themeStyle = document.createElement("style");
+    themeStyle.id = "theme-vars";
+    shadowRoot.appendChild(themeStyle);
+
+    return shadowRoot;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
     this.setupResizeObserver();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.resizeObserver?.disconnect();
+  }
+
+  firstUpdated(): void {
     this.gridRendering();
   }
 
-  updated() {
+  updated(): void {
     this.gridRendering();
   }
 
-  setupResizeObserver() {
+  private setupResizeObserver(): void {
     if (this.containerElement && window.ResizeObserver) {
-      const resizeObserver = new ResizeObserver(() => {
+      this.resizeObserver = new ResizeObserver(() => {
         this.gridRendering();
       });
-      resizeObserver.observe(this.containerElement);
+      this.resizeObserver.observe(this.containerElement);
     }
 
     // Fallback para cambios de viewport
@@ -39,7 +61,11 @@ export class WcGrille extends LitElement {
     });
   }
 
-  grid(breakpoint: number, index: number, length: number) {
+  private grid(
+    breakpoint: number,
+    index: number,
+    length: number
+  ): { rows: number; row: number; col: number } {
     const divInt = Math.floor(length / breakpoint);
     const divMod = length % breakpoint;
     const rows = divMod > 0 ? divInt + 1 : divInt;
@@ -48,10 +74,12 @@ export class WcGrille extends LitElement {
     return { rows, row, col };
   }
 
-  gridRendering() {
+  private gridRendering(): void {
     if (!this.slotElement || !this.containerElement) return;
 
-    const assignedElements = this.slotElement.assignedElements();
+    const assignedElements = this.slotElement
+      .assignedElements()
+      .filter((element) => element.tagName.toLowerCase() === "wc-grille-item");
 
     assignedElements.forEach((element: Element, i: number) => {
       if (!(element instanceof HTMLElement)) return;
@@ -59,23 +87,23 @@ export class WcGrille extends LitElement {
       // Reset styles
       element.style.cssText = "";
 
-      const isMobile = window.innerWidth < 768;
+      const isMobile: boolean = window.innerWidth < 768;
       const dsk = this.grid(this.desktop, i, assignedElements.length);
       const mbl = this.grid(this.mobile, i, assignedElements.length);
 
-      const padding =
+      const padding: number =
         this.gap === "small" ? 8 : this.gap === "medium" ? 16 : 24;
 
       element.style.boxSizing = "content-box";
 
-      // Calcular ancho
+      // Calcular ancho (igual que en Vue)
       if (isMobile) {
         const widthM = Math.floor(
           (this.containerElement.clientWidth -
             2 * padding * (this.mobile - 1)) /
             this.mobile
         );
-        const borderM = (i + 1) % this.mobile !== 0 ? 1 : 0;
+        const borderM: number = (i + 1) % this.mobile !== 0 ? 1 : 0;
         element.style.width = `${widthM - borderM}px`;
       } else {
         const widthd = Math.floor(
@@ -83,15 +111,15 @@ export class WcGrille extends LitElement {
             2 * padding * (this.desktop - 1)) /
             this.desktop
         );
-        const borderD = (i + 1) % this.desktop !== 0 ? 1 : 0;
+        const borderD: number = (i + 1) % this.desktop !== 0 ? 1 : 0;
         element.style.width = `${widthd - borderD}px`;
       }
 
       let hasRightBorder = false;
       let hasBottomBorder = false;
-      const borderColor = "var(--color-outline)";
+      const borderColor = "var(--color-outlineVariant)";
 
-      // Línea derecha
+      // Línea derecha (igual que en Vue)
       if (
         (dsk.col < this.desktop - 1 && !isMobile) ||
         (mbl.col < this.mobile - 1 && isMobile)
@@ -102,7 +130,7 @@ export class WcGrille extends LitElement {
         hasRightBorder = true;
       }
 
-      // Línea abajo
+      // Línea abajo (igual que en Vue)
       if (
         (dsk.row < dsk.rows && !isMobile) ||
         (mbl.row < mbl.rows && isMobile)
@@ -113,9 +141,11 @@ export class WcGrille extends LitElement {
         hasBottomBorder = true;
       }
 
-      // Esquina (donde se cruzan las líneas)
+      // Esquina (donde se cruzan las líneas) - igual que en Vue
       if (hasRightBorder && hasBottomBorder) {
-        const gradientSize = Math.round((2 * padding * Math.sqrt(2)) / 4 + 1);
+        const gradientSize: number = Math.round(
+          (2 * padding * Math.sqrt(2)) / 4 + 1
+        );
         element.style.borderImage = `linear-gradient(315deg, transparent ${gradientSize}px, ${borderColor} 0) 1`;
       }
     });
@@ -123,7 +153,7 @@ export class WcGrille extends LitElement {
 
   render() {
     return html`
-      <div class="wc-grille__container">
+      <div class="wc-grille__container flex flex-wrap">
         <slot @slotchange=${this.gridRendering}></slot>
       </div>
     `;

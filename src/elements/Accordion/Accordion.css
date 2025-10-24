@@ -1,0 +1,91 @@
+/* Accordion Component - Flat Design */
+.wc-accordion {
+  @apply w-full bg-surface;
+}
+
+.wc-accordion--flat {
+  @apply shadow-none rounded-none;
+}
+
+.wc-accordion-item {
+  @apply bg-surfaceContainer border-b border-outlineVariant last:border-b-0;
+}
+
+.wc-accordion-item--flat {
+  @apply rounded-none shadow-none;
+}
+
+.wc-accordion-item[open] {
+  @apply bg-surfaceContainerLow;
+}
+
+.wc-accordion-item__header {
+  @apply w-full p-4 md:p-6 border-0 bg-transparent text-onSurface font-medium
+         cursor-pointer transition-all duration-200 focus:outline-none
+         flex items-center justify-between gap-4
+         hover:bg-surfaceContainerLow focus:bg-surfaceContainerLow
+         disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.wc-accordion-item__header:focus-visible {
+  @apply outline-2 outline-primary outline-offset-2;
+}
+
+.wc-accordion-item__label {
+  @apply flex-1 text-left;
+}
+
+.wc-accordion-item__icon {
+  @apply w-5 h-5 flex items-center justify-center text-onSurfaceVariant
+         transition-transform duration-200 flex-shrink-0;
+}
+
+.wc-accordion-item[open] .wc-accordion-item__icon {
+  @apply transform rotate-180 text-primary;
+}
+
+.wc-accordion-item__panel {
+  @apply bg-surface overflow-hidden transition-all duration-300 ease-in-out;
+}
+
+.wc-accordion-item__panel[hidden] {
+  display: none !important;
+}
+
+.wc-accordion-item__content {
+  @apply p-4 md:p-6 pt-0 text-onSurfaceVariant;
+}
+
+.wc-accordion[multiple] .wc-accordion-item {
+  @apply border-b border-outlineVariant;
+}
+
+.wc-accordion[multiple] .wc-accordion-item[open] {
+  @apply bg-surfaceContainerLow;
+}
+
+.wc-accordion--bordered {
+  @apply border border-outlineVariant;
+}
+
+.wc-accordion--bordered .wc-accordion-item {
+  @apply border-b border-outlineVariant last:border-b-0;
+}
+
+.wc-accordion--separated .wc-accordion-item {
+  @apply mb-2 border border-outlineVariant;
+}
+
+.wc-accordion--separated .wc-accordion-item:last-child {
+  @apply mb-0;
+}
+
+@media (max-width: 768px) {
+  .wc-accordion-item__header {
+    @apply p-3;
+  }
+
+  .wc-accordion-item__content {
+    @apply p-3 pt-0;
+  }
+}

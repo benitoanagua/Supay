@@ -1,0 +1,72 @@
+/* Tabs Component */
+.wc-tabs {
+  @apply w-full;
+}
+
+.wc-tabs--disabled {
+  @apply opacity-60 pointer-events-none;
+}
+
+/* Tab Header */
+.wc-tabs__header {
+  @apply flex border-b-2 border-outlineVariant;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.wc-tabs__header::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tab Button */
+.wc-tab__button {
+  @apply px-6 py-4 border-0 bg-transparent text-onSurfaceVariant font-medium
+         cursor-pointer transition-all duration-200 focus:outline-none
+         disabled:opacity-40 disabled:cursor-not-allowed
+         flex items-center gap-3 whitespace-nowrap
+         border-b-2 border-transparent;
+}
+
+/* Active State - Muy importante */
+.wc-tab__button[aria-selected="true"] {
+  @apply text-primary border-b-2 border-primary bg-surfaceContainerHigh;
+}
+
+/* Hover States */
+.wc-tab__button:not([disabled]):not([aria-selected="true"]):hover {
+  @apply text-onSurface bg-surfaceContainerLow;
+}
+
+.wc-tab__button[aria-selected="true"]:hover {
+  @apply bg-surfaceContainerHigh;
+}
+
+/* Focus State */
+.wc-tab__button:focus-visible {
+  @apply outline-2 outline-primary outline-offset-2;
+}
+
+/* Tab Panel */
+.wc-tab-panel__content {
+  @apply p-6;
+}
+
+.wc-tab-panel__content[hidden] {
+  display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .wc-tabs__header {
+    @apply overflow-x-auto;
+  }
+
+  .wc-tab__button {
+    @apply px-4 py-3 text-sm;
+    min-width: fit-content;
+  }
+
+  .wc-tab-panel__content {
+    @apply p-4;
+  }
+}

@@ -4,12 +4,16 @@
 @import "./styles/material-theme.css";
 @import "./styles/terminal-theme.css";
 @import "./styles/global.css";
+
+@import "./elements/Accordion/Accordion.css";
 @import "./elements/Button/Button.css";
 @import "./elements/Card/Card.css";
+@import "./elements/Carousel/Carousel.css";
 @import "./elements/Grille/Grille.css";
 @import "./elements/Navbar/Navbar.css";
 @import "./elements/Offcanvas/Offcanvas.css";
 @import "./elements/Overlay/Overlay.css";
+@import "./elements/Tab/Tab.css";
 
 @source '../../*.hbs';
 @source '../../partials/**/*.hbs';
