@@ -4,7 +4,7 @@ import {
   property,
   queryAssignedElements,
 } from "lit/decorators.js";
-import mainCSS from "../main.css?inline";
+import mainCSS from "../../main.css?inline";
 import type { AccordionProps } from "../../types/accordion.js";
 import { ThemeAwareMixin } from "../../mixins/ThemeAwareMixin.js";
 

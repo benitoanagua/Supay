@@ -1,6 +1,6 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property, state, query } from "lit/decorators.js";
-import mainCSS from "../main.css?inline";
+import mainCSS from "../../main.css?inline";
 import type { CarouselProps } from "../../types/carousel.js";
 import { ThemeAwareMixin } from "../../mixins/ThemeAwareMixin.js";
 

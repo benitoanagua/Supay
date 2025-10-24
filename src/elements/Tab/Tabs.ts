@@ -5,7 +5,7 @@ import {
   state,
   queryAssignedElements,
 } from "lit/decorators.js";
-import mainCSS from "../main.css?inline";
+import mainCSS from "../../main.css?inline";
 import type { TabsProps, TabChangeEvent } from "../../types/tabs.js";
 
 @customElement("wc-tabs")

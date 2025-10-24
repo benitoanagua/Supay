@@ -1,6 +1,6 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import mainCSS from "../main.css?inline";
+import mainCSS from "../../main.css?inline";
 import type { CarouselItemProps } from "../../types/carousel.js";
 
 @customElement("wc-carousel-item")

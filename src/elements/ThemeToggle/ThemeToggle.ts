@@ -1,6 +1,6 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import mainCSS from "../main.css?inline";
+import mainCSS from "../../main.css?inline";
 import type { ThemeChangeEvent, ThemeMode } from "../../types/events.js";
 
 @customElement("wc-theme-toggle")
