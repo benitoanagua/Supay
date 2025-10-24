@@ -1,7 +1,7 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 import mainCSS from "../main.css?inline";
-import type { GrilleProps, Gap } from "../types/grille.js";
+import type { GrilleProps, Gap } from "../../types/grille.js";
 
 @customElement("wc-grille")
 export class WcGrille extends LitElement implements GrilleProps {

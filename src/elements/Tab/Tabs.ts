@@ -6,7 +6,7 @@ import {
   queryAssignedElements,
 } from "lit/decorators.js";
 import mainCSS from "../main.css?inline";
-import type { TabsProps, TabChangeEvent } from "../types/tabs.js";
+import type { TabsProps, TabChangeEvent } from "../../types/tabs.js";
 
 @customElement("wc-tabs")
 export class WcTabs extends LitElement implements TabsProps {

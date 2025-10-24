@@ -1,20 +1,100 @@
-/* Theme Toggle Component Styles - Matching Offcanvas */
+/* ========================================
+   THEME TOGGLE COMPONENT - OUTLINE-BASED UI
+   Adaptado desde Material Design
+   ======================================== */
+
+/* ========================================
+   BASE THEME TOGGLE - CIRCULAR OUTLINE
+   ======================================== */
+
 .wc-theme-toggle {
-  @apply cursor-pointer border-0 bg-transparent p-2 rounded-none 
-         hover:bg-surfaceContainerLow transition-colors relative;
+  @apply cursor-pointer border-0 bg-transparent;
+  @apply p-2 rounded-full;
+  @apply transition-all duration-300;
+  @apply relative;
+
+  /* Border circular en vez de background */
+  @apply border-2 border-outline/40;
+
+  /* Dimensiones */
+  @apply w-12 h-12;
+  @apply flex items-center justify-center;
 }
+
+/* Hover state - Border + tinte mínimo */
+.wc-theme-toggle:hover {
+  @apply border-outline/80;
+  @apply bg-surfaceContainerLow/30; /* Tinte muy sutil */
+}
+
+/* Active/Press state */
+.wc-theme-toggle:active {
+  @apply scale-95;
+  @apply border-primary/60;
+  @apply bg-primary/10;
+}
+
+/* Focus state */
+.wc-theme-toggle:focus-visible {
+  @apply outline-2 outline-primary outline-offset-2;
+  @apply border-primary/80;
+}
+
+/* ========================================
+   THEME TOGGLE ICON - TRANSICIONES SUAVES
+   ======================================== */
 
 .wc-theme-toggle-icon {
-  @apply block size-6 transition-all duration-200 text-onSurfaceVariant;
+  @apply block size-6;
+  @apply transition-all duration-300;
+  @apply text-onSurfaceVariant;
 }
 
+/* Hover state del icon */
 .wc-theme-toggle:hover .wc-theme-toggle-icon {
-  @apply text-primary;
+  @apply text-primary; /* Color de acento en hover */
+  @apply rotate-180; /* Rotación completa en hover */
 }
 
-/* Theme toggle badge indicator */
+/* Active state del icon */
+.wc-theme-toggle:active .wc-theme-toggle-icon {
+  @apply scale-90;
+}
+
+/* ========================================
+   THEME TOGGLE BADGE - INDICADOR VISUAL
+   ======================================== */
+
 .wc-theme-toggle-badge {
-  @apply absolute -top-0.5 -right-0.5 bg-primary text-onPrimary 
-         rounded-full size-4 text-xs flex items-center justify-center 
-         font-bold pointer-events-none;
+  @apply absolute -top-0.5 -right-0.5;
+  @apply bg-transparent;
+  @apply border-2 border-primary;
+  @apply rounded-full;
+  @apply size-5;
+  @apply text-xs flex items-center justify-center;
+  @apply font-bold pointer-events-none;
+  @apply text-primary;
+  @apply transition-all duration-300;
+}
+
+/* Hover state del badge */
+.wc-theme-toggle:hover .wc-theme-toggle-badge {
+  @apply bg-primary/10; /* Tinte mínimo */
+  @apply border-primary;
+  @apply scale-110; /* Leve agrandamiento */
+}
+
+/* Animación de cambio de tema */
+.wc-theme-toggle-badge {
+  animation: wc-theme-badge-pulse 0.3s ease-out;
+}
+
+@keyframes wc-theme-badge-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
 }

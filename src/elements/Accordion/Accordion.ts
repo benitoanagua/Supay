@@ -5,8 +5,8 @@ import {
   queryAssignedElements,
 } from "lit/decorators.js";
 import mainCSS from "../main.css?inline";
-import type { AccordionProps } from "../types/accordion.js";
-import { ThemeAwareMixin } from "../mixins/ThemeAwareMixin.js";
+import type { AccordionProps } from "../../types/accordion.js";
+import { ThemeAwareMixin } from "../../mixins/ThemeAwareMixin.js";
 
 const ThemeAwareBase = ThemeAwareMixin(LitElement);
 

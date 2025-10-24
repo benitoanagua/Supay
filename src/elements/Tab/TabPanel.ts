@@ -1,7 +1,7 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import mainCSS from "../main.css?inline";
-import type { TabPanelProps } from "../types/tabs.js";
+import type { TabPanelProps } from "../../types/tabs.js";
 
 @customElement("wc-tab-panel")
 export class WcTabPanel extends LitElement implements TabPanelProps {

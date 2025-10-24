@@ -26,7 +26,7 @@ const meta = {
       afterContent.className = "space-y-8 p-8";
       afterContent.innerHTML = Array.from(
         { length: 10 },
-        (_, i) => `
+        () => `
           <div class="bg-surface p-6 rounded-lg border border-outline/20">
             <h3 class="text-xl font-semibold text-onSurface mb-3">${randPhrase()}</h3>
             <p class="text-onSurfaceVariant leading-relaxed">${randPhrase()}</p>

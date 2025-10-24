@@ -1,8 +1,8 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import mainCSS from "../main.css?inline";
-import type { AccordionItemProps } from "../types/accordion.js";
-import { ThemeAwareMixin } from "../mixins/ThemeAwareMixin.js";
+import type { AccordionItemProps } from "../../types/accordion.js";
+import { ThemeAwareMixin } from "../../mixins/ThemeAwareMixin.js";
 
 const ThemeAwareBase = ThemeAwareMixin(LitElement);
 

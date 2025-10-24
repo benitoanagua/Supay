@@ -1,7 +1,7 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement } from "lit/decorators.js";
 import mainCSS from "../main.css?inline";
-import { ThemeAwareMixin } from "../mixins/ThemeAwareMixin.js";
+import { ThemeAwareMixin } from "../../mixins/ThemeAwareMixin.js";
 
 const ThemeAwareBase = ThemeAwareMixin(LitElement);
 
