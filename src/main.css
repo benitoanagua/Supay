@@ -4,6 +4,7 @@
 @import "./styles/material-theme.css";
 @import "./styles/terminal-theme.css";
 @import "./styles/global.css";
+@import "./elements/Button/Button.css";
 @import "./elements/Card/Card.css";
 @import "./elements/Grille/Grille.css";
 @import "./elements/Navbar/Navbar.css";
