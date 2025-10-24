@@ -1,0 +1,634 @@
+/* ========================================
+   MODAL COMPONENT - OUTLINE-BASED UI
+   Adaptado desde Material Design
+   ======================================== */
+
+/* ========================================
+   OVERLAY - BACKDROP CON BLUR MÍNIMO
+   ======================================== */
+
+.wc-modal-overlay {
+  @apply fixed inset-0 z-50;
+  @apply bg-scrim/30; /* Reducido de 50% a 30% */
+  @apply transition-opacity duration-300;
+
+  /* Backdrop blur mínimo (outline style) */
+  @apply backdrop-blur-sm; /* 4px en vez de más */
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Animación de entrada */
+.wc-modal-overlay {
+  animation: wc-modal-fade-in 300ms ease-out;
+}
+
+@keyframes wc-modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Animación de salida */
+.wc-modal-overlay--closing {
+  animation: wc-modal-fade-out 300ms ease-in;
+}
+
+@keyframes wc-modal-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   MODAL CONTAINER - CENTRADO
+   ======================================== */
+
+.wc-modal-container {
+  @apply fixed inset-0 z-50;
+  @apply flex items-center justify-center;
+  @apply p-4 md:p-6;
+  @apply pointer-events-none; /* Solo el modal es clickeable */
+}
+
+/* ========================================
+   MODAL - ESTRUCTURA CON BORDES
+   ======================================== */
+
+.wc-modal {
+  @apply relative w-full max-w-lg;
+  @apply bg-surface/95; /* Semi-transparente */
+  @apply backdrop-blur-md; /* Blur moderado para legibilidad */
+  -webkit-backdrop-filter: blur(12px);
+
+  /* Border como estructura principal */
+  @apply border-2 border-outline/40;
+  @apply rounded-xl;
+
+  @apply shadow-[0_8px_24px_rgba(0,0,0,0.12)]; /* Sombra sutil */
+  @apply transition-all duration-300;
+  @apply pointer-events-auto;
+
+  /* Animación de entrada */
+  animation: wc-modal-slide-up 300ms ease-out;
+}
+
+@keyframes wc-modal-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Animación de salida */
+.wc-modal--closing {
+  animation: wc-modal-slide-down 300ms ease-in;
+}
+
+@keyframes wc-modal-slide-down {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(32px) scale(0.95);
+  }
+}
+
+/* Hover state del modal */
+.wc-modal:hover {
+  @apply border-outline/60; /* Mayor contraste */
+}
+
+/* ========================================
+   MODAL HEADER - CON BORDER INFERIOR
+   ======================================== */
+
+.wc-modal__header {
+  @apply flex items-center justify-between;
+  @apply p-6 md:p-8;
+  @apply border-b border-outline/30; /* Línea divisoria */
+  @apply bg-transparent;
+  @apply transition-colors duration-200;
+}
+
+.wc-modal:hover .wc-modal__header {
+  @apply border-b-outline/50;
+}
+
+/* Title */
+.wc-modal__title {
+  @apply text-xl md:text-2xl font-semibold;
+  @apply text-onSurface;
+  @apply tracking-tight;
+  @apply pr-4; /* Espacio para el botón de cerrar */
+}
+
+/* ========================================
+   CLOSE BUTTON - OUTLINE CIRCULAR
+   ======================================== */
+
+.wc-modal__close {
+  @apply absolute right-4 top-4 md:right-6 md:top-6;
+  @apply cursor-pointer p-2 rounded-full;
+  @apply transition-all duration-200;
+
+  /* Border en vez de background */
+  @apply bg-transparent;
+  @apply border-2 border-outline/40;
+
+  @apply w-10 h-10 flex items-center justify-center;
+}
+
+.wc-modal__close:hover {
+  @apply border-primary/60;
+  @apply bg-primary/5; /* Tinte muy sutil */
+  @apply rotate-90; /* Rotación en hover (efecto X) */
+}
+
+.wc-modal__close:active {
+  @apply border-primary;
+  @apply scale-90;
+}
+
+/* Focus state */
+.wc-modal__close:focus-visible {
+  @apply outline-2 outline-primary outline-offset-2;
+  @apply border-primary/80;
+}
+
+/* Close Icon */
+.wc-modal__close-icon {
+  @apply block h-5 w-5 md:h-6 md:w-6;
+  @apply text-onSurfaceVariant;
+  @apply transition-colors duration-200;
+}
+
+.wc-modal__close:hover .wc-modal__close-icon {
+  @apply text-primary;
+}
+
+/* ========================================
+   MODAL BODY - CONTENIDO CON SCROLL
+   ======================================== */
+
+.wc-modal__body {
+  @apply p-6 md:p-8;
+  @apply bg-transparent;
+  @apply text-onSurfaceVariant;
+  @apply overflow-y-auto;
+  @apply max-h-[60vh];
+
+  /* Scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: theme("colors.outline.DEFAULT / 0.3") transparent;
+}
+
+.wc-modal__body::-webkit-scrollbar {
+  @apply w-1.5;
+}
+
+.wc-modal__body::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.wc-modal__body::-webkit-scrollbar-thumb {
+  @apply bg-outline/30 rounded-full;
+}
+
+.wc-modal__body::-webkit-scrollbar-thumb:hover {
+  @apply bg-outline/50;
+}
+
+/* Fade gradients para scroll */
+.wc-modal__body::before,
+.wc-modal__body::after {
+  content: "";
+  @apply absolute left-0 right-0 h-8 pointer-events-none z-10;
+}
+
+.wc-modal__body::before {
+  @apply top-0;
+  @apply bg-gradient-to-b from-surface/95 to-transparent;
+}
+
+.wc-modal__body::after {
+  @apply bottom-0;
+  @apply bg-gradient-to-t from-surface/95 to-transparent;
+}
+
+/* ========================================
+   MODAL FOOTER - CON BORDER SUPERIOR
+   ======================================== */
+
+.wc-modal__footer {
+  @apply flex items-center justify-end gap-3;
+  @apply p-6 md:p-8 pt-4;
+  @apply border-t border-outline/30; /* Línea divisoria superior */
+  @apply bg-transparent;
+  @apply transition-colors duration-200;
+}
+
+.wc-modal:hover .wc-modal__footer {
+  @apply border-t-outline/50;
+}
+
+/* Footer centrado */
+.wc-modal__footer--centered {
+  @apply justify-center;
+}
+
+/* Footer con espacio entre botones */
+.wc-modal__footer--spaced {
+  @apply justify-between;
+}
+
+/* ========================================
+   MODAL SIZES - VARIANTES DE TAMAÑO
+   ======================================== */
+
+/* Small */
+.wc-modal--small {
+  @apply max-w-sm;
+}
+
+/* Medium (default) */
+.wc-modal--medium {
+  @apply max-w-lg;
+}
+
+/* Large */
+.wc-modal--large {
+  @apply max-w-2xl;
+}
+
+/* Extra Large */
+.wc-modal--xlarge {
+  @apply max-w-4xl;
+}
+
+/* Full */
+.wc-modal--full {
+  @apply max-w-full mx-4 md:mx-8;
+  @apply h-[calc(100vh-2rem)] md:h-[calc(100vh-4rem)];
+}
+
+.wc-modal--full .wc-modal__body {
+  @apply max-h-full;
+}
+
+/* ========================================
+   MODAL VARIANTS - ESTILOS
+   ======================================== */
+
+/* Minimal - Sin header/footer borders */
+.wc-modal--minimal .wc-modal__header {
+  @apply border-b-0 pb-4;
+}
+
+.wc-modal--minimal .wc-modal__footer {
+  @apply border-t-0 pt-4;
+}
+
+/* Bordered - Border más grueso */
+.wc-modal--bordered {
+  @apply border-4 border-outline/50;
+}
+
+.wc-modal--bordered:hover {
+  @apply border-outline/70;
+}
+
+/* Outlined - Solo contorno, sin blur */
+.wc-modal--outlined {
+  @apply bg-surface; /* Fondo sólido */
+  @apply backdrop-blur-none;
+  @apply border-2 border-outline/60;
+}
+
+/* Glass - Máximo blur y transparencia */
+.wc-modal--glass {
+  @apply bg-surface/70; /* Más transparente */
+  @apply backdrop-blur-xl; /* Blur máximo */
+  -webkit-backdrop-filter: blur(24px);
+  @apply border-2 border-outline/20; /* Border muy sutil */
+}
+
+/* Accent border - Border de acento en el top */
+.wc-modal--accent-top {
+  @apply border-t-4 border-t-primary;
+}
+
+.wc-modal--accent-left {
+  @apply border-l-4 border-l-primary;
+}
+
+/* ========================================
+   MODAL POSITIONS - ALINEACIÓN
+   ======================================== */
+
+/* Top */
+.wc-modal-container--top {
+  @apply items-start pt-8 md:pt-16;
+}
+
+/* Bottom */
+.wc-modal-container--bottom {
+  @apply items-end pb-8 md:pb-16;
+}
+
+/* Left */
+.wc-modal-container--left {
+  @apply justify-start pl-8 md:pl-16;
+}
+
+/* Right */
+.wc-modal-container--right {
+  @apply justify-end pr-8 md:pr-16;
+}
+
+/* ========================================
+   MODAL ANIMATIONS - VARIANTES
+   ======================================== */
+
+/* Zoom animation */
+.wc-modal--zoom {
+  animation: wc-modal-zoom 300ms ease-out;
+}
+
+@keyframes wc-modal-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Slide from right */
+.wc-modal--slide-right {
+  animation: wc-modal-slide-right 300ms ease-out;
+}
+
+@keyframes wc-modal-slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide from left */
+.wc-modal--slide-left {
+  animation: wc-modal-slide-left 300ms ease-out;
+}
+
+@keyframes wc-modal-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Flip animation */
+.wc-modal--flip {
+  animation: wc-modal-flip 400ms ease-out;
+}
+
+@keyframes wc-modal-flip {
+  from {
+    opacity: 0;
+    transform: rotateX(-90deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0);
+  }
+}
+
+/* ========================================
+   MODAL STATES - ESTADOS ESPECIALES
+   ======================================== */
+
+/* Loading state */
+.wc-modal--loading {
+  @apply pointer-events-none;
+}
+
+.wc-modal--loading::after {
+  content: "";
+  @apply absolute inset-0;
+  @apply bg-surface/50;
+  @apply flex items-center justify-center;
+  @apply backdrop-blur-sm;
+  @apply rounded-xl;
+}
+
+/* Disabled state */
+.wc-modal--disabled {
+  @apply opacity-60;
+  @apply pointer-events-none;
+}
+
+/* Success state */
+.wc-modal--success {
+  @apply border-green/60;
+}
+
+.wc-modal--success .wc-modal__header {
+  @apply border-b-green/30;
+}
+
+/* Error state */
+.wc-modal--error {
+  @apply border-error/60;
+}
+
+.wc-modal--error .wc-modal__header {
+  @apply border-b-error/30;
+}
+
+/* Warning state */
+.wc-modal--warning {
+  @apply border-yellow/60;
+}
+
+.wc-modal--warning .wc-modal__header {
+  @apply border-b-yellow/30;
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+/* Mobile: Full width con padding reducido */
+@media (max-width: 768px) {
+  .wc-modal {
+    @apply max-w-full mx-2;
+    @apply border; /* Border más delgado en mobile */
+  }
+
+  .wc-modal__header,
+  .wc-modal__body,
+  .wc-modal__footer {
+    @apply p-4;
+  }
+
+  .wc-modal__title {
+    @apply text-lg;
+  }
+
+  .wc-modal__close {
+    @apply right-2 top-2;
+    @apply w-9 h-9;
+  }
+
+  .wc-modal__body {
+    @apply max-h-[50vh];
+  }
+
+  /* Full height en mobile */
+  .wc-modal--full {
+    @apply mx-0 rounded-none;
+    @apply h-screen;
+    @apply border-0;
+  }
+}
+
+/* Tablet: Ajustes intermedios */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .wc-modal--large {
+    @apply max-w-xl;
+  }
+
+  .wc-modal--xlarge {
+    @apply max-w-3xl;
+  }
+}
+
+/* ========================================
+   ACCESIBILIDAD
+   ======================================== */
+
+/* Focus trap */
+.wc-modal:focus-within {
+  @apply border-primary/60;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .wc-modal {
+    @apply border-4 border-outline;
+  }
+
+  .wc-modal__header,
+  .wc-modal__footer {
+    @apply border-2 border-outline;
+  }
+
+  .wc-modal__close {
+    @apply border-4 border-outline;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .wc-modal-overlay,
+  .wc-modal,
+  .wc-modal__close {
+    @apply transition-none;
+    animation: none !important;
+  }
+
+  .wc-modal__close:hover {
+    @apply rotate-0; /* Sin rotación */
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .wc-modal {
+    @apply bg-surface/85; /* Menos transparente en dark */
+    @apply border-outline/50; /* Más visible */
+  }
+
+  .wc-modal-overlay {
+    @apply bg-scrim/50; /* Más oscuro */
+  }
+
+  .wc-modal__header,
+  .wc-modal__footer {
+    @apply border-outline/40;
+  }
+}
+
+/* ========================================
+   UTILITIES
+   ======================================== */
+
+/* No padding */
+.wc-modal--no-padding .wc-modal__body {
+  @apply p-0;
+}
+
+/* Scrollable header/footer (sticky) */
+.wc-modal--sticky-header .wc-modal__header {
+  @apply sticky top-0 z-10;
+  @apply bg-surface/95 backdrop-blur-sm;
+}
+
+.wc-modal--sticky-footer .wc-modal__footer {
+  @apply sticky bottom-0 z-10;
+  @apply bg-surface/95 backdrop-blur-sm;
+}
+
+/* Prevent body scroll */
+body.wc-modal-open {
+  @apply overflow-hidden;
+}
+
+/* Smooth scroll restoration */
+body.wc-modal-open {
+  scroll-behavior: auto;
+}
+
+/* ========================================
+   MODAL NESTED - MODALS APILADOS
+   ======================================== */
+
+.wc-modal-overlay[data-level="2"] {
+  @apply bg-scrim/40;
+  z-index: 60;
+}
+
+.wc-modal-container[data-level="2"] {
+  z-index: 60;
+}
+
+.wc-modal-overlay[data-level="3"] {
+  @apply bg-scrim/50;
+  z-index: 70;
+}
+
+.wc-modal-container[data-level="3"] {
+  z-index: 70;
+}

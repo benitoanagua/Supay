@@ -1,14 +1,14 @@
 // Import all components to register them
 import { WcAccordion } from "./Accordion/Accordion.js";
 import { WcAccordionItem } from "./Accordion/AccordionItem.js";
+import { WcButton } from "./Button/Button.js";
 import { WcCard } from "./Card/Card.js";
 import { WcCarousel } from "./Carousel/Carousel.js";
 import { WcCarouselItem } from "./Carousel/CarouselItem.js";
 import { WcGrille } from "./Grille/Grille.js";
 import { WcGrilleItem } from "./Grille/GrilleItem.js";
 import { WcLogo } from "./Logo/Logo.js";
-import { WcNavbar } from "./Navbar/Navbar.js";
-import { WcOffcanvas } from "./Offcanvas/Offcanvas.js";
+import { WcModal } from "./Modal/Modal.js";
 import { WcOverlay } from "./Overlay/Overlay.js";
 import { WcTab } from "./Tab/Tab.js";
 import { WcTabPanel } from "./Tab/TabPanel.js";
@@ -19,14 +19,14 @@ import { WcThemeToggle } from "./ThemeToggle/ThemeToggle.js";
 export {
   WcAccordion,
   WcAccordionItem,
+  WcButton,
   WcCard,
   WcCarousel,
   WcCarouselItem,
   WcGrille,
   WcGrilleItem,
   WcLogo,
-  WcNavbar,
-  WcOffcanvas,
+  WcModal,
   WcOverlay,
   WcTab,
   WcTabPanel,
@@ -39,14 +39,14 @@ declare global {
   interface HTMLElementTagNameMap {
     "wc-accordion": WcAccordion;
     "wc-accordion-item": WcAccordionItem;
+    "wc-button": WcButton;
     "wc-card": WcCard;
     "wc-carousel": WcCarousel;
     "wc-carousel-item": WcCarouselItem;
     "wc-grille": WcGrille;
     "wc-grille-item": WcGrilleItem;
     "wc-logo": WcLogo;
-    "wc-navbar": WcNavbar;
-    "wc-offcanvas": WcOffcanvas;
+    "wc-modal": WcModal;
     "wc-overlay": WcOverlay;
     "wc-tab": WcTab;
     "wc-tab-panel": WcTabPanel;
