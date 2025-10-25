@@ -1,54 +1,36 @@
-/* ========================================
-   CAROUSEL COMPONENT - OUTLINE-BASED UI
-   Adaptado desde Material Design
-   ======================================== */
-
-/* ========================================
-   BASE CAROUSEL - ESTRUCTURA SIN FONDOS
-   ======================================== */
-
 .wc-carousel {
   @apply w-full bg-transparent relative;
-  @apply border border-outline/30 rounded-lg; /* Borde estructural */
+  @apply border border-outline/30 rounded-lg;
   @apply transition-all duration-200;
 }
 
 .wc-carousel:hover {
-  @apply border-outline/50; /* Mayor contraste en hover */
+  @apply border-outline/50;
 }
 
 .wc-carousel--flat {
-  @apply shadow-none rounded-lg; /* Mantener rounded en flat */
+  @apply shadow-none rounded-lg;
 }
 
-/* Estado de arrastre */
 .wc-carousel--dragging {
   @apply cursor-grabbing;
-  @apply border-primary/40; /* Border de acento durante drag */
+  @apply border-primary/40;
 }
 
 .wc-carousel--dragging .wc-carousel-item__content {
   @apply pointer-events-none;
 }
 
-/* ========================================
-   NAVIGATION BAR - OUTLINE STYLE
-   ======================================== */
-
 .wc-carousel__navigation {
   @apply flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4;
   @apply p-3 md:p-4 bg-transparent;
-  @apply border-b border-outline/30; /* Línea divisoria inferior */
+  @apply border-b border-outline/30;
   @apply transition-colors duration-200;
 }
 
 .wc-carousel:hover .wc-carousel__navigation {
-  @apply border-b-outline/50; /* Mayor contraste en hover */
+  @apply border-b-outline/50;
 }
-
-/* ========================================
-   ARROWS - BOTONES CON BORDER CIRCULAR
-   ======================================== */
 
 .wc-carousel__arrows {
   @apply flex gap-2 order-2 md:order-1;
@@ -56,34 +38,30 @@
 
 .wc-carousel__arrow {
   @apply p-2;
-  @apply border-2 border-outline/40 bg-transparent; /* Sin fondo */
+  @apply border-2 border-outline/40 bg-transparent;
   @apply text-onSurfaceVariant;
   @apply transition-all duration-200 cursor-pointer;
-  @apply rounded-full; /* Circular en vez de cuadrado */
+  @apply rounded-full;
   @apply w-10 h-10 md:w-12 md:h-12;
   @apply flex items-center justify-center;
 }
 
-/* Hover state - Border + tinte mínimo */
 .wc-carousel__arrow:hover {
   @apply border-primary/60 text-primary;
-  @apply bg-primary/5; /* Tinte muy sutil */
+  @apply bg-primary/5;
 }
 
-/* Active/Press state */
 .wc-carousel__arrow:active {
   @apply scale-95;
   @apply border-primary text-primary;
   @apply bg-primary/10;
 }
 
-/* Focus state */
 .wc-carousel__arrow:focus-visible {
   @apply outline-2 outline-primary outline-offset-2;
   @apply border-primary/80;
 }
 
-/* Disabled state */
 .wc-carousel__arrow--disabled,
 .wc-carousel__arrow:disabled {
   @apply opacity-30 cursor-not-allowed;
@@ -94,12 +72,8 @@
 .wc-carousel__arrow--disabled:hover,
 .wc-carousel__arrow:disabled:hover {
   @apply border-outline/20 text-onSurfaceVariant bg-transparent;
-  @apply scale-100; /* Sin efecto scale */
+  @apply scale-100;
 }
-
-/* ========================================
-   DOTS - INDICADORES CON BORDER
-   ======================================== */
 
 .wc-carousel__dots {
   @apply flex gap-2 order-1 md:order-2;
@@ -107,53 +81,42 @@
 
 .wc-carousel__dot {
   @apply w-3 h-3 md:w-4 md:h-4;
-  @apply border-2 border-outline/40 bg-transparent; /* Sin relleno */
+  @apply border-2 border-outline/40 bg-transparent;
   @apply transition-all duration-200 cursor-pointer;
-  @apply rounded-full; /* Circular */
+  @apply rounded-full;
 }
 
-/* Hover state */
 .wc-carousel__dot:hover {
   @apply border-primary/60;
-  @apply bg-primary/10; /* Tinte mínimo */
+  @apply bg-primary/10;
 }
 
-/* Active state - Relleno con color primario */
 .wc-carousel__dot--active {
   @apply border-primary bg-primary;
 }
 
 .wc-carousel__dot--active:hover {
   @apply border-primary bg-primary;
-  @apply scale-110; /* Leve agrandamiento en hover */
+  @apply scale-110;
 }
 
-/* Focus state */
 .wc-carousel__dot:focus-visible {
   @apply outline-2 outline-primary outline-offset-1;
 }
-
-/* ========================================
-   COUNTER - BADGE STYLE
-   ======================================== */
 
 .wc-carousel__counter {
   @apply order-3;
   @apply text-onSurfaceVariant text-sm font-medium;
   @apply px-3 py-1.5;
   @apply bg-transparent;
-  @apply border border-outline/40 rounded-full; /* Badge circular */
+  @apply border border-outline/40 rounded-full;
   @apply transition-all duration-200;
 }
 
 .wc-carousel__counter:hover {
   @apply border-outline/60;
-  @apply bg-surfaceContainerLow/30; /* Tinte muy sutil */
+  @apply bg-surfaceContainerLow/30;
 }
-
-/* ========================================
-   CONTAINER - SCROLL CON ESTRUCTURA
-   ======================================== */
 
 .wc-carousel__container {
   @apply flex overflow-x-auto scroll-smooth p-3 md:p-4 w-full;
@@ -161,9 +124,7 @@
   -ms-overflow-style: none;
   scroll-snap-type: x mandatory;
   cursor: grab;
-
-  /* Border superior sutil (opcional) */
-  @apply border-t border-outline/0; /* Transparente por defecto */
+  @apply border-t border-outline/0;
 }
 
 .wc-carousel__container:active {
@@ -174,24 +135,6 @@
   display: none;
 }
 
-/* Scrollbar personalizado (opcional, si se muestra) */
-.wc-carousel__container::-webkit-scrollbar {
-  @apply h-1;
-}
-
-.wc-carousel__container::-webkit-scrollbar-track {
-  @apply bg-outline/10;
-}
-
-.wc-carousel__container::-webkit-scrollbar-thumb {
-  @apply bg-outline/30 rounded-full;
-}
-
-.wc-carousel__container::-webkit-scrollbar-thumb:hover {
-  @apply bg-outline/50;
-}
-
-/* Gap variants */
 .wc-carousel__container.gap-0 {
   @apply gap-0;
 }
@@ -212,104 +155,37 @@
   @apply gap-4;
 }
 
-/* ========================================
-   CAROUSEL ITEM - OUTLINE CON HOVER
-   ======================================== */
-
 .wc-carousel-item {
   @apply flex-shrink-0 transition-transform duration-300;
   scroll-snap-align: start;
   flex: 0 0 auto;
-
-  /* Border sutil alrededor del item */
   @apply border border-outline/20 rounded-md;
   @apply bg-transparent;
 }
 
-/* Hover state del item */
 .wc-carousel-item:hover {
   @apply border-outline/40;
-  @apply transform scale-[1.02]; /* Leve agrandamiento */
+  @apply transform scale-[1.02];
 }
 
-/* Active/Focus state */
 .wc-carousel-item:focus-within {
   @apply border-primary/60;
   @apply outline-2 outline-primary outline-offset-2;
 }
 
-/* ========================================
-   ITEM CONTENT
-   ======================================== */
-
 .wc-carousel-item__content {
   @apply h-full w-full outline-none;
   @apply transition-all duration-200;
-  @apply rounded-md overflow-hidden; /* Contener contenido dentro del border */
+  @apply rounded-md overflow-hidden;
 }
 
 .wc-carousel-item__content:focus-visible {
   @apply outline-2 outline-primary outline-offset-2;
 }
 
-/* ========================================
-   VARIANTES DE CAROUSEL
-   ======================================== */
-
-/* Minimal - Sin borde externo */
-.wc-carousel--minimal {
-  @apply border-0;
-}
-
-.wc-carousel--minimal .wc-carousel__navigation {
-  @apply border-b-0; /* Sin línea divisoria */
-  @apply pb-0;
-}
-
-/* Bordered - Borde más grueso */
-.wc-carousel--bordered {
-  @apply border-2 border-outline/50;
-}
-
-.wc-carousel--bordered:hover {
-  @apply border-outline/70;
-}
-
-/* Outlined - Énfasis en estructura */
-.wc-carousel--outlined .wc-carousel-item {
-  @apply border-2 border-outline/40;
-}
-
-.wc-carousel--outlined .wc-carousel-item:hover {
-  @apply border-primary/60;
-}
-
-/* Compact - Espaciado reducido */
-.wc-carousel--compact .wc-carousel__navigation {
-  @apply p-2 md:p-3;
-}
-
-.wc-carousel--compact .wc-carousel__container {
-  @apply p-2 md:p-3;
-}
-
-/* Spacious - Espaciado amplio */
-.wc-carousel--spacious .wc-carousel__navigation {
-  @apply p-4 md:p-6;
-}
-
-.wc-carousel--spacious .wc-carousel__container {
-  @apply p-4 md:p-6;
-}
-
-/* ========================================
-   RESPONSIVE ADJUSTMENTS
-   ======================================== */
-
-/* Mobile: Ajustes compactos */
 @media (max-width: 768px) {
   .wc-carousel {
-    @apply border-outline/20; /* Border más sutil en mobile */
+    @apply border-outline/20;
   }
 
   .wc-carousel__navigation {
@@ -317,11 +193,11 @@
   }
 
   .wc-carousel__arrow {
-    @apply w-9 h-9; /* Botones más pequeños */
+    @apply w-9 h-9;
   }
 
   .wc-carousel__dot {
-    @apply w-2.5 h-2.5; /* Dots más pequeños */
+    @apply w-2.5 h-2.5;
   }
 
   .wc-carousel__counter {
@@ -329,46 +205,10 @@
   }
 
   .wc-carousel-item {
-    @apply border-outline/10; /* Border muy sutil en mobile */
+    @apply border-outline/10;
   }
 }
 
-/* Tablet: Ajustes intermedios */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .wc-carousel__arrow {
-    @apply w-10 h-10;
-  }
-
-  .wc-carousel__dot {
-    @apply w-3 h-3;
-  }
-}
-
-/* ========================================
-   ACCESIBILIDAD
-   ======================================== */
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-  .wc-carousel {
-    @apply border-2 border-outline;
-  }
-
-  .wc-carousel__navigation {
-    @apply border-b-2 border-outline;
-  }
-
-  .wc-carousel__arrow,
-  .wc-carousel__dot {
-    @apply border-2 border-outline;
-  }
-
-  .wc-carousel-item {
-    @apply border-2 border-outline;
-  }
-}
-
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .wc-carousel,
   .wc-carousel__arrow,
@@ -379,121 +219,10 @@
   }
 
   .wc-carousel-item:hover {
-    @apply scale-100; /* Sin scale en hover */
+    @apply scale-100;
   }
 
   .wc-carousel__dot--active:hover {
     @apply scale-100;
   }
-}
-
-/* Dark mode adjustments */
-@media (prefers-color-scheme: dark) {
-  .wc-carousel {
-    @apply border-outline/40; /* Más visible en dark */
-  }
-
-  .wc-carousel__navigation {
-    @apply border-b-outline/40;
-  }
-
-  .wc-carousel__arrow,
-  .wc-carousel__dot,
-  .wc-carousel__counter {
-    @apply border-outline/50;
-  }
-
-  .wc-carousel-item {
-    @apply border-outline/30;
-  }
-}
-
-/* ========================================
-   ANIMACIONES ESPECÍFICAS
-   ======================================== */
-
-/* Slide in animation para items */
-@keyframes wc-carousel-slide-in {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.wc-carousel-item {
-  animation: wc-carousel-slide-in 0.3s ease-out;
-}
-
-/* Border glow animation (para loading) */
-@keyframes wc-carousel-border-glow {
-  0%,
-  100% {
-    border-color: theme("colors.outline.DEFAULT / 0.2");
-  }
-  50% {
-    border-color: theme("colors.outline.DEFAULT / 0.6");
-  }
-}
-
-.wc-carousel--loading {
-  animation: wc-carousel-border-glow 2s ease-in-out infinite;
-}
-
-/* Pulse animation para dots activos */
-@keyframes wc-carousel-dot-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-.wc-carousel__dot--active {
-  animation: wc-carousel-dot-pulse 2s ease-in-out infinite;
-}
-
-/* ========================================
-   UTILITIES
-   ======================================== */
-
-/* With shadows variant (opcional) */
-.wc-carousel--with-shadows .wc-carousel-item {
-  @apply shadow-[0_1px_3px_rgba(0,0,0,0.08)];
-}
-
-.wc-carousel--with-shadows .wc-carousel-item:hover {
-  @apply shadow-[0_2px_6px_rgba(0,0,0,0.12)];
-}
-
-/* Full width items */
-.wc-carousel--full-width .wc-carousel-item {
-  @apply w-full;
-}
-
-/* Centered items */
-.wc-carousel--centered .wc-carousel__container {
-  @apply justify-center;
-}
-
-/* No gap between items */
-.wc-carousel--no-gap .wc-carousel__container {
-  @apply gap-0;
-}
-
-.wc-carousel--no-gap .wc-carousel-item {
-  @apply border-r-0 rounded-none;
-}
-
-.wc-carousel--no-gap .wc-carousel-item:first-child {
-  @apply rounded-l-md;
-}
-
-.wc-carousel--no-gap .wc-carousel-item:last-child {
-  @apply rounded-r-md border-r;
 }

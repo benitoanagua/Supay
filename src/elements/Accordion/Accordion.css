@@ -1,13 +1,3 @@
-/* ========================================
-   ACCORDION COMPONENT - OUTLINE-BASED UI
-   Adaptado desde Material Design
-   ======================================== */
-
-/* ========================================
-   BASE ACCORDION - SIN FONDOS SÓLIDOS
-   ======================================== */
-
-/* Base - Transparente con separadores */
 .wc-accordion {
   @apply w-full bg-transparent;
 }
@@ -16,81 +6,60 @@
   @apply shadow-none rounded-none;
 }
 
-/* ========================================
-   ACCORDION ITEM - ESTRUCTURA CON BORDES
-   ======================================== */
-
-/* Item base - Solo bordes como estructura */
 .wc-accordion-item {
   @apply bg-transparent;
-  @apply border-b border-outline/30; /* Línea divisoria sutil */
+  @apply border-b border-outline/30;
   @apply transition-all duration-200;
 }
 
 .wc-accordion-item:last-child {
-  @apply border-b-0; /* Sin borde en último item */
+  @apply border-b-0;
 }
 
 .wc-accordion-item--flat {
   @apply rounded-none shadow-none;
 }
 
-/* Estado abierto - Border más visible */
 .wc-accordion-item[open] {
   @apply bg-transparent;
-  @apply border-b-outline/50; /* Mayor contraste cuando abierto */
+  @apply border-b-outline/50;
 }
 
-/* Hover state */
 .wc-accordion-item:hover {
   @apply border-b-outline/60;
 }
-
-/* ========================================
-   HEADER - BOTÓN CON BORDER LATERAL
-   ======================================== */
 
 .wc-accordion-item__header {
   @apply w-full p-4 md:p-6 border-0 bg-transparent text-onSurface font-medium;
   @apply cursor-pointer transition-all duration-200;
   @apply flex items-center justify-between gap-4;
   @apply focus:outline-none;
-
-  /* Border izquierdo como indicador (oculto por defecto) */
   @apply border-l-2 border-transparent;
 }
 
-/* Hover state - Border + fondo mínimo */
 .wc-accordion-item__header:hover {
-  @apply bg-surfaceContainerLow/50; /* Tinte muy sutil */
-  @apply border-l-outline/40; /* Border visible en hover */
+  @apply bg-surfaceContainerLow/50;
+  @apply border-l-outline/40;
 }
 
-/* Focus state - Border de acento */
 .wc-accordion-item__header:focus-visible {
   @apply outline-2 outline-primary outline-offset-2;
   @apply border-l-primary/60;
 }
 
-/* Active/Open state - Border de acento sólido */
 .wc-accordion-item[open] .wc-accordion-item__header {
-  @apply border-l-primary; /* Border izquierdo cuando abierto */
-  @apply bg-transparent; /* Sin fondo cuando abierto */
+  @apply border-l-primary;
+  @apply bg-transparent;
 }
 
 .wc-accordion-item[open] .wc-accordion-item__header:hover {
   @apply bg-surfaceContainerLow/30;
 }
 
-/* Disabled state */
 .wc-accordion-item__header:disabled {
   @apply cursor-not-allowed opacity-40;
   @apply border-l-transparent;
 }
-
-/* ========================================
-   LABEL Y CONTENIDO DEL HEADER
-   ======================================== */
 
 .wc-accordion-item__label {
   @apply flex-1 text-left;
@@ -98,83 +67,50 @@
 }
 
 .wc-accordion-item[open] .wc-accordion-item__label {
-  @apply text-primary; /* Texto con color de acento cuando abierto */
+  @apply text-primary;
 }
-
-/* ========================================
-   ICON - ROTACIÓN + COLOR
-   ======================================== */
 
 .wc-accordion-item__icon {
   @apply w-5 h-5 flex items-center justify-center;
   @apply text-onSurfaceVariant;
-  @apply transition-all duration-300; /* Transición más suave */
+  @apply transition-all duration-300;
   @apply flex-shrink-0;
 }
 
-/* Hover state del icon */
 .wc-accordion-item__header:hover .wc-accordion-item__icon {
   @apply text-onSurface;
 }
 
-/* Open state - Rotación + color primario */
 .wc-accordion-item[open] .wc-accordion-item__icon {
   @apply transform rotate-180;
-  @apply text-primary; /* Color de acento en icon */
+  @apply text-primary;
 }
 
-/* ========================================
-   PANEL - EXPANSIÓN SUAVE
-   ======================================== */
-
 .wc-accordion-item__panel {
-  @apply bg-transparent; /* Sin fondo */
+  @apply bg-transparent;
   @apply overflow-hidden;
   @apply transition-all duration-300 ease-in-out;
-
-  /* Border superior sutil cuando abierto */
   @apply border-t border-outline/20;
 }
 
 .wc-accordion-item__panel[hidden] {
   display: none !important;
-  @apply border-t-0; /* Sin border cuando cerrado */
+  @apply border-t-0;
 }
-
-/* ========================================
-   CONTENT - ESPACIADO CON BORDER OPCIONAL
-   ======================================== */
 
 .wc-accordion-item__content {
   @apply p-4 md:p-6 pt-4 text-onSurfaceVariant;
   @apply transition-opacity duration-300;
-
-  /* Opcional: Línea vertical izquierda para continuidad visual */
   @apply border-l-2 border-primary/20 ml-4;
 }
 
 .wc-accordion-item__content:hover {
-  @apply text-onSurface; /* Mayor contraste en hover */
+  @apply text-onSurface;
 }
 
-/* ========================================
-   VARIANTES DE ACCORDION
-   ======================================== */
-
-/* Multiple - Permitir múltiples items abiertos */
-.wc-accordion[multiple] .wc-accordion-item {
-  @apply border-b border-outline/30;
-}
-
-.wc-accordion[multiple] .wc-accordion-item[open] {
-  @apply bg-transparent;
-  @apply border-b-outline/50;
-}
-
-/* Bordered - Borde completo alrededor */
 .wc-accordion--bordered {
   @apply border border-outline/40 rounded-lg;
-  @apply p-2; /* Padding interno para separar items del borde */
+  @apply p-2;
 }
 
 .wc-accordion--bordered .wc-accordion-item {
@@ -185,7 +121,6 @@
   @apply border-b-0;
 }
 
-/* Separated - Items con bordes individuales */
 .wc-accordion--separated .wc-accordion-item {
   @apply mb-2;
   @apply border border-outline/40 rounded-md;
@@ -201,47 +136,9 @@
 }
 
 .wc-accordion--separated .wc-accordion-item[open] {
-  @apply border-primary/60; /* Borde de acento cuando abierto */
+  @apply border-primary/60;
 }
 
-/* Minimal - Solo líneas, sin backgrounds */
-.wc-accordion--minimal .wc-accordion-item__header {
-  @apply p-3 md:p-4; /* Padding reducido */
-}
-
-.wc-accordion--minimal .wc-accordion-item__content {
-  @apply p-3 md:p-4 pt-2;
-}
-
-.wc-accordion--minimal .wc-accordion-item__header:hover {
-  @apply bg-transparent; /* Sin fondo en hover */
-}
-
-/* Outlined - Énfasis en bordes */
-.wc-accordion--outlined .wc-accordion-item {
-  @apply border-2 border-outline/50;
-  @apply mb-2 rounded-md;
-}
-
-.wc-accordion--outlined .wc-accordion-item[open] {
-  @apply border-primary; /* Borde de acento sólido */
-}
-
-/* ========================================
-   ACCORDION CON HEADER STICKY (OPCIONAL)
-   ======================================== */
-
-.wc-accordion--sticky .wc-accordion-item__header {
-  @apply sticky top-0 z-10;
-  @apply bg-surface/95 backdrop-blur-sm;
-  -webkit-backdrop-filter: blur(4px);
-}
-
-/* ========================================
-   RESPONSIVE ADJUSTMENTS
-   ======================================== */
-
-/* Mobile: Padding reducido */
 @media (max-width: 768px) {
   .wc-accordion-item__header {
     @apply p-3;
@@ -249,46 +146,14 @@
 
   .wc-accordion-item__content {
     @apply p-3 pt-2;
-    @apply ml-2; /* Border line más cercano */
+    @apply ml-2;
   }
 
-  /* Icons más pequeños en mobile */
   .wc-accordion-item__icon {
     @apply w-4 h-4;
   }
 }
 
-/* Tablet: Ajustes intermedios */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .wc-accordion-item__header {
-    @apply p-4;
-  }
-
-  .wc-accordion-item__content {
-    @apply p-4 pt-3;
-  }
-}
-
-/* ========================================
-   ACCESIBILIDAD
-   ======================================== */
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-  .wc-accordion-item {
-    @apply border-b-2 border-outline;
-  }
-
-  .wc-accordion-item__header {
-    @apply border-l-4; /* Bordes más gruesos */
-  }
-
-  .wc-accordion-item[open] .wc-accordion-item__header {
-    @apply border-l-primary;
-  }
-}
-
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .wc-accordion-item,
   .wc-accordion-item__header,
@@ -301,102 +166,4 @@
   .wc-accordion-item[open] .wc-accordion-item__icon {
     animation: none !important;
   }
-}
-
-/* Dark mode adjustments */
-@media (prefers-color-scheme: dark) {
-  .wc-accordion-item {
-    @apply border-b-outline/40; /* Más visible en dark */
-  }
-
-  .wc-accordion-item[open] {
-    @apply border-b-outline/60;
-  }
-
-  .wc-accordion-item__header:hover {
-    @apply bg-surfaceContainerLow/30;
-  }
-}
-
-/* ========================================
-   ANIMACIONES AVANZADAS
-   ======================================== */
-
-/* Fade in content animation */
-@keyframes wc-accordion-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.wc-accordion-item[open] .wc-accordion-item__content {
-  animation: wc-accordion-fade-in 0.3s ease-out;
-}
-
-/* Border pulse animation (para estados de loading) */
-@keyframes wc-accordion-border-pulse {
-  0%,
-  100% {
-    border-color: theme("colors.outline.DEFAULT / 0.3");
-  }
-  50% {
-    border-color: theme("colors.outline.DEFAULT / 0.7");
-  }
-}
-
-.wc-accordion-item--loading {
-  animation: wc-accordion-border-pulse 2s ease-in-out infinite;
-}
-
-/* ========================================
-   UTILITIES
-   ======================================== */
-
-/* Compact variant */
-.wc-accordion--compact .wc-accordion-item__header {
-  @apply p-2 md:p-3;
-}
-
-.wc-accordion--compact .wc-accordion-item__content {
-  @apply p-2 md:p-3 pt-1;
-}
-
-/* Spacious variant */
-.wc-accordion--spacious .wc-accordion-item__header {
-  @apply p-6 md:p-8;
-}
-
-.wc-accordion--spacious .wc-accordion-item__content {
-  @apply p-6 md:p-8 pt-4;
-}
-
-/* With icons variant */
-.wc-accordion-item__header--with-icon {
-  @apply gap-3;
-}
-
-.wc-accordion-item__header--with-icon::before {
-  content: "";
-  @apply w-5 h-5 flex-shrink-0;
-  @apply bg-primary/20 rounded-full;
-  @apply transition-all duration-200;
-}
-
-.wc-accordion-item[open] .wc-accordion-item__header--with-icon::before {
-  @apply bg-primary/40;
-}
-
-/* Disabled entire accordion */
-.wc-accordion--disabled {
-  @apply opacity-50 pointer-events-none;
-}
-
-/* Loading state */
-.wc-accordion-item--loading .wc-accordion-item__icon {
-  @apply animate-spin;
 }

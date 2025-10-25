@@ -1,7 +1,3 @@
-/* ========================================
-   BUTTON COMPONENT - OUTLINE-BASED UI
-   ======================================== */
-
 .wc-button {
   @apply inline-flex items-center justify-center;
   @apply relative overflow-hidden;
@@ -12,10 +8,6 @@
   @apply select-none;
   @apply focus:outline-2 focus:outline-primary focus:outline-offset-2;
 }
-
-/* ========================================
-   VARIANTS
-   ======================================== */
 
 .wc-button--variant-filled {
   @apply bg-transparent;
@@ -78,10 +70,6 @@
   @apply border-primaryContainer/80;
 }
 
-/* ========================================
-   SIZES
-   ======================================== */
-
 .wc-button--size-small {
   @apply px-3 py-1.5;
   @apply text-xs;
@@ -102,10 +90,6 @@
   @apply gap-2.5;
   @apply min-h-12;
 }
-
-/* ========================================
-   COLORS
-   ======================================== */
 
 .wc-button--color-secondary.wc-button--variant-filled,
 .wc-button--color-secondary.wc-button--variant-outlined,
@@ -139,42 +123,6 @@
   @apply border-errorContainer text-onErrorContainer;
 }
 
-.wc-button--color-success.wc-button--variant-filled,
-.wc-button--color-success.wc-button--variant-outlined,
-.wc-button--color-success.wc-button--variant-text {
-  @apply border-green text-green;
-}
-
-.wc-button--color-success.wc-button--variant-filled:hover,
-.wc-button--color-success.wc-button--variant-outlined:hover,
-.wc-button--color-success.wc-button--variant-text:hover {
-  @apply bg-green/10;
-}
-
-.wc-button--color-success.wc-button--variant-tonal {
-  @apply border-greenContainer text-onGreenContainer;
-}
-
-.wc-button--color-warning.wc-button--variant-filled,
-.wc-button--color-warning.wc-button--variant-outlined,
-.wc-button--color-warning.wc-button--variant-text {
-  @apply border-yellow text-yellow;
-}
-
-.wc-button--color-warning.wc-button--variant-filled:hover,
-.wc-button--color-warning.wc-button--variant-outlined:hover,
-.wc-button--color-warning.wc-button--variant-text:hover {
-  @apply bg-yellow/10;
-}
-
-.wc-button--color-warning.wc-button--variant-tonal {
-  @apply border-yellowContainer text-onYellowContainer;
-}
-
-/* ========================================
-   STATES
-   ======================================== */
-
 .wc-button--disabled {
   @apply opacity-40 pointer-events-none;
   @apply cursor-not-allowed;
@@ -191,10 +139,6 @@
 .wc-button--full-width {
   @apply w-full;
 }
-
-/* ========================================
-   ICONS
-   ======================================== */
 
 .wc-button__icon {
   @apply flex-shrink-0;
@@ -221,10 +165,6 @@
   @apply w-5 h-5;
 }
 
-/* ========================================
-   LOADING INDICATOR
-   ======================================== */
-
 .wc-button__loading {
   @apply absolute inset-0 flex items-center justify-center;
 }
@@ -244,10 +184,6 @@
   @apply w-5 h-5 border-4;
 }
 
-/* ========================================
-   RIPPLE EFFECT
-   ======================================== */
-
 .wc-button__ripple {
   @apply absolute inset-0 overflow-hidden rounded-lg;
 }
@@ -264,10 +200,6 @@
     opacity: 0;
   }
 }
-
-/* ========================================
-   RESPONSIVE
-   ======================================== */
 
 @media (max-width: 768px) {
   .wc-button--size-large {

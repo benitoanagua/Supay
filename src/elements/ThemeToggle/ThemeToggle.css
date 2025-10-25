@@ -1,48 +1,28 @@
-/* ========================================
-   THEME TOGGLE COMPONENT - OUTLINE-BASED UI
-   Adaptado desde Material Design
-   ======================================== */
-
-/* ========================================
-   BASE THEME TOGGLE - CIRCULAR OUTLINE
-   ======================================== */
-
 .wc-theme-toggle {
   @apply cursor-pointer border-0 bg-transparent;
   @apply p-2 rounded-full;
   @apply transition-all duration-300;
   @apply relative;
-
-  /* Border circular en vez de background */
   @apply border-2 border-outline/40;
-
-  /* Dimensiones */
   @apply w-12 h-12;
   @apply flex items-center justify-center;
 }
 
-/* Hover state - Border + tinte mínimo */
 .wc-theme-toggle:hover {
   @apply border-outline/80;
-  @apply bg-surfaceContainerLow/30; /* Tinte muy sutil */
+  @apply bg-surfaceContainerLow/30;
 }
 
-/* Active/Press state */
 .wc-theme-toggle:active {
   @apply scale-95;
   @apply border-primary/60;
   @apply bg-primary/10;
 }
 
-/* Focus state */
 .wc-theme-toggle:focus-visible {
   @apply outline-2 outline-primary outline-offset-2;
   @apply border-primary/80;
 }
-
-/* ========================================
-   THEME TOGGLE ICON - TRANSICIONES SUAVES
-   ======================================== */
 
 .wc-theme-toggle-icon {
   @apply block size-6;
@@ -50,20 +30,14 @@
   @apply text-onSurfaceVariant;
 }
 
-/* Hover state del icon */
 .wc-theme-toggle:hover .wc-theme-toggle-icon {
-  @apply text-primary; /* Color de acento en hover */
-  @apply rotate-180; /* Rotación completa en hover */
+  @apply text-primary;
+  @apply rotate-180;
 }
 
-/* Active state del icon */
 .wc-theme-toggle:active .wc-theme-toggle-icon {
   @apply scale-90;
 }
-
-/* ========================================
-   THEME TOGGLE BADGE - INDICADOR VISUAL
-   ======================================== */
 
 .wc-theme-toggle-badge {
   @apply absolute -top-0.5 -right-0.5;
@@ -77,14 +51,12 @@
   @apply transition-all duration-300;
 }
 
-/* Hover state del badge */
 .wc-theme-toggle:hover .wc-theme-toggle-badge {
-  @apply bg-primary/10; /* Tinte mínimo */
+  @apply bg-primary/10;
   @apply border-primary;
-  @apply scale-110; /* Leve agrandamiento */
+  @apply scale-110;
 }
 
-/* Animación de cambio de tema */
 .wc-theme-toggle-badge {
   animation: wc-theme-badge-pulse 0.3s ease-out;
 }

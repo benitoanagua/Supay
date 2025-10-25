@@ -1,18 +1,9 @@
-/* ========================================
-   OVERLAY COMPONENT - OUTLINE-BASED UI
-   Adaptado desde Material Design
-   ======================================== */
-
-/* Base Overlay - Estructura con bordes en vez de rellenos */
 .wc-overlay {
   @apply w-full flex overflow-hidden bg-cover bg-center relative;
   isolation: isolate;
-  @apply border border-white/20; /* Borde sutil que funciona sobre imágenes */
+  @apply border border-white/20;
 }
 
-/* ========================================
-   ALIGNMENT - Sin cambios estructurales
-   ======================================== */
 .wc-overlay--align-start {
   @apply justify-start;
 }
@@ -25,9 +16,6 @@
   @apply justify-end;
 }
 
-/* ========================================
-   POSITION - Sin cambios estructurales
-   ======================================== */
 .wc-overlay--position-top {
   @apply items-start;
 }
@@ -40,9 +28,6 @@
   @apply items-end;
 }
 
-/* ========================================
-   ASPECT RATIOS - Sin cambios
-   ======================================== */
 .wc-overlay--aspect-square {
   @apply aspect-square;
 }
@@ -55,24 +40,16 @@
   @apply aspect-4/3;
 }
 
-/* ========================================
-   FILL EFFECTS - Reducción de opacidad
-   Menos blur, más estructura lineal
-   ======================================== */
-
-/* Full fill - Menos opaco para mantener visibilidad */
 .wc-overlay--fill-full::before {
   content: "";
   @apply absolute inset-0 z-1;
-  @apply bg-scrim/40; /* Reducido de 60% a 40% */
+  @apply bg-scrim/40;
 }
 
-/* Gradient fills - Más sutiles */
 .wc-overlay--fill-gradient.wc-overlay--position-top::before {
   content: "";
   @apply absolute inset-0 z-1;
   @apply bg-gradient-to-b from-scrim/50 via-scrim/20 to-transparent;
-  /* Gradiente más suave */
 }
 
 .wc-overlay--fill-gradient.wc-overlay--position-bottom::before {
@@ -85,105 +62,63 @@
   content: "";
   @apply absolute inset-0 z-1;
   @apply bg-gradient-to-t from-transparent via-scrim/30 to-transparent;
-  /* Más sutil en el centro */
 }
 
-/* Fill None - Sin overlay */
 .wc-overlay--fill-none::before {
   content: none;
 }
 
-/* ========================================
-   CONTENT CONTAINER - OUTLINE STYLE
-   Borde en vez de fondo blur
-   ======================================== */
 .wc-overlay__content {
   @apply max-w-[42rem] p-6 flex flex-col gap-3 text-left z-2 relative;
   @apply md:p-4 md:m-2;
-
-  /* Reemplazo de backdrop-blur por border estructural */
-  @apply bg-transparent; /* Sin fondo por defecto */
-  @apply border border-white/30; /* Borde blanco sutil */
+  @apply bg-transparent;
+  @apply border border-white/30;
   @apply rounded-lg;
-
-  /* Transición suave */
   @apply transition-all duration-300;
 }
 
 .wc-overlay__content:hover {
-  @apply border-white/50; /* Mayor contraste en hover */
+  @apply border-white/50;
 }
 
-/* ========================================
-   BOX STYLES - REDEFINIDOS PARA OUTLINE
-   ======================================== */
-
-/* Background - Blur mínimo + borde */
 .wc-overlay--box-background .wc-overlay__content {
-  @apply bg-white/5; /* Tinte mínimo */
-  @apply backdrop-blur-sm; /* Blur reducido (4px) */
+  @apply bg-white/5;
+  @apply backdrop-blur-sm;
   -webkit-backdrop-filter: blur(4px);
-  @apply border-2 border-white/40; /* Borde más grueso */
+  @apply border-2 border-white/40;
 }
 
-/* Border - Solo contorno, sin fondo */
 .wc-overlay--box-border .wc-overlay__content {
   @apply bg-transparent;
-  @apply border-2 border-white/60; /* Borde más visible */
-  @apply backdrop-blur-none; /* Sin blur */
-}
-
-.wc-overlay--box-border .wc-overlay__content:hover {
-  @apply border-white/80; /* Contraste máximo en hover */
-}
-
-/* Transparent - Sin estructura visible (solo contenido) */
-.wc-overlay--box-transparent .wc-overlay__content {
-  @apply bg-transparent;
-  @apply border-0; /* Sin borde */
+  @apply border-2 border-white/60;
   @apply backdrop-blur-none;
 }
 
-/* Double Border - Nueva variante outline-first */
-.wc-overlay--box-double .wc-overlay__content {
-  @apply bg-transparent;
-  @apply border-2 border-white/50;
-  @apply shadow-[0_0_0_4px_rgba(255,255,255,0.15)]; /* Doble borde con box-shadow */
+.wc-overlay--box-border .wc-overlay__content:hover {
+  @apply border-white/80;
 }
 
-/* ========================================
-   CATEGORY/TAG - OUTLINE STYLE
-   ======================================== */
+.wc-overlay--box-transparent .wc-overlay__content {
+  @apply bg-transparent;
+  @apply border-0;
+  @apply backdrop-blur-none;
+}
+
 .wc-overlay__category {
   @apply text-white w-fit text-xs font-medium;
   @apply uppercase tracking-wide;
   @apply py-1 px-3;
   @apply rounded-full;
   @apply transition-all duration-200;
-
-  /* Reemplazo de bg solid por border */
-  @apply bg-transparent; /* Sin fondo */
-  @apply border border-white/60; /* Borde blanco */
+  @apply bg-transparent;
+  @apply border border-white/60;
 }
 
 .wc-overlay__category:hover {
-  @apply border-white; /* Borde sólido en hover */
-  @apply bg-white/10; /* Tinte mínimo opcional */
+  @apply border-white;
+  @apply bg-white/10;
 }
 
-/* Variante con acento de color */
-.wc-overlay__category--accent {
-  @apply border-primary/80 text-primary;
-  @apply bg-transparent;
-}
-
-.wc-overlay__category--accent:hover {
-  @apply border-primary bg-primary/10;
-}
-
-/* ========================================
-   TITLE LINK - UNDERLINE REVEAL
-   ======================================== */
 .wc-overlay__title-link {
   @apply relative block;
 }
@@ -194,7 +129,6 @@
   @apply relative;
 }
 
-/* Underline effect en vez de opacity change */
 .wc-overlay__title-link::after {
   content: "";
   @apply absolute bottom-0 left-0;
@@ -208,158 +142,50 @@
 }
 
 .wc-overlay__title-link:hover > * {
-  @apply text-white; /* Mantener color, no cambiar opacity */
+  @apply text-white;
 }
 
-/* ========================================
-   META CONTAINER - ESTRUCTURA CON LÍNEAS
-   ======================================== */
 .wc-overlay__meta {
   @apply flex flex-wrap items-center gap-3 text-sm;
-  @apply pt-3; /* Espacio superior */
-  @apply border-t border-white/20; /* Línea divisoria superior */
+  @apply pt-3;
+  @apply border-t border-white/20;
 }
 
-/* Meta Items con separadores más sutiles */
 .wc-overlay__meta-item {
   @apply text-white/90 flex items-center font-medium;
   @apply transition-colors duration-200;
 }
 
 .wc-overlay__meta-item:hover {
-  @apply text-white; /* Full white en hover */
+  @apply text-white;
 }
 
 .wc-overlay__meta-item:not(:last-child)::after {
   content: "•";
-  @apply text-white/40 ml-2 mr-1; /* Bullet más sutil */
+  @apply text-white/40 ml-2 mr-1;
 }
 
-/* ========================================
-   RESPONSIVE - Mobile adjustments
-   ======================================== */
-.wc-overlay--aspect-square,
-.wc-overlay--aspect-video,
-.wc-overlay--aspect-monitor {
-  @apply md:aspect-3/4;
-}
-
-/* Bordes más delgados en mobile */
 @media (max-width: 768px) {
   .wc-overlay {
-    @apply border-0; /* Sin borde en mobile para maximizar espacio */
+    @apply border-0;
   }
 
   .wc-overlay__content {
-    @apply border; /* 1px en vez de 2px */
-    @apply rounded-md; /* Esquinas menos redondeadas */
+    @apply border;
+    @apply rounded-md;
   }
 
   .wc-overlay--box-background .wc-overlay__content,
-  .wc-overlay--box-border .wc-overlay__content,
-  .wc-overlay--box-double .wc-overlay__content {
-    @apply border; /* Uniformar en 1px en mobile */
+  .wc-overlay--box-border .wc-overlay__content {
+    @apply border;
   }
 }
 
-/* ========================================
-   VARIANTES ADICIONALES - OUTLINE FIRST
-   ======================================== */
-
-/* Overlay con grid de líneas (estilo blueprint) */
-.wc-overlay--grid::after {
-  content: "";
-  @apply absolute inset-0 z-0 pointer-events-none;
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 31px,
-      rgba(255, 255, 255, 0.05) 32px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 31px,
-      rgba(255, 255, 255, 0.05) 32px
-    );
-  background-size: 32px 32px;
-}
-
-/* Overlay con borde de acento lateral */
-.wc-overlay--accent-left .wc-overlay__content {
-  @apply border-l-4 border-l-primary;
-}
-
-.wc-overlay--accent-top .wc-overlay__content {
-  @apply border-t-4 border-t-primary;
-}
-
-/* Overlay con efecto de "marco de foto" */
-.wc-overlay--frame .wc-overlay__content {
-  @apply border-4 border-white/40;
-  @apply shadow-[inset_0_0_0_4px_rgba(0,0,0,0.2)]; /* Borde interno */
-}
-
-/* Overlay minimalista (solo líneas, sin fills) */
-.wc-overlay--minimal::before {
-  content: none; /* Sin overlay de fondo */
-}
-
-.wc-overlay--minimal .wc-overlay__content {
-  @apply bg-transparent;
-  @apply border border-white/50;
-  @apply backdrop-blur-none;
-}
-
-/* ========================================
-   INTERACCIONES AVANZADAS
-   ======================================== */
-
-/* Hover state para todo el overlay */
-.wc-overlay:hover .wc-overlay__content {
-  @apply border-white/70;
-  @apply shadow-[0_0_0_1px_rgba(255,255,255,0.2)]; /* Glow sutil */
-}
-
-/* Focus state para navegación por teclado */
 .wc-overlay:focus-within .wc-overlay__content {
   @apply border-2 border-white;
   @apply outline-2 outline-white outline-offset-2;
 }
 
-/* Loading state (skeleton) */
-.wc-overlay--loading .wc-overlay__content {
-  @apply animate-pulse;
-  @apply border-white/20;
-}
-
-.wc-overlay--loading .wc-overlay__title-link,
-.wc-overlay--loading .wc-overlay__category,
-.wc-overlay--loading .wc-overlay__meta {
-  @apply opacity-0;
-}
-
-/* ========================================
-   ACCESIBILIDAD
-   ======================================== */
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-  .wc-overlay__content {
-    @apply border-2 border-white;
-  }
-
-  .wc-overlay__category {
-    @apply border-2 border-white;
-  }
-
-  .wc-overlay__meta {
-    @apply border-t-2 border-white;
-  }
-}
-
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .wc-overlay__content,
   .wc-overlay__title-link,
@@ -367,138 +193,5 @@
   .wc-overlay__meta-item,
   .wc-overlay__title-link::after {
     @apply transition-none;
-  }
-
-  .wc-overlay--loading .wc-overlay__content {
-    @apply animate-none;
-  }
-}
-
-/* ========================================
-   DARK MODE ADJUSTMENTS
-   ======================================== */
-
-/* En dark mode, los overlays necesitan menos contraste */
-@media (prefers-color-scheme: dark) {
-  .wc-overlay {
-    @apply border-white/30; /* Más visible en dark */
-  }
-
-  .wc-overlay__content {
-    @apply border-white/40;
-  }
-
-  .wc-overlay--box-background .wc-overlay__content {
-    @apply bg-white/3; /* Tinte más sutil */
-    @apply border-white/50;
-  }
-}
-
-/* ========================================
-   UTILITIES - COMPOSICIÓN
-   ======================================== */
-
-/* Stack múltiples overlays con z-index */
-.wc-overlay--stacked-1 {
-  z-index: 10;
-}
-.wc-overlay--stacked-2 {
-  z-index: 20;
-}
-.wc-overlay--stacked-3 {
-  z-index: 30;
-}
-
-/* Content alignment interno */
-.wc-overlay__content--left {
-  @apply items-start text-left;
-}
-
-.wc-overlay__content--center {
-  @apply items-center text-center;
-}
-
-.wc-overlay__content--right {
-  @apply items-end text-right;
-}
-
-/* Compact variant */
-.wc-overlay--compact .wc-overlay__content {
-  @apply p-4 gap-2;
-  @apply max-w-md;
-}
-
-/* Expanded variant */
-.wc-overlay--expanded .wc-overlay__content {
-  @apply p-8 gap-4;
-  @apply max-w-4xl;
-}
-
-/* ========================================
-   ANIMACIONES ESPECÍFICAS
-   ======================================== */
-
-/* Fade in animation para overlay content */
-@keyframes wc-overlay-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.wc-overlay__content {
-  animation: wc-overlay-fade-in 0.4s ease-out;
-}
-
-/* Border pulse animation (para estados de loading/focus) */
-@keyframes wc-overlay-border-pulse {
-  0%,
-  100% {
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-  50% {
-    border-color: rgba(255, 255, 255, 0.7);
-  }
-}
-
-.wc-overlay--pulsing .wc-overlay__content {
-  animation: wc-overlay-border-pulse 2s ease-in-out infinite;
-}
-
-/* Draw border animation (SVG-style) */
-@keyframes wc-overlay-draw-border {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* Para usar con SVG border (avanzado) */
-.wc-overlay--animated-border .wc-overlay__content {
-  position: relative;
-}
-
-.wc-overlay--animated-border .wc-overlay__content::before {
-  content: "";
-  @apply absolute inset-0 rounded-lg;
-  @apply border-2 border-transparent;
-  background:
-    linear-gradient(var(--bg-color, transparent), var(--bg-color, transparent))
-      padding-box,
-    linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.5) 0%,
-        rgba(255, 255, 255, 0.1) 100%
-      )
-      border-box;
-  animation: wc-overlay-gradient-rotate 3s linear infinite;
-}
-
-@keyframes wc-overlay-gradient-rotate {
-  to {
-    transform: rotate(360deg);
   }
 }
