@@ -1,0 +1,25 @@
+@import "./styles/global.css";
+
+:where(iconify-icon) {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  color: currentColor;
+  flex: 0 0 auto;
+}
+
+:where(button, a, input, select, textarea) :where(iconify-icon) {
+  pointer-events: none;
+}
+
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--strata-color-focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(*) {
+    scroll-behavior: auto !important;
+  }
+}

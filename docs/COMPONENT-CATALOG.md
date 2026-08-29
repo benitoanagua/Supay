@@ -1,6 +1,6 @@
 # STRATA component catalog
 
-STRATA v2.5 ships a 30+ component catalog. The catalog is deliberately broad enough for mobile product UI while keeping each component small and composable.
+STRATA v2.5 ships a 48-component catalog. The catalog is deliberately broad enough for mobile product UI while keeping each component small and composable.
 
 ## Actions
 
@@ -32,4 +32,4 @@ Every component should document: purpose, anatomy, variants, size, states, acces
 
 ## Maturity
 
-The 2.5 catalog is intentionally split between mature legacy migrations and newly introduced primitives. Every new component is shipped as a composable baseline; components that gain complex interaction semantics (dialogs, menus, date fields, data tables, etc.) must complete the full checklist before being marked Stable.
+Every component is shipped as a composable baseline. Components that gain complex interaction semantics (dialogs, menus, date fields, data tables, etc.) must complete the full checklist before being marked Stable.

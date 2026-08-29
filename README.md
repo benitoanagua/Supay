@@ -32,11 +32,5 @@ pnpm storybook
 pnpm check
 pnpm test:visual
 pnpm test:a11y
-pnpm migrate:legacy ./path/to/legacy/source
 ```
 
-## Legacy migration
-
-New code must use `strata-*`. Historical `wc-*` tags are available only through the compatibility bridge and are deprecated. The migration helper replaces canonical `wc-*` tags in HTML/JS/TS/JSX/TSX files without rewriting arbitrary strings.
-
-See `docs/LEGACY-MIGRATION.md` and `docs/COMPONENT-CATALOG.md`.

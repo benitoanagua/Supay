@@ -30,17 +30,17 @@ const meta = {
       const header = document.createElement("div");
       header.slot = "header";
       header.innerHTML = `
-        <div class="flex items-center gap-3">
+        <div class="strata-story-row">
           <iconify-icon icon="carbon:document" aria-hidden="true" class="strata-story-icon"></iconify-icon>
-          <span class="font-medium">Section ${i + 1}</span>
+          <span class="strata-story-medium">Section ${i + 1}</span>
         </div>
       `;
 
       const content = document.createElement("div");
       content.innerHTML = `
-        <p class="text-onSurfaceVariant">Accordion content keeps the panel layout intact and lets typography carry the hierarchy.</p>
-        <div class="mt-3 p-3 bg-surfaceContainerLow border-l-4 border-primary">
-          <p class="text-onSurfaceVariant text-sm">Semantic color is used sparingly, as a signal, not decoration.</p>
+        <p class="strata-story-secondary">Accordion content keeps the panel layout intact and lets typography carry the hierarchy.</p>
+        <div class="strata-story-callout strata-story-callout--compact">
+          <p class="strata-story-secondary strata-story-small">Semantic color is used sparingly, as a signal, not decoration.</p>
         </div>
       `;
 

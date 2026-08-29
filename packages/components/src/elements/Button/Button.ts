@@ -1,6 +1,7 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./Button.css?inline";
 import type {
   StrataIconName,
   ButtonVariant,
@@ -11,7 +12,7 @@ import type {
 
 @customElement("strata-button")
 export class StrataButton extends LitElement {
-  static styles = [unsafeCSS(mainCSS)];
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @property({ type: String }) label = "";
   @property({ type: String }) variant: ButtonVariant = "outlined";
@@ -104,7 +105,7 @@ export class StrataButton extends LitElement {
         <span class="strata-button__loading">
           <span class="strata-button__spinner"></span>
         </span>
-        <span class="strata-button__label opacity-0">${this.label}</span>
+        <span class="strata-button__label strata-button__label--hidden">${this.label}</span>
       `;
     }
 

@@ -1,6 +1,7 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./Overlay.css?inline";
 import type {
   OverlayAlign,
   OverlayPosition,
@@ -15,7 +16,7 @@ const BaseClass = TitleRendererMixin(LitElement);
 
 @customElement("strata-overlay")
 export class StrataOverlay extends BaseClass {
-  static styles = [unsafeCSS(mainCSS)];
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @property({ type: String }) title = "";
   @property({ type: String }) url = "";

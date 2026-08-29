@@ -69,10 +69,10 @@ const meta = {
 
     const content = document.createElement("div");
     content.innerHTML = `
-      <div class="space-y-4">
-        <p class="text-onSurfaceVariant">STRATA is a contemporary editorial design system built on monochrome structure and semantic color. Typography leads hierarchy, and physical scale determines structural weight.</p>
-        <div class="p-4 bg-surfaceContainerLow border-l-4 border-primary">
-          <p class="text-onSurfaceVariant text-sm">Color establishes meaning. Use the semantic spectrum only as a signal, never as decoration.</p>
+      <div class="strata-story-stack">
+        <p class="strata-story-secondary">STRATA is a contemporary editorial design system built on monochrome structure and semantic color. Typography leads hierarchy, and physical scale determines structural weight.</p>
+        <div class="strata-story-callout">
+          <p class="strata-story-secondary strata-story-small">Color establishes meaning. Use the semantic spectrum only as a signal, never as decoration.</p>
         </div>
       </div>
     `;
@@ -80,7 +80,7 @@ const meta = {
     const footer = document.createElement("div");
     footer.slot = "footer";
     footer.innerHTML = `
-      <div class="flex items-center justify-end gap-3">
+      <div class="strata-story-actions">
         <strata-button label="Cancel" variant="outlined" size="medium"></strata-button>
         <strata-button label="Confirm" variant="filled" size="medium"></strata-button>
       </div>

@@ -16,6 +16,6 @@ export class StrataIconButton extends LitElement {
   @property({ type: String }) label = "";
   @property({ type: String }) icon = "carbon:add";
   render() {
-    return html`<button ?disabled=${this.disabled} aria-label=${this.label || "Action"}><iconify-icon icon=${this.icon} aria-hidden="true"></iconify-icon></button>`;
+    return html`<button type="button" ?disabled=${this.disabled} aria-label=${this.label || "Action"}><iconify-icon icon=${this.icon} aria-hidden="true"></iconify-icon></button>`;
   }
 }

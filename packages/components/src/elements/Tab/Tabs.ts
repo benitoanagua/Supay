@@ -5,12 +5,15 @@ import {
   state,
   queryAssignedElements,
 } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./Tab.css?inline";
 import type { TabsProps, TabChangeEvent } from "../../types/tabs.js";
+import type { StrataTab } from "./Tab.js";
+import type { StrataTabPanel } from "./TabPanel.js";
 
 @customElement("strata-tabs")
 export class StrataTabs extends LitElement implements TabsProps {
-  static styles = [unsafeCSS(mainCSS)];
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @property({ type: Number, attribute: "active-tab" }) activeTab = 0;
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -18,23 +21,23 @@ export class StrataTabs extends LitElement implements TabsProps {
   @state() private selected = 0;
 
   @queryAssignedElements({ slot: "tabs", selector: "strata-tab" })
-  private tabElements!: Element[];
+  private tabElements!: StrataTab[];
 
   @queryAssignedElements({ slot: "panels", selector: "strata-tab-panel" })
-  private panelElements!: Element[];
+  private panelElements!: StrataTabPanel[];
 
   connectedCallback() {
     super.connectedCallback();
-    this.selected = this.activeTab;
+    this.selected = Math.max(0, this.activeTab);
   }
 
   protected firstUpdated() {
     this.updateTabs();
   }
 
-  protected updated(changedProperties: Map<string, any>) {
+  protected updated(changedProperties: Map<string, unknown>) {
     if (changedProperties.has("activeTab")) {
-      this.selected = this.activeTab;
+      this.selected = Math.max(0, this.activeTab);
       this.updateTabs();
     }
   }
@@ -61,18 +64,20 @@ export class StrataTabs extends LitElement implements TabsProps {
       const isActive = index === this.selected;
 
       // Actualizar la propiedad 'active' del tab
-      (tab as any).active = isActive;
+      tab.active = isActive;
+      tab.panelId = `strata-tab-panel-${index}`;
 
       if (this.disabled) {
-        (tab as any).disabled = true;
+        tab.disabled = true;
       } else {
-        (tab as any).disabled = false;
+        tab.disabled = false;
       }
     });
 
     // Update panels
     this.panelElements.forEach((panel, index) => {
-      (panel as any).active = index === this.selected;
+      panel.active = index === this.selected;
+      panel.panelId = `strata-tab-panel-${index}`;
     });
   }
 

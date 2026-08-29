@@ -8,7 +8,6 @@ export type CardMediaWidth =
   | "is-one-quarter"
   | "is-one-fifth";
 export type CardAspectRatio = "monitor" | "square" | "video";
-export type CardElevation = 0 | 1 | 2 | 3;
 
 export interface CardProps {
   title: string;
@@ -27,5 +26,4 @@ export interface CardProps {
   media_align: CardMediaAlign;
   media_width: CardMediaWidth;
   aspect_ratio: CardAspectRatio;
-  elevation: CardElevation;
 }

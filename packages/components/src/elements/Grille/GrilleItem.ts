@@ -1,23 +1,12 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
-import { ThemeAwareMixin } from "../../mixins/ThemeAwareMixin.js";
-
-const ThemeAwareBase = ThemeAwareMixin(LitElement);
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./Grille.css?inline";
 
 @customElement("strata-grille-item")
-export class StrataGrilleItem extends ThemeAwareBase {
-  static styles = [unsafeCSS(mainCSS)];
+export class StrataGrilleItem extends LitElement {
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
-  protected createRenderRoot() {
-    const shadowRoot = super.createRenderRoot();
-
-    const themeStyle = document.createElement("style");
-    themeStyle.id = "theme-vars";
-    shadowRoot.appendChild(themeStyle);
-
-    return shadowRoot;
-  }
 
   connectedCallback() {
     super.connectedCallback();

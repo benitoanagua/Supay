@@ -6,7 +6,7 @@ export interface TitleRendererInterface {
   title: string;
 }
 
-export function TitleRendererMixin<T extends new (...args: any[]) => any>(
+export function TitleRendererMixin<T extends new (...args: never[]) => object>(
   Base: T
 ) {
   return class extends Base implements TitleRendererInterface {
@@ -14,7 +14,7 @@ export function TitleRendererMixin<T extends new (...args: any[]) => any>(
     title!: string;
 
     getHeadingClass(): string {
-      return `m-0 font-medium headline-${this.heading}`;
+      return `strata-title strata-title--level-${this.heading}`;
     }
 
     renderTitle(additionalClasses: string = ""): TemplateResult {

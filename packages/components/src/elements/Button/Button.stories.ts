@@ -51,7 +51,7 @@ export const Outline: Story = {
 export const StructuralVariants: Story = {
   render: () => {
     const container = document.createElement("div");
-    container.className = "flex flex-wrap items-center gap-4 p-6";
+    container.className = "strata-story-button-variants";
 
     const variants = ["outlined", "filled", "text", "tonal"];
     variants.forEach((variant) => {
@@ -76,7 +76,7 @@ export const Playground: Story = {
     loading: false,
     fullWidth: false,
     href: "",
-    icon: "carbon--settings",
+    icon: "carbon:settings",
     trailingIcon: false,
   },
   parameters: {

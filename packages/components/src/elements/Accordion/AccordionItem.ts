@@ -1,31 +1,19 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./Accordion.css?inline";
 import type { AccordionItemProps } from "../../types/accordion.js";
-import { ThemeAwareMixin } from "../../mixins/ThemeAwareMixin.js";
-
-const ThemeAwareBase = ThemeAwareMixin(LitElement);
 
 @customElement("strata-accordion-item")
 export class StrataAccordionItem
-  extends ThemeAwareBase
+  extends LitElement
   implements AccordionItemProps
 {
-  static styles = [unsafeCSS(mainCSS)];
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @property({ type: Boolean, reflect: true }) open = false;
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  protected createRenderRoot() {
-    const shadowRoot = super.createRenderRoot();
-
-    // Ensure theme style element is created
-    const themeStyle = document.createElement("style");
-    themeStyle.id = "theme-vars";
-    shadowRoot.appendChild(themeStyle);
-
-    return shadowRoot;
-  }
 
   private toggle() {
     if (this.disabled) return;

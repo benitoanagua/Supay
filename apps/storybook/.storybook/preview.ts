@@ -1,3 +1,4 @@
+import '../src/story-components.css';
 import '@strata/tokens/styles.css';
 import '@strata/components';
 import type { Preview } from '@storybook/html';

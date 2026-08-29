@@ -1,11 +1,9 @@
 import { defineConfig } from "vite";
 import { resolve } from "node:path";
-import tailwindcss from "@tailwindcss/vite";
 import dts from "vite-plugin-dts";
 
 export default defineConfig({
   plugins: [
-    tailwindcss(),
     dts({
       entryRoot: "src",
       tsconfigPath: "./tsconfig.json",

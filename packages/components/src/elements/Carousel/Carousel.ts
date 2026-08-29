@@ -1,14 +1,12 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property, state, query } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./Carousel.css?inline";
 import type { CarouselProps } from "../../types/carousel.js";
-import { ThemeAwareMixin } from "../../mixins/ThemeAwareMixin.js";
-
-const ThemeAwareBase = ThemeAwareMixin(LitElement);
 
 @customElement("strata-carousel")
-export class StrataCarousel extends ThemeAwareBase implements CarouselProps {
-  static styles = [unsafeCSS(mainCSS)];
+export class StrataCarousel extends LitElement implements CarouselProps {
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @property({ type: Number }) desktop = 3;
   @property({ type: Number }) mobile = 1;
@@ -46,13 +44,13 @@ export class StrataCarousel extends ThemeAwareBase implements CarouselProps {
 
   private get gapClass(): string {
     const gapMap = {
-      none: "gap-0",
-      small: "gap-1",
-      medium: "gap-2",
-      large: "gap-3",
-      xlarge: "gap-4",
+      none: "strata-carousel__container--gap-none",
+      small: "strata-carousel__container--gap-small",
+      medium: "strata-carousel__container--gap-medium",
+      large: "strata-carousel__container--gap-large",
+      xlarge: "strata-carousel__container--gap-xlarge",
     };
-    return gapMap[this.gap] || "gap-2";
+    return gapMap[this.gap] || "strata-carousel__container--gap-medium";
   }
 
   private get gapValue(): number {
@@ -89,7 +87,7 @@ export class StrataCarousel extends ThemeAwareBase implements CarouselProps {
     this.setupAutoPlay();
   }
 
-  protected willUpdate(changedProperties: Map<string, any>) {
+  protected willUpdate(changedProperties: Map<string, unknown>) {
     if (
       changedProperties.has("desktop") ||
       changedProperties.has("mobile") ||
@@ -196,7 +194,7 @@ export class StrataCarousel extends ThemeAwareBase implements CarouselProps {
 
   private getContainerClasses(): string {
     const baseClasses =
-      "strata-carousel__container flex overflow-x-auto scroll-smooth p-3 md:p-4 w-full";
+      "strata-carousel__container";
 
     const currentGapClass = this.gapClass;
 
@@ -484,7 +482,7 @@ export class StrataCarousel extends ThemeAwareBase implements CarouselProps {
 
     return html`
       <div class="strata-carousel__counter" aria-live="polite" aria-atomic="true">
-        <span class="text-sm text-onSurfaceVariant">
+        <span class="strata-carousel__counter">
           ${this.currentIndex + 1} / ${this.maxIndex + 1}
         </span>
       </div>

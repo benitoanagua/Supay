@@ -5,5 +5,5 @@ import { StrataElement } from "../StrataBase.js";
 @customElement("strata-spinner")
 export class StrataSpinner extends StrataElement {
   @property({type:String}) label="Loading";
-  render(){return html`<span class="spinner" role="status" aria-label=${this.label}></span>`;}
+  render(){return html`<span class="strata-spinner" role="status" aria-label=${this.label}></span>`;}
 }

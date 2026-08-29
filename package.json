@@ -11,12 +11,11 @@
     "lint": "node tooling/lint/design-rules.mjs && node tooling/lint/icon-rules.mjs && turbo lint",
     "storybook": "pnpm --filter @strata/storybook storybook",
     "build:storybook": "pnpm --filter @strata/storybook build-storybook",
-    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm build:storybook",
+    "check": "pnpm audit && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm build:storybook",
     "test:visual": "pnpm --filter @strata/testing test:visual",
     "test:a11y": "pnpm --filter @strata/testing test:a11y",
     "release": "changeset publish",
-    "audit": "node tooling/token-validator/check.mjs && node tooling/lint/design-rules.mjs && node tooling/lint/icon-rules.mjs && node tooling/migration/audit.mjs",
-    "migrate:legacy": "node tooling/migration/wc-to-strata.mjs",
+    "audit": "node tooling/token-validator/check.mjs && node tooling/lint/design-rules.mjs && node tooling/lint/icon-rules.mjs",
     "docs": "pnpm storybook",
     "test:contracts": "pnpm --filter @strata/testing test:contracts",
     "format:check": "prettier --check .",
@@ -31,10 +30,8 @@
     "typescript": "^5.7.0",
     "@iconify-json/carbon": "^1.2.25",
     "iconify-icon": "^3.0.2",
-    "@tailwindcss/vite": "^4.1.0",
-    "tailwindcss": "^4.1.0",
     "@playwright/test": "^1.50.0",
     "@axe-core/playwright": "^4.10.0"
   },
-  "description": "STRATA Design System \u2014 contemporary editorial UI system"
+  "description": "STRATA Design System — contemporary editorial UI system"
 }

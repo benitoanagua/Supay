@@ -1,11 +1,12 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./Carousel.css?inline";
 import type { CarouselItemProps } from "../../types/carousel.js";
 
 @customElement("strata-carousel-item")
 export class StrataCarouselItem extends LitElement implements CarouselItemProps {
-  static styles = [unsafeCSS(mainCSS)];
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @property({ type: Number }) order = 0;
   @property({ type: Boolean }) active = false;
@@ -31,7 +32,7 @@ export class StrataCarouselItem extends LitElement implements CarouselItemProps 
     this.setAttribute("aria-roledescription", "slide");
   }
 
-  updated(changedProperties: Map<string, any>) {
+  updated(changedProperties: Map<string, unknown>) {
     if (changedProperties.has("active")) {
       this.updateAriaAttributes();
     }

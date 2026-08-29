@@ -1,11 +1,12 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./Grille.css?inline";
 import type { GrilleProps, Gap } from "../../types/grille.js";
 
 @customElement("strata-grille")
 export class StrataGrille extends LitElement implements GrilleProps {
-  static styles = [unsafeCSS(mainCSS)];
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @property({ type: Number }) desktop: GrilleProps["desktop"] = 3;
   @property({ type: Number }) mobile: GrilleProps["mobile"] = 2;
@@ -18,16 +19,9 @@ export class StrataGrille extends LitElement implements GrilleProps {
   private slotElement!: HTMLSlotElement;
 
   private resizeObserver?: ResizeObserver;
+  private readonly handleResize = () => { window.setTimeout(() => this.gridRendering(), 100); };
 
-  protected createRenderRoot() {
-    const shadowRoot = super.createRenderRoot();
 
-    const themeStyle = document.createElement("style");
-    themeStyle.id = "theme-vars";
-    shadowRoot.appendChild(themeStyle);
-
-    return shadowRoot;
-  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -37,6 +31,7 @@ export class StrataGrille extends LitElement implements GrilleProps {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver?.disconnect();
+    window.removeEventListener("resize", this.handleResize);
   }
 
   firstUpdated(): void {
@@ -55,10 +50,7 @@ export class StrataGrille extends LitElement implements GrilleProps {
       this.resizeObserver.observe(this.containerElement);
     }
 
-    // Fallback para cambios de viewport
-    window.addEventListener("resize", () => {
-      setTimeout(() => this.gridRendering(), 100);
-    });
+    window.addEventListener("resize", this.handleResize);
   }
 
   private grid(
@@ -153,7 +145,7 @@ export class StrataGrille extends LitElement implements GrilleProps {
 
   render() {
     return html`
-      <div class="strata-grille__container flex flex-wrap">
+      <div class="strata-grille__container">
         <slot @slotchange=${this.gridRendering}></slot>
       </div>
     `;

@@ -11,3 +11,8 @@
 .strata-card--bordered.strata-card--size-medium{border-width:var(--strata-border-medium)}
 .strata-card--bordered.strata-card--size-large{border-width:var(--strata-border-large)}
 .strata-card--bordered.strata-card--size-hero{border-width:var(--strata-border-hero)}
+
+.strata-card__container--row{flex-direction:row}.strata-card__container--responsive-row{flex-direction:column}.strata-card__container--row-reverse{flex-direction:row-reverse}.strata-card__container--responsive-row-reverse{flex-direction:column-reverse}.strata-card__container--column{flex-direction:column}.strata-card__container--column-reverse{flex-direction:column-reverse}
+.strata-card__figure--flexible{flex:1}.strata-card__figure--one-fifth{width:20%}.strata-card__figure--one-quarter{width:25%}.strata-card__figure--one-third{width:33.333333%}.strata-card__figure--two-fifths{width:40%}.strata-card__figure--one-half{width:50%}
+.strata-card__image{width:100%;height:auto;object-fit:cover}.strata-card__image--compact{border-radius:var(--strata-radius-small)}.strata-card__image--standard{border-radius:var(--strata-radius-medium)}.strata-card__image--large{border-radius:var(--strata-radius-large)}.strata-card__image--square{aspect-ratio:1}.strata-card__image--video{aspect-ratio:16/9}.strata-card__image--four-three{aspect-ratio:4/3}
+@media(max-width:768px){.strata-card__container--responsive-row,.strata-card__container--responsive-row-reverse{flex-direction:column}.strata-card__figure--one-fifth,.strata-card__figure--one-quarter,.strata-card__figure--one-third,.strata-card__figure--two-fifths,.strata-card__figure--one-half{width:100%}}

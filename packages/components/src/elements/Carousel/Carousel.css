@@ -1,211 +1,402 @@
 .strata-carousel {
-  @apply w-full bg-transparent relative;
-  @apply border border-outline/30 rounded-lg;
-  @apply transition-all duration-200;
+  
+  width:100%;
+  background-color:transparent;
+  position:relative;
+  
+  border-width:1px;border-style:solid;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 30%, transparent);
+  border-radius:var(--strata-radius-medium);
+  
+  transition-property:all;
+  transition-duration:200ms;
 }
 
 .strata-carousel:hover {
-  @apply border-outline/50;
+  
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 50%, transparent);
 }
 
 .strata-carousel--flat {
-  @apply shadow-none rounded-lg;
+  
+  border-radius:var(--strata-radius-medium);
 }
 
 .strata-carousel--dragging {
-  @apply cursor-grabbing;
-  @apply border-primary/40;
+  
+  cursor:grabbing;
+  
+  border-color: color-mix(in srgb, var(--strata-color-action-primary) 40%, transparent);
 }
 
 .strata-carousel--dragging .strata-carousel-item__content {
-  @apply pointer-events-none;
+  
+  pointer-events:none;
 }
 
 .strata-carousel__navigation {
-  @apply flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4;
-  @apply p-3 md:p-4 bg-transparent;
-  @apply border-b border-outline/30;
-  @apply transition-colors duration-200;
+  
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+  
+  padding:.75rem;
+  background-color:transparent;
+  
+  border-bottom-width:1px;border-bottom-style:solid;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 30%, transparent);
+  
+  transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;
+  transition-duration:200ms;
+}
+@media (min-width: 769px) {
+
+
+.strata-carousel__navigation {
+  gap:1rem;
+  padding:1rem;
+}
 }
 
 .strata-carousel:hover .strata-carousel__navigation {
-  @apply border-b-outline/50;
+  
+  border-bottom-color: color-mix(in srgb, var(--strata-color-border-strong) 50%, transparent);
 }
 
 .strata-carousel__arrows {
-  @apply flex gap-2 order-2 md:order-1;
+  
+  display:flex;
+  gap:.5rem;
+  order:2;
+}
+@media (min-width: 769px) {
+
+
+.strata-carousel__arrows {
+  order:1;
+}
 }
 
 .strata-carousel__arrow {
-  @apply p-2;
-  @apply border-2 border-outline/40 bg-transparent;
-  @apply text-onSurfaceVariant;
-  @apply transition-all duration-200 cursor-pointer;
-  @apply rounded-full;
-  @apply w-10 h-10 md:w-12 md:h-12;
-  @apply flex items-center justify-center;
+  
+  padding:.5rem;
+  
+  border-width:2px;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 40%, transparent);
+  background-color:transparent;
+  
+  color:var(--strata-color-text-secondary);
+  
+  transition-property:all;
+  transition-duration:200ms;
+  cursor:pointer;
+  
+  border-radius:9999px;
+  
+  width:2.5rem;
+  height:2.5rem;
+  
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+@media (min-width: 769px) {
+
+
+.strata-carousel__arrow {
+  width:3rem;
+  height:3rem;
+}
 }
 
 .strata-carousel__arrow:hover {
-  @apply border-primary/60 text-primary;
-  @apply bg-primary/5;
+  
+  border-color: color-mix(in srgb, var(--strata-color-action-primary) 60%, transparent);
+  color:var(--strata-color-action-primary);
+  
+  background-color: color-mix(in srgb, var(--strata-color-action-primary) 5%, transparent);
 }
 
 .strata-carousel__arrow:active {
-  @apply scale-95;
-  @apply border-primary text-primary;
-  @apply bg-primary/10;
+  
+  transform:scale(.95);
+  
+  border-color:var(--strata-color-action-primary);
+  color:var(--strata-color-action-primary);
+  
+  background-color: color-mix(in srgb, var(--strata-color-action-primary) 10%, transparent);
 }
 
 .strata-carousel__arrow:focus-visible {
-  @apply outline-2 outline-primary outline-offset-2;
-  @apply border-primary/80;
+  
+  outline-width:2px;
+  outline-color:var(--strata-color-action-primary);
+  outline-offset:2px;
+  
+  border-color: color-mix(in srgb, var(--strata-color-action-primary) 80%, transparent);
 }
 
 .strata-carousel__arrow--disabled,
 .strata-carousel__arrow:disabled {
-  @apply opacity-30 cursor-not-allowed;
-  @apply border-outline/20 text-onSurfaceVariant;
-  @apply bg-transparent;
+  
+  opacity:.3;
+  cursor:not-allowed;
+  
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 20%, transparent);
+  color:var(--strata-color-text-secondary);
+  
+  background-color:transparent;
 }
 
 .strata-carousel__arrow--disabled:hover,
 .strata-carousel__arrow:disabled:hover {
-  @apply border-outline/20 text-onSurfaceVariant bg-transparent;
-  @apply scale-100;
+  
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 20%, transparent);
+  color:var(--strata-color-text-secondary);
+  background-color:transparent;
+  
+  transform:scale(1);
 }
 
 .strata-carousel__dots {
-  @apply flex gap-2 order-1 md:order-2;
+  
+  display:flex;
+  gap:.5rem;
+  order:1;
+}
+@media (min-width: 769px) {
+
+
+.strata-carousel__dots {
+  order:2;
+}
 }
 
 .strata-carousel__dot {
-  @apply w-3 h-3 md:w-4 md:h-4;
-  @apply border-2 border-outline/40 bg-transparent;
-  @apply transition-all duration-200 cursor-pointer;
-  @apply rounded-full;
+  
+  width:.75rem;
+  height:.75rem;
+  
+  border-width:2px;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 40%, transparent);
+  background-color:transparent;
+  
+  transition-property:all;
+  transition-duration:200ms;
+  cursor:pointer;
+  
+  border-radius:9999px;
+}
+@media (min-width: 769px) {
+
+
+.strata-carousel__dot {
+  width:1rem;
+  height:1rem;
+}
 }
 
 .strata-carousel__dot:hover {
-  @apply border-primary/60;
-  @apply bg-primary/10;
+  
+  border-color: color-mix(in srgb, var(--strata-color-action-primary) 60%, transparent);
+  
+  background-color: color-mix(in srgb, var(--strata-color-action-primary) 10%, transparent);
 }
 
 .strata-carousel__dot--active {
-  @apply border-primary bg-primary;
+  
+  border-color:var(--strata-color-action-primary);
+  background-color:var(--strata-color-action-primary);
 }
 
 .strata-carousel__dot--active:hover {
-  @apply border-primary bg-primary;
-  @apply scale-110;
+  
+  border-color:var(--strata-color-action-primary);
+  background-color:var(--strata-color-action-primary);
+  
+  transform:scale(1.1);
 }
 
 .strata-carousel__dot:focus-visible {
-  @apply outline-2 outline-primary outline-offset-1;
+  
+  outline-width:2px;
+  outline-color:var(--strata-color-action-primary);
+  outline-offset:1px;
 }
 
 .strata-carousel__counter {
-  @apply order-3;
-  @apply text-onSurfaceVariant text-sm font-medium;
-  @apply px-3 py-1.5;
-  @apply bg-transparent;
-  @apply border border-outline/40 rounded-full;
-  @apply transition-all duration-200;
+  
+  order:3;
+  
+  color:var(--strata-color-text-secondary);
+  font-size:.875rem;
+  font-weight:500;
+  
+  padding-left:.75rem;padding-right:.75rem;
+  padding-top:.375rem;padding-bottom:.375rem;
+  
+  background-color:transparent;
+  
+  border-width:1px;border-style:solid;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 40%, transparent);
+  border-radius:9999px;
+  
+  transition-property:all;
+  transition-duration:200ms;
 }
 
 .strata-carousel__counter:hover {
-  @apply border-outline/60;
-  @apply bg-surfaceContainerLow/30;
+  
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 60%, transparent);
+  
+  background-color: color-mix(in srgb, var(--strata-color-surface-subtle) 30%, transparent);
 }
 
 .strata-carousel__container {
-  @apply flex overflow-x-auto scroll-smooth p-3 md:p-4 w-full;
+  
+  display:flex;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  padding:.75rem;
+  width:100%;
   scrollbar-width: none;
   -ms-overflow-style: none;
   scroll-snap-type: x mandatory;
   cursor: grab;
-  @apply border-t border-outline/0;
+  
+  border-top-width:1px;border-top-style:solid;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 0%, transparent);
+}
+@media (min-width: 769px) {
+
+
+.strata-carousel__container {
+  padding:1rem;
+}
 }
 
 .strata-carousel__container:active {
-  @apply cursor-grabbing;
+  
+  cursor:grabbing;
 }
 
 .strata-carousel__container::-webkit-scrollbar {
   display: none;
 }
 
-.strata-carousel__container.gap-0 {
-  @apply gap-0;
+.strata-carousel__container.strata-carousel__container--gap-none {
+  
+  gap:0;
 }
 
-.strata-carousel__container.gap-1 {
-  @apply gap-1;
+.strata-carousel__container.strata-carousel__container--gap-small {
+  
+  gap:.25rem;
 }
 
-.strata-carousel__container.gap-2 {
-  @apply gap-2;
+.strata-carousel__container.strata-carousel__container--gap-medium {
+  
+  gap:.5rem;
 }
 
-.strata-carousel__container.gap-3 {
-  @apply gap-3;
+.strata-carousel__container.strata-carousel__container--gap-large {
+  
+  gap:.75rem;
 }
 
-.strata-carousel__container.gap-4 {
-  @apply gap-4;
+.strata-carousel__container.strata-carousel__container--gap-xlarge {
+  
+  gap:1rem;
 }
 
 .strata-carousel-item {
-  @apply flex-shrink-0 transition-transform duration-300;
+  
+  flex-shrink:0;
+  transition-property:transform;
+  transition-duration:300ms;
   scroll-snap-align: start;
   flex: 0 0 auto;
-  @apply border border-outline/20 rounded-md;
-  @apply bg-transparent;
+  
+  border-width:1px;border-style:solid;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 20%, transparent);
+  border-radius:var(--strata-radius-small);
+  
+  background-color:transparent;
 }
 
 .strata-carousel-item:hover {
-  @apply border-outline/40;
-  @apply transform scale-[1.02];
+  
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 40%, transparent);
+  
+  transform:translateZ(0);
+  transform:scale(1.02);
 }
 
 .strata-carousel-item:focus-within {
-  @apply border-primary/60;
-  @apply outline-2 outline-primary outline-offset-2;
+  
+  border-color: color-mix(in srgb, var(--strata-color-action-primary) 60%, transparent);
+  
+  outline-width:2px;
+  outline-color:var(--strata-color-action-primary);
+  outline-offset:2px;
 }
 
 .strata-carousel-item__content {
-  @apply h-full w-full outline-none;
-  @apply transition-all duration-200;
-  @apply rounded-md overflow-hidden;
+  
+  height:100%;
+  width:100%;
+  outline:none;
+  
+  transition-property:all;
+  transition-duration:200ms;
+  
+  border-radius:var(--strata-radius-small);
+  overflow:hidden;
 }
 
 .strata-carousel-item__content:focus-visible {
-  @apply outline-2 outline-primary outline-offset-2;
+  
+  outline-width:2px;
+  outline-color:var(--strata-color-action-primary);
+  outline-offset:2px;
 }
 
 @media (max-width: 768px) {
   .strata-carousel {
-    @apply border-outline/20;
+    
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 20%, transparent);
   }
 
   .strata-carousel__navigation {
-    @apply flex-col gap-2;
+    
+  flex-direction:column;
+  gap:.5rem;
   }
 
   .strata-carousel__arrow {
-    @apply w-9 h-9;
+    
+  width:2.25rem;
+  height:2.25rem;
   }
 
   .strata-carousel__dot {
-    @apply w-2.5 h-2.5;
+    
+  width:.625rem;
+  height:.625rem;
   }
 
   .strata-carousel__counter {
-    @apply px-2 py-1 text-xs;
+    
+  padding-left:.5rem;padding-right:.5rem;
+  padding-top:.25rem;padding-bottom:.25rem;
+  font-size:.75rem;
   }
 
   .strata-carousel-item {
-    @apply border-outline/10;
+    
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 10%, transparent);
   }
 }
 
@@ -215,14 +406,17 @@
   .strata-carousel__dot,
   .strata-carousel-item,
   .strata-carousel-item__content {
-    @apply transition-none;
+    
+  transition-property:none;
   }
 
   .strata-carousel-item:hover {
-    @apply scale-100;
+    
+  transform:scale(1);
   }
 
   .strata-carousel__dot--active:hover {
-    @apply scale-100;
+    
+  transform:scale(1);
   }
 }

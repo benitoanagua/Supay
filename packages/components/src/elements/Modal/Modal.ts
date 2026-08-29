@@ -1,6 +1,7 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./Modal.css?inline";
 import type {
   ModalSize,
   ModalPosition,
@@ -10,7 +11,7 @@ import type {
 
 @customElement("strata-modal")
 export class StrataModal extends LitElement {
-  static styles = unsafeCSS(mainCSS);
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @property({ type: Boolean, reflect: true }) open = false;
   @property({ type: String }) title = "";
@@ -27,18 +28,9 @@ export class StrataModal extends LitElement {
   preventScroll = true;
 
   @state() private isClosing = false;
-
-  // Deshabilitar Shadow DOM para usar estilos globales de Tailwind
-  protected createRenderRoot() {
-    const shadowRoot = super.createRenderRoot();
-
-    // Aplicar estilos globales manualmente
-    const style = document.createElement("style");
-    style.textContent = (mainCSS as any).toString();
-    shadowRoot.appendChild(style);
-
-    return shadowRoot;
-  }
+  private previousBodyOverflow = "";
+  private previouslyFocused: HTMLElement | null = null;
+  private readonly titleId = `strata-modal-title-${Math.random().toString(36).slice(2)}`;
 
   connectedCallback() {
     super.connectedCallback();
@@ -53,8 +45,13 @@ export class StrataModal extends LitElement {
     this.restoreBodyScroll();
   }
 
-  protected updated(changedProperties: Map<string, any>) {
+  protected updated(changedProperties: Map<string, unknown>) {
     super.updated(changedProperties);
+
+    if (changedProperties.has("closeOnEscape")) {
+      this.cleanupEscapeListener();
+      if (this.closeOnEscape) this.setupEscapeListener();
+    }
 
     if (changedProperties.has("open")) {
       if (this.open) {
@@ -66,6 +63,7 @@ export class StrataModal extends LitElement {
   }
 
   private handleOpen() {
+    this.previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     if (this.preventScroll) {
       this.preventBodyScroll();
     }
@@ -84,6 +82,8 @@ export class StrataModal extends LitElement {
 
   private handleClose() {
     this.restoreBodyScroll();
+    this.previouslyFocused?.focus();
+    this.previouslyFocused = null;
 
     // Dispatch close event
     this.dispatchEvent(
@@ -140,28 +140,31 @@ export class StrataModal extends LitElement {
   };
 
   private preventBodyScroll() {
-    document.body.classList.add("strata-modal-open");
+    this.previousBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
   }
 
   private restoreBodyScroll() {
-    document.body.classList.remove("strata-modal-open");
-    document.body.style.overflow = "";
+    document.body.style.overflow = this.previousBodyOverflow;
   }
 
   private setupFocusTrap() {
-    // Focus first focusable element inside modal
     setTimeout(() => {
-      const modal = this.shadowRoot?.querySelector(".strata-modal");
-      if (modal) {
-        const focusableElements = modal.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        const firstElement = focusableElements[0] as HTMLElement;
-        firstElement?.focus();
-      }
-    }, 100);
+      const modal = this.shadowRoot?.querySelector<HTMLElement>(".strata-modal");
+      const first = modal?.querySelector<HTMLElement>('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+      (first || modal)?.focus();
+    }, 0);
   }
+
+  private handleModalKeydown = (event: KeyboardEvent) => {
+    if (event.key !== "Tab") return;
+    const modal = event.currentTarget as HTMLElement;
+    const items = [...modal.querySelectorAll<HTMLElement>('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')];
+    if (!items.length) { event.preventDefault(); modal.focus(); return; }
+    const first = items[0], last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  };
 
   private getModalClasses() {
     const classes = [
@@ -224,8 +227,8 @@ export class StrataModal extends LitElement {
           class="${this.getModalClasses()}"
           role="dialog"
           aria-modal="true"
-          aria-labelledby="modal-title"
-          @click="${(e: Event) => e.stopPropagation()}"
+          aria-labelledby=${this.title ? this.titleId : undefined}
+          @click="${(e: Event) => e.stopPropagation()}" @keydown="${this.handleModalKeydown}" tabindex="-1"
         >
           <!-- Close Button -->
           ${this.showClose
@@ -248,7 +251,7 @@ export class StrataModal extends LitElement {
           ${this.title
             ? html`
                 <div class="strata-modal__header">
-                  <h2 class="strata-modal__title" id="modal-title">
+                  <h2 class="strata-modal__title" id=${this.titleId}>
                     ${this.title}
                   </h2>
                 </div>

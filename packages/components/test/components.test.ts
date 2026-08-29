@@ -56,3 +56,37 @@ describe("STRATA NavItem", () => {
     el.remove();
   });
 });
+
+describe("STRATA accessibility contracts", () => {
+  it("gives switches an accessible name and native disabled state", async () => {
+    const el = document.createElement("strata-switch");
+    el.setAttribute("label", "Enable alerts");
+    el.setAttribute("disabled", "");
+    document.body.appendChild(el);
+    await (el as unknown as { updateComplete: Promise<unknown> }).updateComplete;
+    const button = el.shadowRoot?.querySelector<HTMLButtonElement>("button");
+    expect(button?.getAttribute("role")).toBe("switch");
+    expect(button?.getAttribute("aria-label")).toBe("Enable alerts");
+    expect(button?.disabled).toBe(true);
+    el.remove();
+  });
+
+  it("uses unique dialog title ids and restores focus", async () => {
+    const trigger = document.createElement("button");
+    document.body.appendChild(trigger);
+    trigger.focus();
+    const dialog = document.createElement("strata-dialog") as HTMLElement & { open: boolean };
+    dialog.setAttribute("title", "Details");
+    dialog.open = true;
+    document.body.appendChild(dialog);
+    await (dialog as unknown as { updateComplete: Promise<unknown> }).updateComplete;
+    const title = dialog.shadowRoot?.querySelector("h2");
+    const content = dialog.shadowRoot?.querySelector("[role=dialog]");
+    expect(title?.id).toBeTruthy();
+    expect(content?.getAttribute("aria-labelledby")).toBe(title?.id);
+    dialog.open = false;
+    await (dialog as unknown as { updateComplete: Promise<unknown> }).updateComplete;
+    expect(document.activeElement).toBe(trigger);
+    dialog.remove(); trigger.remove();
+  });
+});

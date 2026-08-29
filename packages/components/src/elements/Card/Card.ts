@@ -1,13 +1,13 @@
-import { LitElement, html, PropertyValueMap, unsafeCSS } from "lit";
+import { LitElement, html, PropertyValues, unsafeCSS } from "lit";
 import { customElement, property, state, query } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./Card.css?inline";
 import type {
   CardHeading,
   CardDensity,
   CardMediaAlign,
   CardMediaWidth,
   CardAspectRatio,
-  CardElevation,
 } from "../../types/card.js";
 import { TitleRendererMixin } from "../../mixins/TitleRenderer.js";
 
@@ -16,7 +16,7 @@ const BaseClass = TitleRendererMixin(LitElement);
 
 @customElement("strata-card")
 export class StrataCard extends BaseClass {
-  static styles = [unsafeCSS(mainCSS)];
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @property({ type: String }) title = "";
   @property({ type: String }) url = "";
@@ -39,21 +39,19 @@ export class StrataCard extends BaseClass {
   aspect_ratio: CardAspectRatio = "monitor";
   @property({ type: String, attribute: "reading-time" }) reading_time = "";
   @property({ type: String, attribute: "published-at" }) published_at = "";
-  @property({ type: Number }) elevation: CardElevation = 2;
   @property({ type: Boolean, reflect: true }) bordered = false;
 
   @state() private imageSize = { width: 0, height: 0 };
 
   @query("img") private imageElement?: HTMLImageElement;
 
-  private metaObserver?: ResizeObserver;
   private imageObserver?: ResizeObserver;
 
   protected createRenderRoot() {
     return this;
   }
 
-  protected updated(changedProperties: PropertyValueMap<any>) {
+  protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
     this.setupObservers();
   }
@@ -80,7 +78,6 @@ export class StrataCard extends BaseClass {
   }
 
   private cleanupObservers() {
-    this.metaObserver?.disconnect();
     this.imageObserver?.disconnect();
   }
 
@@ -91,55 +88,39 @@ export class StrataCard extends BaseClass {
   }
 
   private getFlexClass() {
-    if (this.media_align === "left" && this.density !== "normal")
-      return "flex-row";
-    if (this.media_align === "left" && this.density === "normal")
-      return "flex-col md:flex-row";
-    if (this.media_align === "right" && this.density !== "normal")
-      return "flex-row-reverse";
-    if (this.media_align === "right" && this.density === "normal")
-      return "flex-col-reverse md:flex-row-reverse";
-    if (this.media_align === "top") return "flex-col";
-    return "flex-col-reverse";
+    if (this.media_align === "left" && this.density !== "normal") return "strata-card__container--row";
+    if (this.media_align === "left" && this.density === "normal") return "strata-card__container--responsive-row";
+    if (this.media_align === "right" && this.density !== "normal") return "strata-card__container--row-reverse";
+    if (this.media_align === "right" && this.density === "normal") return "strata-card__container--responsive-row-reverse";
+    if (this.media_align === "top") return "strata-card__container--column";
+    return "strata-card__container--column-reverse";
   }
 
   private getFigureClass() {
-    const isHorizontal =
-      this.media_align === "left" || this.media_align === "right";
+    const isHorizontal = this.media_align === "left" || this.media_align === "right";
     const isNormalDensity = this.density === "normal";
-
-    if (!isHorizontal || (isHorizontal && isNormalDensity)) return "flex-1";
-
+    if (!isHorizontal || (isHorizontal && isNormalDensity)) return "strata-card__figure--flexible";
     switch (this.media_width) {
-      case "is-one-fifth":
-        return "w-1/5";
-      case "is-one-quarter":
-        return "w-1/4";
-      case "is-one-third":
-        return "w-1/3";
-      case "is-two-fifths":
-        return "w-2/5";
-      default:
-        return "w-1/2";
+      case "is-one-fifth": return "strata-card__figure--one-fifth";
+      case "is-one-quarter": return "strata-card__figure--one-quarter";
+      case "is-one-third": return "strata-card__figure--one-third";
+      case "is-two-fifths": return "strata-card__figure--two-fifths";
+      default: return "strata-card__figure--one-half";
     }
   }
 
   private getImageClasses() {
-    const sizeClass =
-      this.imageSize.width < 240
-        ? "rounded"
-        : this.imageSize.width >= 240 && this.imageSize.width <= 440
-          ? "rounded-md"
-          : "rounded-lg";
-
-    const aspectClass =
-      this.aspect_ratio === "square"
-        ? "aspect-square"
-        : this.aspect_ratio === "video"
-          ? "aspect-video"
-          : "aspect-4/3";
-
-    return `w-full object-cover ${sizeClass} ${aspectClass}`;
+    const sizeClass = this.imageSize.width < 240
+      ? "strata-card__image--compact"
+      : this.imageSize.width <= 440
+        ? "strata-card__image--standard"
+        : "strata-card__image--large";
+    const aspectClass = this.aspect_ratio === "square"
+      ? "strata-card__image--square"
+      : this.aspect_ratio === "video"
+        ? "strata-card__image--video"
+        : "strata-card__image--four-three";
+    return `strata-card__image ${sizeClass} ${aspectClass}`;
   }
 
   render() {

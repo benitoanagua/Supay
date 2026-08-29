@@ -31,9 +31,9 @@ const meta = {
       panel.slot = "panels";
       if (index === args.activeTab) panel.setAttribute("active", "true");
       panel.innerHTML = `
-        <div class="p-6">
-          <h3 class="text-lg font-medium text-onSurface mb-3">${name}</h3>
-          <p class="text-onSurfaceVariant">STRATA separates content with typography, whitespace, and dividers.</p>
+        <div class="strata-story-tab-panel">
+          <h3 class="strata-story-tab-title">${name}</h3>
+          <p class="strata-story-secondary">STRATA separates content with typography, whitespace, and dividers.</p>
         </div>
       `;
 

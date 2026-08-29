@@ -21,7 +21,6 @@ const meta = {
       options: ["left", "right", "top", "bottom"],
     },
     aspect_ratio: { control: "radio", options: ["monitor", "square", "video"] },
-    elevation: { control: { type: "range", min: 0, max: 3, step: 1 } },
   },
   render: (args: CardProps) => {
     const card = document.createElement("strata-card");
@@ -51,32 +50,14 @@ const baseCardData = {
   author_url: "#",
 };
 
-export const StructuralElevation: Story = {
+export const StructuralScale: Story = {
   args: {
     ...baseCardData,
-    elevation: 2,
     density: "normal",
     feature_image: "https://picsum.photos/400/300",
   },
 };
 
-export const ElevationScale: Story = {
-  render: () => {
-    const container = document.createElement("div");
-    container.className = "grid grid-cols-2 gap-6 p-6";
-
-    [0, 1, 2, 3].forEach((elevation) => {
-      const card = document.createElement("strata-card");
-      card.setAttribute("title", `Elevation ${elevation}`);
-      card.setAttribute("excerpt", "Scale Law keeps radius, border, and elevation monotonic across micro, small, medium, large and hero.");
-      card.setAttribute("elevation", elevation.toString());
-      card.setAttribute("density", "compact");
-      container.appendChild(card);
-    });
-
-    return container;
-  },
-};
 
 export const Playground: Story = {
   args: {
@@ -92,7 +73,6 @@ export const Playground: Story = {
     density: "normal",
     media_align: "left",
     aspect_ratio: "monitor",
-    elevation: 2,
     url: "https://example.com",
     tag_url: "https://example.com/tag",
     author_url: "https://example.com/author",

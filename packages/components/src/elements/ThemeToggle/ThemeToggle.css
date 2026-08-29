@@ -1,60 +1,112 @@
 .strata-theme-toggle {
-  @apply cursor-pointer border-0 bg-transparent;
-  @apply p-2 rounded-full;
-  @apply transition-all duration-300;
-  @apply relative;
-  @apply border-2 border-outline/40;
-  @apply w-12 h-12;
-  @apply flex items-center justify-center;
+  
+  cursor:pointer;
+  border:0;
+  background-color:transparent;
+  
+  padding:.5rem;
+  border-radius:9999px;
+  
+  transition-property:all;
+  transition-duration:300ms;
+  
+  position:relative;
+  
+  border-width:2px;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 40%, transparent);
+  
+  width:3rem;
+  height:3rem;
+  
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .strata-theme-toggle:hover {
-  @apply border-outline/80;
-  @apply bg-surfaceContainerLow/30;
+  
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 80%, transparent);
+  
+  background-color: color-mix(in srgb, var(--strata-color-surface-subtle) 30%, transparent);
 }
 
 .strata-theme-toggle:active {
-  @apply scale-95;
-  @apply border-primary/60;
-  @apply bg-primary/10;
+  
+  transform:scale(.95);
+  
+  border-color: color-mix(in srgb, var(--strata-color-action-primary) 60%, transparent);
+  
+  background-color: color-mix(in srgb, var(--strata-color-action-primary) 10%, transparent);
 }
 
 .strata-theme-toggle:focus-visible {
-  @apply outline-2 outline-primary outline-offset-2;
-  @apply border-primary/80;
+  
+  outline-width:2px;
+  outline-color:var(--strata-color-action-primary);
+  outline-offset:2px;
+  
+  border-color: color-mix(in srgb, var(--strata-color-action-primary) 80%, transparent);
 }
 
 .strata-theme-toggle-icon {
-  @apply block size-6;
-  @apply transition-all duration-300;
-  @apply text-onSurfaceVariant;
+  
+  display:block;
+  width:1.5rem;height:1.5rem;
+  
+  transition-property:all;
+  transition-duration:300ms;
+  
+  color:var(--strata-color-text-secondary);
 }
 
 .strata-theme-toggle:hover .strata-theme-toggle-icon {
-  @apply text-primary;
-  @apply rotate-180;
+  
+  color:var(--strata-color-action-primary);
+  
+  transform:rotate(180deg);
 }
 
 .strata-theme-toggle:active .strata-theme-toggle-icon {
-  @apply scale-90;
+  
+  transform:scale(.9);
 }
 
 .strata-theme-toggle-badge {
-  @apply absolute -top-0.5 -right-0.5;
-  @apply bg-transparent;
-  @apply border-2 border-primary;
-  @apply rounded-full;
-  @apply size-5;
-  @apply text-xs flex items-center justify-center;
-  @apply font-bold pointer-events-none;
-  @apply text-primary;
-  @apply transition-all duration-300;
+  
+  position:absolute;
+  top:-0.125rem;
+  right:-0.125rem;
+  
+  background-color:transparent;
+  
+  border-width:2px;
+  border-color:var(--strata-color-action-primary);
+  
+  border-radius:9999px;
+  
+  width:1.25rem;height:1.25rem;
+  
+  font-size:.75rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  
+  font-weight:700;
+  pointer-events:none;
+  
+  color:var(--strata-color-action-primary);
+  
+  transition-property:all;
+  transition-duration:300ms;
 }
 
 .strata-theme-toggle:hover .strata-theme-toggle-badge {
-  @apply bg-primary/10;
-  @apply border-primary;
-  @apply scale-110;
+  
+  background-color: color-mix(in srgb, var(--strata-color-action-primary) 10%, transparent);
+  
+  border-color:var(--strata-color-action-primary);
+  
+  transform:scale(1.1);
 }
 
 .strata-theme-toggle-badge {

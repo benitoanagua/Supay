@@ -28,3 +28,10 @@ There is intentionally no `@strata/icons` abstraction. Components use `iconify-i
 ## Storybook
 
 Storybook is the living catalogue and visual documentation layer. It consumes the published package boundaries rather than becoming the implementation itself.
+
+
+## Component source of truth
+
+`packages/components/src/elements/index.ts` is the public export boundary and `ComponentCatalog.ts` is the canonical inventory. Storybook consumes those public exports; it does not maintain a second component registry.
+
+Shared behavior belongs in `StrataElement` only when it is genuinely common. Component-specific behavior and styles stay with the component. CSS is split into `component-base.css` plus component-local styles so each shadow-root component does not receive the full system stylesheet. There is no compatibility layer or migration bridge in the production package.

@@ -1,26 +1,19 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./Tab.css?inline";
 import type { TabPanelProps } from "../../types/tabs.js";
 
 @customElement("strata-tab-panel")
 export class StrataTabPanel extends LitElement implements TabPanelProps {
-  static styles = [unsafeCSS(mainCSS)];
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @property({ type: Boolean, reflect: true }) active = false;
+  @property({ type: String, attribute: "panel-id" }) panelId = "";
 
-  protected createRenderRoot() {
-    const shadowRoot = super.createRenderRoot();
 
-    // Ensure theme style element is created
-    const themeStyle = document.createElement("style");
-    themeStyle.id = "theme-vars";
-    shadowRoot.appendChild(themeStyle);
 
-    return shadowRoot;
-  }
-
-  protected willUpdate(changedProperties: Map<string, any>) {
+  protected willUpdate(changedProperties: Map<string, unknown>) {
     if (changedProperties.has("active")) {
       this.style.display = this.active ? "block" : "none";
     }
@@ -29,7 +22,7 @@ export class StrataTabPanel extends LitElement implements TabPanelProps {
   render() {
     return html`
       <div
-        class="strata-tab-panel__content"
+        class="strata-tab-panel__content" id=${this.panelId || undefined}
         role="tabpanel"
         aria-hidden="${!this.active}"
       >

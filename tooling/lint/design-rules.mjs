@@ -22,7 +22,7 @@ function checkFile(file) {
   const lines = text.split(/\n/);
   lines.forEach((line, i) => {
     const n = i + 1;
-    if (rawColor.test(line) && !file.endsWith('ThemeAwareMixin.ts')) violations.push(`${file}:${n} raw color; use STRATA color tokens`);
+    if (rawColor.test(line)) violations.push(`${file}:${n} raw color; use STRATA color tokens`);
     const shadow = line.match(/box-shadow\s*:\s*([^;]+)/);
     if (shadow && !allowedShadow.test(shadow[1])) violations.push(`${file}:${n} non-token shadow`);
     const radius = line.match(/border-radius\s*:\s*([^;]+)/);

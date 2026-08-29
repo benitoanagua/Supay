@@ -1,11 +1,17 @@
 .strata-grille__container {
-  @apply flex flex-wrap w-full;
+  
+  display:flex;
+  flex-wrap:wrap;
+  width:100%;
 }
 
 .strata-grille-item {
-  @apply box-border;
+  
+  box-sizing:border-box;
 }
 
 .strata-grille-item__content {
-  @apply w-full h-full;
+  
+  width:100%;
+  height:100%;
 }

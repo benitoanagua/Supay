@@ -28,7 +28,7 @@ export const Iconography: Story = {
       <h1>Carbon is the only allowed icon collection.</h1>
       <p class="strata-lead">Use Iconify directly with the Carbon namespace. STRATA does not introduce an icon abstraction layer.</p>
       <div class="strata-icon-grid">
-        ${['add','close','search','settings','arrow-left','arrow-right','checkmark','warning','information'].map(name => `<div><iconify-icon icon="carbon:${name}"></iconify-icon><span class="strata-mono">carbon:${name}</span></div>`).join('')}
+        ${['add','close','search','settings','arrow-left','arrow-right','checkmark','warning','information'].map(name => `<div><iconify-icon icon="carbon:${name}"></iconify-icon><span class="strata-code-label">carbon:${name}</span></div>`).join('')}
       </div>
     </main>`,
 };

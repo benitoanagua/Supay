@@ -11,7 +11,7 @@ const meta = {
   argTypes: {
     className: {
       control: "text",
-      description: "Tailwind CSS classes (e.g., h-8 fill-primary)",
+      description: "CSS classes applied to the logo element",
     },
   },
   render: (args: LogoProps) => {
@@ -28,13 +28,13 @@ type Story = StoryObj<LogoProps>;
 
 export const Structural: Story = {
   args: {
-    className: "h-8 fill-primary",
+    className: "strata-logo--default",
   },
 };
 
 export const Playground: Story = {
   args: {
-    className: "h-8 fill-primary",
+    className: "strata-logo--default",
   },
   parameters: {
     controls: { expanded: true },

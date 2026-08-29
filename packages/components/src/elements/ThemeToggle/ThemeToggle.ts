@@ -1,11 +1,12 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./ThemeToggle.css?inline";
 import type { ThemeChangeEvent, ThemeMode } from "../../types/events.js";
 
 @customElement("strata-theme-toggle")
 export class StrataThemeToggle extends LitElement {
-  static styles = unsafeCSS(mainCSS);
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @state() private currentTheme: ThemeMode = "light";
 
@@ -29,12 +30,8 @@ export class StrataThemeToggle extends LitElement {
 
     if (theme === "dark") {
       htmlElement.setAttribute("data-theme", "dark");
-      htmlElement.classList.add("dark");
-      htmlElement.classList.remove("light");
     } else {
       htmlElement.setAttribute("data-theme", "light");
-      htmlElement.classList.add("light");
-      htmlElement.classList.remove("dark");
     }
 
     this.currentTheme = theme;

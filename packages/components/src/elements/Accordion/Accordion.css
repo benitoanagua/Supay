@@ -1,156 +1,267 @@
 .strata-accordion {
-  @apply w-full bg-transparent;
+  
+  width:100%;
+  background-color:transparent;
 }
 
 .strata-accordion--flat {
-  @apply shadow-none rounded-none;
+  
+  border-radius:0;
 }
 
 .strata-accordion-item {
-  @apply bg-transparent;
-  @apply border-b border-outline/30;
-  @apply transition-all duration-200;
+  
+  background-color:transparent;
+  
+  border-bottom-width:1px;border-bottom-style:solid;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 30%, transparent);
+  
+  transition-property:all;
+  transition-duration:200ms;
 }
 
 .strata-accordion-item:last-child {
-  @apply border-b-0;
+  
+  border-bottom:0;
 }
 
 .strata-accordion-item--flat {
-  @apply rounded-none shadow-none;
+  
+  border-radius:0;
 }
 
 .strata-accordion-item[open] {
-  @apply bg-transparent;
-  @apply border-b-outline/50;
+  
+  background-color:transparent;
+  
+  border-bottom-color: color-mix(in srgb, var(--strata-color-border-strong) 50%, transparent);
 }
 
 .strata-accordion-item:hover {
-  @apply border-b-outline/60;
+  
+  border-bottom-color: color-mix(in srgb, var(--strata-color-border-strong) 60%, transparent);
 }
 
 .strata-accordion-item__header {
-  @apply w-full p-4 md:p-6 border-0 bg-transparent text-onSurface font-medium;
-  @apply cursor-pointer transition-all duration-200;
-  @apply flex items-center justify-between gap-4;
-  @apply focus:outline-none;
-  @apply border-l-2 border-transparent;
+  
+  width:100%;
+  padding:1rem;
+  border:0;
+  background-color:transparent;
+  color:var(--strata-color-text-primary);
+  font-weight:500;
+  
+  cursor:pointer;
+  transition-property:all;
+  transition-duration:200ms;
+  
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  
+  outline:none;
+  
+  border-left-width:2px;
+  border-color:transparent;
+}
+@media (min-width: 769px) {
+
+
+.strata-accordion-item__header {
+  padding:1.5rem;
+}
 }
 
 .strata-accordion-item__header:hover {
-  @apply bg-surfaceContainerLow/50;
-  @apply border-l-outline/40;
+  
+  background-color: color-mix(in srgb, var(--strata-color-surface-subtle) 50%, transparent);
+  
+  border-left-color: color-mix(in srgb, var(--strata-color-border-strong) 40%, transparent);
 }
 
 .strata-accordion-item__header:focus-visible {
-  @apply outline-2 outline-primary outline-offset-2;
-  @apply border-l-primary/60;
+  
+  outline-width:2px;
+  outline-color:var(--strata-color-action-primary);
+  outline-offset:2px;
+  
+  border-left-color: color-mix(in srgb, var(--strata-color-action-primary) 60%, transparent);
 }
 
 .strata-accordion-item[open] .strata-accordion-item__header {
-  @apply border-l-primary;
-  @apply bg-transparent;
+  
+  border-left-color:var(--strata-color-action-primary);
+  
+  background-color:transparent;
 }
 
 .strata-accordion-item[open] .strata-accordion-item__header:hover {
-  @apply bg-surfaceContainerLow/30;
+  
+  background-color: color-mix(in srgb, var(--strata-color-surface-subtle) 30%, transparent);
 }
 
 .strata-accordion-item__header:disabled {
-  @apply cursor-not-allowed opacity-40;
-  @apply border-l-transparent;
+  
+  cursor:not-allowed;
+  opacity:.4;
+  
+  border-left-color:transparent;
 }
 
 .strata-accordion-item__label {
-  @apply flex-1 text-left;
-  @apply transition-colors duration-200;
+  
+  flex:1 1 0%;
+  text-align:left;
+  
+  transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;
+  transition-duration:200ms;
 }
 
 .strata-accordion-item[open] .strata-accordion-item__label {
-  @apply text-primary;
+  
+  color:var(--strata-color-action-primary);
 }
 
 .strata-accordion-item__icon {
-  @apply w-5 h-5 flex items-center justify-center;
-  @apply text-onSurfaceVariant;
-  @apply transition-all duration-300;
-  @apply flex-shrink-0;
+  
+  width:1.25rem;
+  height:1.25rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  
+  color:var(--strata-color-text-secondary);
+  
+  transition-property:all;
+  transition-duration:300ms;
+  
+  flex-shrink:0;
 }
 
 .strata-accordion-item__header:hover .strata-accordion-item__icon {
-  @apply text-onSurface;
+  
+  color:var(--strata-color-text-primary);
 }
 
 .strata-accordion-item[open] .strata-accordion-item__icon {
-  @apply transform rotate-180;
-  @apply text-primary;
+  
+  transform:rotate(180deg);
+  
+  color:var(--strata-color-action-primary);
 }
 
 .strata-accordion-item__panel {
-  @apply bg-transparent;
-  @apply overflow-hidden;
-  @apply transition-all duration-300 ease-in-out;
-  @apply border-t border-outline/20;
+  
+  background-color:transparent;
+  
+  overflow:hidden;
+  
+  transition-property:all;
+  transition-duration:300ms;
+  transition-timing-function:cubic-bezier(.4,0,.2,1);
+  
+  border-top-width:1px;border-top-style:solid;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 20%, transparent);
 }
 
 .strata-accordion-item__panel[hidden] {
   display: none !important;
-  @apply border-t-0;
+  
+  border-top:0;
 }
 
 .strata-accordion-item__content {
-  @apply p-4 md:p-6 pt-4 text-onSurfaceVariant;
-  @apply transition-opacity duration-300;
-  @apply border-l-2 border-primary/20 ml-4;
+  
+  padding:1rem;
+  padding-top:1rem;
+  color:var(--strata-color-text-secondary);
+  
+  transition-property:opacity;
+  transition-duration:300ms;
+  
+  border-left-width:2px;
+  border-color: color-mix(in srgb, var(--strata-color-action-primary) 20%, transparent);
+  margin-left:1rem;
+}
+@media (min-width: 769px) {
+
+
+.strata-accordion-item__content {
+  padding:1.5rem;
+}
 }
 
 .strata-accordion-item__content:hover {
-  @apply text-onSurface;
+  
+  color:var(--strata-color-text-primary);
 }
 
 .strata-accordion--bordered {
-  @apply border border-outline/40 rounded-lg;
-  @apply p-2;
+  
+  border-width:1px;border-style:solid;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 40%, transparent);
+  border-radius:var(--strata-radius-medium);
+  
+  padding:.5rem;
 }
 
 .strata-accordion--bordered .strata-accordion-item {
-  @apply border-b border-outline/20;
+  
+  border-bottom-width:1px;border-bottom-style:solid;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 20%, transparent);
 }
 
 .strata-accordion--bordered .strata-accordion-item:last-child {
-  @apply border-b-0;
+  
+  border-bottom:0;
 }
 
 .strata-accordion--separated .strata-accordion-item {
-  @apply mb-2;
-  @apply border border-outline/40 rounded-md;
-  @apply transition-all duration-200;
+  
+  margin-bottom:.5rem;
+  
+  border-width:1px;border-style:solid;
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 40%, transparent);
+  border-radius:var(--strata-radius-small);
+  
+  transition-property:all;
+  transition-duration:200ms;
 }
 
 .strata-accordion--separated .strata-accordion-item:last-child {
-  @apply mb-0;
+  
+  margin-bottom:0;
 }
 
 .strata-accordion--separated .strata-accordion-item:hover {
-  @apply border-outline/70;
+  
+  border-color: color-mix(in srgb, var(--strata-color-border-strong) 70%, transparent);
 }
 
 .strata-accordion--separated .strata-accordion-item[open] {
-  @apply border-primary/60;
+  
+  border-color: color-mix(in srgb, var(--strata-color-action-primary) 60%, transparent);
 }
 
 @media (max-width: 768px) {
   .strata-accordion-item__header {
-    @apply p-3;
+    
+  padding:.75rem;
   }
 
   .strata-accordion-item__content {
-    @apply p-3 pt-2;
-    @apply ml-2;
+    
+  padding:.75rem;
+  padding-top:.5rem;
+    
+  margin-left:.5rem;
   }
 
   .strata-accordion-item__icon {
-    @apply w-4 h-4;
+    
+  width:1rem;
+  height:1rem;
   }
 }
 
@@ -160,7 +271,8 @@
   .strata-accordion-item__icon,
   .strata-accordion-item__panel,
   .strata-accordion-item__content {
-    @apply transition-none;
+    
+  transition-property:none;
   }
 
   .strata-accordion-item[open] .strata-accordion-item__icon {

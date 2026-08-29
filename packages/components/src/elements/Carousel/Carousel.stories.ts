@@ -43,11 +43,11 @@ const meta = {
       const item = document.createElement("strata-carousel-item");
       const content = document.createElement("div");
       content.className =
-        "p-6 bg-surfaceContainerHigh border border-outlineVariant rounded-lg min-h-[200px] flex items-center justify-center";
+        "strata-story-carousel-slide";
       content.innerHTML = `
-        <div class="text-center">
-          <div class="text-4xl font-bold text-primary mb-3">${i + 1}</div>
-          <p class="text-onSurfaceVariant">Editorial item for the STRATA carousel.</p>
+        <div class="strata-story-center">
+          <div class="strata-story-number">${i + 1}</div>
+          <p class="strata-story-secondary">Editorial item for the STRATA carousel.</p>
         </div>
       `;
       item.appendChild(content);

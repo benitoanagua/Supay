@@ -17,11 +17,10 @@ export const Structural: Story = {};
 export const InContext: Story = {
   render: () => {
     const container = document.createElement("div");
-    container.className =
-      "flex items-center justify-between p-4 bg-surfaceContainerHigh border border-outlineVariant rounded-lg";
+    container.className = "strata-story-theme-context";
 
     container.innerHTML = `
-      <div class="text-onSurface font-medium">Theme Control</div>
+      <div class="strata-story-theme-control">Theme Control</div>
       <strata-theme-toggle></strata-theme-toggle>
     `;
 

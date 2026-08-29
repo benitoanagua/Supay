@@ -117,5 +117,3 @@ declare global {
   }
 }
 
-// Register legacy aliases once; they are compatibility-only.
-import "./legacy.js";

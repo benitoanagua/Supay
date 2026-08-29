@@ -1,2 +1,8 @@
-import {describe,it,expect} from 'vitest';import {STRATA_SCALE_LAW} from '@strata/core';
-describe('STRATA Scale Law',()=>it('is monotonically increasing',()=>{const sizes=['micro','small','medium','large','hero'] as const;for(let i=1;i<sizes.length;i++){const a=STRATA_SCALE_LAW[sizes[i-1]],b=STRATA_SCALE_LAW[sizes[i]];expect(b.radius).toBeGreaterThanOrEqual(a.radius);expect(b.border).toBeGreaterThanOrEqual(a.border);expect(b.elevation).toBeGreaterThanOrEqual(a.elevation)}}));
+import { describe, expect, it } from "vitest";
+import { assertStrataScaleLaw } from "@strata/core";
+
+describe("STRATA Scale Law", () => {
+  it("is structurally monotonic", () => {
+    expect(() => assertStrataScaleLaw()).not.toThrow();
+  });
+});

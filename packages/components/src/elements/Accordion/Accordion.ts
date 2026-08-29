@@ -4,22 +4,21 @@ import {
   property,
   queryAssignedElements,
 } from "lit/decorators.js";
-import mainCSS from "../../main.css?inline";
+import baseCSS from "../../component-base.css?inline";
+import componentCSS from "./Accordion.css?inline";
 import type { AccordionProps } from "../../types/accordion.js";
-import { ThemeAwareMixin } from "../../mixins/ThemeAwareMixin.js";
-
-const ThemeAwareBase = ThemeAwareMixin(LitElement);
+import type { StrataAccordionItem } from "./AccordionItem.js";
 
 @customElement("strata-accordion")
-export class StrataAccordion extends ThemeAwareBase implements AccordionProps {
-  static styles = [unsafeCSS(mainCSS)];
+export class StrataAccordion extends LitElement implements AccordionProps {
+  static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @property({ type: Boolean, reflect: true }) multiple = false;
   @property({ type: String }) variant: "default" | "bordered" | "separated" =
     "default";
 
   @queryAssignedElements({ selector: "strata-accordion-item" })
-  private items!: HTMLElement[];
+  private items!: StrataAccordionItem[];
 
   connectedCallback() {
     super.connectedCallback();
@@ -39,9 +38,9 @@ export class StrataAccordion extends ThemeAwareBase implements AccordionProps {
 
     this.items.forEach((item, i) => {
       if (i === index) {
-        (item as any).open = !(item as any).open;
+        item.open = !item.open;
       } else if (!this.multiple) {
-        (item as any).open = false;
+        item.open = false;
       }
     });
   }
