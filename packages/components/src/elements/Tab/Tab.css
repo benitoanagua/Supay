@@ -1,0 +1,13 @@
+.strata-tabs{display:block;width:100%;background:transparent;color:var(--strata-color-text-primary)}
+.strata-tabs__header{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;border-bottom:var(--strata-border-small) solid var(--strata-color-border-subtle)}
+.strata-tabs__header::-webkit-scrollbar{display:none}
+.strata-tab__button{min-height:40px;padding:8px 12px;border:0;border-radius:var(--strata-radius-small);background:transparent;color:var(--strata-color-text-secondary);font:500 14px/1.2 var(--strata-font-sans);cursor:pointer;white-space:nowrap;transition:background-color var(--strata-motion-fast) ease,color var(--strata-motion-fast) ease}
+.strata-tab__button:hover:not(:disabled){background:var(--strata-color-gray100);color:var(--strata-color-text-primary)}
+.strata-tab__button[aria-selected="true"]{background:var(--strata-color-gray200);color:var(--strata-color-text-primary);font-weight:700}
+.strata-tab__button:focus-visible{outline:2px solid var(--strata-color-focus-ring);outline-offset:2px}
+.strata-tab__button:disabled{opacity:.45;cursor:not-allowed}
+.strata-tabs__content{padding-top:var(--strata-space-4)}
+.strata-tab-panel__content{padding:var(--strata-space-4) 0;border:0}
+.strata-tab-panel__content[hidden]{display:none!important}
+@media(max-width:480px){.strata-tab__button{min-height:36px;padding:6px 10px;font-size:13px}.strata-tabs__header{border-bottom:var(--strata-border-micro) solid var(--strata-color-border-subtle)}}
+@media(prefers-reduced-motion:reduce){.strata-tab__button{transition:none}}

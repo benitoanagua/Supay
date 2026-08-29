@@ -1,0 +1,352 @@
+.strata-modal-overlay {
+  @apply fixed inset-0 z-50;
+  @apply bg-scrim/30;
+  @apply transition-opacity duration-300;
+  @apply backdrop-blur-sm;
+  -webkit-backdrop-filter: blur(4px);
+  animation: strata-modal-fade-in 300ms ease-out;
+}
+
+@keyframes strata-modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.strata-modal-overlay--closing {
+  animation: strata-modal-fade-out 300ms ease-in;
+}
+
+@keyframes strata-modal-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.strata-modal-container {
+  @apply fixed inset-0 z-50;
+  @apply flex items-center justify-center;
+  @apply p-4 md:p-6;
+  @apply pointer-events-none;
+}
+
+.strata-modal-container--top {
+  @apply items-start pt-8 md:pt-16;
+}
+
+.strata-modal-container--bottom {
+  @apply items-end pb-8 md:pb-16;
+}
+
+.strata-modal-container--left {
+  @apply justify-start pl-8 md:pl-16;
+}
+
+.strata-modal-container--right {
+  @apply justify-end pr-8 md:pr-16;
+}
+
+.strata-modal {
+  @apply relative w-full max-w-lg;
+  @apply bg-surface/95;
+  @apply backdrop-blur-md;
+  -webkit-backdrop-filter: blur(12px);
+  @apply border-2 border-outline/40;
+  @apply rounded-xl;
+  @apply shadow-[0_8px_24px_rgba(0,0,0,0.12)];
+  @apply transition-all duration-300;
+  @apply pointer-events-auto;
+  animation: strata-modal-slide-up 300ms ease-out;
+}
+
+@keyframes strata-modal-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.strata-modal--closing {
+  animation: strata-modal-slide-down 300ms ease-in;
+}
+
+@keyframes strata-modal-slide-down {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(32px) scale(0.95);
+  }
+}
+
+.strata-modal:hover {
+  @apply border-outline/60;
+}
+
+.strata-modal--small {
+  @apply max-w-sm;
+}
+
+.strata-modal--medium {
+  @apply max-w-lg;
+}
+
+.strata-modal--large {
+  @apply max-w-2xl;
+}
+
+.strata-modal--xlarge {
+  @apply max-w-4xl;
+}
+
+.strata-modal--full {
+  @apply max-w-full mx-4 md:mx-8;
+  @apply h-[calc(100vh-2rem)] md:h-[calc(100vh-4rem)];
+}
+
+.strata-modal--full .strata-modal__body {
+  @apply max-h-full;
+}
+
+.strata-modal--minimal .strata-modal__header {
+  @apply border-b-0 pb-4;
+}
+
+.strata-modal--minimal .strata-modal__footer {
+  @apply border-t-0 pt-4;
+}
+
+.strata-modal--bordered {
+  @apply border-4 border-outline/50;
+}
+
+.strata-modal--bordered:hover {
+  @apply border-outline/70;
+}
+
+.strata-modal--outlined {
+  @apply bg-surface;
+  @apply backdrop-blur-none;
+  @apply border-2 border-outline/60;
+}
+
+.strata-modal--glass {
+  @apply bg-surface/70;
+  @apply backdrop-blur-xl;
+  -webkit-backdrop-filter: blur(24px);
+  @apply border-2 border-outline/20;
+}
+
+.strata-modal--accent-top {
+  @apply border-t-4 border-t-primary;
+}
+
+.strata-modal--accent-left {
+  @apply border-l-4 border-l-primary;
+}
+
+.strata-modal--zoom {
+  animation: strata-modal-zoom 300ms ease-out;
+}
+
+@keyframes strata-modal-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.strata-modal--slide-right {
+  animation: strata-modal-slide-right 300ms ease-out;
+}
+
+@keyframes strata-modal-slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.strata-modal--slide-left {
+  animation: strata-modal-slide-left 300ms ease-out;
+}
+
+@keyframes strata-modal-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.strata-modal__header {
+  @apply flex items-center justify-between;
+  @apply p-6 md:p-8;
+  @apply border-b border-outline/30;
+  @apply bg-transparent;
+  @apply transition-colors duration-200;
+}
+
+.strata-modal:hover .strata-modal__header {
+  @apply border-b-outline/50;
+}
+
+.strata-modal__title {
+  @apply text-xl md:text-2xl font-semibold;
+  @apply text-onSurface;
+  @apply tracking-tight;
+  @apply pr-4;
+}
+
+.strata-modal__close {
+  @apply absolute right-4 top-4 md:right-6 md:top-6;
+  @apply cursor-pointer p-2 rounded-full;
+  @apply transition-all duration-200;
+  @apply bg-transparent;
+  @apply border-2 border-outline/40;
+  @apply w-10 h-10 flex items-center justify-center;
+}
+
+.strata-modal__close:hover {
+  @apply border-primary/60;
+  @apply bg-primary/5;
+  @apply rotate-90;
+}
+
+.strata-modal__close:active {
+  @apply border-primary;
+  @apply scale-90;
+}
+
+.strata-modal__close:focus-visible {
+  @apply outline-2 outline-primary outline-offset-2;
+  @apply border-primary/80;
+}
+
+.strata-modal__close-icon {
+  @apply block h-5 w-5 md:h-6 md:w-6;
+  @apply text-onSurfaceVariant;
+  @apply transition-colors duration-200;
+}
+
+.strata-modal__close:hover .strata-modal__close-icon {
+  @apply text-primary;
+}
+
+.strata-modal__body {
+  @apply p-6 md:p-8;
+  @apply bg-transparent;
+  @apply text-onSurfaceVariant;
+  @apply overflow-y-auto;
+  @apply max-h-[60vh];
+  scrollbar-width: thin;
+  scrollbar-color: theme("colors.outline.DEFAULT / 0.3") transparent;
+}
+
+.strata-modal__body::-webkit-scrollbar {
+  @apply w-1.5;
+}
+
+.strata-modal__body::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.strata-modal__body::-webkit-scrollbar-thumb {
+  @apply bg-outline/30 rounded-full;
+}
+
+.strata-modal__body::-webkit-scrollbar-thumb:hover {
+  @apply bg-outline/50;
+}
+
+.strata-modal__footer {
+  @apply flex items-center justify-end gap-3;
+  @apply p-6 md:p-8 pt-4;
+  @apply border-t border-outline/30;
+  @apply bg-transparent;
+  @apply transition-colors duration-200;
+}
+
+.strata-modal:hover .strata-modal__footer {
+  @apply border-t-outline/50;
+}
+
+.strata-modal__footer--centered {
+  @apply justify-center;
+}
+
+.strata-modal__footer--spaced {
+  @apply justify-between;
+}
+
+@media (max-width: 768px) {
+  .strata-modal {
+    @apply max-w-full mx-2;
+    @apply border;
+  }
+
+  .strata-modal__header,
+  .strata-modal__body,
+  .strata-modal__footer {
+    @apply p-4;
+  }
+
+  .strata-modal__title {
+    @apply text-lg;
+  }
+
+  .strata-modal__close {
+    @apply right-2 top-2;
+    @apply w-9 h-9;
+  }
+
+  .strata-modal__body {
+    @apply max-h-[50vh];
+  }
+
+  .strata-modal--full {
+    @apply mx-0 rounded-none;
+    @apply h-screen;
+    @apply border-0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strata-modal-overlay,
+  .strata-modal,
+  .strata-modal__close {
+    @apply transition-none;
+    animation: none !important;
+  }
+
+  .strata-modal__close:hover {
+    @apply rotate-0;
+  }
+}
+
+body.strata-modal-open {
+  @apply overflow-hidden;
+}

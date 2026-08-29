@@ -1,0 +1,26 @@
+{
+  "name": "@strata/testing",
+  "version": "2.5.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:visual": "playwright test visual",
+    "test:a11y": "playwright test visual/a11y.spec.ts",
+    "test:contracts": "vitest run src/**/*.test.ts",
+    "test:visual:update": "playwright test visual --update-snapshots",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@strata/core": "workspace:*",
+    "@strata/tokens": "workspace:*",
+    "@strata/components": "workspace:*"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0",
+    "@axe-core/playwright": "^4.10.0"
+  }
+}

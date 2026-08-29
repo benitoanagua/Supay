@@ -1,0 +1,114 @@
+import "../iconify.js";
+import "iconify-icon";
+
+export { StrataAccordion, StrataAccordionItem } from "./Accordion/Accordion.js";
+export { StrataButton } from "./Button/Button.js";
+export { StrataCard } from "./Card/Card.js";
+export { StrataCarousel, StrataCarouselItem } from "./Carousel/Carousel.js";
+export { StrataGrille, StrataGrilleItem } from "./Grille/Grille.js";
+export { StrataLogo } from "./Logo/Logo.js";
+export { StrataModal } from "./Modal/Modal.js";
+export { StrataOverlay } from "./Overlay/Overlay.js";
+export { StrataTab, StrataTabPanel, StrataTabs } from "./Tab/Tab.js";
+export { StrataThemeToggle } from "./ThemeToggle/ThemeToggle.js";
+export { StrataSurface } from "./Surface/Surface.js";
+export { StrataDivider } from "./Divider/Divider.js";
+export { StrataBadge } from "./Badge/Badge.js";
+export { StrataAlert } from "./Alert/Alert.js";
+export { StrataProgress } from "./Progress/Progress.js";
+export { StrataSkeleton } from "./Skeleton/Skeleton.js";
+export { StrataIconButton } from "./IconButton/IconButton.js";
+export { StrataTextField } from "./TextField/TextField.js";
+export { StrataSelect } from "./Select/Select.js";
+export { StrataCheckbox } from "./Checkbox/Checkbox.js";
+export { StrataSwitch } from "./Switch/Switch.js";
+export { StrataNavItem } from "./NavItem/NavItem.js";
+export { StrataDialog } from "./Dialog/Dialog.js";
+export { StrataDataTable } from "./DataTable/DataTable.js";
+export { StrataPagination } from "./Pagination/Pagination.js";
+
+export { StrataAvatar } from "./Avatar/Avatar.js";
+export { StrataBreadcrumb } from "./Breadcrumb/Breadcrumb.js";
+export { StrataButtonGroup } from "./ButtonGroup/ButtonGroup.js";
+export { StrataMenu } from "./Menu/Menu.js";
+export { StrataMenuItem } from "./MenuItem/MenuItem.js";
+export { StrataRadio, StrataRadioGroup } from "./Radio/Radio.js";
+export { StrataSlider } from "./Slider/Slider.js";
+export { StrataSearchField } from "./SearchField/SearchField.js";
+export { StrataNumberField } from "./NumberField/NumberField.js";
+export { StrataDateField } from "./DateField/DateField.js";
+export { StrataTooltip } from "./Tooltip/Tooltip.js";
+export { StrataPopover } from "./Popover/Popover.js";
+export { StrataDrawer } from "./Drawer/Drawer.js";
+export { StrataBottomSheet } from "./BottomSheet/BottomSheet.js";
+export { StrataSnackbar } from "./Snackbar/Snackbar.js";
+export { StrataTag } from "./Tag/Tag.js";
+export { StrataList, StrataListItem } from "./List/List.js";
+export { StrataSpinner } from "./Spinner/Spinner.js";
+export { StrataFileUpload } from "./FileUpload/FileUpload.js";
+export { StrataStepper } from "./Stepper/Stepper.js";
+
+export { STRATA_COMPONENT_CATALOG } from "./ComponentCatalog.js";
+export type { StrataComponentName } from "./ComponentCatalog.js";
+export type { StrataIconName } from "../types/iconify.js";
+
+// Global element typing is kept here so IDEs know every public element.
+declare global {
+  interface HTMLElementTagNameMap {
+    "strata-accordion": import("./Accordion/Accordion.js").StrataAccordion;
+    "strata-accordion-item": import("./Accordion/AccordionItem.js").StrataAccordionItem;
+    "strata-button": import("./Button/Button.js").StrataButton;
+    "strata-card": import("./Card/Card.js").StrataCard;
+    "strata-carousel": import("./Carousel/Carousel.js").StrataCarousel;
+    "strata-carousel-item": import("./Carousel/CarouselItem.js").StrataCarouselItem;
+    "strata-grille": import("./Grille/Grille.js").StrataGrille;
+    "strata-grille-item": import("./Grille/GrilleItem.js").StrataGrilleItem;
+    "strata-logo": import("./Logo/Logo.js").StrataLogo;
+    "strata-modal": import("./Modal/Modal.js").StrataModal;
+    "strata-overlay": import("./Overlay/Overlay.js").StrataOverlay;
+    "strata-tab": import("./Tab/Tab.js").StrataTab;
+    "strata-tab-panel": import("./Tab/TabPanel.js").StrataTabPanel;
+    "strata-tabs": import("./Tab/Tabs.js").StrataTabs;
+    "strata-theme-toggle": import("./ThemeToggle/ThemeToggle.js").StrataThemeToggle;
+    "strata-surface": import("./Surface/Surface.js").StrataSurface;
+    "strata-divider": import("./Divider/Divider.js").StrataDivider;
+    "strata-badge": import("./Badge/Badge.js").StrataBadge;
+    "strata-alert": import("./Alert/Alert.js").StrataAlert;
+    "strata-progress": import("./Progress/Progress.js").StrataProgress;
+    "strata-skeleton": import("./Skeleton/Skeleton.js").StrataSkeleton;
+    "strata-icon-button": import("./IconButton/IconButton.js").StrataIconButton;
+    "strata-text-field": import("./TextField/TextField.js").StrataTextField;
+    "strata-select": import("./Select/Select.js").StrataSelect;
+    "strata-checkbox": import("./Checkbox/Checkbox.js").StrataCheckbox;
+    "strata-switch": import("./Switch/Switch.js").StrataSwitch;
+    "strata-nav-item": import("./NavItem/NavItem.js").StrataNavItem;
+    "strata-dialog": import("./Dialog/Dialog.js").StrataDialog;
+    "strata-data-table": import("./DataTable/DataTable.js").StrataDataTable;
+    "strata-pagination": import("./Pagination/Pagination.js").StrataPagination;
+    "strata-avatar": import("./Avatar/Avatar.js").Avatar;
+    "strata-breadcrumb": import("./Breadcrumb/Breadcrumb.js").Breadcrumb;
+    "strata-button-group": import("./ButtonGroup/ButtonGroup.js").ButtonGroup;
+    "strata-menu": import("./Menu/Menu.js").Menu;
+    "strata-menu-item": import("./MenuItem/MenuItem.js").MenuItem;
+    "strata-radio": import("./Radio/Radio.js").StrataRadio;
+    "strata-radio-group": import("./Radio/Radio.js").StrataRadioGroup;
+    "strata-slider": import("./Slider/Slider.js").Slider;
+    "strata-search-field": import("./SearchField/SearchField.js").SearchField;
+    "strata-number-field": import("./NumberField/NumberField.js").NumberField;
+    "strata-date-field": import("./DateField/DateField.js").DateField;
+    "strata-tooltip": import("./Tooltip/Tooltip.js").Tooltip;
+    "strata-popover": import("./Popover/Popover.js").Popover;
+    "strata-drawer": import("./Drawer/Drawer.js").Drawer;
+    "strata-bottom-sheet": import("./BottomSheet/BottomSheet.js").BottomSheet;
+    "strata-snackbar": import("./Snackbar/Snackbar.js").Snackbar;
+    "strata-tag": import("./Tag/Tag.js").Tag;
+    "strata-list": import("./List/List.js").List;
+    "strata-list-item": import("./List/List.js").ListItem;
+    "strata-spinner": import("./Spinner/Spinner.js").Spinner;
+    "strata-file-upload": import("./FileUpload/FileUpload.js").FileUpload;
+    "strata-stepper": import("./Stepper/Stepper.js").Stepper;
+  }
+}
+
+// Register legacy aliases once; they are compatibility-only.
+import "./legacy.js";

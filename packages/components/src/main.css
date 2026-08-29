@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import "./styles/global.css";
+@import "./elements/Accordion/Accordion.css";
+@import "./elements/Button/Button.css";
+@import "./elements/Card/Card.css";
+@import "./elements/Carousel/Carousel.css";
+@import "./elements/Grille/Grille.css";
+@import "./elements/Overlay/Overlay.css";
+@import "./elements/Modal/Modal.css";
+@import "./elements/Tab/Tab.css";
+@import "./elements/StrataFoundation.css";
+@source './**/*.{ts,css,js}';
+
+:where(iconify-icon) {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  color: currentColor;
+  flex: 0 0 auto;
+}
+
+:where(button, a, input, select, textarea) :where(iconify-icon) {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(*) { scroll-behavior: auto !important; }
+}

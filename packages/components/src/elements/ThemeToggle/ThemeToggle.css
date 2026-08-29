@@ -1,0 +1,72 @@
+.strata-theme-toggle {
+  @apply cursor-pointer border-0 bg-transparent;
+  @apply p-2 rounded-full;
+  @apply transition-all duration-300;
+  @apply relative;
+  @apply border-2 border-outline/40;
+  @apply w-12 h-12;
+  @apply flex items-center justify-center;
+}
+
+.strata-theme-toggle:hover {
+  @apply border-outline/80;
+  @apply bg-surfaceContainerLow/30;
+}
+
+.strata-theme-toggle:active {
+  @apply scale-95;
+  @apply border-primary/60;
+  @apply bg-primary/10;
+}
+
+.strata-theme-toggle:focus-visible {
+  @apply outline-2 outline-primary outline-offset-2;
+  @apply border-primary/80;
+}
+
+.strata-theme-toggle-icon {
+  @apply block size-6;
+  @apply transition-all duration-300;
+  @apply text-onSurfaceVariant;
+}
+
+.strata-theme-toggle:hover .strata-theme-toggle-icon {
+  @apply text-primary;
+  @apply rotate-180;
+}
+
+.strata-theme-toggle:active .strata-theme-toggle-icon {
+  @apply scale-90;
+}
+
+.strata-theme-toggle-badge {
+  @apply absolute -top-0.5 -right-0.5;
+  @apply bg-transparent;
+  @apply border-2 border-primary;
+  @apply rounded-full;
+  @apply size-5;
+  @apply text-xs flex items-center justify-center;
+  @apply font-bold pointer-events-none;
+  @apply text-primary;
+  @apply transition-all duration-300;
+}
+
+.strata-theme-toggle:hover .strata-theme-toggle-badge {
+  @apply bg-primary/10;
+  @apply border-primary;
+  @apply scale-110;
+}
+
+.strata-theme-toggle-badge {
+  animation: strata-theme-badge-pulse 0.3s ease-out;
+}
+
+@keyframes strata-theme-badge-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}

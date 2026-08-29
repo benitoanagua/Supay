@@ -1,0 +1,11 @@
+.strata-grille__container {
+  @apply flex flex-wrap w-full;
+}
+
+.strata-grille-item {
+  @apply box-border;
+}
+
+.strata-grille-item__content {
+  @apply w-full h-full;
+}

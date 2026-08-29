@@ -1,0 +1,228 @@
+.strata-carousel {
+  @apply w-full bg-transparent relative;
+  @apply border border-outline/30 rounded-lg;
+  @apply transition-all duration-200;
+}
+
+.strata-carousel:hover {
+  @apply border-outline/50;
+}
+
+.strata-carousel--flat {
+  @apply shadow-none rounded-lg;
+}
+
+.strata-carousel--dragging {
+  @apply cursor-grabbing;
+  @apply border-primary/40;
+}
+
+.strata-carousel--dragging .strata-carousel-item__content {
+  @apply pointer-events-none;
+}
+
+.strata-carousel__navigation {
+  @apply flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4;
+  @apply p-3 md:p-4 bg-transparent;
+  @apply border-b border-outline/30;
+  @apply transition-colors duration-200;
+}
+
+.strata-carousel:hover .strata-carousel__navigation {
+  @apply border-b-outline/50;
+}
+
+.strata-carousel__arrows {
+  @apply flex gap-2 order-2 md:order-1;
+}
+
+.strata-carousel__arrow {
+  @apply p-2;
+  @apply border-2 border-outline/40 bg-transparent;
+  @apply text-onSurfaceVariant;
+  @apply transition-all duration-200 cursor-pointer;
+  @apply rounded-full;
+  @apply w-10 h-10 md:w-12 md:h-12;
+  @apply flex items-center justify-center;
+}
+
+.strata-carousel__arrow:hover {
+  @apply border-primary/60 text-primary;
+  @apply bg-primary/5;
+}
+
+.strata-carousel__arrow:active {
+  @apply scale-95;
+  @apply border-primary text-primary;
+  @apply bg-primary/10;
+}
+
+.strata-carousel__arrow:focus-visible {
+  @apply outline-2 outline-primary outline-offset-2;
+  @apply border-primary/80;
+}
+
+.strata-carousel__arrow--disabled,
+.strata-carousel__arrow:disabled {
+  @apply opacity-30 cursor-not-allowed;
+  @apply border-outline/20 text-onSurfaceVariant;
+  @apply bg-transparent;
+}
+
+.strata-carousel__arrow--disabled:hover,
+.strata-carousel__arrow:disabled:hover {
+  @apply border-outline/20 text-onSurfaceVariant bg-transparent;
+  @apply scale-100;
+}
+
+.strata-carousel__dots {
+  @apply flex gap-2 order-1 md:order-2;
+}
+
+.strata-carousel__dot {
+  @apply w-3 h-3 md:w-4 md:h-4;
+  @apply border-2 border-outline/40 bg-transparent;
+  @apply transition-all duration-200 cursor-pointer;
+  @apply rounded-full;
+}
+
+.strata-carousel__dot:hover {
+  @apply border-primary/60;
+  @apply bg-primary/10;
+}
+
+.strata-carousel__dot--active {
+  @apply border-primary bg-primary;
+}
+
+.strata-carousel__dot--active:hover {
+  @apply border-primary bg-primary;
+  @apply scale-110;
+}
+
+.strata-carousel__dot:focus-visible {
+  @apply outline-2 outline-primary outline-offset-1;
+}
+
+.strata-carousel__counter {
+  @apply order-3;
+  @apply text-onSurfaceVariant text-sm font-medium;
+  @apply px-3 py-1.5;
+  @apply bg-transparent;
+  @apply border border-outline/40 rounded-full;
+  @apply transition-all duration-200;
+}
+
+.strata-carousel__counter:hover {
+  @apply border-outline/60;
+  @apply bg-surfaceContainerLow/30;
+}
+
+.strata-carousel__container {
+  @apply flex overflow-x-auto scroll-smooth p-3 md:p-4 w-full;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  cursor: grab;
+  @apply border-t border-outline/0;
+}
+
+.strata-carousel__container:active {
+  @apply cursor-grabbing;
+}
+
+.strata-carousel__container::-webkit-scrollbar {
+  display: none;
+}
+
+.strata-carousel__container.gap-0 {
+  @apply gap-0;
+}
+
+.strata-carousel__container.gap-1 {
+  @apply gap-1;
+}
+
+.strata-carousel__container.gap-2 {
+  @apply gap-2;
+}
+
+.strata-carousel__container.gap-3 {
+  @apply gap-3;
+}
+
+.strata-carousel__container.gap-4 {
+  @apply gap-4;
+}
+
+.strata-carousel-item {
+  @apply flex-shrink-0 transition-transform duration-300;
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  @apply border border-outline/20 rounded-md;
+  @apply bg-transparent;
+}
+
+.strata-carousel-item:hover {
+  @apply border-outline/40;
+  @apply transform scale-[1.02];
+}
+
+.strata-carousel-item:focus-within {
+  @apply border-primary/60;
+  @apply outline-2 outline-primary outline-offset-2;
+}
+
+.strata-carousel-item__content {
+  @apply h-full w-full outline-none;
+  @apply transition-all duration-200;
+  @apply rounded-md overflow-hidden;
+}
+
+.strata-carousel-item__content:focus-visible {
+  @apply outline-2 outline-primary outline-offset-2;
+}
+
+@media (max-width: 768px) {
+  .strata-carousel {
+    @apply border-outline/20;
+  }
+
+  .strata-carousel__navigation {
+    @apply flex-col gap-2;
+  }
+
+  .strata-carousel__arrow {
+    @apply w-9 h-9;
+  }
+
+  .strata-carousel__dot {
+    @apply w-2.5 h-2.5;
+  }
+
+  .strata-carousel__counter {
+    @apply px-2 py-1 text-xs;
+  }
+
+  .strata-carousel-item {
+    @apply border-outline/10;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strata-carousel,
+  .strata-carousel__arrow,
+  .strata-carousel__dot,
+  .strata-carousel-item,
+  .strata-carousel-item__content {
+    @apply transition-none;
+  }
+
+  .strata-carousel-item:hover {
+    @apply scale-100;
+  }
+
+  .strata-carousel__dot--active:hover {
+    @apply scale-100;
+  }
+}

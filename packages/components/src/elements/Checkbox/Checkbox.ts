@@ -1,0 +1,2 @@
+import {LitElement,html,css} from 'lit';import {customElement,property} from 'lit/decorators.js';
+@customElement('strata-checkbox') export class StrataCheckbox extends LitElement{static styles=css`:host{display:inline-block}label{display:inline-flex;align-items:center;gap:8px;font:400 14px var(--strata-font-sans);cursor:pointer}input{accent-color:var(--strata-color-blue);width:16px;height:16px}`;@property({type:Boolean}) checked=false;@property() label='';render(){return html`<label><input type="checkbox" .checked=${this.checked}><slot>${this.label}</slot></label>`}}

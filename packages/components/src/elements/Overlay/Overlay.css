@@ -1,0 +1,197 @@
+.strata-overlay {
+  @apply w-full flex overflow-hidden bg-cover bg-center relative;
+  isolation: isolate;
+  @apply border border-white/20;
+}
+
+.strata-overlay--align-start {
+  @apply justify-start;
+}
+
+.strata-overlay--align-center {
+  @apply justify-center;
+}
+
+.strata-overlay--align-end {
+  @apply justify-end;
+}
+
+.strata-overlay--position-top {
+  @apply items-start;
+}
+
+.strata-overlay--position-center {
+  @apply items-center;
+}
+
+.strata-overlay--position-bottom {
+  @apply items-end;
+}
+
+.strata-overlay--aspect-square {
+  @apply aspect-square;
+}
+
+.strata-overlay--aspect-video {
+  @apply aspect-video;
+}
+
+.strata-overlay--aspect-monitor {
+  @apply aspect-4/3;
+}
+
+.strata-overlay--fill-full::before {
+  content: "";
+  @apply absolute inset-0 z-1;
+  @apply bg-scrim/40;
+}
+
+.strata-overlay--fill-gradient.strata-overlay--position-top::before {
+  content: "";
+  @apply absolute inset-0 z-1;
+  @apply bg-gradient-to-b from-scrim/50 via-scrim/20 to-transparent;
+}
+
+.strata-overlay--fill-gradient.strata-overlay--position-bottom::before {
+  content: "";
+  @apply absolute inset-0 z-1;
+  @apply bg-gradient-to-t from-scrim/50 via-scrim/20 to-transparent;
+}
+
+.strata-overlay--fill-gradient.strata-overlay--position-center::before {
+  content: "";
+  @apply absolute inset-0 z-1;
+  @apply bg-gradient-to-t from-transparent via-scrim/30 to-transparent;
+}
+
+.strata-overlay--fill-none::before {
+  content: none;
+}
+
+.strata-overlay__content {
+  @apply max-w-[42rem] p-6 flex flex-col gap-3 text-left z-2 relative;
+  @apply md:p-4 md:m-2;
+  @apply bg-transparent;
+  @apply border border-white/30;
+  @apply rounded-lg;
+  @apply transition-all duration-300;
+}
+
+.strata-overlay__content:hover {
+  @apply border-white/50;
+}
+
+.strata-overlay--box-background .strata-overlay__content {
+  @apply bg-white/5;
+  @apply backdrop-blur-sm;
+  -webkit-backdrop-filter: blur(4px);
+  @apply border-2 border-white/40;
+}
+
+.strata-overlay--box-border .strata-overlay__content {
+  @apply bg-transparent;
+  @apply border-2 border-white/60;
+  @apply backdrop-blur-none;
+}
+
+.strata-overlay--box-border .strata-overlay__content:hover {
+  @apply border-white/80;
+}
+
+.strata-overlay--box-transparent .strata-overlay__content {
+  @apply bg-transparent;
+  @apply border-0;
+  @apply backdrop-blur-none;
+}
+
+.strata-overlay__category {
+  @apply text-white w-fit text-xs font-medium;
+  @apply uppercase tracking-wide;
+  @apply py-1 px-3;
+  @apply rounded-full;
+  @apply transition-all duration-200;
+  @apply bg-transparent;
+  @apply border border-white/60;
+}
+
+.strata-overlay__category:hover {
+  @apply border-white;
+  @apply bg-white/10;
+}
+
+.strata-overlay__title-link {
+  @apply relative block;
+}
+
+.strata-overlay__title-link > * {
+  @apply text-white no-underline;
+  @apply transition-all duration-200;
+  @apply relative;
+}
+
+.strata-overlay__title-link::after {
+  content: "";
+  @apply absolute bottom-0 left-0;
+  @apply w-0 h-0.5;
+  @apply bg-white;
+  @apply transition-all duration-300;
+}
+
+.strata-overlay__title-link:hover::after {
+  @apply w-full;
+}
+
+.strata-overlay__title-link:hover > * {
+  @apply text-white;
+}
+
+.strata-overlay__meta {
+  @apply flex flex-wrap items-center gap-3 text-sm;
+  @apply pt-3;
+  @apply border-t border-white/20;
+}
+
+.strata-overlay__meta-item {
+  @apply text-white/90 flex items-center font-medium;
+  @apply transition-colors duration-200;
+}
+
+.strata-overlay__meta-item:hover {
+  @apply text-white;
+}
+
+.strata-overlay__meta-item:not(:last-child)::after {
+  content: "•";
+  @apply text-white/40 ml-2 mr-1;
+}
+
+@media (max-width: 768px) {
+  .strata-overlay {
+    @apply border-0;
+  }
+
+  .strata-overlay__content {
+    @apply border;
+    @apply rounded-md;
+  }
+
+  .strata-overlay--box-background .strata-overlay__content,
+  .strata-overlay--box-border .strata-overlay__content {
+    @apply border;
+  }
+}
+
+.strata-overlay:focus-within .strata-overlay__content {
+  @apply border-2 border-white;
+  @apply outline-2 outline-white outline-offset-2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strata-overlay__content,
+  .strata-overlay__title-link,
+  .strata-overlay__category,
+  .strata-overlay__meta-item,
+  .strata-overlay__title-link::after {
+    @apply transition-none;
+  }
+}

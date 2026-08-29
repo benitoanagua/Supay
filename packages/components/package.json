@@ -1,0 +1,35 @@
+{
+  "name": "@strata/components",
+  "version": "2.5.0",
+  "type": "module",
+  "description": "STRATA Design System Web Components",
+  "main": "./dist/strata-components.es.js",
+  "module": "./dist/strata-components.es.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@strata/core": "workspace:*",
+    "@strata/tokens": "workspace:*",
+    "lit": "^3.3.3",
+    "iconify-icon": "^3.0.2",
+    "@iconify-json/carbon": "^1.2.25"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0",
+    "jsdom": "^26.0.0",
+    "@tailwindcss/vite": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

@@ -1,40 +1,42 @@
-# Supay Web Components
+# STRATA Design System
 
-Supay is a collection of reusable Web Components built with Lit, Tailwind CSS, Material Design 3, Vite, and Storybook.
+STRATA is a contemporary editorial design system for mobile-first interfaces. Its visual language combines classic newspaper discipline with contemporary magazine clarity.
 
-## Development
+## Core laws
+
+- **Monochrome establishes structure.**
+- **Color establishes meaning.** Spectrum is reserved for semantic contrast: red, orange, yellow, green, blue, indigo and violet.
+- **Typography leads hierarchy.** Source Sans 3 is the interface family; Source Code Pro is reserved for data and numeric alignment.
+- **Physical scale determines structural weight.** `micro → small → medium → large → hero` controls radius, border and elevation monotonically.
+- **Semantic importance never overrides physical scale.**
+- **Carbon Icons via Iconify is the only icon collection.** Use `iconify-icon` with `carbon:*` names.
+
+## Architecture
+
+```text
+apps/storybook
+packages/tokens
+packages/core
+packages/components
+packages/testing
+tooling
+docs
+tests
+```
+
+## Commands
 
 ```bash
 pnpm install
 pnpm storybook
+pnpm check
+pnpm test:visual
+pnpm test:a11y
+pnpm migrate:legacy ./path/to/legacy/source
 ```
 
-## Validation
+## Legacy migration
 
-```bash
-pnpm test
-pnpm test:coverage
-pnpm type-check
-pnpm build
-pnpm build-storybook
-```
+New code must use `strata-*`. Historical `wc-*` tags are available only through the compatibility bridge and are deprecated. The migration helper replaces canonical `wc-*` tags in HTML/JS/TS/JSX/TSX files without rewriting arbitrary strings.
 
-## Structure
-
-```text
-src/
-├── elements/
-├── mixins/
-├── plugins/
-├── scripts/
-├── styles/
-├── types/
-├── main.css
-└── main.ts
-
-.storybook/
-├── main.ts
-└── preview.ts
-```
-
-Storybook loads stories directly from `src/` and does not depend on generated static assets.
+See `docs/LEGACY-MIGRATION.md` and `docs/COMPONENT-CATALOG.md`.

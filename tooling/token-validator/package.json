@@ -1,0 +1,9 @@
+{
+  "name": "@strata/token-validator",
+  "version": "2.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node check.mjs"
+  }
+}
