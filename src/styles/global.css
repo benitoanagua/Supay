@@ -129,16 +129,3 @@
   @apply lg:px-8;
   @apply xl:px-10;
 }
-
-/* Highly specific styles for traditional Instagram embeds */
-iframe {
-  margin-top: 3vmin !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  margin-bottom: 3vmin !important;
-}
-
-/* Youtube iframe */
-iframe[src*="youtube.com"] {
-  --at-apply: aspect-video w-full h-auto;
-}

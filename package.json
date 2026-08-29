@@ -1,6 +1,6 @@
 {
-  "name": "supay-elements",
-  "description": "Supay web components and Storybook component library.",
+  "name": "supay",
+  "description": "Supay web components built with Lit, Tailwind CSS, Material Design 3, Vite, and Storybook.",
   "version": "0.1.2",
   "type": "module",
   "license": "MIT",
@@ -9,6 +9,12 @@
     "email": "benito.anagua@gmail.com",
     "url": "https://benitoanagua.me"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benitoanagua/Supay.git"
+  },
+  "bugs": "https://github.com/benitoanagua/Supay/issues",
+  "demo": "https://benitoanagua.github.io/Supay",
   "keywords": [
     "supay",
     "andean",
@@ -17,150 +23,63 @@
     "material-design",
     "lit"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/benitoanagua/Supay.git"
-  },
-  "bugs": "https://github.com/benitoanagua/Supay/issues",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:watch": "vite build --watch",
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
-    "prettier": "prettier --write \"src/**/*.{js,ts,html,css}\"",
-    "prettier:check": "prettier --check \"src/**/*.{js,ts,html,css}\"",
-    "format": "npm run prettier",
-    "lint": "npm run prettier:check && npm run type-check",
+    "prettier": "prettier --write \"src/**/*.{js,ts,html,css}\" \"test/**/*.{ts,js}\" \"*.{ts,json,md}\"",
+    "prettier:check": "prettier --check \"src/**/*.{js,ts,html,css}\" \"test/**/*.{ts,js}\" \"*.{ts,json,md}\"",
+    "format": "pnpm prettier",
+    "lint": "pnpm prettier:check && pnpm type-check",
+    "test": "vitest run",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "generate:theme": "tsx src/plugins/material-theme/cli.ts",
-    "prestart": "npm run generate:theme",
-    "prebuild": "npm run generate:theme"
+    "prebuild": "pnpm generate:theme",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "check": "pnpm prettier:check && pnpm type-check && pnpm test",
+    "ci": "pnpm check && pnpm test:coverage && pnpm build && pnpm build-storybook"
+  },
+  "dependencies": {
+    "lit": "^3.3.3"
   },
   "devDependencies": {
-    "@iconify-json/carbon": "^1.2.14",
-    "@iconify/tailwind4": "^1.0.6",
-    "@lit-labs/observers": "^2.0.6",
-    "@lit/reactive-element": "^2.1.1",
+    "@iconify/tailwind4": "^1.2.3",
     "@material/material-color-utilities": "^0.3.0",
     "@ngneat/falso": "^8.0.2",
-    "@storybook/addon-a11y": "^9.1.15",
-    "@storybook/addon-essentials": "9.0.0-alpha.12",
-    "@storybook/html": "^9.1.15",
-    "@storybook/html-vite": "^9.1.15",
-    "@tailwindcss/vite": "^4.1.16",
-    "@types/node": "^24.9.1",
-    "eslint": "^9.38.0",
-    "lit": "^3.3.1",
-    "prettier": "^3.6.2",
-    "prettier-plugin-tailwindcss": "^0.7.1",
-    "storybook": "^9.1.15",
-    "tailwindcss": "^4.1.16",
-    "ts-loader": "^9.5.4",
-    "tslint": "^6.1.3",
-    "tsx": "^4.20.6",
+    "@storybook/addon-a11y": "^9.1.20",
+    "@storybook/addon-essentials": "^9.1.20",
+    "@storybook/html": "^9.1.20",
+    "@storybook/html-vite": "^9.1.20",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^24.13.3",
+    "@vitest/coverage-v8": "^3.2.4",
+    "jsdom": "^26.1.0",
+    "prettier": "^3.9.6",
+    "prettier-plugin-tailwindcss": "^0.7.4",
+    "storybook": "^9.1.20",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.12",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.2",
-    "vite": "^7.1.12"
+    "vite": "^7.3.6",
+    "vitest": "^3.2.4"
   },
   "browserslist": [
     "last 2 versions and not dead"
   ],
-  "config": {
-    "image_sizes": {
-      "xxs": {
-        "width": 30
-      },
-      "xs": {
-        "width": 100
-      },
-      "s": {
-        "width": 300
-      },
-      "m": {
-        "width": 600
-      },
-      "l": {
-        "width": 1000
-      },
-      "xl": {
-        "width": 2000
-      }
-    },
-    "posts_per_page": 12,
-    "card_assets": true,
-    "custom": {
-      "twitter_url": {
-        "type": "text",
-        "label": "Twitter URL"
-      },
-      "youtube_url": {
-        "type": "text",
-        "label": "Youtube URL"
-      },
-      "instagram_url": {
-        "type": "text",
-        "label": "Instagram URL"
-      },
-      "tiktok_url": {
-        "type": "text",
-        "label": "Tik Tok URL"
-      },
-      "home": {
-        "type": "select",
-        "options": [
-          "Home 1",
-          "Home 2",
-          "Home 3"
-        ],
-        "default": "Home 1",
-        "group": "homepage"
-      },
-      "color_scheme": {
-        "type": "select",
-        "options": [
-          "Light",
-          "Dark",
-          "Auto"
-        ],
-        "default": "Light"
-      },
-      "featured_category_1": {
-        "type": "text",
-        "label": "Categoría Principal 1 (slug)",
-        "group": "homepage"
-      },
-      "featured_category_1_name": {
-        "type": "text",
-        "label": "Nombre Categoría Principal 1",
-        "group": "homepage"
-      },
-      "featured_category_2": {
-        "type": "text",
-        "label": "Categoría Principal 2 (slug)",
-        "group": "homepage"
-      },
-      "featured_category_2_name": {
-        "type": "text",
-        "label": "Nombre Categoría Principal 2",
-        "group": "homepage"
-      },
-      "featured_category_3": {
-        "type": "text",
-        "label": "Categoría Sidebar (slug)",
-        "group": "homepage"
-      },
-      "featured_category_3_name": {
-        "type": "text",
-        "label": "Nombre Categoría Sidebar",
-        "group": "homepage"
-      },
-      "excluded_tags": {
-        "type": "text",
-        "label": "Tags excluidos (separados por comas)",
-        "group": "homepage"
-      }
-    }
-  }
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "license"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ]
 }

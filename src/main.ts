@@ -1,5 +1,5 @@
 /**
- * Main entry point for Supay web components
+ * Main entry point for Supay theme components
  */
 
 // Import styles
