@@ -46,7 +46,8 @@
   "dependencies": {
     "lit": "^3.3.3"
   },
-"devDependencies": {
+  "devDependencies": {
+    "@iconify-json/carbon": "^1.2.25",
     "@iconify/tailwind4": "^1.2.3",
     "@material/material-color-utilities": "^0.3.0",
     "@ngneat/falso": "^8.0.2",

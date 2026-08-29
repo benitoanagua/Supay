@@ -12,6 +12,9 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
     devDependencies:
+      '@iconify-json/carbon':
+        specifier: ^1.2.25
+        version: 1.2.25
       '@iconify/tailwind4':
         specifier: ^1.2.3
         version: 1.2.3(tailwindcss@4.3.3)
@@ -456,6 +459,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@iconify-json/carbon@1.2.25':
+    resolution: {integrity: sha512-7GLgXnmi47Skh8DcPPiP8U3vgm3rOVziEe+flCdG/kwiVaeb649U3Eqt/ej4f3NvlZK8BrOxpR3xQlWFLZYblQ==}
 
   '@iconify/tailwind4@1.2.3':
     resolution: {integrity: sha512-z8SKiMHRASJKF/IY//87MF88lcB7ulxh8vlhQXXLWsBkNtOh6ese9R41MyGpQeqXdRvQVt+/fX2glQtHFjQ+MA==}
@@ -2333,6 +2339,10 @@ snapshots:
 
   '@esbuild/win32-x64@0.28.2':
     optional: true
+
+  '@iconify-json/carbon@1.2.25':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify/tailwind4@1.2.3(tailwindcss@4.3.3)':
     dependencies:
