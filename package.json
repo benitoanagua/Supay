@@ -1,11 +1,7 @@
 {
-  "name": "supay",
-  "description": "A Ghost CMS theme inspired by Andean culture, built with Tailwind CSS v4, Material Design 3, and Lit web components.",
-  "demo": "https://benitoanagua.github.io/Supay",
+  "name": "supay-elements",
+  "description": "Supay web components and Storybook component library.",
   "version": "0.1.2",
-  "engines": {
-    "ghost": ">=5.0.0"
-  },
   "type": "module",
   "license": "MIT",
   "author": {
@@ -13,18 +9,8 @@
     "email": "benito.anagua@gmail.com",
     "url": "https://benitoanagua.me"
   },
-  "gpm": {
-    "type": "theme",
-    "categories": [
-      "Minimal",
-      "Cultural",
-      "Magazine"
-    ]
-  },
   "keywords": [
     "supay",
-    "ghost",
-    "ghost-theme",
     "andean",
     "cultural",
     "tailwind",
@@ -46,22 +32,11 @@
     "prettier:check": "prettier --check \"src/**/*.{js,ts,html,css}\"",
     "format": "npm run prettier",
     "lint": "npm run prettier:check && npm run type-check",
-    "content": "node src/scripts/ghost-content.js",
-    "content:help": "node src/scripts/ghost-content.js --help",
-    "zip": "node src/scripts/zip.js",
-    "test": "gscan .",
-    "test:ci": "gscan --fatal --verbose .",
-    "pretest": "npm run build",
-    "preship": "npm test",
-    "ship": "node src/scripts/ship.js",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "generate:theme": "tsx src/plugins/material-theme/cli.ts",
     "prestart": "npm run generate:theme",
     "prebuild": "npm run generate:theme"
-  },
-  "screenshots": {
-    "desktop": "assets/hello-world-thumb.png"
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.2.14",
@@ -77,7 +52,6 @@
     "@tailwindcss/vite": "^4.1.16",
     "@types/node": "^24.9.1",
     "eslint": "^9.38.0",
-    "gscan": "^5.2.0",
     "lit": "^3.3.1",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
