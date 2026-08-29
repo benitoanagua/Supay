@@ -24,7 +24,7 @@ export class StrataDialog extends LitElement {
     this.labelledBy = this.title ? `dialog-title-${++StrataDialog.nextId}` : "";
     queueMicrotask(() => {
       const content = this.renderRoot.querySelector<HTMLElement>(".strata-dialog__content");
-      const first = content?.querySelector<HTMLElement>("button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])");
+      const first = content?.querySelector<HTMLElement>("button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex=\"-1\"])");
       (first || content)?.focus();
     });
   }
@@ -34,7 +34,7 @@ export class StrataDialog extends LitElement {
     if (e.key !== "Tab") return;
     const content = this.renderRoot.querySelector<HTMLElement>(".strata-dialog__content");
     if (!content) return;
-    const items = [...content.querySelectorAll<HTMLElement>("button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])")];
+    const items = [...content.querySelectorAll<HTMLElement>("button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex=\"-1\"])")];
     if (!items.length) { e.preventDefault(); content.focus(); return; }
     const first = items[0], last = items[items.length - 1];
     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }

@@ -1,4 +1,4 @@
-import { html, TemplateResult } from "lit";
+import { html, LitElement, TemplateResult } from "lit";
 import type { CardHeading } from "../types/card.js";
 
 export interface TitleRendererInterface {
@@ -6,10 +6,13 @@ export interface TitleRendererInterface {
   title: string;
 }
 
-export function TitleRendererMixin<T extends new (...args: never[]) => object>(
+export function TitleRendererMixin<T extends new (...args: any[]) => LitElement>(
   Base: T
 ) {
   return class extends Base implements TitleRendererInterface {
+    constructor(...args: any[]) {
+      super(...args);
+    }
     heading!: CardHeading;
     title!: string;
 
