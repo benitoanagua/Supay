@@ -1,12 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/html";
-import {
-  randCatchPhrase,
-  randParagraph,
-  randFullName,
-  randAvatar,
-  randWord,
-  randUrl,
-} from "@ngneat/falso";
 import type { CardProps } from "../../types/card.js";
 
 const meta = {
@@ -46,16 +38,17 @@ export default meta;
 type Story = StoryObj<CardProps>;
 
 const baseCardData = {
-  title: randCatchPhrase(),
-  excerpt: randParagraph(),
-  author_name: randFullName(),
-  author_profile_image: randAvatar(),
-  tag_name: randWord(),
+  title: "Monochrome establishes structure",
+  excerpt:
+    "STRATA is a contemporary editorial design system. Typography leads hierarchy, and physical scale determines structural weight.",
+  author_name: "Jane Smith",
+  author_profile_image: "https://picsum.photos/seed/author/120/120",
+  tag_name: "Editorial",
   reading_time: "5 min read",
   published_at: "Just now",
-  url: randUrl(),
-  tag_url: randUrl(),
-  author_url: randUrl(),
+  url: "#",
+  tag_url: "#",
+  author_url: "#",
 };
 
 export const StructuralElevation: Story = {
@@ -75,7 +68,7 @@ export const ElevationScale: Story = {
     [0, 1, 2, 3].forEach((elevation) => {
       const card = document.createElement("strata-card");
       card.setAttribute("title", `Elevation ${elevation}`);
-      card.setAttribute("excerpt", randParagraph());
+      card.setAttribute("excerpt", "Scale Law keeps radius, border, and elevation monotonic across micro, small, medium, large and hero.");
       card.setAttribute("elevation", elevation.toString());
       card.setAttribute("density", "compact");
       container.appendChild(card);

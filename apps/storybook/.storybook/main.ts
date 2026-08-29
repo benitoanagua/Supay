@@ -13,7 +13,6 @@ const config: StorybookConfig = {
     resolve: {
       alias: {
         '@strata/components': path.resolve(__dirname, '../../../packages/components/src/main.ts'),
-        '@strata/tokens': path.resolve(__dirname, '../../../packages/tokens/src/index.ts'),
       },
     },
   }),

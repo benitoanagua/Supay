@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/html";
-import { randPhrase, randFullName } from "@ngneat/falso";
 import type {
   OverlayAlign,
   OverlayPosition,
@@ -64,12 +63,12 @@ type Story = StoryObj<OverlayProps>;
 
 export const Structural: Story = {
   args: {
-    title: randPhrase(),
+    title: "Monochrome establishes structure",
     feature_image: "https://picsum.photos/800/600",
     position: "bottom",
     box: "border",
     show_meta: true,
-    author_name: randFullName(),
+    author_name: "Jane Smith",
   },
 };
 

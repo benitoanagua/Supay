@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/html";
-import { randPhrase } from "@ngneat/falso";
 
 interface GrilleProps {
   desktop?: number;
@@ -28,7 +27,7 @@ const meta = {
     // Create grille items
     for (let i = 0; i < 7; i++) {
       const div = document.createElement("div");
-      div.textContent = `${i + 1}. ${randPhrase()}`;
+      div.textContent = `${i + 1}. Editorial headline`;
       div.style.padding = "12px";
       div.style.minHeight = "80px";
       grille.appendChild(div);

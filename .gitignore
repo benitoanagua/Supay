@@ -11,9 +11,42 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# turbo
+.turbo
+*.turbo-*.log
+
 # custom
 dist
 assets/dist
 *.zip
 *storybook.log
 storybook-static
+test-results
+playwright-report
+blob-report
+__screenshots__
+
+# coverage
+coverage
+.coverage
+.nyc_output
+
+# build / cache intermediates
+*.tsbuildinfo
+.cache
+.eslintcache
+
+# OS
+.DS_Store
+
+# editor / IDE (machine-specific)
+.idea
+.vscode
+
+# merge / patch leftovers
+*.orig
+*.rej
+
+# misc transient logs
+*.log
+*.pid

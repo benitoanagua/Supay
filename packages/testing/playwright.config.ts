@@ -10,10 +10,10 @@ export default defineConfig({
     viewport: { width: 390, height: 844 },
   },
   projects: [
-    { name: 'mobile', use: { ...devices['iPhone 13'] } },
+    { name: 'mobile', use: { ...devices['Pixel 7'] } },
   ],
   webServer: {
-    command: 'pnpm --filter @strata/storybook storybook -- --ci --host 127.0.0.1',
+    command: 'CI=true pnpm --filter @strata/storybook storybook -- --host 127.0.0.1',
     url: 'http://127.0.0.1:6006',
     reuseExistingServer: true,
     timeout: 120_000,

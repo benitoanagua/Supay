@@ -2,7 +2,7 @@ import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
 export const strataComponentStyles = css`
-  :host { display: block; font-family: var(--strata-font-family-sans); color: var(--strata-color-text-primary); }
+  :host { display: block; font-family: var(--strata-font-sans); color: var(--strata-color-text-primary); }
   *, *::before, *::after { box-sizing: border-box; }
   button, input, select, textarea { font: inherit; }
   button { cursor: pointer; }
@@ -17,7 +17,7 @@ export const strataComponentStyles = css`
   :host([size="large"]) { --strata-component-radius:var(--strata-radius-large); --strata-component-border:var(--strata-border-large); --strata-component-elevation:var(--strata-elevation-large); }
   :host([size="hero"]) { --strata-component-radius:var(--strata-radius-hero); --strata-component-border:var(--strata-border-hero); --strata-component-elevation:var(--strata-elevation-hero); }
   .surface { background: var(--strata-color-surface-default); color: var(--strata-color-text-primary); border-radius:var(--strata-component-radius); border:var(--strata-component-border) solid var(--strata-color-border-subtle); box-shadow:var(--strata-component-elevation); }
-  .mono { font-family: var(--strata-font-family-mono); font-variant-numeric: tabular-nums; }
+  .mono { font-family: var(--strata-font-mono); font-variant-numeric: tabular-nums; }
   .avatar { width: 40px; height: 40px; border-radius: var(--strata-radius-small); overflow: hidden; display:grid; place-items:center; background:var(--strata-color-surface-subtle); font-weight:700; }
   .avatar img { width:100%; height:100%; object-fit:cover; }
   nav ol { display:flex; gap:8px; padding:0; margin:0; list-style:none; align-items:center; flex-wrap:wrap; }

@@ -3,8 +3,8 @@ import path from 'node:path';
 
 const root = path.resolve('packages/components/src');
 const violations = [];
-const allowedRadius = /var\(--strata-radius-(micro|small|medium|large|hero)\)|999px|50%|inherit|0/;
-const allowedShadow = /var\(--strata-elevation-(micro|small|medium|large|hero)\)|none/;
+const allowedRadius = /var\(--strata-radius-(micro|small|medium|large|hero)\)|var\(--strata-component-radius\)|999px|50%|inherit|0/;
+const allowedShadow = /var\(--strata-elevation-(micro|small|medium|large|hero)\)|var\(--strata-component-elevation\)|none/;
 const allowedBorderWidth = /var\(--strata-border-(micro|small|medium|large|hero)\)|0|thin|medium|thick/;
 const rawColor = /#[0-9a-fA-F]{3,8}\b|\brgb\(|\brgba\(|\bhsl\(|\bhsla\(/;
 

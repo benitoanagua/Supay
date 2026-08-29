@@ -1,6 +1,17 @@
 import { LitElement, PropertyValues } from "lit";
-import { THEME_CSS_VARS, type ThemeCssVar } from "../types/material.js";
 import { type ThemeChangeEvent } from "../types/events.js";
+
+const THEME_CSS_VARS = [
+  "primary",
+  "onPrimary",
+  "onSurface",
+  "onSurfaceVariant",
+  "outline",
+  "surface",
+  "surfaceContainerLow",
+  "surfaceContainerHigh",
+] as const;
+type ThemeCssVar = (typeof THEME_CSS_VARS)[number];
 
 export function ThemeAwareMixin<T extends new (...args: any[]) => LitElement>(
   Base: T

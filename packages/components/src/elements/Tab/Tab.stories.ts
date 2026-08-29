@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/html";
-import { randSentence } from "@ngneat/falso";
 
 interface TabsProps {
   activeTab?: number;
@@ -34,7 +33,7 @@ const meta = {
       panel.innerHTML = `
         <div class="p-6">
           <h3 class="text-lg font-medium text-onSurface mb-3">${name}</h3>
-          <p class="text-onSurfaceVariant">${randSentence()}</p>
+          <p class="text-onSurfaceVariant">STRATA separates content with typography, whitespace, and dividers.</p>
         </div>
       `;
 

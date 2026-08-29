@@ -5,7 +5,7 @@ const outDir = new URL('./dist/', import.meta.url);
 const outFile = new URL('./styles.css', outDir);
 const tokens = JSON.parse(fs.readFileSync(tokenFile, 'utf8'));
 
-const kebab = (key) => key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
+const kebab = (key) => key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`).replace(/([a-z])(\d)/g, '$1-$2');
 const vars = [];
 
 for (const [key, value] of Object.entries(tokens.font)) vars.push(`--strata-font-${kebab(key)}: ${value};`);

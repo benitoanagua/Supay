@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/html";
-import { randParagraph, randMusicGenre } from "@ngneat/falso";
 
 interface AccordionProps {
   multiple?: boolean;
@@ -39,9 +38,9 @@ const meta = {
 
       const content = document.createElement("div");
       content.innerHTML = `
-        <p class="text-onSurfaceVariant">${randParagraph()}</p>
+        <p class="text-onSurfaceVariant">Accordion content keeps the panel layout intact and lets typography carry the hierarchy.</p>
         <div class="mt-3 p-3 bg-surfaceContainerLow border-l-4 border-primary">
-          <p class="text-onSurfaceVariant text-sm">${randMusicGenre()}</p>
+          <p class="text-onSurfaceVariant text-sm">Semantic color is used sparingly, as a signal, not decoration.</p>
         </div>
       `;
 

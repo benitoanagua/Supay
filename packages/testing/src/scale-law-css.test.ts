@@ -1,11 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const here = path.dirname(fileURLToPath(import.meta.url));
+const root = path.resolve(here, '..', '..', '..');
 
 const files = [
-  path.resolve('packages/components/src/elements/Button/Button.css'),
-  path.resolve('packages/components/src/elements/Card/Card.css'),
-  path.resolve('packages/components/src/elements/Surface/Surface.ts'),
+  path.join(root, 'packages/components/src/elements/Button/Button.css'),
+  path.join(root, 'packages/components/src/elements/Card/Card.css'),
+  path.join(root, 'packages/components/src/elements/Surface/Surface.ts'),
 ];
 
 function read(name: string) {

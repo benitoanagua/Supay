@@ -13,11 +13,11 @@ export function TitleRendererMixin<T extends new (...args: any[]) => any>(
     heading!: CardHeading;
     title!: string;
 
-    protected getHeadingClass(): string {
+    getHeadingClass(): string {
       return `m-0 font-medium headline-${this.heading}`;
     }
 
-    protected renderTitle(additionalClasses: string = ""): TemplateResult {
+    renderTitle(additionalClasses: string = ""): TemplateResult {
       const titleClass = this.getHeadingClass();
       const fullClass = additionalClasses
         ? `${titleClass} ${additionalClasses}`

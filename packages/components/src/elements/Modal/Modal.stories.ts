@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/html";
-import { randParagraph } from "@ngneat/falso";
 import type {
   ModalSize,
   ModalPosition,
@@ -71,9 +70,9 @@ const meta = {
     const content = document.createElement("div");
     content.innerHTML = `
       <div class="space-y-4">
-        <p class="text-onSurfaceVariant">${randParagraph()}</p>
+        <p class="text-onSurfaceVariant">STRATA is a contemporary editorial design system built on monochrome structure and semantic color. Typography leads hierarchy, and physical scale determines structural weight.</p>
         <div class="p-4 bg-surfaceContainerLow border-l-4 border-primary">
-          <p class="text-onSurfaceVariant text-sm">${randParagraph().substring(0, 120)}</p>
+          <p class="text-onSurfaceVariant text-sm">Color establishes meaning. Use the semantic spectrum only as a signal, never as decoration.</p>
         </div>
       </div>
     `;

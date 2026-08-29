@@ -11,6 +11,17 @@
 @import "./elements/StrataFoundation.css";
 @source './**/*.{ts,css,js}';
 
+@theme {
+  --color-primary: var(--strata-color-action-primary);
+  --color-onSurface: var(--strata-color-text-primary);
+  --color-onSurfaceVariant: var(--strata-color-text-secondary);
+  --color-outline: var(--strata-color-border-strong);
+  --color-surface: var(--strata-color-surface-page);
+  --color-surfaceContainerLow: var(--strata-color-surface-subtle);
+  --color-surfaceContainerHigh: var(--strata-color-surface-raised);
+  --color-scrim: var(--strata-color-black);
+}
+
 :where(iconify-icon) {
   display: inline-block;
   width: 1em;

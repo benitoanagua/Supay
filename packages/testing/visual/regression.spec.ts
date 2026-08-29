@@ -9,7 +9,7 @@ const stories = [
 test.describe('STRATA visual regression', () => {
   for (const [story, snapshot] of stories) {
     test(snapshot, async ({ page }) => {
-      await page.goto(`/?path=/story/${story}`);
+      await page.goto(`/iframe.html?id=${story}&viewMode=story`);
       await page.waitForLoadState('networkidle');
       await expect(page.locator('.strata-story-frame')).toHaveScreenshot(`${snapshot}.png`, { fullPage: true });
     });

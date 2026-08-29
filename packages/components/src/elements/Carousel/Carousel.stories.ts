@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/html";
-import { randCatchPhrase } from "@ngneat/falso";
 
 interface CarouselProps {
   desktop?: number;
@@ -48,7 +47,7 @@ const meta = {
       content.innerHTML = `
         <div class="text-center">
           <div class="text-4xl font-bold text-primary mb-3">${i + 1}</div>
-          <p class="text-onSurfaceVariant">${randCatchPhrase()}</p>
+          <p class="text-onSurfaceVariant">Editorial item for the STRATA carousel.</p>
         </div>
       `;
       item.appendChild(content);

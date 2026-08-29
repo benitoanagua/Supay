@@ -2,11 +2,14 @@
  * Legacy compatibility bridge for Supay/WC consumers.
  * New code must use strata-* elements. Remove these aliases in the next major release.
  */
-import { StrataAccordion, StrataAccordionItem } from "./Accordion/Accordion.js";
+import { StrataAccordion } from "./Accordion/Accordion.js";
+import { StrataAccordionItem } from "./Accordion/AccordionItem.js";
 import { StrataButton } from "./Button/Button.js";
 import { StrataCard } from "./Card/Card.js";
-import { StrataCarousel, StrataCarouselItem } from "./Carousel/Carousel.js";
-import { StrataGrille, StrataGrilleItem } from "./Grille/Grille.js";
+import { StrataCarousel } from "./Carousel/Carousel.js";
+import { StrataCarouselItem } from "./Carousel/CarouselItem.js";
+import { StrataGrille } from "./Grille/Grille.js";
+import { StrataGrilleItem } from "./Grille/GrilleItem.js";
 import { StrataLogo } from "./Logo/Logo.js";
 import { StrataModal } from "./Modal/Modal.js";
 import { StrataOverlay } from "./Overlay/Overlay.js";

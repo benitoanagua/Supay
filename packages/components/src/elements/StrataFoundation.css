@@ -1,2 +1,2 @@
 .strata-mono,.strata-numeric{font-family:var(--strata-font-mono);font-variant-numeric:tabular-nums;}
-.strata-editorial-divider{border:0;border-top:var(--strata-border-thin) solid var(--strata-color-border-subtle);}
+.strata-editorial-divider{border:0;border-top:var(--strata-border-small) solid var(--strata-color-border-subtle);}
