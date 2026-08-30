@@ -1,2 +1,41 @@
-import {LitElement,html,css} from 'lit';import {customElement,property} from 'lit/decorators.js';
-@customElement('strata-nav-item') export class StrataNavItem extends LitElement{static styles=css`:host{display:block}.strata-nav-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border:0;border-radius:var(--strata-radius-small);background:transparent;color:var(--strata-color-text-secondary);font:500 14px var(--strata-font-sans);cursor:pointer}.strata-nav-item:hover{background:var(--strata-color-gray-100);color:var(--strata-color-text-primary)}:host([selected]) .strata-nav-item{background:var(--strata-color-gray-200);color:var(--strata-color-text-primary);font-weight:700}`;@property({type:Boolean,reflect:true}) selected=false;@property() label='';render(){return html`<button class="strata-nav-item" aria-current=${this.selected?'page':'false'}><slot>${this.label}</slot></button>`}}
+import { LitElement, html, css } from "lit";
+import { customElement, property } from "lit/decorators.js";
+@customElement("strata-nav-item")
+export class StrataNavItem extends LitElement {
+  static styles = css`
+    :host {
+      display: block;
+    }
+    .strata-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 0;
+      border-radius: var(--strata-radius-small);
+      background: transparent;
+      color: var(--strata-color-text-secondary);
+      font: 500 14px var(--strata-font-sans);
+      cursor: pointer;
+    }
+    .strata-nav-item:hover {
+      background: var(--strata-color-gray-100);
+      color: var(--strata-color-text-primary);
+    }
+    :host([selected]) .strata-nav-item {
+      background: var(--strata-color-gray-200);
+      color: var(--strata-color-text-primary);
+      font-weight: 700;
+    }
+  `;
+  @property({ type: Boolean, reflect: true }) selected = false;
+  @property() label = "";
+  render() {
+    return html`<button
+      class="strata-nav-item"
+      aria-current=${this.selected ? "page" : "false"}
+    >
+      <slot>${this.label}</slot>
+    </button>`;
+  }
+}

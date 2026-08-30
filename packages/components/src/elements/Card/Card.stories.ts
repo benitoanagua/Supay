@@ -58,7 +58,6 @@ export const StructuralScale: Story = {
   },
 };
 
-
 export const Playground: Story = {
   args: {
     title: "Customizable Card",

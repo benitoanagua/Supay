@@ -28,7 +28,7 @@ export class StrataAccordion extends LitElement implements AccordionProps {
   disconnectedCallback() {
     this.removeEventListener(
       "accordion-toggle",
-      this.onToggle as EventListener
+      this.onToggle as EventListener,
     );
     super.disconnectedCallback();
   }

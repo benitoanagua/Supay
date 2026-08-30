@@ -4,6 +4,11 @@ import { StrataElement } from "../StrataBase.js";
 
 @customElement("strata-radio-group")
 export class StrataRadioGroup extends StrataElement {
-  @property({type:String}) label="";
-  render(){return html`<fieldset><legend>${this.label}</legend><slot></slot></fieldset>`;}
+  @property({ type: String }) label = "";
+  render() {
+    return html`<fieldset>
+      <legend>${this.label}</legend>
+      <slot></slot>
+    </fieldset>`;
+  }
 }

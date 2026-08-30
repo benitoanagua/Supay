@@ -5,7 +5,10 @@ import componentCSS from "./Carousel.css?inline";
 import type { CarouselItemProps } from "../../types/carousel.js";
 
 @customElement("strata-carousel-item")
-export class StrataCarouselItem extends LitElement implements CarouselItemProps {
+export class StrataCarouselItem
+  extends LitElement
+  implements CarouselItemProps
+{
   static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
   @property({ type: Number }) order = 0;
@@ -20,7 +23,7 @@ export class StrataCarouselItem extends LitElement implements CarouselItemProps 
 
     if (this.shadowRoot) {
       const contentDiv = this.shadowRoot.querySelector(
-        ".strata-carousel-item__content"
+        ".strata-carousel-item__content",
       );
       if (contentDiv) {
         contentDiv.classList.add("strata-carousel-item__content");

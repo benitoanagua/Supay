@@ -1,4 +1,3 @@
-
 ## Interactive value contract
 
 Form controls expose their value through the public `value`/`checked` property and emit `strata-input` while editing and `strata-change` when the value is committed. Event details use `{ value }` and events bubble across shadow boundaries.

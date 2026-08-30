@@ -11,11 +11,7 @@ export class StrataCarousel extends LitElement implements CarouselProps {
   @property({ type: Number }) desktop = 3;
   @property({ type: Number }) mobile = 1;
   @property({ type: String }) gap:
-    | "none"
-    | "small"
-    | "medium"
-    | "large"
-    | "xlarge" = "medium";
+    "none" | "small" | "medium" | "large" | "xlarge" = "medium";
   @property({ type: Number }) interval = 5000;
   @property({ type: Boolean, attribute: "auto-play" }) autoPlay = true;
   @property({ type: Boolean, attribute: "show-arrows" }) showArrows = true;
@@ -193,8 +189,7 @@ export class StrataCarousel extends LitElement implements CarouselProps {
   }
 
   private getContainerClasses(): string {
-    const baseClasses =
-      "strata-carousel__container";
+    const baseClasses = "strata-carousel__container";
 
     const currentGapClass = this.gapClass;
 
@@ -371,13 +366,13 @@ export class StrataCarousel extends LitElement implements CarouselProps {
         },
         bubbles: true,
         composed: true,
-      })
+      }),
     );
   }
 
   private dispatchNavigationEvent(
     direction: "next" | "prev" | "goto",
-    index?: number
+    index?: number,
   ) {
     this.dispatchEvent(
       new CustomEvent("carousel-navigation", {
@@ -388,7 +383,7 @@ export class StrataCarousel extends LitElement implements CarouselProps {
         },
         bubbles: true,
         composed: true,
-      })
+      }),
     );
   }
 
@@ -421,27 +416,33 @@ export class StrataCarousel extends LitElement implements CarouselProps {
     return html`
       <div class="strata-carousel__arrows">
         <button
-          class="strata-carousel__arrow strata-carousel__arrow--prev ${isAtStart
-            ? "strata-carousel__arrow--disabled"
-            : ""}"
+          class="strata-carousel__arrow strata-carousel__arrow--prev ${
+            isAtStart ? "strata-carousel__arrow--disabled" : ""
+          }"
           @click="${this.goPrev}"
           ?disabled="${isAtStart}"
           aria-label="${ariaLabels.prevButton}"
           aria-controls="carousel-items"
         >
-          <iconify-icon icon="carbon:arrow-left" aria-hidden="true"></iconify-icon>
+          <iconify-icon
+            icon="carbon:arrow-left"
+            aria-hidden="true"
+          ></iconify-icon>
         </button>
 
         <button
-          class="strata-carousel__arrow strata-carousel__arrow--next ${isAtEnd
-            ? "strata-carousel__arrow--disabled"
-            : ""}"
+          class="strata-carousel__arrow strata-carousel__arrow--next ${
+            isAtEnd ? "strata-carousel__arrow--disabled" : ""
+          }"
           @click="${this.goNext}"
           ?disabled="${isAtEnd}"
           aria-label="${ariaLabels.nextButton}"
           aria-controls="carousel-items"
         >
-          <iconify-icon icon="carbon:arrow-right" aria-hidden="true"></iconify-icon>
+          <iconify-icon
+            icon="carbon:arrow-right"
+            aria-hidden="true"
+          ></iconify-icon>
         </button>
       </div>
     `;
@@ -463,15 +464,17 @@ export class StrataCarousel extends LitElement implements CarouselProps {
         ${dots.map(
           (index) => html`
             <button
-              class="strata-carousel__dot ${this.currentIndex === index
-                ? "strata-carousel__dot--active"
-                : ""}"
+              class="strata-carousel__dot ${
+                this.currentIndex === index
+                  ? "strata-carousel__dot--active"
+                  : ""
+              }"
               @click="${() => this.goToIndex(index)}"
               aria-label="${ariaLabels.dot(index)}"
               aria-selected="${this.currentIndex === index}"
               role="tab"
             ></button>
-          `
+          `,
         )}
       </div>
     `;
@@ -481,7 +484,11 @@ export class StrataCarousel extends LitElement implements CarouselProps {
     if (this.childCount <= this.visibleSlides) return html``;
 
     return html`
-      <div class="strata-carousel__counter" aria-live="polite" aria-atomic="true">
+      <div
+        class="strata-carousel__counter"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         <span class="strata-carousel__counter">
           ${this.currentIndex + 1} / ${this.maxIndex + 1}
         </span>

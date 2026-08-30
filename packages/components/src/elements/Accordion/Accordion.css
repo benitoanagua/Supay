@@ -1,267 +1,294 @@
 .strata-accordion {
-  
-  width:100%;
-  background-color:transparent;
+  width: 100%;
+  background-color: transparent;
 }
 
 .strata-accordion--flat {
-  
-  border-radius:0;
+  border-radius: 0;
 }
 
 .strata-accordion-item {
-  
-  background-color:transparent;
-  
-  border-bottom-width:1px;border-bottom-style:solid;
-  border-color: color-mix(in srgb, var(--strata-color-border-strong) 30%, transparent);
-  
-  transition-property:all;
-  transition-duration:200ms;
+  background-color: transparent;
+
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: color-mix(
+    in srgb,
+    var(--strata-color-border-strong) 30%,
+    transparent
+  );
+
+  transition-property: all;
+  transition-duration: 200ms;
 }
 
 .strata-accordion-item:last-child {
-  
-  border-bottom:0;
+  border-bottom: 0;
 }
 
 .strata-accordion-item--flat {
-  
-  border-radius:0;
+  border-radius: 0;
 }
 
 .strata-accordion-item[open] {
-  
-  background-color:transparent;
-  
-  border-bottom-color: color-mix(in srgb, var(--strata-color-border-strong) 50%, transparent);
+  background-color: transparent;
+
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--strata-color-border-strong) 50%,
+    transparent
+  );
 }
 
 .strata-accordion-item:hover {
-  
-  border-bottom-color: color-mix(in srgb, var(--strata-color-border-strong) 60%, transparent);
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--strata-color-border-strong) 60%,
+    transparent
+  );
 }
 
 .strata-accordion-item__header {
-  
-  width:100%;
-  padding:1rem;
-  border:0;
-  background-color:transparent;
-  color:var(--strata-color-text-primary);
-  font-weight:500;
-  
-  cursor:pointer;
-  transition-property:all;
-  transition-duration:200ms;
-  
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  
-  outline:none;
-  
-  border-left-width:2px;
-  border-color:transparent;
+  width: 100%;
+  padding: 1rem;
+  border: 0;
+  background-color: transparent;
+  color: var(--strata-color-text-primary);
+  font-weight: 500;
+
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 200ms;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  outline: none;
+
+  border-left-width: 2px;
+  border-color: transparent;
 }
 @media (min-width: 769px) {
-
-
-.strata-accordion-item__header {
-  padding:1.5rem;
-}
+  .strata-accordion-item__header {
+    padding: 1.5rem;
+  }
 }
 
 .strata-accordion-item__header:hover {
-  
-  background-color: color-mix(in srgb, var(--strata-color-surface-subtle) 50%, transparent);
-  
-  border-left-color: color-mix(in srgb, var(--strata-color-border-strong) 40%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--strata-color-surface-subtle) 50%,
+    transparent
+  );
+
+  border-left-color: color-mix(
+    in srgb,
+    var(--strata-color-border-strong) 40%,
+    transparent
+  );
 }
 
 .strata-accordion-item__header:focus-visible {
-  
-  outline-width:2px;
-  outline-color:var(--strata-color-action-primary);
-  outline-offset:2px;
-  
-  border-left-color: color-mix(in srgb, var(--strata-color-action-primary) 60%, transparent);
+  outline-width: 2px;
+  outline-color: var(--strata-color-action-primary);
+  outline-offset: 2px;
+
+  border-left-color: color-mix(
+    in srgb,
+    var(--strata-color-action-primary) 60%,
+    transparent
+  );
 }
 
 .strata-accordion-item[open] .strata-accordion-item__header {
-  
-  border-left-color:var(--strata-color-action-primary);
-  
-  background-color:transparent;
+  border-left-color: var(--strata-color-action-primary);
+
+  background-color: transparent;
 }
 
 .strata-accordion-item[open] .strata-accordion-item__header:hover {
-  
-  background-color: color-mix(in srgb, var(--strata-color-surface-subtle) 30%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--strata-color-surface-subtle) 30%,
+    transparent
+  );
 }
 
 .strata-accordion-item__header:disabled {
-  
-  cursor:not-allowed;
-  opacity:.4;
-  
-  border-left-color:transparent;
+  cursor: not-allowed;
+  opacity: 0.4;
+
+  border-left-color: transparent;
 }
 
 .strata-accordion-item__label {
-  
-  flex:1 1 0%;
-  text-align:left;
-  
-  transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;
-  transition-duration:200ms;
+  flex: 1 1 0%;
+  text-align: left;
+
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-duration: 200ms;
 }
 
 .strata-accordion-item[open] .strata-accordion-item__label {
-  
-  color:var(--strata-color-action-primary);
+  color: var(--strata-color-action-primary);
 }
 
 .strata-accordion-item__icon {
-  
-  width:1.25rem;
-  height:1.25rem;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  
-  color:var(--strata-color-text-secondary);
-  
-  transition-property:all;
-  transition-duration:300ms;
-  
-  flex-shrink:0;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--strata-color-text-secondary);
+
+  transition-property: all;
+  transition-duration: 300ms;
+
+  flex-shrink: 0;
 }
 
 .strata-accordion-item__header:hover .strata-accordion-item__icon {
-  
-  color:var(--strata-color-text-primary);
+  color: var(--strata-color-text-primary);
 }
 
 .strata-accordion-item[open] .strata-accordion-item__icon {
-  
-  transform:rotate(180deg);
-  
-  color:var(--strata-color-action-primary);
+  transform: rotate(180deg);
+
+  color: var(--strata-color-action-primary);
 }
 
 .strata-accordion-item__panel {
-  
-  background-color:transparent;
-  
-  overflow:hidden;
-  
-  transition-property:all;
-  transition-duration:300ms;
-  transition-timing-function:cubic-bezier(.4,0,.2,1);
-  
-  border-top-width:1px;border-top-style:solid;
-  border-color: color-mix(in srgb, var(--strata-color-border-strong) 20%, transparent);
+  background-color: transparent;
+
+  overflow: hidden;
+
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-color: color-mix(
+    in srgb,
+    var(--strata-color-border-strong) 20%,
+    transparent
+  );
 }
 
 .strata-accordion-item__panel[hidden] {
   display: none !important;
-  
-  border-top:0;
+
+  border-top: 0;
 }
 
 .strata-accordion-item__content {
-  
-  padding:1rem;
-  padding-top:1rem;
-  color:var(--strata-color-text-secondary);
-  
-  transition-property:opacity;
-  transition-duration:300ms;
-  
-  border-left-width:2px;
-  border-color: color-mix(in srgb, var(--strata-color-action-primary) 20%, transparent);
-  margin-left:1rem;
+  padding: 1rem;
+  padding-top: 1rem;
+  color: var(--strata-color-text-secondary);
+
+  transition-property: opacity;
+  transition-duration: 300ms;
+
+  border-left-width: 2px;
+  border-color: color-mix(
+    in srgb,
+    var(--strata-color-action-primary) 20%,
+    transparent
+  );
+  margin-left: 1rem;
 }
 @media (min-width: 769px) {
-
-
-.strata-accordion-item__content {
-  padding:1.5rem;
-}
+  .strata-accordion-item__content {
+    padding: 1.5rem;
+  }
 }
 
 .strata-accordion-item__content:hover {
-  
-  color:var(--strata-color-text-primary);
+  color: var(--strata-color-text-primary);
 }
 
 .strata-accordion--bordered {
-  
-  border-width:1px;border-style:solid;
-  border-color: color-mix(in srgb, var(--strata-color-border-strong) 40%, transparent);
-  border-radius:var(--strata-radius-medium);
-  
-  padding:.5rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: color-mix(
+    in srgb,
+    var(--strata-color-border-strong) 40%,
+    transparent
+  );
+  border-radius: var(--strata-radius-medium);
+
+  padding: 0.5rem;
 }
 
 .strata-accordion--bordered .strata-accordion-item {
-  
-  border-bottom-width:1px;border-bottom-style:solid;
-  border-color: color-mix(in srgb, var(--strata-color-border-strong) 20%, transparent);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: color-mix(
+    in srgb,
+    var(--strata-color-border-strong) 20%,
+    transparent
+  );
 }
 
 .strata-accordion--bordered .strata-accordion-item:last-child {
-  
-  border-bottom:0;
+  border-bottom: 0;
 }
 
 .strata-accordion--separated .strata-accordion-item {
-  
-  margin-bottom:.5rem;
-  
-  border-width:1px;border-style:solid;
-  border-color: color-mix(in srgb, var(--strata-color-border-strong) 40%, transparent);
-  border-radius:var(--strata-radius-small);
-  
-  transition-property:all;
-  transition-duration:200ms;
+  margin-bottom: 0.5rem;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: color-mix(
+    in srgb,
+    var(--strata-color-border-strong) 40%,
+    transparent
+  );
+  border-radius: var(--strata-radius-small);
+
+  transition-property: all;
+  transition-duration: 200ms;
 }
 
 .strata-accordion--separated .strata-accordion-item:last-child {
-  
-  margin-bottom:0;
+  margin-bottom: 0;
 }
 
 .strata-accordion--separated .strata-accordion-item:hover {
-  
-  border-color: color-mix(in srgb, var(--strata-color-border-strong) 70%, transparent);
+  border-color: color-mix(
+    in srgb,
+    var(--strata-color-border-strong) 70%,
+    transparent
+  );
 }
 
 .strata-accordion--separated .strata-accordion-item[open] {
-  
-  border-color: color-mix(in srgb, var(--strata-color-action-primary) 60%, transparent);
+  border-color: color-mix(
+    in srgb,
+    var(--strata-color-action-primary) 60%,
+    transparent
+  );
 }
 
 @media (max-width: 768px) {
   .strata-accordion-item__header {
-    
-  padding:.75rem;
+    padding: 0.75rem;
   }
 
   .strata-accordion-item__content {
-    
-  padding:.75rem;
-  padding-top:.5rem;
-    
-  margin-left:.5rem;
+    padding: 0.75rem;
+    padding-top: 0.5rem;
+
+    margin-left: 0.5rem;
   }
 
   .strata-accordion-item__icon {
-    
-  width:1rem;
-  height:1rem;
+    width: 1rem;
+    height: 1rem;
   }
 }
 
@@ -271,8 +298,7 @@
   .strata-accordion-item__icon,
   .strata-accordion-item__panel,
   .strata-accordion-item__content {
-    
-  transition-property:none;
+    transition-property: none;
   }
 
   .strata-accordion-item[open] .strata-accordion-item__icon {

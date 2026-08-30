@@ -60,46 +60,60 @@ export class StrataOverlay extends BaseClass {
     return html`
       <div
         class="${this.getOverlayClasses()}"
-        style="${this.feature_image
-          ? `background-image: url(${this.feature_image})`
-          : ""}"
+        style="${
+          this.feature_image
+            ? `background-image: url(${this.feature_image})`
+            : ""
+        }"
       >
         <div class="strata-overlay__content">
-          ${this.tag_name
-            ? html` <span class="strata-overlay__category">${this.tag_name}</span> `
-            : ""}
+          ${
+            this.tag_name
+              ? html`
+                  <span class="strata-overlay__category">${this.tag_name}</span>
+                `
+              : ""
+          }
 
           <a href="${this.url}" class="strata-overlay__title-link">
-            ${this.renderTitle("text-white")}
+            ${this.renderTitle()}
           </a>
 
-          ${this.show_meta
-            ? html`
-                <ul class="strata-overlay__meta">
-                  ${this.author_name
-                    ? html`
-                        <li class="strata-overlay__meta-item">
-                          ${this.author_name}
-                        </li>
-                      `
-                    : ""}
-                  ${this.published_at
-                    ? html`
-                        <li class="strata-overlay__meta-item">
-                          ${this.published_at}
-                        </li>
-                      `
-                    : ""}
-                  ${this.reading_time
-                    ? html`
-                        <li class="strata-overlay__meta-item">
-                          ${this.reading_time}
-                        </li>
-                      `
-                    : ""}
-                </ul>
-              `
-            : ""}
+          ${
+            this.show_meta
+              ? html`
+                  <ul class="strata-overlay__meta">
+                    ${
+                      this.author_name
+                        ? html`
+                            <li class="strata-overlay__meta-item">
+                              ${this.author_name}
+                            </li>
+                          `
+                        : ""
+                    }
+                    ${
+                      this.published_at
+                        ? html`
+                            <li class="strata-overlay__meta-item">
+                              ${this.published_at}
+                            </li>
+                          `
+                        : ""
+                    }
+                    ${
+                      this.reading_time
+                        ? html`
+                            <li class="strata-overlay__meta-item">
+                              ${this.reading_time}
+                            </li>
+                          `
+                        : ""
+                    }
+                  </ul>
+                `
+              : ""
+          }
         </div>
       </div>
     `;

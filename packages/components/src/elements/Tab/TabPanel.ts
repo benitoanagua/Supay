@@ -11,8 +11,6 @@ export class StrataTabPanel extends LitElement implements TabPanelProps {
   @property({ type: Boolean, reflect: true }) active = false;
   @property({ type: String, attribute: "panel-id" }) panelId = "";
 
-
-
   protected willUpdate(changedProperties: Map<string, unknown>) {
     if (changedProperties.has("active")) {
       this.style.display = this.active ? "block" : "none";
@@ -22,7 +20,8 @@ export class StrataTabPanel extends LitElement implements TabPanelProps {
   render() {
     return html`
       <div
-        class="strata-tab-panel__content" id=${this.panelId || undefined}
+        class="strata-tab-panel__content"
+        id=${this.panelId || undefined}
         role="tabpanel"
         aria-hidden="${!this.active}"
       >

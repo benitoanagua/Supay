@@ -1,15 +1,15 @@
- .strata-logo {
-  display:inline-flex;
-  vertical-align:middle;
+.strata-logo {
+  display: inline-flex;
+  vertical-align: middle;
 }
 
 .strata-logo--default {
-  height:2rem;
-  fill:var(--strata-color-action-primary);
+  height: 2rem;
+  fill: var(--strata-color-action-primary);
 }
 
 .strata-logo svg {
-  display:block;
-  width:auto;
-  height:100%;
+  display: block;
+  width: auto;
+  height: 100%;
 }

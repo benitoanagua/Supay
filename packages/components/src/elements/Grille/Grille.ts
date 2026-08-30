@@ -19,9 +19,9 @@ export class StrataGrille extends LitElement implements GrilleProps {
   private slotElement!: HTMLSlotElement;
 
   private resizeObserver?: ResizeObserver;
-  private readonly handleResize = () => { window.setTimeout(() => this.gridRendering(), 100); };
-
-
+  private readonly handleResize = () => {
+    window.setTimeout(() => this.gridRendering(), 100);
+  };
 
   connectedCallback() {
     super.connectedCallback();
@@ -56,7 +56,7 @@ export class StrataGrille extends LitElement implements GrilleProps {
   private grid(
     breakpoint: number,
     index: number,
-    length: number
+    length: number,
   ): { rows: number; row: number; col: number } {
     const divInt = Math.floor(length / breakpoint);
     const divMod = length % breakpoint;
@@ -71,7 +71,9 @@ export class StrataGrille extends LitElement implements GrilleProps {
 
     const assignedElements = this.slotElement
       .assignedElements()
-      .filter((element) => element.tagName.toLowerCase() === "strata-grille-item");
+      .filter(
+        (element) => element.tagName.toLowerCase() === "strata-grille-item",
+      );
 
     assignedElements.forEach((element: Element, i: number) => {
       if (!(element instanceof HTMLElement)) return;
@@ -93,7 +95,7 @@ export class StrataGrille extends LitElement implements GrilleProps {
         const widthM = Math.floor(
           (this.containerElement.clientWidth -
             2 * padding * (this.mobile - 1)) /
-            this.mobile
+            this.mobile,
         );
         const borderM: number = (i + 1) % this.mobile !== 0 ? 1 : 0;
         element.style.width = `${widthM - borderM}px`;
@@ -101,7 +103,7 @@ export class StrataGrille extends LitElement implements GrilleProps {
         const widthd = Math.floor(
           (this.containerElement.clientWidth -
             2 * padding * (this.desktop - 1)) /
-            this.desktop
+            this.desktop,
         );
         const borderD: number = (i + 1) % this.desktop !== 0 ? 1 : 0;
         element.style.width = `${widthd - borderD}px`;
@@ -136,7 +138,7 @@ export class StrataGrille extends LitElement implements GrilleProps {
       // Esquina (donde se cruzan las líneas) - igual que en Vue
       if (hasRightBorder && hasBottomBorder) {
         const gradientSize: number = Math.round(
-          (2 * padding * Math.sqrt(2)) / 4 + 1
+          (2 * padding * Math.sqrt(2)) / 4 + 1,
         );
         element.style.borderImage = `linear-gradient(315deg, transparent ${gradientSize}px, ${borderColor} 0) 1`;
       }

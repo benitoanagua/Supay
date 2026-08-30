@@ -18,7 +18,7 @@ export class StrataThemeToggle extends LitElement {
   private loadTheme() {
     const savedTheme = localStorage.getItem("strata-theme") as ThemeMode | null;
     const systemPrefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)",
     ).matches;
 
     this.currentTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
@@ -45,7 +45,7 @@ export class StrataThemeToggle extends LitElement {
         "theme-change",
         {
           detail: { theme },
-        }
+        },
       ) as ThemeChangeEvent;
 
       window.dispatchEvent(themeChangeEvent);
@@ -74,13 +74,23 @@ export class StrataThemeToggle extends LitElement {
         title="${themeLabel}"
         data-theme="${this.currentTheme}"
       >
-        ${this.currentTheme === "light"
-          ? html`
-              <iconify-icon class="strata-theme-toggle-icon" icon="carbon:sun" aria-hidden="true"></iconify-icon>
-            `
-          : html`
-              <iconify-icon class="strata-theme-toggle-icon" icon="carbon:moon" aria-hidden="true"></iconify-icon>
-            `}
+        ${
+          this.currentTheme === "light"
+            ? html`
+                <iconify-icon
+                  class="strata-theme-toggle-icon"
+                  icon="carbon:sun"
+                  aria-hidden="true"
+                ></iconify-icon>
+              `
+            : html`
+                <iconify-icon
+                  class="strata-theme-toggle-icon"
+                  icon="carbon:moon"
+                  aria-hidden="true"
+                ></iconify-icon>
+              `
+        }
 
         <!-- Visual mode indicator -->
         <span class="strata-theme-toggle-badge">

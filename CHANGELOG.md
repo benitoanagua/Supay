@@ -3,6 +3,7 @@
 ## 2.5.1
 
 ### Fixed
+
 - Typecheck: corrected global element type map and item-component exports in `packages/components`.
 - Removed the redundant theme-aware mixin; components now inherit STRATA CSS tokens directly.
 - `@strata/components` now emits declaration files via `vite-plugin-dts` so downstream packages typecheck against a real `types` entry.
@@ -15,17 +16,20 @@
 - Removed the dead root `.storybook` configuration.
 
 ### Added
+
 - GitHub Actions CI covering audit, lint, typecheck, unit tests, build, Storybook build, a11y, visual regression and Changesets.
 - `.changeset/config.json`.
 
 ## 2.5.0
 
 ### Added
+
 - Expanded the canonical STRATA catalog to 48 component/element entries.
 - Added form, navigation, feedback, overlay, data and content primitives.
 - Added component catalog registry and Storybook overview.
 
 ### Changed
+
 - `strata-*` is the canonical namespace.
 - Carbon via `iconify-icon` remains the only permitted icon collection.
 - All new components consume STRATA tokens and Scale Law geometry.

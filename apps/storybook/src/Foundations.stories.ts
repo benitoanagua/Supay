@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/html';
-import '@strata/components';
+import type { Meta, StoryObj } from "@storybook/html";
+import "@strata/components";
 
-const meta: Meta = { title: 'Foundations/Overview' };
+const meta: Meta = { title: "Foundations/Overview" };
 export default meta;
 type Story = StoryObj;
 
@@ -11,7 +11,7 @@ export const ScaleLaw: Story = {
       <h1>STRATA Scale Law</h1>
       <p>Physical scale determines structural weight.</p>
       <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:end">
-        ${['micro','small','medium','large','hero'].map((size) => `<strata-surface size="${size}"><strong>${size}</strong><br><small>radius · border · elevation</small></strata-surface>`).join('')}
+        ${["micro", "small", "medium", "large", "hero"].map((size) => `<strata-surface size="${size}"><strong>${size}</strong><br><small>radius · border · elevation</small></strata-surface>`).join("")}
       </div>
     </section>`,
 };
@@ -22,7 +22,7 @@ export const Spectrum: Story = {
       <h1>STRATA Spectrum</h1>
       <p>Monochrome establishes structure. Color establishes meaning.</p>
       <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px">
-        ${['red','orange','yellow','green','blue','indigo','violet'].map((tone) => `<strata-badge tone="${tone}">${tone}</strata-badge>`).join('')}
+        ${["red", "orange", "yellow", "green", "blue", "indigo", "violet"].map((tone) => `<strata-badge tone="${tone}">${tone}</strata-badge>`).join("")}
       </div>
     </section>`,
 };
@@ -38,5 +38,6 @@ export const Typography: Story = {
 };
 
 export const Dividers: Story = {
-  render: () => `<section class="strata-story-foundation-page"><h2>Editorial dividers</h2><p>Structural separation</p><strata-divider></strata-divider><p>Major section</p><strata-divider variant="double"></strata-divider><p>Secondary relationship</p><strata-divider variant="dashed"></strata-divider></section>`,
+  render: () =>
+    `<section class="strata-story-foundation-page"><h2>Editorial dividers</h2><p>Structural separation</p><strata-divider></strata-divider><p>Major section</p><strata-divider variant="double"></strata-divider><p>Secondary relationship</p><strata-divider variant="dashed"></strata-divider></section>`,
 };

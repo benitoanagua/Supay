@@ -1,11 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/html';
-import '@strata/components';
+import type { Meta, StoryObj } from "@storybook/html";
+import "@strata/components";
 
-const meta: Meta = { title: 'Foundations/Scale Law', parameters: { layout: 'fullscreen' } };
+const meta: Meta = {
+  title: "Foundations/Scale Law",
+  parameters: { layout: "fullscreen" },
+};
 export default meta;
 type Story = StoryObj;
 
-const sizes = ['micro','small','medium','large','hero'];
+const sizes = ["micro", "small", "medium", "large", "hero"];
 export const StructuralWeight: Story = {
   render: () => `
     <main class="strata-story-scale-page">
@@ -15,7 +18,7 @@ export const StructuralWeight: Story = {
         <p style="font-size:18px;line-height:1.5">As physical size increases, radius, border and elevation increase with it. Importance never overrides geometry.</p>
       </header>
       <div class="strata-story-scale-grid">
-        ${sizes.map(size => `<strata-surface size="${size}"><strong style="display:block;font-size:${size==='hero'?28:size==='large'?22:size==='medium'?18:14}px">${size}</strong><span style="font:400 11px var(--strata-font-mono)">radius / border / depth</span></strata-surface>`).join('')}
+        ${sizes.map((size) => `<strata-surface size="${size}"><strong style="display:block;font-size:${size === "hero" ? 28 : size === "large" ? 22 : size === "medium" ? 18 : 14}px">${size}</strong><span style="font:400 11px var(--strata-font-mono)">radius / border / depth</span></strata-surface>`).join("")}
       </div>
     </main>`,
 };

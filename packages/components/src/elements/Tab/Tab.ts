@@ -12,8 +12,6 @@ export class StrataTab extends LitElement implements TabProps {
   @property({ type: Boolean, reflect: true }) active = false;
   @property({ type: String, attribute: "panel-id" }) panelId = "";
 
-
-
   render() {
     return html`
       <button

@@ -116,4 +116,3 @@ declare global {
     "strata-stepper": import("./Stepper/Stepper.js").StrataStepper;
   }
 }
-

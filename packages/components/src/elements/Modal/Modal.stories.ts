@@ -62,7 +62,7 @@ const meta = {
       if (value !== undefined) {
         modal.setAttribute(
           key.replace(/([A-Z])/g, "-$1").toLowerCase(),
-          String(value)
+          String(value),
         );
       }
     });

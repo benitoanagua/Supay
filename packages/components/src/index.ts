@@ -7,4 +7,4 @@ export * from "./types/events.js";
 export * from "./types/modal.js";
 export * from "./types/overlay.js";
 export * from "./types/tabs.js";
-export * from './elements/index.js';
+export * from "./elements/index.js";

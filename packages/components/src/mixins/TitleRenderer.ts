@@ -4,15 +4,16 @@ import type { CardHeading } from "../types/card.js";
 export interface TitleRendererInterface {
   heading: CardHeading;
   title: string;
+  getHeadingClass(): string;
+  renderTitle(additionalClasses?: string): TemplateResult;
 }
 
-export function TitleRendererMixin<T extends new (...args: any[]) => LitElement>(
-  Base: T
-) {
-  return class extends Base implements TitleRendererInterface {
-    constructor(...args: any[]) {
-      super(...args);
-    }
+type Constructor<T = object> = new (...args: any[]) => T;
+
+export function TitleRendererMixin<T extends Constructor<LitElement>>(
+  Base: T,
+): Constructor<TitleRendererInterface> & T {
+  class TitleRenderer extends Base implements TitleRendererInterface {
     heading!: CardHeading;
     title!: string;
 
@@ -26,7 +27,6 @@ export function TitleRendererMixin<T extends new (...args: any[]) => LitElement>
         ? `${titleClass} ${additionalClasses}`
         : titleClass;
 
-      // Usar switch en lugar de template dinámico
       switch (this.heading) {
         case 1:
           return html`<h1 class="${fullClass}">${this.title}</h1>`;
@@ -44,5 +44,7 @@ export function TitleRendererMixin<T extends new (...args: any[]) => LitElement>
           return html`<h2 class="${fullClass}">${this.title}</h2>`;
       }
     }
-  };
+  }
+
+  return TitleRenderer;
 }

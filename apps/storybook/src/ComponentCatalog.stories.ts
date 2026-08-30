@@ -1,11 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/html';
-import '@strata/components';
+import type { Meta, StoryObj } from "@storybook/html";
+import "@strata/components";
 
-const meta: Meta = { title: 'Components/Overview', parameters: { layout: 'fullscreen' } };
+const meta: Meta = {
+  title: "Components/Overview",
+  parameters: { layout: "fullscreen" },
+};
 export default meta;
 type Story = StoryObj;
 
-export const Catalog: Story = { render: () => `
+export const Catalog: Story = {
+  render: () => `
 <main class="strata-story-catalog-page">
 <header class="strata-story-catalog-header"><p style="font:500 12px var(--strata-font-mono);letter-spacing:.08em;text-transform:uppercase">STRATA / Components</p><h1 style="font-size:42px;line-height:1.05;margin:8px 0">Components are consequences of the foundations.</h1><p style="font-size:18px;line-height:1.5">Each component inherits scale, typography, color, state and accessibility contracts.</p></header>
 <section class="strata-story-section">
@@ -16,4 +20,5 @@ export const Catalog: Story = { render: () => `
 <div><h2>Feedback</h2><div class="strata-story-feedback-demo"><strata-alert tone="info">Information is communicated without changing the structural scale.</strata-alert><strata-alert tone="success">Confirmed.</strata-alert><div><strata-badge tone="violet">Special</strata-badge></div><strata-progress value="64"></strata-progress><strata-skeleton></strata-skeleton></div></div>
 <strata-divider></strata-divider>
 <div><h2>Editorial surface</h2><strata-card size="large"><h3>Large surfaces carry more structural weight.</h3><p>Typography and dividers can establish hierarchy without enclosing every block.</p><strata-divider variant="dashed"></strata-divider><p class="strata-story-numeric">2026-08-29 · 14:32 · 98.4%</p></strata-card></div>
-</section></main>` };
+</section></main>`,
+};

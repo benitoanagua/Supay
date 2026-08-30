@@ -7,7 +7,6 @@ import componentCSS from "./Grille.css?inline";
 export class StrataGrilleItem extends LitElement {
   static styles = [unsafeCSS(baseCSS), unsafeCSS(componentCSS)];
 
-
   connectedCallback() {
     super.connectedCallback();
     this.classList.add("strata-grille-item");

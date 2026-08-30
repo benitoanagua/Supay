@@ -1,2 +1,40 @@
-import {LitElement,html,css} from 'lit';import {customElement,property} from 'lit/decorators.js';
-@customElement('strata-progress') export class StrataProgress extends LitElement{static styles=css`:host{display:block}.strata-progress__track{height:4px;background:var(--strata-color-gray-200);overflow:hidden}.strata-progress__bar{height:100%;background:var(--strata-color-blue);transition:width var(--strata-motion-normal) ease}@media(prefers-reduced-motion:reduce){.strata-progress__bar{transition:none}}`;@property({type:Number}) value=0;render(){return html`<div class="strata-progress__track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.max(0,Math.min(100,this.value))}"><div class="strata-progress__bar" style="width:${Math.max(0,Math.min(100,this.value))}%"></div></div>`}}
+import { LitElement, html, css } from "lit";
+import { customElement, property } from "lit/decorators.js";
+@customElement("strata-progress")
+export class StrataProgress extends LitElement {
+  static styles = css`
+    :host {
+      display: block;
+    }
+    .strata-progress__track {
+      height: 4px;
+      background: var(--strata-color-gray-200);
+      overflow: hidden;
+    }
+    .strata-progress__bar {
+      height: 100%;
+      background: var(--strata-color-blue);
+      transition: width var(--strata-motion-normal) ease;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .strata-progress__bar {
+        transition: none;
+      }
+    }
+  `;
+  @property({ type: Number }) value = 0;
+  render() {
+    return html`<div
+      class="strata-progress__track"
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="${Math.max(0, Math.min(100, this.value))}"
+    >
+      <div
+        class="strata-progress__bar"
+        style="width:${Math.max(0, Math.min(100, this.value))}%"
+      ></div>
+    </div>`;
+  }
+}

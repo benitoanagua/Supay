@@ -34,7 +34,8 @@ export class StrataCard extends BaseClass {
   media_width: CardMediaWidth = "is-half";
   @property({ type: Number, reflect: true }) heading: CardHeading = 4;
   @property({ type: String }) density: CardDensity = "normal";
-  @property({ type: String, reflect: true }) size: "small" | "medium" | "large" | "hero" = "medium";
+  @property({ type: String, reflect: true }) size:
+    "small" | "medium" | "large" | "hero" = "medium";
   @property({ type: String, attribute: "aspect-ratio" })
   aspect_ratio: CardAspectRatio = "monitor";
   @property({ type: String, attribute: "reading-time" }) reading_time = "";
@@ -88,38 +89,51 @@ export class StrataCard extends BaseClass {
   }
 
   private getFlexClass() {
-    if (this.media_align === "left" && this.density !== "normal") return "strata-card__container--row";
-    if (this.media_align === "left" && this.density === "normal") return "strata-card__container--responsive-row";
-    if (this.media_align === "right" && this.density !== "normal") return "strata-card__container--row-reverse";
-    if (this.media_align === "right" && this.density === "normal") return "strata-card__container--responsive-row-reverse";
+    if (this.media_align === "left" && this.density !== "normal")
+      return "strata-card__container--row";
+    if (this.media_align === "left" && this.density === "normal")
+      return "strata-card__container--responsive-row";
+    if (this.media_align === "right" && this.density !== "normal")
+      return "strata-card__container--row-reverse";
+    if (this.media_align === "right" && this.density === "normal")
+      return "strata-card__container--responsive-row-reverse";
     if (this.media_align === "top") return "strata-card__container--column";
     return "strata-card__container--column-reverse";
   }
 
   private getFigureClass() {
-    const isHorizontal = this.media_align === "left" || this.media_align === "right";
+    const isHorizontal =
+      this.media_align === "left" || this.media_align === "right";
     const isNormalDensity = this.density === "normal";
-    if (!isHorizontal || (isHorizontal && isNormalDensity)) return "strata-card__figure--flexible";
+    if (!isHorizontal || (isHorizontal && isNormalDensity))
+      return "strata-card__figure--flexible";
     switch (this.media_width) {
-      case "is-one-fifth": return "strata-card__figure--one-fifth";
-      case "is-one-quarter": return "strata-card__figure--one-quarter";
-      case "is-one-third": return "strata-card__figure--one-third";
-      case "is-two-fifths": return "strata-card__figure--two-fifths";
-      default: return "strata-card__figure--one-half";
+      case "is-one-fifth":
+        return "strata-card__figure--one-fifth";
+      case "is-one-quarter":
+        return "strata-card__figure--one-quarter";
+      case "is-one-third":
+        return "strata-card__figure--one-third";
+      case "is-two-fifths":
+        return "strata-card__figure--two-fifths";
+      default:
+        return "strata-card__figure--one-half";
     }
   }
 
   private getImageClasses() {
-    const sizeClass = this.imageSize.width < 240
-      ? "strata-card__image--compact"
-      : this.imageSize.width <= 440
-        ? "strata-card__image--standard"
-        : "strata-card__image--large";
-    const aspectClass = this.aspect_ratio === "square"
-      ? "strata-card__image--square"
-      : this.aspect_ratio === "video"
-        ? "strata-card__image--video"
-        : "strata-card__image--four-three";
+    const sizeClass =
+      this.imageSize.width < 240
+        ? "strata-card__image--compact"
+        : this.imageSize.width <= 440
+          ? "strata-card__image--standard"
+          : "strata-card__image--large";
+    const aspectClass =
+      this.aspect_ratio === "square"
+        ? "strata-card__image--square"
+        : this.aspect_ratio === "video"
+          ? "strata-card__image--video"
+          : "strata-card__image--four-three";
     return `strata-card__image ${sizeClass} ${aspectClass}`;
   }
 
@@ -127,58 +141,77 @@ export class StrataCard extends BaseClass {
     return html`
       <div class="${this.getCardClasses()}">
         <div class="strata-card__container ${this.getFlexClass()}">
-          ${this.feature_image
-            ? html`
-                <figure class="strata-card__figure ${this.getFigureClass()}">
-                  <a href="${this.url}">
-                    <img
-                      src="${this.feature_image}"
-                      alt="${this.title}"
-                      class="${this.getImageClasses()}"
-                    />
-                  </a>
-                </figure>
-              `
-            : ""}
+          ${
+            this.feature_image
+              ? html`
+                  <figure class="strata-card__figure ${this.getFigureClass()}">
+                    <a href="${this.url}">
+                      <img
+                        src="${this.feature_image}"
+                        alt="${this.title}"
+                        class="${this.getImageClasses()}"
+                      />
+                    </a>
+                  </figure>
+                `
+              : ""
+          }
 
           <div class="strata-card__content">
-            ${this.author_name
-              ? html`
-                  <div class="strata-card__author">
-                    ${this.author_profile_image
-                      ? html`
-                          <img
-                            src="${this.author_profile_image}"
-                            alt="${this.author_name}"
-                            class="strata-card__author-image"
-                          />
-                        `
-                      : html`<span class="strata-card__author-bullet"></span>`}
-                    <a href="${this.author_url}" class="strata-card__author-link">
-                      ${this.author_name}
-                    </a>
-                  </div>
-                `
-              : ""}
+            ${
+              this.author_name
+                ? html`
+                    <div class="strata-card__author">
+                      ${
+                        this.author_profile_image
+                          ? html`
+                              <img
+                                src="${this.author_profile_image}"
+                                alt="${this.author_name}"
+                                class="strata-card__author-image"
+                              />
+                            `
+                          : html`<span
+                              class="strata-card__author-bullet"
+                            ></span>`
+                      }
+                      <a
+                        href="${this.author_url}"
+                        class="strata-card__author-link"
+                      >
+                        ${this.author_name}
+                      </a>
+                    </div>
+                  `
+                : ""
+            }
 
             <a href="${this.url}" class="strata-card__title-link">
               ${this.renderTitle()}
             </a>
 
-            ${this.density === "normal"
-              ? html`<p class="strata-card__excerpt">${this.excerpt}</p>`
-              : ""}
-            ${this.tag_name && this.density !== "minimal"
-              ? html`
-                  <div class="strata-card__meta">
-                    <span class="strata-card__meta-item">${this.published_at}</span>
-                    <span class="strata-card__meta-item">${this.reading_time}</span>
-                    <a href="${this.tag_url}" class="strata-card__tag">
-                      ${this.tag_name}
-                    </a>
-                  </div>
-                `
-              : ""}
+            ${
+              this.density === "normal"
+                ? html`<p class="strata-card__excerpt">${this.excerpt}</p>`
+                : ""
+            }
+            ${
+              this.tag_name && this.density !== "minimal"
+                ? html`
+                    <div class="strata-card__meta">
+                      <span class="strata-card__meta-item"
+                        >${this.published_at}</span
+                      >
+                      <span class="strata-card__meta-item"
+                        >${this.reading_time}</span
+                      >
+                      <a href="${this.tag_url}" class="strata-card__tag">
+                        ${this.tag_name}
+                      </a>
+                    </div>
+                  `
+                : ""
+            }
           </div>
         </div>
       </div>

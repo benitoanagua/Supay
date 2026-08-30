@@ -33,7 +33,7 @@ const meta = {
       if (value !== undefined) {
         carousel.setAttribute(
           key.replace(/([A-Z])/g, "-$1").toLowerCase(),
-          String(value)
+          String(value),
         );
       }
     });
@@ -42,8 +42,7 @@ const meta = {
     for (let i = 0; i < 6; i++) {
       const item = document.createElement("strata-carousel-item");
       const content = document.createElement("div");
-      content.className =
-        "strata-story-carousel-slide";
+      content.className = "strata-story-carousel-slide";
       content.innerHTML = `
         <div class="strata-story-center">
           <div class="strata-story-number">${i + 1}</div>

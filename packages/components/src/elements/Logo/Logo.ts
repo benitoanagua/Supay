@@ -17,8 +17,8 @@ const STRATA_LOGO_PATH = [
   "47.5c12.75-5.75 28.5-10.5 45.002-10.5 14 0 21.5 2.75 21.5 8.5Zm0 30v19c-3 6-8.5 10-15.75 10-7.5",
   "0-13.002-3-13.002-10 0-9.25 6.752-11.5 16.252-14 5.5-1.5 9.75-3.5 12.5-5Zm100 106.5c35.25 0",
   "50.75-24.5 60.5-51L731.252 3.5h-53.25l-23 97-23.5-97h-57l54.25 141.25-.5 1.75c-1.5 5.5-7.75",
-  "7.75-19.25 7.75-7.25 0-11-1-16.25-2.25l-3.25 38.5c8 2 17 3.25 30.5 3.25Z"
-].join(' ');
+  "7.75-19.25 7.75-7.25 0-11-1-16.25-2.25l-3.25 38.5c8 2 17 3.25 30.5 3.25Z",
+].join(" ");
 
 @customElement("strata-logo")
 export class StrataLogo extends LitElement {
@@ -41,9 +41,7 @@ export class StrataLogo extends LitElement {
   render() {
     return html`
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 732 194">
-        <path
-          d=${STRATA_LOGO_PATH}
-        />
+        <path d=${STRATA_LOGO_PATH} />
       </svg>
     `;
   }

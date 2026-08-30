@@ -4,6 +4,10 @@ import { StrataElement } from "../StrataBase.js";
 
 @customElement("strata-tooltip")
 export class StrataTooltip extends StrataElement {
-  @property({type:String}) text="";
-  render(){return html`<span class="strata-tooltip"><slot></slot><span role="tooltip">${this.text}</span></span>`;}
+  @property({ type: String }) text = "";
+  render() {
+    return html`<span class="strata-tooltip"
+      ><slot></slot><span role="tooltip">${this.text}</span></span
+    >`;
+  }
 }

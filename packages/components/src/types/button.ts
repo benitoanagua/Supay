@@ -1,16 +1,8 @@
 export type ButtonVariant =
-  | "filled"
-  | "outlined"
-  | "text"
-  | "elevated"
-  | "tonal";
+  "filled" | "outlined" | "text" | "elevated" | "tonal";
 export type ButtonSize = "small" | "medium" | "large";
 export type ButtonColor =
-  | "primary"
-  | "secondary"
-  | "error"
-  | "success"
-  | "warning";
+  "primary" | "secondary" | "error" | "success" | "warning";
 export type ButtonType = "button" | "submit" | "reset";
 export type { StrataIconName } from "./iconify.js";
 

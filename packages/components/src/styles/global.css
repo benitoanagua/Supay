@@ -1,7 +1,27 @@
 @layer base {
-  :root { font-family: var(--strata-font-sans); color: var(--strata-color-text-primary); background: var(--strata-color-surface-page); }
-  html { font-family: var(--strata-font-sans); -webkit-font-smoothing: antialiased; }
-  body { margin:0; min-height:100vh; background:var(--strata-color-surface-page); color:var(--strata-color-text-primary); font-family:var(--strata-font-sans); }
-  *,*::before,*::after { box-sizing:border-box; }
-  :focus-visible { outline:2px solid var(--strata-color-focus-ring); outline-offset:2px; }
+  :root {
+    font-family: var(--strata-font-sans);
+    color: var(--strata-color-text-primary);
+    background: var(--strata-color-surface-page);
+  }
+  html {
+    font-family: var(--strata-font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--strata-color-surface-page);
+    color: var(--strata-color-text-primary);
+    font-family: var(--strata-font-sans);
+  }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  :focus-visible {
+    outline: 2px solid var(--strata-color-focus-ring);
+    outline-offset: 2px;
+  }
 }

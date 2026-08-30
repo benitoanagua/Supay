@@ -1,100 +1,101 @@
 .strata-overlay {
-  
-  width:100%;
-  display:flex;
-  overflow:hidden;
-  background-size:cover;
-  background-position:center;
-  position:relative;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  position: relative;
   isolation: isolate;
-  
-  border-width:1px;border-style:solid;
-  border-color: rgb(255 255 255 / 0.2);
+  border-width: var(--strata-border-small);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--strata-color-white) 20%, transparent);
 }
 
 .strata-overlay--align-start {
-  
-  justify-content:flex-start;
+  justify-content: flex-start;
 }
 
 .strata-overlay--align-center {
-  
-  justify-content:center;
+  justify-content: center;
 }
 
 .strata-overlay--align-end {
-  
-  justify-content:flex-end;
+  justify-content: flex-end;
 }
 
 .strata-overlay--position-top {
-  
-  align-items:flex-start;
+  align-items: flex-start;
 }
 
 .strata-overlay--position-center {
-  
-  align-items:center;
+  align-items: center;
 }
 
 .strata-overlay--position-bottom {
-  
-  align-items:flex-end;
+  align-items: flex-end;
 }
 
 .strata-overlay--aspect-square {
-  
-  aspect-ratio:1 / 1;
+  aspect-ratio: 1 / 1;
 }
 
 .strata-overlay--aspect-video {
-  
-  aspect-ratio:16 / 9;
+  aspect-ratio: 16 / 9;
 }
 
 .strata-overlay--aspect-monitor {
-  
-  aspect-ratio:4 / 3;
+  aspect-ratio: 4 / 3;
 }
 
 .strata-overlay--fill-full::before {
   content: "";
-  
-  position:absolute;
-  inset:0;
-  z-index:1;
-  
-  background-color: color-mix(in srgb, var(--strata-color-black) 40%, transparent);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: color-mix(
+    in srgb,
+    var(--strata-color-black) 40%,
+    transparent
+  );
 }
 
 .strata-overlay--fill-gradient.strata-overlay--position-top::before {
   content: "";
-  
-  position:absolute;
-  inset:0;
-  z-index:1;
-  
-  background-image:linear-gradient(to bottom, color-mix(in srgb, var(--strata-color-black) 50%, transparent) 0%, color-mix(in srgb, var(--strata-color-black) 20%, transparent) 50%, transparent 100%);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--strata-color-black) 50%, transparent) 0%,
+    color-mix(in srgb, var(--strata-color-black) 20%, transparent) 50%,
+    transparent 100%
+  );
 }
 
 .strata-overlay--fill-gradient.strata-overlay--position-bottom::before {
   content: "";
-  
-  position:absolute;
-  inset:0;
-  z-index:1;
-  
-  background-image:linear-gradient(to top, color-mix(in srgb, var(--strata-color-black) 50%, transparent) 0%, color-mix(in srgb, var(--strata-color-black) 20%, transparent) 50%, transparent 100%);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--strata-color-black) 50%, transparent) 0%,
+    color-mix(in srgb, var(--strata-color-black) 20%, transparent) 50%,
+    transparent 100%
+  );
 }
 
 .strata-overlay--fill-gradient.strata-overlay--position-center::before {
   content: "";
-  
-  position:absolute;
-  inset:0;
-  z-index:1;
-  
-  background-image:linear-gradient(to top, transparent 0%, color-mix(in srgb, var(--strata-color-black) 30%, transparent) 50%, transparent 100%);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: linear-gradient(
+    to top,
+    transparent 0%,
+    color-mix(in srgb, var(--strata-color-black) 30%, transparent) 50%,
+    transparent 100%
+  );
 }
 
 .strata-overlay--fill-none::before {
@@ -102,216 +103,182 @@
 }
 
 .strata-overlay__content {
-  
-  max-width:42rem;
-  padding:1.5rem;
-  display:flex;
-  flex-direction:column;
-  gap:.75rem;
-  text-align:left;
-  z-index:2;
-  position:relative;
-  
-  
-  background-color:transparent;
-  
-  border-width:1px;border-style:solid;
-  border-color: rgb(255 255 255 / 0.3);
-  
-  border-radius:var(--strata-radius-medium);
-  
-  transition-property:all;
-  transition-duration:300ms;
+  max-width: 42rem;
+  padding: var(--strata-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--strata-space-3);
+  text-align: left;
+  z-index: 2;
+  position: relative;
+  background-color: transparent;
+  border-width: var(--strata-border-small);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--strata-color-white) 30%, transparent);
+  border-radius: var(--strata-radius-medium);
+  transition-property: all;
+  transition-duration: 300ms;
 }
+
 @media (min-width: 769px) {
-
-
-.strata-overlay__content {
-  padding:1rem;
-  margin:.5rem;
-}
+  .strata-overlay__content {
+    padding: var(--strata-space-4);
+    margin: var(--strata-space-2);
+  }
 }
 
 .strata-overlay__content:hover {
-  
-  border-color: rgb(255 255 255 / 0.5);
+  border-color: color-mix(in srgb, var(--strata-color-white) 50%, transparent);
 }
 
 .strata-overlay--box-background .strata-overlay__content {
-  
-  background-color: rgb(255 255 255 / 0.05);
-  
-  backdrop-filter:blur(4px);
+  background-color: color-mix(
+    in srgb,
+    var(--strata-color-white) 5%,
+    transparent
+  );
+  backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  
-  border-width:2px;
-  border-color: rgb(255 255 255 / 0.4);
+  border-width: var(--strata-border-medium);
+  border-color: color-mix(in srgb, var(--strata-color-white) 40%, transparent);
 }
 
 .strata-overlay--box-border .strata-overlay__content {
-  
-  background-color:transparent;
-  
-  border-width:2px;
-  border-color: rgb(255 255 255 / 0.6);
-  
-  backdrop-filter:none;
+  background-color: transparent;
+  border-width: var(--strata-border-medium);
+  border-color: color-mix(in srgb, var(--strata-color-white) 60%, transparent);
+  backdrop-filter: none;
 }
 
 .strata-overlay--box-border .strata-overlay__content:hover {
-  
-  border-color: rgb(255 255 255 / 0.8);
+  border-color: color-mix(in srgb, var(--strata-color-white) 80%, transparent);
 }
 
 .strata-overlay--box-transparent .strata-overlay__content {
-  
-  background-color:transparent;
-  
-  border:0;
-  
-  backdrop-filter:none;
+  background-color: transparent;
+  border: 0;
+  backdrop-filter: none;
 }
 
 .strata-overlay__category {
-  
-  color:#fff;
-  width:fit-content;
-  font-size:.75rem;
-  font-weight:500;
-  
-  text-transform:uppercase;
-  letter-spacing:0.025em;
-  
-  padding-top:.25rem;padding-bottom:.25rem;
-  padding-left:.75rem;padding-right:.75rem;
-  
-  border-radius:9999px;
-  
-  transition-property:all;
-  transition-duration:200ms;
-  
-  background-color:transparent;
-  
-  border-width:1px;border-style:solid;
-  border-color: rgb(255 255 255 / 0.6);
+  color: var(--strata-color-white);
+  width: fit-content;
+  font-size: var(--strata-space-3);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  padding-top: var(--strata-space-1);
+  padding-bottom: var(--strata-space-1);
+  padding-left: var(--strata-space-3);
+  padding-right: var(--strata-space-3);
+  border-radius: 9999px;
+  transition-property: all;
+  transition-duration: 200ms;
+  background-color: transparent;
+  border-width: var(--strata-border-small);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--strata-color-white) 60%, transparent);
 }
 
 .strata-overlay__category:hover {
-  
-  border-color:#fff;
-  
-  background-color: rgb(255 255 255 / 0.1);
+  border-color: var(--strata-color-white);
+  background-color: color-mix(
+    in srgb,
+    var(--strata-color-white) 10%,
+    transparent
+  );
 }
 
 .strata-overlay__title-link {
-  
-  position:relative;
-  display:block;
+  position: relative;
+  display: block;
 }
 
 .strata-overlay__title-link > * {
-  
-  color:#fff;
-  text-decoration:none;
-  
-  transition-property:all;
-  transition-duration:200ms;
-  
-  position:relative;
+  color: var(--strata-color-white);
+  text-decoration: none;
+  transition-property: all;
+  transition-duration: 200ms;
+  position: relative;
 }
 
 .strata-overlay__title-link::after {
   content: "";
-  
-  position:absolute;
-  bottom:0;
-  left:0;
-  
-  width:0;
-  height:.125rem;
-  
-  background-color:#fff;
-  
-  transition-property:all;
-  transition-duration:300ms;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: var(--strata-space-1);
+  background-color: var(--strata-color-white);
+  transition-property: all;
+  transition-duration: 300ms;
 }
 
 .strata-overlay__title-link:hover::after {
-  
-  width:100%;
+  width: 100%;
 }
 
 .strata-overlay__title-link:hover > * {
-  
-  color:#fff;
+  color: var(--strata-color-white);
 }
 
 .strata-overlay__meta {
-  
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:.75rem;
-  font-size:.875rem;
-  
-  padding-top:.75rem;
-  
-  border-top-width:1px;border-top-style:solid;
-  border-color: rgb(255 255 255 / 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--strata-space-3);
+  font-size: var(--strata-space-3);
+  padding-top: var(--strata-space-3);
+  border-top-width: var(--strata-border-small);
+  border-top-style: solid;
+  border-color: color-mix(in srgb, var(--strata-color-white) 20%, transparent);
 }
 
 .strata-overlay__meta-item {
-  
-  color: rgb(255 255 255 / 0.9);
-  display:flex;
-  align-items:center;
-  font-weight:500;
-  
-  transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;
-  transition-duration:200ms;
+  color: color-mix(in srgb, var(--strata-color-white) 90%, transparent);
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-duration: 200ms;
 }
 
 .strata-overlay__meta-item:hover {
-  
-  color:#fff;
+  color: var(--strata-color-white);
 }
 
 .strata-overlay__meta-item:not(:last-child)::after {
   content: "•";
-  
-  color: rgb(255 255 255 / 0.4);
-  margin-left:.5rem;
-  margin-right:.25rem;
+  color: color-mix(in srgb, var(--strata-color-white) 40%, transparent);
+  margin-left: var(--strata-space-2);
+  margin-right: var(--strata-space-1);
 }
 
 @media (max-width: 768px) {
   .strata-overlay {
-    
-  border:0;
+    border: 0;
   }
 
   .strata-overlay__content {
-    
-  border-width:1px;border-style:solid;
-    
-  border-radius:var(--strata-radius-small);
+    border-width: var(--strata-border-small);
+    border-style: solid;
+    border-radius: var(--strata-radius-small);
   }
 
   .strata-overlay--box-background .strata-overlay__content,
   .strata-overlay--box-border .strata-overlay__content {
-    
-  border-width:1px;border-style:solid;
+    border-width: var(--strata-border-small);
+    border-style: solid;
   }
 }
 
 .strata-overlay:focus-within .strata-overlay__content {
-  
-  border-width:2px;
-  border-color:#fff;
-  
-  outline-width:2px;
-  outline-color:#fff;
-  outline-offset:2px;
+  border-width: var(--strata-border-medium);
+  border-color: var(--strata-color-white);
+  outline-width: 2px;
+  outline-color: var(--strata-color-white);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -320,7 +287,6 @@
   .strata-overlay__category,
   .strata-overlay__meta-item,
   .strata-overlay__title-link::after {
-    
-  transition-property:none;
+    transition-property: none;
   }
 }

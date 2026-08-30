@@ -14,7 +14,6 @@ export class StrataAccordionItem
   @property({ type: Boolean, reflect: true }) open = false;
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-
   private toggle() {
     if (this.disabled) return;
 
@@ -25,7 +24,7 @@ export class StrataAccordionItem
         bubbles: true,
         composed: true,
         detail: { index },
-      })
+      }),
     );
   }
 

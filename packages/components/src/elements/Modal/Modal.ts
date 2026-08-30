@@ -29,6 +29,7 @@ export class StrataModal extends LitElement {
 
   @state() private isClosing = false;
   private previousBodyOverflow = "";
+  private bodyScrollLocked = false;
   private previouslyFocused: HTMLElement | null = null;
   private readonly titleId = `strata-modal-title-${Math.random().toString(36).slice(2)}`;
 
@@ -63,7 +64,10 @@ export class StrataModal extends LitElement {
   }
 
   private handleOpen() {
-    this.previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    this.previouslyFocused =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
     if (this.preventScroll) {
       this.preventBodyScroll();
     }
@@ -73,7 +77,7 @@ export class StrataModal extends LitElement {
       new CustomEvent("modal-open", {
         bubbles: true,
         composed: true,
-      })
+      }),
     );
 
     // Focus trap
@@ -82,15 +86,17 @@ export class StrataModal extends LitElement {
 
   private handleClose() {
     this.restoreBodyScroll();
-    this.previouslyFocused?.focus();
-    this.previouslyFocused = null;
+    if (this.previouslyFocused) {
+      this.previouslyFocused.focus();
+      this.previouslyFocused = null;
+    }
 
     // Dispatch close event
     this.dispatchEvent(
       new CustomEvent("modal-close", {
         bubbles: true,
         composed: true,
-      })
+      }),
     );
   }
 
@@ -140,18 +146,25 @@ export class StrataModal extends LitElement {
   };
 
   private preventBodyScroll() {
+    if (this.bodyScrollLocked) return;
     this.previousBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    this.bodyScrollLocked = true;
   }
 
   private restoreBodyScroll() {
+    if (!this.bodyScrollLocked) return;
     document.body.style.overflow = this.previousBodyOverflow;
+    this.bodyScrollLocked = false;
   }
 
   private setupFocusTrap() {
     setTimeout(() => {
-      const modal = this.shadowRoot?.querySelector<HTMLElement>(".strata-modal");
-      const first = modal?.querySelector<HTMLElement>('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+      const modal =
+        this.shadowRoot?.querySelector<HTMLElement>(".strata-modal");
+      const first = modal?.querySelector<HTMLElement>(
+        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
       (first || modal)?.focus();
     }, 0);
   }
@@ -159,11 +172,25 @@ export class StrataModal extends LitElement {
   private handleModalKeydown = (event: KeyboardEvent) => {
     if (event.key !== "Tab") return;
     const modal = event.currentTarget as HTMLElement;
-    const items = [...modal.querySelectorAll<HTMLElement>('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')];
-    if (!items.length) { event.preventDefault(); modal.focus(); return; }
-    const first = items[0], last = items[items.length - 1];
-    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    const items = [
+      ...modal.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ),
+    ];
+    if (!items.length) {
+      event.preventDefault();
+      modal.focus();
+      return;
+    }
+    const first = items[0],
+      last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   };
 
   private getModalClasses() {
@@ -228,35 +255,41 @@ export class StrataModal extends LitElement {
           role="dialog"
           aria-modal="true"
           aria-labelledby=${this.title ? this.titleId : undefined}
-          @click="${(e: Event) => e.stopPropagation()}" @keydown="${this.handleModalKeydown}" tabindex="-1"
+          @click="${(e: Event) => e.stopPropagation()}"
+          @keydown="${this.handleModalKeydown}"
+          tabindex="-1"
         >
           <!-- Close Button -->
-          ${this.showClose
-            ? html`
-                <button
-                  class="strata-modal__close"
-                  @click="${this.closeModal}"
-                  aria-label="Close modal"
-                >
-                  <iconify-icon
-                    class="strata-modal__close-icon"
-                    icon="carbon:close"
-                    aria-hidden="true"
-                  ></iconify-icon>
-                </button>
-              `
-            : ""}
+          ${
+            this.showClose
+              ? html`
+                  <button
+                    class="strata-modal__close"
+                    @click="${this.closeModal}"
+                    aria-label="Close modal"
+                  >
+                    <iconify-icon
+                      class="strata-modal__close-icon"
+                      icon="carbon:close"
+                      aria-hidden="true"
+                    ></iconify-icon>
+                  </button>
+                `
+              : ""
+          }
 
           <!-- Header -->
-          ${this.title
-            ? html`
-                <div class="strata-modal__header">
-                  <h2 class="strata-modal__title" id=${this.titleId}>
-                    ${this.title}
-                  </h2>
-                </div>
-              `
-            : html`<slot name="header"></slot>`}
+          ${
+            this.title
+              ? html`
+                  <div class="strata-modal__header">
+                    <h2 class="strata-modal__title" id=${this.titleId}>
+                      ${this.title}
+                    </h2>
+                  </div>
+                `
+              : html`<slot name="header"></slot>`
+          }
 
           <!-- Body -->
           <div class="strata-modal__body">

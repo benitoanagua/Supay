@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/html';
-import '@strata/components';
+import type { Meta, StoryObj } from "@storybook/html";
+import "@strata/components";
 
-const meta: Meta = { title: 'Editorial/Principles' };
+const meta: Meta = { title: "Editorial/Principles" };
 export default meta;
 type Story = StoryObj;
 

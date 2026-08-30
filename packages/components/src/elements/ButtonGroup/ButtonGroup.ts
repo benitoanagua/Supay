@@ -4,6 +4,11 @@ import { StrataElement } from "../StrataBase.js";
 
 @customElement("strata-button-group")
 export class StrataButtonGroup extends StrataElement {
-  @property({type:String}) orientation:"horizontal"|"vertical"="horizontal";
-  render(){return html`<div class="strata-control-group" role="group"><slot></slot></div>`;}
+  @property({ type: String }) orientation: "horizontal" | "vertical" =
+    "horizontal";
+  render() {
+    return html`<div class="strata-control-group" role="group">
+      <slot></slot>
+    </div>`;
+  }
 }

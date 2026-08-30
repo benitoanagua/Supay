@@ -43,7 +43,9 @@ export class StrataButton extends LitElement {
   private createRippleEffect(event: MouseEvent) {
     if (this.loading || this.disabled) return;
 
-    const button = this.renderRoot.querySelector(".strata-button") as HTMLElement;
+    const button = this.renderRoot.querySelector(
+      ".strata-button",
+    ) as HTMLElement;
     if (!button) return;
 
     const ripple = document.createElement("span");
@@ -57,7 +59,9 @@ export class StrataButton extends LitElement {
     ripple.style.left = `${x}px`;
     ripple.style.top = `${y}px`;
 
-    const rippleContainer = this.renderRoot.querySelector(".strata-button__ripple");
+    const rippleContainer = this.renderRoot.querySelector(
+      ".strata-button__ripple",
+    );
     if (rippleContainer) {
       rippleContainer.appendChild(ripple);
 
@@ -96,7 +100,11 @@ export class StrataButton extends LitElement {
         : "strata-button__icon--leading"
     }`;
 
-    return html`<iconify-icon class="${iconClass}" icon=${this.icon} aria-hidden="true"></iconify-icon>`;
+    return html`<iconify-icon
+      class="${iconClass}"
+      icon=${this.icon}
+      aria-hidden="true"
+    ></iconify-icon>`;
   }
 
   private renderContent() {
@@ -105,7 +113,9 @@ export class StrataButton extends LitElement {
         <span class="strata-button__loading">
           <span class="strata-button__spinner"></span>
         </span>
-        <span class="strata-button__label strata-button__label--hidden">${this.label}</span>
+        <span class="strata-button__label strata-button__label--hidden"
+          >${this.label}</span
+        >
       `;
     }
 

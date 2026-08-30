@@ -1,2 +1,33 @@
-import {LitElement,html,css} from 'lit';import {customElement,property} from 'lit/decorators.js';
-@customElement('strata-skeleton') export class StrataSkeleton extends LitElement{static styles=css`:host{display:block}.strata-skeleton{height:var(--strata-space-4);background:var(--strata-color-gray-200);animation:pulse 1.2s ease-in-out infinite}@keyframes pulse{50%{opacity:.45}}@media(prefers-reduced-motion:reduce){.strata-skeleton{animation:none}}`;@property() width='100%';render(){return html`<div class="skeleton" style="width:${this.width}" aria-hidden="true"></div>`}}
+import { LitElement, html, css } from "lit";
+import { customElement, property } from "lit/decorators.js";
+@customElement("strata-skeleton")
+export class StrataSkeleton extends LitElement {
+  static styles = css`
+    :host {
+      display: block;
+    }
+    .strata-skeleton {
+      height: var(--strata-space-4);
+      background: var(--strata-color-gray-200);
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      50% {
+        opacity: 0.45;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .strata-skeleton {
+        animation: none;
+      }
+    }
+  `;
+  @property() width = "100%";
+  render() {
+    return html`<div
+      class="skeleton"
+      style="width:${this.width}"
+      aria-hidden="true"
+    ></div>`;
+  }
+}

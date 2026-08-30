@@ -6,7 +6,9 @@ const waitForUpdate = (element: Element) =>
 
 describe("STRATA value controls", () => {
   it("emits semantic input and change events from text field", async () => {
-    const field = document.createElement("strata-text-field") as HTMLElement & { value: string };
+    const field = document.createElement("strata-text-field") as HTMLElement & {
+      value: string;
+    };
     document.body.appendChild(field);
     await waitForUpdate(field);
 
@@ -25,14 +27,19 @@ describe("STRATA value controls", () => {
   });
 
   it("keeps switch state reflected and emits both value events", async () => {
-    const control = document.createElement("strata-switch") as HTMLElement & { checked: boolean };
+    const control = document.createElement("strata-switch") as HTMLElement & {
+      checked: boolean;
+    };
     document.body.appendChild(control);
     await waitForUpdate(control);
     const events: string[] = [];
     control.addEventListener("strata-input", () => events.push("input"));
     control.addEventListener("strata-change", () => events.push("change"));
 
-    control.shadowRoot?.querySelector("button")?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    control.shadowRoot
+      ?.querySelector("button")
+      ?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    await waitForUpdate(control);
 
     expect(control.checked).toBe(true);
     expect(control.hasAttribute("checked")).toBe(true);
@@ -45,7 +52,9 @@ describe("STRATA modal contract", () => {
   it("does not erase a pre-existing body overflow value", async () => {
     const previous = document.body.style.overflow;
     document.body.style.overflow = "scroll";
-    const modal = document.createElement("strata-modal") as HTMLElement & { open: boolean };
+    const modal = document.createElement("strata-modal") as HTMLElement & {
+      open: boolean;
+    };
     document.body.appendChild(modal);
     await waitForUpdate(modal);
     modal.open = true;

@@ -1,2 +1,41 @@
-import {LitElement,html,css} from 'lit';import {customElement,property} from 'lit/decorators.js';
-@customElement('strata-alert') export class StrataAlert extends LitElement{static styles=css`:host{display:block}.strata-alert{display:flex;gap:12px;padding:12px 14px;border-left:var(--strata-border-large) solid currentColor;border-radius:var(--strata-radius-small);background:var(--strata-color-surface-raised);font:400 14px/1.45 var(--strata-font-sans)}.strata-alert--error{color:var(--strata-color-red)}.strata-alert--warning{color:var(--strata-color-orange)}.strata-alert--success{color:var(--strata-color-green)}.strata-alert--info{color:var(--strata-color-blue)}`;@property({reflect:true}) tone:'error'|'warning'|'success'|'info'='info';render(){return html`<div class="strata-alert strata-alert--${this.tone}" role="status"><slot></slot></div>`}}
+import { LitElement, html, css } from "lit";
+import { customElement, property } from "lit/decorators.js";
+@customElement("strata-alert")
+export class StrataAlert extends LitElement {
+  static styles = css`
+    :host {
+      display: block;
+    }
+    .strata-alert {
+      display: flex;
+      gap: 12px;
+      padding: 12px 14px;
+      border-left: var(--strata-border-large) solid currentColor;
+      border-radius: var(--strata-radius-small);
+      background: var(--strata-color-surface-raised);
+      font: 400 14px/1.45 var(--strata-font-sans);
+    }
+    .strata-alert--error {
+      color: var(--strata-color-red);
+    }
+    .strata-alert--warning {
+      color: var(--strata-color-orange);
+    }
+    .strata-alert--success {
+      color: var(--strata-color-green);
+    }
+    .strata-alert--info {
+      color: var(--strata-color-blue);
+    }
+  `;
+  @property({ reflect: true }) tone: "error" | "warning" | "success" | "info" =
+    "info";
+  render() {
+    return html`<div
+      class="strata-alert strata-alert--${this.tone}"
+      role="status"
+    >
+      <slot></slot>
+    </div>`;
+  }
+}

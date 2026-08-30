@@ -9,5 +9,6 @@ const meta: Meta = {
 export default meta;
 
 export const Inventory: StoryObj = {
-  render: () => `<div class="strata-story-catalog-summary"><strong>${STRATA_COMPONENT_CATALOG.length} canonical entries</strong><ol>${STRATA_COMPONENT_CATALOG.map((name) => `<li><code>${name}</code></li>`).join("")}</ol></div>`,
+  render: () =>
+    `<div class="strata-story-catalog-summary"><strong>${STRATA_COMPONENT_CATALOG.length} canonical entries</strong><ol>${STRATA_COMPONENT_CATALOG.map((name) => `<li><code>${name}</code></li>`).join("")}</ol></div>`,
 };

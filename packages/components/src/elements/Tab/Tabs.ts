@@ -54,7 +54,7 @@ export class StrataTabs extends LitElement implements TabsProps {
         detail: { activeTab: this.selected, previousTab },
         bubbles: true,
         composed: true,
-      }) as TabChangeEvent
+      }) as TabChangeEvent,
     );
   }
 

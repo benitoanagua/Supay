@@ -1,2 +1,8 @@
-export default {title:'Introduction/STRATA Design System',tags:['autodocs']};
-export const Overview={render:()=>`<article class="strata-story-foundation-page"><h1 style="font-size:48px;line-height:1;letter-spacing:-.04em;margin-bottom:12px">STRATA</h1><p style="font-size:20px">Contemporary editorial design system rooted in monochrome structure, proportional geometry, and restrained semantic color.</p><hr><p><b>Monochrome establishes structure.</b><br>Color establishes meaning.</p></article>`};
+export default {
+  title: "Introduction/STRATA Design System",
+  tags: ["autodocs"],
+};
+export const Overview = {
+  render: () =>
+    `<article class="strata-story-foundation-page"><h1 style="font-size:48px;line-height:1;letter-spacing:-.04em;margin-bottom:12px">STRATA</h1><p style="font-size:20px">Contemporary editorial design system rooted in monochrome structure, proportional geometry, and restrained semantic color.</p><hr><p><b>Monochrome establishes structure.</b><br>Color establishes meaning.</p></article>`,
+};
