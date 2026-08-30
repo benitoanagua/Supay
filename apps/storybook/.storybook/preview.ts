@@ -30,8 +30,22 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (story) =>
-      `<div data-theme="light" class="strata-story-frame">${story()}</div>`,
+    (story) => {
+      const rendered = story();
+      const frame = document.createElement("div");
+      frame.dataset.theme = "light";
+      frame.className = "strata-story-frame";
+
+      if (typeof rendered === "string") {
+        frame.innerHTML = rendered;
+      } else if (rendered instanceof Node) {
+        frame.appendChild(rendered);
+      } else if (rendered != null) {
+        frame.appendChild(document.createTextNode(String(rendered)));
+      }
+
+      return frame;
+    },
   ],
   tags: ["autodocs"],
 };
