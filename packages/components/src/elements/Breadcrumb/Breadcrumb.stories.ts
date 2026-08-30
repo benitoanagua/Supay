@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/html";
+import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
 import "@strata/components";
-const meta: Meta = {
-  title: "Components/Breadcrumb",
-  component: "strata-breadcrumb",
-};
+
+const meta: Meta = { title: "Components/Breadcrumb", component: "strata-breadcrumb" };
 export default meta;
+
 export const Default: StoryObj = {
-  render: () => `<strata-breadcrumb></strata-breadcrumb>`,
+  render: () => html`<strata-breadcrumb items="Home|Components|Current"></strata-breadcrumb>`,
 };

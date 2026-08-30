@@ -1,42 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/html";
+import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
 
-interface LogoProps {
-  className?: string;
-}
-
-const meta = {
-  title: "Components/Logo",
-  component: "strata-logo",
-  tags: ["autodocs"],
-  argTypes: {
-    className: {
-      control: "text",
-      description: "CSS classes applied to the logo element",
-    },
-  },
-  render: (args: LogoProps) => {
-    const logo = document.createElement("strata-logo");
-    if (args.className) {
-      logo.className = args.className;
-    }
-    return logo;
-  },
-} satisfies Meta<LogoProps>;
-
+const meta: Meta = { title: "Components/Logo", component: "strata-logo", tags: ["autodocs"] };
 export default meta;
-type Story = StoryObj<LogoProps>;
+type Story = StoryObj;
 
-export const Structural: Story = {
-  args: {
-    className: "strata-logo--default",
-  },
-};
-
-export const Playground: Story = {
-  args: {
-    className: "strata-logo--default",
-  },
-  parameters: {
-    controls: { expanded: true },
-  },
-};
+export const Structural: Story = { render: () => html`<strata-logo></strata-logo>` };
+export const Playground: Story = { render: () => html`<strata-logo></strata-logo>`, parameters: { controls: { expanded: true } } };

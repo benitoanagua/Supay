@@ -32,6 +32,13 @@
 
 ### Storybook
 
+- Storybook usa `@storybook/web-components-vite` como framework y `@storybook/web-components` como renderer nativo.
+- Las stories usan tagged template literals de Lit (`html`) y custom elements directamente.
+- Los bindings de propiedades complejas/booleanas se realizan mediante property bindings de Lit.
+- El Shadow DOM de los componentes se conserva intacto; Storybook no depende de estilos inyectados en el documento para representar los componentes.
+- Las pruebas de Playwright esperan la finalización de `updateComplete` antes de validar accesibilidad o regresión visual.
+- Las stories de componentes contenedores incluyen contenido real en sus slots; no se consideran válidas stories que rendericen únicamente un contenedor visualmente vacío.
+
 - Catálogo canónico de 48 componentes.
 - 105 historias indexadas.
 - Addons de Storybook declarados explícitamente según las capacidades utilizadas: accesibilidad, backgrounds, controls, docs, toolbars y viewport.

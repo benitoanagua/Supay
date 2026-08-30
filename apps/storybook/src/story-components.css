@@ -158,3 +158,52 @@
 .strata-story-numeric--large {
   font-size: 24px;
 }
+.strata-story-foundation-page h1 {
+  font-size: clamp(2.5rem, 7vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0 0 1rem;
+}
+.strata-story-foundation-page h2 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+.strata-story-lead {
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+.strata-story-grid-item {
+  min-height: 80px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.strata-story-catalog-kicker {
+  font: 500 12px var(--strata-font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.strata-story-catalog-title {
+  font-size: 42px;
+  line-height: 1.05;
+  margin: 8px 0;
+}
+.strata-story-catalog-lead {
+  font-size: 18px;
+  line-height: 1.5;
+}
+.strata-story-editorial-header {
+  border-bottom: 2px solid var(--strata-color-border-strong);
+  padding-bottom: 16px;
+}
+.strata-story-editorial-title {
+  font-size: clamp(36px, 8vw, 72px);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  margin: 8px 0;
+}
+.strata-story-editorial-lead {
+  font-size: 18px;
+  max-width: 680px;
+  line-height: 1.5;
+}

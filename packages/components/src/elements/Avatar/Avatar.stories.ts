@@ -1,7 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/html";
+import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
 import "@strata/components";
-const meta: Meta = { title: "Components/Avatar", component: "strata-avatar" };
+
+const meta: Meta = { title: "Components/Avatar", component: "strata-avatar", tags: ["autodocs"] };
 export default meta;
+
 export const Default: StoryObj = {
-  render: () => `<strata-avatar></strata-avatar>`,
+  render: () => html`<strata-avatar label="Jane Smith" alt="Jane Smith"></strata-avatar>`,
 };

@@ -1,4 +1,4 @@
-import type { StorybookConfig } from "@storybook/html-vite";
+import type { StorybookConfig } from "@storybook/web-components-vite";
 import { mergeConfig } from "vite";
 import path from "node:path";
 
@@ -15,7 +15,7 @@ const config: StorybookConfig = {
     "@storybook/addon-toolbars",
     "@storybook/addon-viewport",
   ],
-  framework: { name: "@storybook/html-vite", options: {} },
+  framework: { name: "@storybook/web-components-vite", options: {} },
   viteFinal: async (config) =>
     mergeConfig(config, {
       resolve: {

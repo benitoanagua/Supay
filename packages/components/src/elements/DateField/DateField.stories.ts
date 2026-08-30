@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/html";
+import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
 import "@strata/components";
 const meta: Meta = {
   title: "Components/DateField",
@@ -6,5 +7,5 @@ const meta: Meta = {
 };
 export default meta;
 export const Default: StoryObj = {
-  render: () => `<strata-date-field></strata-date-field>`,
+  render: () => html`<strata-date-field></strata-date-field>`,
 };

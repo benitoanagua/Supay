@@ -1,7 +1,8 @@
 import "../src/story-components.css";
 import "@strata/tokens/styles.css";
 import "@strata/components";
-import type { Preview } from "@storybook/html";
+import type { Preview } from "@storybook/web-components";
+import { html } from "lit";
 import "./strata-preview.css";
 
 const preview: Preview = {
@@ -30,22 +31,9 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (story) => {
-      const rendered = story();
-      const frame = document.createElement("div");
-      frame.dataset.theme = "light";
-      frame.className = "strata-story-frame";
-
-      if (typeof rendered === "string") {
-        frame.innerHTML = rendered;
-      } else if (rendered instanceof Node) {
-        frame.appendChild(rendered);
-      } else if (rendered != null) {
-        frame.appendChild(document.createTextNode(String(rendered)));
-      }
-
-      return frame;
-    },
+    (story) => html`
+      <div data-theme="light" class="strata-story-frame">${story()}</div>
+    `,
   ],
   tags: ["autodocs"],
 };

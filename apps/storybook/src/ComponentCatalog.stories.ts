@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/html";
+import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
 import "@strata/components";
 
 const meta: Meta = {
@@ -9,9 +10,9 @@ export default meta;
 type Story = StoryObj;
 
 export const Catalog: Story = {
-  render: () => `
+  render: () => html`
 <main class="strata-story-catalog-page">
-<header class="strata-story-catalog-header"><p style="font:500 12px var(--strata-font-mono);letter-spacing:.08em;text-transform:uppercase">STRATA / Components</p><h1 style="font-size:42px;line-height:1.05;margin:8px 0">Components are consequences of the foundations.</h1><p style="font-size:18px;line-height:1.5">Each component inherits scale, typography, color, state and accessibility contracts.</p></header>
+<header class="strata-story-catalog-header"><p class="strata-story-catalog-kicker">STRATA / Components</p><h1 class="strata-story-catalog-title">Components are consequences of the foundations.</h1><p class="strata-story-catalog-lead">Each component inherits scale, typography, color, state and accessibility contracts.</p></header>
 <section class="strata-story-section">
 <div><h2>Actions</h2><div class="strata-story-actions-demo"><strata-button label="Primary" icon="carbon:add"></strata-button><strata-button label="Outlined" variant="outlined"></strata-button><strata-button label="Text" variant="text"></strata-button><strata-icon-button label="Settings"><iconify-icon icon="carbon:settings"></iconify-icon></strata-icon-button></div></div>
 <strata-divider variant="double"></strata-divider>

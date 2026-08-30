@@ -1,5 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/html";
+import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
 import type { ButtonProps } from "../../types/button.js";
+import "@strata/components";
 
 const meta = {
   title: "Components/Button",
@@ -7,79 +9,41 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     label: { control: "text" },
-    variant: {
-      control: "select",
-      options: ["outlined", "filled", "text", "tonal", "elevated"],
-    },
-    size: {
-      control: "radio",
-      options: ["small", "medium", "large"],
-    },
-    color: {
-      control: "select",
-      options: ["primary", "secondary", "error", "success", "warning"],
-    },
-    disabled: { control: "boolean" },
-    loading: { control: "boolean" },
-    fullWidth: { control: "boolean" },
-    href: { control: "text" },
-    icon: { control: "text" },
-    trailingIcon: { control: "boolean" },
+    variant: { control: "select", options: ["outlined", "filled", "text", "tonal", "elevated"] },
+    size: { control: "radio", options: ["small", "medium", "large"] },
+    color: { control: "select", options: ["primary", "secondary", "error", "success", "warning"] },
+    disabled: { control: "boolean" }, loading: { control: "boolean" }, fullWidth: { control: "boolean" },
+    href: { control: "text" }, icon: { control: "text" }, trailingIcon: { control: "boolean" },
   },
-  render: (args: ButtonProps) => {
-    const button = document.createElement("strata-button");
-    Object.entries(args).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) {
-        button.setAttribute(key, String(value));
-      }
-    });
-    return button;
-  },
+  render: (args: ButtonProps) => html`
+    <strata-button
+      label=${args.label ?? ""}
+      variant=${args.variant ?? "outlined"}
+      size=${args.size ?? "medium"}
+      color=${args.color ?? "primary"}
+      .disabled=${args.disabled ?? false}
+      .loading=${args.loading ?? false}
+      .fullWidth=${args.fullWidth ?? false}
+      href=${args.href ?? ""}
+      icon=${args.icon ?? ""}
+      .trailingIcon=${args.trailingIcon ?? false}
+    ></strata-button>
+  `,
 } satisfies Meta<ButtonProps>;
 
 export default meta;
 type Story = StoryObj<ButtonProps>;
-
-export const Outline: Story = {
-  args: {
-    label: "Outline Button",
-    variant: "outlined",
-    size: "medium",
-  },
-};
-
+export const Outline: Story = { args: { label: "Outline Button", variant: "outlined", size: "medium" } };
 export const StructuralVariants: Story = {
-  render: () => {
-    const container = document.createElement("div");
-    container.className = "strata-story-button-variants";
-
-    const variants = ["outlined", "filled", "text", "tonal"];
-    variants.forEach((variant) => {
-      const button = document.createElement("strata-button");
-      button.setAttribute("label", `${variant}`);
-      button.setAttribute("variant", variant);
-      button.setAttribute("size", "medium");
-      container.appendChild(button);
-    });
-
-    return container;
-  },
+  render: () => html`
+    <div class="strata-story-button-variants">
+      ${["outlined", "filled", "text", "tonal"].map((variant) => html`
+        <strata-button label=${variant} variant=${variant} size="medium"></strata-button>
+      `)}
+    </div>
+  `,
 };
-
 export const Playground: Story = {
-  args: {
-    label: "Customize me",
-    variant: "outlined",
-    size: "medium",
-    color: "primary",
-    disabled: false,
-    loading: false,
-    fullWidth: false,
-    href: "",
-    icon: "carbon:settings",
-    trailingIcon: false,
-  },
-  parameters: {
-    controls: { expanded: true },
-  },
+  args: { label: "Customize me", variant: "outlined", size: "medium", color: "primary", disabled: false, loading: false, fullWidth: false, href: "", icon: "carbon:settings", trailingIcon: false },
+  parameters: { controls: { expanded: true } },
 };

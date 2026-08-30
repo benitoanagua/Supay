@@ -1,8 +1,9 @@
+import { waitForStoryReady } from "./story-ready.js";
 import { test, expect } from "@playwright/test";
 
 const stories = [
   ["introduction-strata-design-system--overview", "introduction"],
-  ["foundations-scale-law--structural-weight", "scale-law"],
+  ["foundations-scale-law--structural", "scale-law"],
   ["components-overview--catalog", "component-catalog"],
 ] as const;
 
@@ -11,6 +12,7 @@ test.describe("STRATA visual regression", () => {
     test(snapshot, async ({ page }) => {
       await page.goto(`/iframe.html?id=${story}&viewMode=story`);
       await page.waitForLoadState("networkidle");
+    await waitForStoryReady(page);
       await expect(page.locator(".strata-story-frame")).toHaveScreenshot(
         `${snapshot}.png`,
         { fullPage: true },

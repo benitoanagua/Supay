@@ -1,3 +1,4 @@
+import { waitForStoryReady } from "./story-ready.js";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -25,6 +26,7 @@ test("STRATA component stories have no critical accessibility violations", async
   for (const story of stories) {
     await page.goto(`/iframe.html?id=${story.id}&viewMode=story`);
     await page.waitForLoadState("networkidle");
+    await waitForStoryReady(page);
 
     const results = await new AxeBuilder({ page }).analyze();
     const critical = results.violations.filter(

@@ -62,12 +62,15 @@ importers:
       "@storybook/addon-viewport":
         specifier: ^8.6.18
         version: 8.6.18(storybook@8.6.18(prettier@3.9.6))
-      "@storybook/html":
+      "@storybook/web-components":
         specifier: ^8.6.18
         version: 8.6.18(storybook@8.6.18(prettier@3.9.6))
-      "@storybook/html-vite":
+      "@storybook/web-components-vite":
         specifier: ^8.6.18
         version: 8.6.18(storybook@8.6.18(prettier@3.9.6))(vite@6.4.3(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0))
+      lit:
+        specifier: ^3.3.3
+        version: 3.3.3
       storybook:
         specifier: ^8.6.18
         version: 8.6.18(prettier@3.9.6)

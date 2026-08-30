@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/html";
+import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
 import "@strata/components";
 const meta: Meta = {
   title: "Components/NumberField",
@@ -6,5 +7,5 @@ const meta: Meta = {
 };
 export default meta;
 export const Default: StoryObj = {
-  render: () => `<strata-number-field></strata-number-field>`,
+  render: () => html`<strata-number-field></strata-number-field>`,
 };

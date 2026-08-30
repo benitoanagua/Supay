@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/html";
+import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
 import "@strata/components";
 
 const meta: Meta = { title: "Editorial/Principles" };
@@ -6,14 +7,14 @@ export default meta;
 type Story = StoryObj;
 
 export const NewspaperToMagazine: Story = {
-  render: () => `
+  render: () => html`
     <article class="strata-story-editorial-page">
-      <header style="border-bottom:2px solid var(--strata-color-border-strong);padding-bottom:16px">
+      <header class="strata-story-editorial-header">
         <p class="strata-story-editorial-kicker">STRATA / Editorial</p>
-        <h1 style="font-size:clamp(36px,8vw,72px);line-height:.95;letter-spacing:-.05em;margin:8px 0">
+        <h1 class="strata-story-editorial-title">
           Structure in monochrome.<br>Meaning in color.
         </h1>
-        <p style="font-size:18px;max-width:680px;line-height:1.5">
+        <p class="strata-story-editorial-lead">
           Classic newspaper discipline meets contemporary magazine clarity. Typography leads; dividers organize; spectrum signals.
         </p>
       </header>

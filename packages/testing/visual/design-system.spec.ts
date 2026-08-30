@@ -1,9 +1,10 @@
+import { waitForStoryReady } from "./story-ready.js";
 import { test, expect } from "@playwright/test";
 
 test.describe("STRATA visual contracts", () => {
   test("scale law presentation is available", async ({ page }) => {
     await page.goto(
-      "/iframe.html?id=foundations-scale-law--structural-weight&viewMode=story",
+      "/iframe.html?id=foundations-scale-law--structural&viewMode=story",
     );
     await expect(
       page.getByText("Physical scale determines structural weight."),
